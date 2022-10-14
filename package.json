@@ -24,7 +24,17 @@
 	"license": "MIT",
 	"scripts": {
 		"lint": "eslint .",
-		"lint:fix": "eslint --fix"
+		"lint:fix": "eslint --fix ."
+	},
+	"dependencies": {
+		"@babel/core": "7.19.3",
+		"@babel/eslint-parser": "7.19.1",
+		"eslint-config-prettier": "8.5.0",
+		"eslint-plugin-import": "2.26.0",
+		"eslint-plugin-prettier": "4.2.1",
+		"eslint-plugin-simple-import-sort": "8.0.0",
+		"eslint-plugin-unused-imports": "2.0.0",
+		"prettier": "2.7.1"
 	},
 	"peerDependencies": {
 		"eslint": ">=8"
