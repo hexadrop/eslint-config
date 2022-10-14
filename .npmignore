@@ -6,3 +6,4 @@
 .pnp.loader.mjs
 .yarnrc.yml
 yarn.lock
+renovate.json
