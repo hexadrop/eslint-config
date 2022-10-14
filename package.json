@@ -1,10 +1,9 @@
 {
 	"name": "@hexatool/eslint-config",
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"description": "Hexatool's ESLint and Prettier Config",
 	"keywords": [
 		"javascript",
-		"typescript",
 		"ecmascript",
 		"eslint",
 		"eslintconfig",
@@ -22,6 +21,7 @@
 	},
 	"author": "MarioMH8",
 	"license": "MIT",
+	"main": "index.js",
 	"scripts": {
 		"lint": "eslint .",
 		"lint:fix": "eslint --fix ."
