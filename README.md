@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  Opinionated linting configuration considering modern TypeScript best practices and providing consistency to your <code>import</code> statements. Valid for your JavaScript or TypeScript projects
+  Opinionated linting configuration considering modern JavaScript best practices and providing consistency to your code.
   <br />
   <br />
   Take a look, play and have fun with this.
@@ -22,27 +22,15 @@
      extends: [ "@hexatool/eslint-config" ]
    }
    ```
-3. If you are using TypeScript, extend the TypeScript configuration instead, and point to your `tsconfig.json` in `parserOptions`:
-   ```js
-   {
-     extends: [ "@hexatool/eslint-config/typescript" ],
-     parserOptions: {
-       project: ["./tsconfig.json"],
-     },
-   }
-   ```
-
-ℹ️ Please note that some rules enabled by default require that you have `strict: true` in your `tsconfig.json`.
 
 ## 🤔 What it does
 
 - Lints JavaScript using [`eslint:recommended`](https://eslint.org/docs/latest/user-guide/configuring/configuration-files#using-eslintrecommended) and [Prettier](https://prettier.io/)
-- Additionally, lints TypeScript using [`@typescript-eslint/recommended` and `@typescript-eslint/recommended-requiring-type-checking`](https://typescript-eslint.io/docs/linting/configs)
 - Uses the following plugins:
     - [`import`](https://github.com/import-js/eslint-plugin-import/): helps validate proper imports
     - [`simple-import-sort`](https://github.com/lydell/eslint-plugin-simple-import-sort/): sorts imports
     - [`unused-imports`](https://github.com/sweepline/eslint-plugin-unused-imports): finds and removes unused ES6 module imports
-- Uses the following [JavaScript rules](https://github.com/hexatool/eslint-config/blob/main/.eslintrc.js#L13) and [TypeScript rules](https://github.com/hexatool/eslint-config/blob/main/typescript.js#L17)
+- Uses the following [rules](https://github.com/hexatool/eslint-config/blob/main/.eslintrc.js#L13)
 
 ## 👌 Hexatool Code Quality Standards
 
