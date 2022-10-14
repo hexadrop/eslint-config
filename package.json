@@ -1,0 +1,37 @@
+{
+	"name": "@hexatool/eslint-config",
+	"version": "0.0.0",
+	"description": "Hexatool's ESLint and Prettier Config",
+	"keywords": [
+		"javascript",
+		"typescript",
+		"ecmascript",
+		"eslint",
+		"eslintconfig",
+		"lint",
+		"config",
+		"prettier"
+	],
+	"homepage": "https://github.com/hexatool/eslint-config",
+	"bugs": {
+		"url": "https://github.com/hexatool/eslint-config/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/hexatool/eslint-config"
+	},
+	"author": "MarioMH8",
+	"license": "MIT",
+	"scripts": {
+		"lint": "eslint .",
+		"lint:fix": "eslint --fix"
+	},
+	"engines": {
+		"node": ">=16"
+	},
+	"volta": {
+		"node": "16.17.0",
+		"yarn": "1.22.19"
+	},
+	"packageManager": "yarn@3.2.4"
+}
