@@ -12,7 +12,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  codecheck:
+  code-check:
     name: Code check
     runs-on: ubuntu-latest
     permissions:
