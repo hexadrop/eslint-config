@@ -17,6 +17,8 @@
       <excludePattern pattern="*.lock" />
       <excludePattern pattern="nest-cli.json" />
       <excludePattern pattern="webpack.config.js" />
+      <excludePattern pattern=".editorconfig" />
+      <excludePattern pattern="renovate.json" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
