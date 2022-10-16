@@ -1,1 +1,2 @@
-.pnp.*
+.pnp.cjs
+.pnp.loader.mjs
