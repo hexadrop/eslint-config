@@ -1,36 +1,36 @@
 name: Code check
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-    types: [ opened, synchronize ]
+    push:
+        branches: [ main ]
+    pull_request:
+        branches: [ main ]
+        types: [ opened, synchronize ]
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
 
 jobs:
-  code-check:
-    name: Code check
-    runs-on: ubuntu-latest
-    permissions:
-      contents: 'read'
-      id-token: 'write'
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+    code-check:
+        name: Code check
+        runs-on: ubuntu-latest
+        permissions:
+            contents: 'read'
+            id-token: 'write'
+        steps:
+            -   name: Checkout
+                uses: actions/checkout@v3
 
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-          cache: 'yarn'
-          registry-url: 'https://registry.npmjs.org'
+            -   name: Setup Node
+                uses: actions/setup-node@v3
+                with:
+                    node-version: '16'
+                    cache: 'yarn'
+                    registry-url: 'https://registry.npmjs.org'
 
-      - name: Install dependencies
-        run: yarn install --immutable
+            -   name: Install dependencies
+                run: yarn install --immutable
 
-      - name: Lint
-        run: yarn lint
+            -   name: Lint
+                run: yarn lint
