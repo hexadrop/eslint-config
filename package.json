@@ -24,11 +24,14 @@
 	"main": "index.js",
 	"scripts": {
 		"lint": "eslint .",
-		"lint:fix": "eslint --fix ."
+		"lint:fix": "eslint --fix .",
+		"publish": "yarn changeset publish",
+		"version": "yarn changeset version"
 	},
 	"dependencies": {
 		"@babel/core": "7.20.12",
 		"@babel/eslint-parser": "7.19.1",
+		"@changesets/cli": "2.26.0",
 		"eslint-config-prettier": "8.6.0",
 		"eslint-plugin-import": "2.26.0",
 		"eslint-plugin-prettier": "4.2.1",
