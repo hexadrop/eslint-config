@@ -1,15 +1,9 @@
 name: Code check
 
 on:
-    push:
-        branches: [ main ]
     pull_request:
         branches: [ main ]
         types: [ opened, synchronize ]
-
-concurrency:
-    group: ${{ github.workflow }}-${{ github.ref }}
-    cancel-in-progress: true
 
 jobs:
     code-check:
@@ -25,7 +19,7 @@ jobs:
             -   name: Setup Node
                 uses: actions/setup-node@v3
                 with:
-                    node-version: '18'
+                    node-version: 'lts/*'
                     cache: 'yarn'
                     registry-url: 'https://registry.npmjs.org'
 
