@@ -21,10 +21,18 @@ jobs:
             -   name: Checkout
                 uses: actions/checkout@v3
 
-            -   name: Setup Node
-                uses: volta-cli/action@v3
+            -   name: Setup Volta
+                uses: volta-cli/action@v4
                 with:
                     registry-url: 'https://registry.npmjs.org'
+
+            -   name: Cache
+                uses: actions/cache@v3
+                with:
+                    path: './.yarn/cache'
+                    key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+                    restore-keys: |
+                        ${{ runner.os }}-yarn-
 
             -   name: Configure Git User
                 run: |
