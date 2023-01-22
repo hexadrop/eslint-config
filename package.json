@@ -3,13 +3,16 @@
 	"version": "1.0.3",
 	"description": "Hexatool's ESLint and Prettier Config",
 	"keywords": [
+		"hexa",
+		"hexatool",
 		"javascript",
 		"ecmascript",
 		"eslint",
 		"eslintconfig",
 		"lint",
 		"config",
-		"prettier"
+		"prettier",
+		"prettierconfig"
 	],
 	"homepage": "https://github.com/hexatool/eslint-config",
 	"bugs": {
