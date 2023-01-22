@@ -53,6 +53,9 @@ jobs:
                     git config --global user.email "development@mariomh.com"
                     git config --global user.name "$GITHUB_ACTOR"
 
+            -   name: Echo .npmrc
+                run: echo "$(<.npmrc )"
+
             -   name: Install dependencies
                 run: yarn install --immutable
 
