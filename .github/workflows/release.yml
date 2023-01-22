@@ -19,9 +19,6 @@ jobs:
 
             -   name: Setup Volta
                 uses: volta-cli/action@v4
-                with:
-                    registry-url: 'https://registry.npmjs.org'
-                    scope: '@hexatool'
 
             -   name: Configure Git User
                 run: |
