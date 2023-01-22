@@ -1,4 +1,4 @@
-name: Code check
+name: Release
 
 on:
     push:
@@ -10,8 +10,6 @@ jobs:
         runs-on: ubuntu-latest
         permissions:
             contents: 'write'
-            id-token: 'write'
-            issues: 'write'
             pull-requests: 'write'
         steps:
             -   name: Checkout
@@ -19,11 +17,6 @@ jobs:
 
             -   name: Setup Volta
                 uses: volta-cli/action@v4
-
-            -   name: Configure Git User
-                run: |
-                    git config --global user.email "development@mariomh.com"
-                    git config --global user.name "$GITHUB_ACTOR"
 
             -   name: Install dependencies
                 run: yarn install --immutable
@@ -35,7 +28,6 @@ jobs:
                     version: yarn version
                     commit: 'chore: release'
                     title: 'chore: release'
-                    setupGitUser: false
                 env:
                     GITHUB_TOKEN: ${{ secrets.HEXATOOL_GITHUB_TOKEN }}
                     NPM_TOKEN: ${{ secrets.HEXATOOL_NPM_TOKEN }}
