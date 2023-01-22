@@ -56,6 +56,9 @@ jobs:
             -   name: Echo .npmrc
                 run: echo "$(<.npmrc )"
 
+            -   name: Echo other .npmrc
+                run: echo "$(</home/runner/work/_temp/.npmrc )"
+
             -   name: Install dependencies
                 run: yarn install --immutable
 
