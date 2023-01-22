@@ -47,6 +47,10 @@ jobs:
                 uses: volta-cli/action@v4
                 with:
                     registry-url: 'https://registry.npmjs.org'
+                    always-auth: true
+                    scope: @hexatool
+                env:
+                    NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
             -   name: Configure Git User
                 run: |
