@@ -4,7 +4,7 @@
 
 ### Patch Changes
 
-- 99ddbc5: Corregit .npmignore
+- 99ddbc5: Fix .npmignore
 
 ## 1.0.2
 
