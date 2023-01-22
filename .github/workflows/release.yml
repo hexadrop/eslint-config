@@ -47,21 +47,12 @@ jobs:
                 uses: volta-cli/action@v4
                 with:
                     registry-url: 'https://registry.npmjs.org'
-                    always-auth: true
                     scope: '@hexatool'
-                env:
-                    NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
             -   name: Configure Git User
                 run: |
                     git config --global user.email "development@mariomh.com"
                     git config --global user.name "$GITHUB_ACTOR"
-
-            -   name: Echo .npmrc
-                run: echo "$(<.npmrc )"
-
-            -   name: Echo other .npmrc
-                run: echo "$(</home/runner/work/_temp/.npmrc )"
 
             -   name: Install dependencies
                 run: yarn install --immutable
