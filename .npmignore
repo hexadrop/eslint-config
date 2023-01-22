@@ -3,7 +3,6 @@
 .idea
 .yarn
 .editorconfig
-.eslintrc.js
 .yarnrc.yml
 renovate.json
 yarn.lock
