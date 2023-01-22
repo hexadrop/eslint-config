@@ -1,10 +1,10 @@
+.changeset
 .github
 .idea
 .yarn
-.eslintignore
-.pnp.cjs
-.pnp.loader.mjs
-.yarnrc.yml
-yarn.lock
-renovate.json
 .editorconfig
+.eslintignore
+.eslintrc.js
+.yarnrc.yml
+renovate.json
+yarn.lock

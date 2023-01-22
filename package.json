@@ -25,8 +25,8 @@
 	"scripts": {
 		"lint": "eslint .",
 		"lint:fix": "eslint --fix .",
-		"publish": "$npm_execpath changeset publish",
-		"version": "$npm_execpath changeset version"
+		"publish": "changeset publish",
+		"version": "changeset version"
 	},
 	"dependencies": {
 		"@babel/core": "7.20.12",
