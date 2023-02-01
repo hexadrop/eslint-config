@@ -114,7 +114,6 @@ dist
 .turbo
 
 # Yarn
-.pnp.*
 .yarn/*
 !.yarn/cache
 !.yarn/patches
