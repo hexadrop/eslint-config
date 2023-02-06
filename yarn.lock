@@ -207,11 +207,11 @@ __metadata:
   linkType: hard
 
 "@babel/parser@npm:^7.20.13, @babel/parser@npm:^7.20.7":
-  version: 7.20.13
-  resolution: "@babel/parser@npm:7.20.13"
+  version: 7.20.15
+  resolution: "@babel/parser@npm:7.20.15"
   bin:
     parser: ./bin/babel-parser.js
-  checksum: 7eb2e3d9d9ad5e24b087c88d137f5701d94f049e28b9dce9f3f5c6d4d9b06a0d7c43b9106f1c02df8a204226200e0517de4bc81a339768a4ebd4c59107ea93a4
+  checksum: 1d0f47ca67ff2652f1c0ff1570bed8deccbc4b53509e7cd73476af9cc7ed23480c99f1179bd6d0be01612368b92b39e206d330ad6054009d699934848a89298b
   languageName: node
   linkType: hard
 
@@ -1219,9 +1219,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.4.284":
-  version: 1.4.284
-  resolution: "electron-to-chromium@npm:1.4.284"
-  checksum: be496e9dca6509dbdbb54dc32146fc99f8eb716d28a7ee8ccd3eba0066561df36fc51418d8bd7cf5a5891810bf56c0def3418e74248f51ea4a843d423603d10a
+  version: 1.4.286
+  resolution: "electron-to-chromium@npm:1.4.286"
+  checksum: 6b53e2aea63892cb4af85ea4ee5ed2b6d848713519987efcf4c1177a32e2fe6d04a7f591f5bcd1feab0b3c88890c6eaf65b6feb16c0e0319bf07e31de31930af
   languageName: node
   linkType: hard
 
