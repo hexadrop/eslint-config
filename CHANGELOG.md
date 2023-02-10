@@ -1,5 +1,12 @@
 # @hexatool/eslint-config
 
+## 1.0.6
+
+### Patch Changes
+
+- bf1dfa8: update dependency prettier to v2.8.4
+- bf1dfa8: Disable `import/no-unresolved` rule due an incompatibility with package.json exports
+
 ## 1.0.5
 
 ### Patch Changes
