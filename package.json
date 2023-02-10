@@ -1,6 +1,6 @@
 {
 	"name": "@hexatool/eslint-config",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"description": "Hexatool's ESLint and Prettier Config",
 	"keywords": [
 		"hexa",
@@ -49,7 +49,7 @@
 	},
 	"volta": {
 		"node": "18.14.0",
-		"yarn": "3.4.0"
+		"yarn": "3.4.1"
 	},
-	"packageManager": "yarn@3.4.0"
+	"packageManager": "yarn@3.4.1"
 }
