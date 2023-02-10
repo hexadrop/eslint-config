@@ -66,7 +66,8 @@ module.exports = {
 		'import/first': 'error',
 		'import/newline-after-import': 'error',
 		'import/no-duplicates': 'error',
-		'import/no-unresolved': 'error',
+		// Disabled due an incompatibility with package.json exports. See: https://github.com/import-js/eslint-plugin-import/issues/2703
+		'import/no-unresolved': 'off',
 		'import/no-webpack-loader-syntax': 'error',
 		'prettier/prettier': [
 			'error',
