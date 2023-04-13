@@ -48,7 +48,7 @@
 		"eslint": "8.38.0"
 	},
 	"volta": {
-		"node": "18.15.0",
+		"node": "18.16.0",
 		"yarn": "3.5.0"
 	},
 	"packageManager": "yarn@3.5.0"
