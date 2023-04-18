@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 1.0.7
+
+### Patch Changes
+
+- 480742b: Update dependencies
+
 ## 1.0.6
 
 ### Patch Changes
