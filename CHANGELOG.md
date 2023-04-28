@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 1.0.9
+
+### Patch Changes
+
+- fea16d9: update dependency prettier to v2.8.8
+
 ## 1.0.8
 
 ### Patch Changes
