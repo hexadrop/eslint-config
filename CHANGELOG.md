@@ -1,5 +1,22 @@
 # @hexatool/eslint-config
 
+## 2.0.0
+
+### Major Changes
+
+- e935a19: Update dependency prettier to v3
+- f498849: Update dependency eslint-plugin-prettier to v5
+- b70325f: Update dependency eslint-config-prettier to v9
+- ec5e999: Update dependency eslint-plugin-unused-imports to v3
+- a002346: Update dependency eslint-config-prettier to v9
+
+### Patch Changes
+
+- 3a27d3c: Update dependency eslint-plugin-import to v2.28.1
+- 4b7f231: Update dependency eslint-plugin-import to v2.28.1
+- 91561a6: Update dependency eslint-config-prettier to v8.10.0
+- f8676a5: Update babel dependency
+
 ## 1.0.9
 
 ### Patch Changes
