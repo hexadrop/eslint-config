@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  Opinionated linting configuration considering modern JavaScript best practices and providing consistency to your code.
+  A TypeScript ESLint ruleset designed for large teams and projects
 </p>
 
 ## Installation
@@ -20,26 +20,26 @@ yarn add eslint @hexatool/eslint-config -dev
 
 ## What it does
 
-- Lints JavaScript
+- Lints JavaScript and TypeScript
   using [`eslint:recommended`](https://eslint.org/docs/latest/user-guide/configuring/configuration-files#using-eslintrecommended)
   and [Prettier](https://prettier.io/)
 - Uses the following plugins:
+    - [`@typescript-eslint`](https://github.com/typescript-eslint/typescript-eslint): TypeScript support
     - [`import`](https://github.com/import-js/eslint-plugin-import/): helps validate proper imports
     - [`simple-import-sort`](https://github.com/lydell/eslint-plugin-simple-import-sort/): sorts imports
     - [`unused-imports`](https://github.com/sweepline/eslint-plugin-unused-imports): finds and removes unused ES6 module
       imports
-- Uses the following [rules](https://github.com/hexatool/eslint-config/blob/main/.eslintrc.js#L13)
 
 ## How to use
-   
+
 1. Add it to your `.eslintrc.js` file
 
    ```js
    {
-     extends: [ "@hexatool/eslint-config" ]
+     extends: [ "@hexatool" ]
    }
    ```
-   
+
 2. Run eslint
 
    ```shell
@@ -54,7 +54,9 @@ yarn add eslint @hexatool/eslint-config -dev
         "lint:fix": "eslint --fix ."
     }
     ```
-   
+
+ℹ️ Please note that some rules enabled by default require that you have `strict: true` in your `tsconfig.json`.
+
 ## Hexatool Code Quality Standards
 
 Publishing this package we are committing ourselves to the following code quality standards:
