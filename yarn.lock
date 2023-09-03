@@ -344,7 +344,6 @@ __metadata:
     eslint-plugin-simple-import-sort: 10.0.0
     eslint-plugin-unused-imports: 3.0.0
     prettier: 3.0.3
-    remark-preset-prettier: 2.0.1
     typescript: 5.2.2
   peerDependencies:
     astro-eslint-parser: ">=0.0.0"
@@ -4351,15 +4350,6 @@ __metadata:
     mdast-util-from-markdown: ^1.0.0
     unified: ^10.0.0
   checksum: 30cb8f2790380b1c7370a1c66cda41f33a7dc196b9e440a00e2675037bca55aea868165a8204e0cdbacc27ef4a3bdb7d45879826bd6efa07d9fdf328cb67a332
-  languageName: node
-  linkType: hard
-
-"remark-preset-prettier@npm:2.0.1":
-  version: 2.0.1
-  resolution: "remark-preset-prettier@npm:2.0.1"
-  peerDependencies:
-    prettier: ">=1.0.0"
-  checksum: 44f63df01f3a99daa0df6ba73648f39d8f3f6d7d4dc093580e04b691941ba286e6afa0cd860d2092733500479b1bb7779ac73a45d21bdc577daae40af428950e
   languageName: node
   linkType: hard
 
