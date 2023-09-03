@@ -21,6 +21,7 @@ module.exports = {
 	extends: [
 		'eslint:recommended',
 		'plugin:prettier/recommended',
+		'plugin:md/recommended',
 		'plugin:jsonc/recommended-with-jsonc',
 		'plugin:jsonc/prettier',
 	],
@@ -78,6 +79,19 @@ module.exports = {
 					},
 					// ...
 				],
+			},
+		},
+		{
+			files: ['*.md'],
+			parser: 'markdown-eslint-parser',
+			rules: {
+				'md/remark': [
+					'error',
+					{
+						plugins: [['lint-maximum-line-length', 120]],
+					},
+				],
+				'prettier/prettier': ['error', { parser: 'markdown' }],
 			},
 		},
 		{

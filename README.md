@@ -24,11 +24,11 @@ yarn add eslint @hexatool/eslint-config -dev
   using [`eslint:recommended`](https://eslint.org/docs/latest/user-guide/configuring/configuration-files#using-eslintrecommended)
   and [Prettier](https://prettier.io/)
 - Uses the following plugins:
-    - [`@typescript-eslint`](https://github.com/typescript-eslint/typescript-eslint): TypeScript support
-    - [`import`](https://github.com/import-js/eslint-plugin-import/): helps validate proper imports
-    - [`simple-import-sort`](https://github.com/lydell/eslint-plugin-simple-import-sort/): sorts imports
-    - [`unused-imports`](https://github.com/sweepline/eslint-plugin-unused-imports): finds and removes unused ES6 module
-      imports
+  - [`@typescript-eslint`](https://github.com/typescript-eslint/typescript-eslint): TypeScript support
+  - [`import`](https://github.com/import-js/eslint-plugin-import/): helps validate proper imports
+  - [`simple-import-sort`](https://github.com/lydell/eslint-plugin-simple-import-sort/): sorts imports
+  - [`unused-imports`](https://github.com/sweepline/eslint-plugin-unused-imports): finds and removes unused ES6 module
+    imports
 
 ## How to use
 
@@ -48,12 +48,12 @@ yarn add eslint @hexatool/eslint-config -dev
 
    **Or adding to your package.json**
 
-    ```json
-    "scripts": {
-        "lint": "eslint .",
-        "lint:fix": "eslint --fix ."
-    }
-    ```
+   ```json
+   "scripts": {
+       "lint": "eslint .",
+       "lint:fix": "eslint --fix ."
+   }
+   ```
 
 ℹ️ Please note that some rules enabled by default require that you have `strict: true` in your `tsconfig.json`.
 
