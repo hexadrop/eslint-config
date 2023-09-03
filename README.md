@@ -50,8 +50,8 @@ yarn add eslint @hexatool/eslint-config -dev
 
    ```json
    "scripts": {
-       "lint": "eslint .",
-       "lint:fix": "eslint --fix ."
+       "lint": "eslint --ext .js,.ts,.jsx,.tsx,.astro,.json,.md,.mdx .",
+       "lint:fix": "eslint --ext .js,.ts,.jsx,.tsx,.astro,.json,.md,.mdx --fix ."
    }
    ```
 

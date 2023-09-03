@@ -4,6 +4,7 @@ const importRules = require('./rules/import.rules.js');
 const typescriptOverrides = require('./overrides/typescript.overrides.js');
 const jsonOverrides = require('./overrides/json.overrides.js');
 const packageJsonOverrides = require('./overrides/package.json.overrides.js');
+const markdownOverrides = require('./overrides/markdown.overrides');
 
 module.exports = {
 	env: {
@@ -26,5 +27,5 @@ module.exports = {
 		...prettierRules,
 		...importRules,
 	},
-	overrides: [typescriptOverrides, jsonOverrides, packageJsonOverrides],
+	overrides: [typescriptOverrides, jsonOverrides, packageJsonOverrides, markdownOverrides],
 };

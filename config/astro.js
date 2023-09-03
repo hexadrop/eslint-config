@@ -5,6 +5,7 @@ const typescriptOverrides = require('./overrides/typescript.overrides.js');
 const jsonOverrides = require('./overrides/json.overrides.js');
 const packageJsonOverrides = require('./overrides/package.json.overrides.js');
 const astroOverrides = require('./overrides/astro.overrides.js');
+const markdownOverrides = require('./overrides/markdown.overrides.js');
 const astroScriptOverrides = require('./overrides/astro-script.overrides.js');
 
 module.exports = {
@@ -28,5 +29,12 @@ module.exports = {
 		...prettierRules,
 		...importRules,
 	},
-	overrides: [typescriptOverrides, jsonOverrides, packageJsonOverrides, astroOverrides, astroScriptOverrides],
+	overrides: [
+		typescriptOverrides,
+		jsonOverrides,
+		packageJsonOverrides,
+		markdownOverrides,
+		astroOverrides,
+		astroScriptOverrides,
+	],
 };
