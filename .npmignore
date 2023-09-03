@@ -3,8 +3,9 @@
 .idea
 .yarn
 .editorconfig
-.yarnrc.yml
+.eslintrc.js
 .pnp.cjs
 .pnp.loader.mjs
+.yarnrc.yml
 renovate.json
 yarn.lock
