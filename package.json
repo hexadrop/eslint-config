@@ -1,18 +1,16 @@
 {
 	"name": "@hexatool/eslint-config",
 	"version": "1.0.9",
-	"description": "Hexatool's ESLint and Prettier Config",
+	"description": "A TypeScript ESLint ruleset designed for large teams and projects",
 	"keywords": [
-		"hexa",
-		"hexatool",
-		"javascript",
-		"ecmascript",
-		"eslint",
-		"eslintconfig",
 		"lint",
-		"config",
-		"prettier",
-		"prettierconfig"
+		"eslint",
+		"eslint-config",
+		"monorepo",
+		"scalable",
+		"scale",
+		"typescript",
+		"prettier"
 	],
 	"homepage": "https://github.com/hexatool/eslint-config",
 	"bugs": {
