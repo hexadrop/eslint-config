@@ -18,13 +18,68 @@ module.exports = {
 		sourceType: 'module',
 	},
 	plugins: ['import', 'simple-import-sort', 'unused-imports'],
-	extends: ['eslint:recommended', 'plugin:prettier/recommended'],
+	extends: [
+		'eslint:recommended',
+		'plugin:prettier/recommended',
+		'plugin:jsonc/recommended-with-jsonc',
+		'plugin:jsonc/prettier',
+	],
 	rules: {
 		...eslintRules,
 		...prettierRules,
 		...importRules,
 	},
 	overrides: [
+		{
+			files: ['*.json', '*.json5', '*.jsonc'],
+			parser: 'jsonc-eslint-parser',
+			rules: {
+				'jsonc/auto': 'error',
+				'jsonc/array-bracket-newline': 'error',
+			},
+		},
+		{
+			files: ['package.json'],
+			rules: {
+				'jsonc/sort-keys': [
+					'error',
+					// For example, a definition for package.json
+					{
+						pathPattern: '^$',
+						order: [
+							'name',
+							'version',
+							'description',
+							'keywords',
+							'homepage',
+							'bugs',
+							'repository',
+							'license',
+							'private',
+							'publishConfig',
+							'files',
+							'main',
+							'module',
+							'types',
+							'exports',
+							'typesVersions',
+							'scripts',
+							'dependencies',
+							'peerDependencies',
+							'peerDependenciesMeta',
+							'devDependencies',
+							'volta',
+							'packageManager',
+						],
+					},
+					{
+						pathPattern: '^(?:dev|peer|optional|bundled)?[Dd]ependencies$',
+						order: { type: 'asc' },
+					},
+					// ...
+				],
+			},
+		},
 		{
 			files: ['*.ts', '*.tsx'],
 			parserOptions: {

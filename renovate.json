@@ -1,5 +1,3 @@
 {
-	"extends": [
-		"github>hexatool/renovate-config"
-	]
+	"extends": ["github>hexatool/renovate-config"]
 }
