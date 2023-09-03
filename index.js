@@ -1,3 +1,3 @@
-const eslintrc = require('./.eslintrc.js');
+const eslintrc = require('./config/typescript.js');
 
 module.exports = eslintrc;
