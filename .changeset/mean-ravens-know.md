@@ -1,0 +1,58 @@
+---
+"@hexatool/eslint-config": major
+---
+
+Enable the following ESLint rules
+
+- capitalized-comments
+- complexity
+- consistent-this
+- curly
+- default-case-last
+- dot-notation
+- func-name-matching
+- func-names
+- grouped-accessor-pairs
+- guard-for-in
+- max-depth
+- max-params
+- multiline-comment-style
+- no-alert
+- no-bitwise
+- no-caller
+- no-eq-null
+- no-empty-static-block
+- no-eval
+- no-extra-bind
+- no-extra-label
+- no-floating-decimal
+- no-implicit-coercion
+- no-implicit-globals
+- no-implied-eval
+- no-inline-comments
+- no-invalid-this
+- no-iterator
+- no-label-var
+- no-lone-blocks
+- no-loop-func
+- no-mixed-operators
+- no-multi-assign
+- no-negated-condition
+- no-new-wrappers
+- no-sequences
+- no-underscore-dangle
+- no-unneeded-ternary
+- no-unused-expressions
+- no-useless-call
+- no-useless-computed-key
+- no-useless-return
+- one-var
+- operator-assignment
+- prefer-named-capture-group
+- prefer-numeric-literals
+- prefer-object-has-own
+- prefer-promise-reject-errors
+- require-await
+- quote-props
+- spaced-comment
+- arrow-parens
