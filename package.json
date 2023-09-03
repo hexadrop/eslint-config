@@ -21,6 +21,19 @@
 		"url": "https://github.com/hexatool/eslint-config"
 	},
 	"license": "MIT",
+	"files": [
+		"config",
+		"index.js",
+		"patch.js"
+	],
+	"exports": {
+		".": {
+			"require": "./index.js"
+		},
+		"./patch": {
+			"require": "./patch.js"
+		}
+	},
 	"scripts": {
 		"lint": "eslint .",
 		"lint:fix": "eslint --fix .",
