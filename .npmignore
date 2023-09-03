@@ -4,5 +4,7 @@
 .yarn
 .editorconfig
 .yarnrc.yml
+.pnp.cjs
+.pnp.loader.mjs
 renovate.json
 yarn.lock
