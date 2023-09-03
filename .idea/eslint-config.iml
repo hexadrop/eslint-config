@@ -21,6 +21,7 @@
       <excludePattern pattern="webpack.config.js" />
       <excludePattern pattern=".editorconfig" />
       <excludePattern pattern="renovate.json" />
+      <excludePattern pattern=".eslintrc.js" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
