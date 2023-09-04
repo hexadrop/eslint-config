@@ -5,6 +5,7 @@
     "@hexatool/eslint-config": "1.0.9"
   },
   "changesets": [
+    "clever-apes-unite",
     "forty-buttons-perform",
     "gorgeous-rockets-sing",
     "gorgeous-rockets-sings",
