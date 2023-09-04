@@ -2,4 +2,4 @@
 "@hexatool/eslint-config": minor
 ---
 
-Add astro support
+Add markdown support
