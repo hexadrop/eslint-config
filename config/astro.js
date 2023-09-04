@@ -6,7 +6,6 @@ const jsonOverrides = require('./overrides/json.overrides.js');
 const packageJsonOverrides = require('./overrides/package.json.overrides.js');
 const astroOverrides = require('./overrides/astro.overrides.js');
 const markdownOverrides = require('./overrides/markdown.overrides.js');
-const astroScriptOverrides = require('./overrides/astro-script.overrides.js');
 
 module.exports = {
 	env: {
@@ -28,12 +27,5 @@ module.exports = {
 		...prettierRules,
 		...importRules,
 	},
-	overrides: [
-		typescriptOverrides,
-		jsonOverrides,
-		packageJsonOverrides,
-		markdownOverrides,
-		astroOverrides,
-		astroScriptOverrides,
-	],
+	overrides: [typescriptOverrides, jsonOverrides, packageJsonOverrides, markdownOverrides, astroOverrides],
 };
