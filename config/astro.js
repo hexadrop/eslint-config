@@ -1,5 +1,5 @@
 const eslintRules = require('./rules/eslint.rules.js');
-const prettierRules = require('./rules/prettier-astro.rules.js');
+const prettierRules = require('./rules/prettier.rules.js');
 const importRules = require('./rules/import.rules.js');
 const typescriptOverrides = require('./overrides/typescript.overrides.js');
 const jsonOverrides = require('./overrides/json.overrides.js');
