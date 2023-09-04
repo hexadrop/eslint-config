@@ -2,9 +2,6 @@ const eslintRules = require('./rules/eslint.rules.js');
 const prettierRules = require('./rules/prettier.rules.js');
 const importRules = require('./rules/import.rules.js');
 const typescriptOverrides = require('./overrides/typescript.overrides.js');
-const jsonOverrides = require('./overrides/json.overrides.js');
-const packageJsonOverrides = require('./overrides/package.json.overrides.js');
-const markdownOverrides = require('./overrides/markdown.overrides');
 
 module.exports = {
 	env: {
@@ -13,9 +10,6 @@ module.exports = {
 		node: true,
 	},
 	parserOptions: {
-		ecmaFeatures: {
-			jsx: true,
-		},
 		ecmaVersion: 12,
 		sourceType: 'module',
 	},
@@ -26,5 +20,5 @@ module.exports = {
 		...prettierRules,
 		...importRules,
 	},
-	overrides: [typescriptOverrides, jsonOverrides, packageJsonOverrides, markdownOverrides],
+	overrides: [typescriptOverrides],
 };
