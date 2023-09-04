@@ -1,5 +1,17 @@
 # @hexatool/eslint-config
 
+## 2.0.0-beta.3
+
+### Patch Changes
+
+- cb7d2f2: Fix prettier for astro
+
+## 2.0.0-beta.2
+
+### Patch Changes
+
+- 485cf69: Apply only @typescript-eslint/parser to `.ts` files
+
 ## 2.0.0-beta.1
 
 ### Patch Changes

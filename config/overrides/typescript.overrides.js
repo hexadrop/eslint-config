@@ -2,6 +2,7 @@ const typescriptRules = require('../rules/typescript.rules.js');
 
 module.exports = {
 	files: ['*.ts', '*.tsx'],
+	parser: '@typescript-eslint/parser',
 	parserOptions: {
 		project: ['./tsconfig.json'],
 	},
