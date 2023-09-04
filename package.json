@@ -1,18 +1,16 @@
 {
 	"name": "@hexatool/eslint-config",
-	"version": "2.0.0",
-	"description": "Hexatool's ESLint and Prettier Config",
+	"version": "2.0.0-beta.0",
+	"description": "Opinionated ESLint ruleset designed for large teams and projects",
 	"keywords": [
-		"hexa",
-		"hexatool",
-		"javascript",
-		"ecmascript",
-		"eslint",
-		"eslintconfig",
 		"lint",
-		"config",
-		"prettier",
-		"prettierconfig"
+		"eslint",
+		"eslint-config",
+		"monorepo",
+		"scalable",
+		"scale",
+		"typescript",
+		"prettier"
 	],
 	"homepage": "https://github.com/hexatool/eslint-config",
 	"bugs": {
@@ -23,32 +21,58 @@
 		"url": "https://github.com/hexatool/eslint-config"
 	},
 	"license": "MIT",
-	"main": "index.js",
+	"files": [
+		"config",
+		"index.js",
+		"patch.js"
+	],
+	"exports": {
+		".": {
+			"require": "./index.js"
+		},
+		"./astro": {
+			"require": "./astro.js"
+		},
+		"./patch": {
+			"require": "./patch.js"
+		}
+	},
 	"scripts": {
-		"lint": "eslint .",
-		"lint:fix": "eslint --fix .",
+		"lint": "eslint --ext .js,.ts,.jsx,.tsx,.astro,.json,.md,.mdx .",
+		"lint:fix": "eslint --ext .js,.ts,.jsx,.tsx,.astro,.json,.md,.mdx --fix .",
 		"publish": "changeset publish",
 		"version": "changeset version"
 	},
 	"dependencies": {
-		"@babel/core": "7.22.11",
-		"@babel/eslint-parser": "7.22.11",
+		"@rushstack/eslint-patch": "1.3.3",
+		"@typescript-eslint/eslint-plugin": "6.5.0",
+		"@typescript-eslint/parser": "6.5.0",
 		"eslint-config-prettier": "9.0.0",
 		"eslint-plugin-import": "2.28.1",
+		"eslint-plugin-jsonc": "2.9.0",
+		"eslint-plugin-mdx": "2.2.0",
 		"eslint-plugin-prettier": "5.0.0",
 		"eslint-plugin-simple-import-sort": "10.0.0",
 		"eslint-plugin-unused-imports": "3.0.0",
-		"prettier": "3.0.2"
+		"prettier": "3.0.3"
 	},
 	"peerDependencies": {
-		"eslint": ">=8"
+		"astro-eslint-parser": ">=0.0.0",
+		"eslint": "^7.0.0 || ^8.0.0",
+		"typescript": ">=4.7.0"
+	},
+	"peerDependenciesMeta": {
+		"astro-eslint-parser": {
+			"optional": true
+		}
 	},
 	"devDependencies": {
 		"@changesets/cli": "2.26.2",
-		"eslint": "8.48.0"
+		"eslint": "8.48.0",
+		"typescript": "5.2.2"
 	},
 	"volta": {
-		"node": "18.17.1",
+		"node": "20.5.1",
 		"yarn": "3.6.3"
 	},
 	"packageManager": "yarn@3.6.3"

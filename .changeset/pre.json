@@ -1,0 +1,18 @@
+{
+  "mode": "pre",
+  "tag": "beta",
+  "initialVersions": {
+    "@hexatool/eslint-config": "1.0.9"
+  },
+  "changesets": [
+    "forty-buttons-perform",
+    "gorgeous-rockets-sing",
+    "gorgeous-rockets-sings",
+    "green-eagles-add",
+    "heavy-terms-pretend",
+    "mean-ravens-claw",
+    "mean-ravens-know",
+    "nervous-tables-invent",
+    "quiet-turtles-relax"
+  ]
+}
