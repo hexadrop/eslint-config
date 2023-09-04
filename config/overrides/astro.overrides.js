@@ -21,5 +21,7 @@ module.exports = {
 		'astro/no-unused-define-vars-in-style': 'error',
 		'astro/valid-compile': 'error',
 		'prettier/prettier': 'off',
+		'import/prefer-default-export': 'off',
+		'import/exports-last': 'off',
 	},
 };

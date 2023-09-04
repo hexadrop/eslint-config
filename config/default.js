@@ -2,6 +2,7 @@ const eslintRules = require('./rules/eslint.rules.js');
 const prettierRules = require('./rules/prettier.rules.js');
 const importRules = require('./rules/import.rules.js');
 const typescriptOverrides = require('./overrides/typescript.overrides.js');
+const typescriptDefOverrides = require('./overrides/typescript-definition.overrides.js');
 
 module.exports = {
 	env: {
@@ -20,5 +21,5 @@ module.exports = {
 		...prettierRules,
 		...importRules,
 	},
-	overrides: [typescriptOverrides],
+	overrides: [typescriptOverrides, typescriptDefOverrides],
 };
