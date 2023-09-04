@@ -3,7 +3,8 @@
 </h1>
 
 <p align="center">
-  A TypeScript ESLint ruleset designed for large teams and projects
+  Opinionated ESLint ruleset designed for large teams and projects considering modern JavaScript best practices and 
+  providing consistency to your code.
 </p>
 
 ## Installation

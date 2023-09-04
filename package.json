@@ -1,7 +1,7 @@
 {
 	"name": "@hexatool/eslint-config",
 	"version": "1.0.9",
-	"description": "A TypeScript ESLint ruleset designed for large teams and projects",
+	"description": "Opinionated ESLint ruleset designed for large teams and projects",
 	"keywords": [
 		"lint",
 		"eslint",
