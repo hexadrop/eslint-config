@@ -1,3 +1,3 @@
-const eslintrc = require('./index.js');
+const eslintrc = require('./config/recommended.js');
 
 module.exports = eslintrc;

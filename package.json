@@ -1,6 +1,6 @@
 {
 	"name": "@hexatool/eslint-config",
-	"version": "2.0.0-beta.4",
+	"version": "2.0.0-beta.10",
 	"description": "Opinionated ESLint ruleset designed for large teams and projects",
 	"keywords": [
 		"lint",
@@ -23,19 +23,26 @@
 	"license": "MIT",
 	"files": [
 		"config",
-		"astro.js",
-		"index.js",
-		"patch.js"
+		"patch"
 	],
 	"exports": {
 		".": {
-			"require": "./index.js"
+			"require": "./config/default.js"
 		},
 		"./astro": {
-			"require": "./astro.js"
+			"require": "./config/astro.js"
+		},
+		"./json": {
+			"require": "./config/json.js"
+		},
+		"./markdown": {
+			"require": "./config/markdown.js"
 		},
 		"./patch": {
-			"require": "./patch.js"
+			"require": "./patch/index.js"
+		},
+		"./recommended": {
+			"require": "./config/recommended.js"
 		}
 	},
 	"scripts": {

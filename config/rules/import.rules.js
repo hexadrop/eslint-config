@@ -7,7 +7,7 @@ module.exports = {
 	'import/no-extraneous-dependencies': [
 		'error',
 		{
-			devDependencies: ['**/*.{test,spec}.{js,ts,jsx,tsx}'],
+			devDependencies: ['**/*.{test,spec}.{js,ts,jsx,tsx}', '**/.*{js,ts}'],
 		},
 	],
 	// Disabled due an incompatibility with package.json exports. See: https://github.com/import-js/eslint-plugin-import/issues/2703
