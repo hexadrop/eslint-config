@@ -1,4 +1,5 @@
 module.exports = {
+	extends: ['plugin:astro/recommended'],
 	// Define the configuration for `.astro` file.
 	files: ['*.astro'],
 	// Enable this plugin
@@ -29,6 +30,5 @@ module.exports = {
 		'astro/no-deprecated-getentrybyslug': 'error',
 		'astro/no-unused-define-vars-in-style': 'error',
 		'astro/valid-compile': 'error',
-		'prettier/prettier': 'off',
 	},
 };
