@@ -1,6 +1,6 @@
 {
 	"name": "@hexatool/eslint-config",
-	"version": "2.0.0-beta.0",
+	"version": "2.0.0-beta.1",
 	"description": "Opinionated ESLint ruleset designed for large teams and projects",
 	"keywords": [
 		"lint",
@@ -23,6 +23,7 @@
 	"license": "MIT",
 	"files": [
 		"config",
+		"astro.js",
 		"index.js",
 		"patch.js"
 	],

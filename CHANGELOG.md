@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 2.0.0-beta.1
+
+### Patch Changes
+
+- 9a3e51a: Fix package.json files field
+
 ## 2.0.0-beta.0
 
 ### Major Changes
