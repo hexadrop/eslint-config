@@ -20,5 +20,6 @@ module.exports = {
 		'astro/no-deprecated-getentrybyslug': 'error',
 		'astro/no-unused-define-vars-in-style': 'error',
 		'astro/valid-compile': 'error',
+		'prettier/prettier': 'off',
 	},
 };
