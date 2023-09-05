@@ -79,7 +79,7 @@ module.exports = {
 	'no-useless-return': 'error',
 	'no-var': 'error',
 	'object-shorthand': 'error',
-	'one-var': ['error', 'always'],
+	'one-var': 'off',
 	'operator-assignment': ['error', 'always'],
 	'prefer-const': 'error',
 	'prefer-named-capture-group': 'error',
