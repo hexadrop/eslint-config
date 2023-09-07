@@ -1,7 +1,5 @@
 module.exports = {
 	files: ['package.json'],
-	parser: 'jsonc-eslint-parser',
-	extends: ['plugin:jsonc/recommended-with-jsonc', 'plugin:jsonc/prettier'],
 	rules: {
 		'jsonc/sort-keys': [
 			'error',
