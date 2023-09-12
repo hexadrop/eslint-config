@@ -1,6 +1,6 @@
 {
 	"name": "@hexatool/eslint-config",
-	"version": "2.0.0-beta.17",
+	"version": "2.0.0-beta.18",
 	"description": "Opinionated ESLint ruleset designed for large teams and projects",
 	"keywords": [
 		"lint",

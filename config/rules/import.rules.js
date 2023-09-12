@@ -4,12 +4,7 @@ module.exports = {
 	'import/newline-after-import': 'error',
 	'import/no-empty-named-blocks': 'error',
 	'import/no-duplicates': 'error',
-	'import/no-extraneous-dependencies': [
-		'error',
-		{
-			devDependencies: ['**/*.{test,spec}.{js,ts,jsx,tsx}', '**/.*{js,ts}', '**/vite.config.*'],
-		},
-	],
+	'import/no-extraneous-dependencies': 'off',
 	// Disabled due an incompatibility with package.json exports. See: https://github.com/import-js/eslint-plugin-import/issues/2703
 	'import/no-mutable-exports': 'off',
 	'import/no-named-as-default': 'off',
