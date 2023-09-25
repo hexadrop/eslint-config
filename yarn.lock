@@ -448,8 +448,8 @@ __metadata:
   linkType: hard
 
 "@npmcli/config@npm:^6.0.0":
-  version: 6.2.1
-  resolution: "@npmcli/config@npm:6.2.1"
+  version: 6.3.0
+  resolution: "@npmcli/config@npm:6.3.0"
   dependencies:
     "@npmcli/map-workspaces": ^3.0.2
     ci-info: ^3.8.0
@@ -459,7 +459,7 @@ __metadata:
     read-package-json-fast: ^3.0.2
     semver: ^7.3.5
     walk-up-path: ^3.0.1
-  checksum: ab64781e73af2adb037b58019a54b304ff25c6d08366f97569ddfda195f9045f68dbb91d68bcaf4c1d3c0bdc8877718620d77ca19d594592830277d38ce989d5
+  checksum: a1c4e844c581ff1743d9bf4ac1ead1ff67eb27ed72935bddb6dc5639b8c8d5409d13ca067d6baea6deebd7f467de76bfc10ce21d7831d89b8e51fe3e8b9412b6
   languageName: node
   linkType: hard
 
@@ -529,27 +529,27 @@ __metadata:
   linkType: hard
 
 "@types/debug@npm:^4.0.0":
-  version: 4.1.8
-  resolution: "@types/debug@npm:4.1.8"
+  version: 4.1.9
+  resolution: "@types/debug@npm:4.1.9"
   dependencies:
     "@types/ms": "*"
-  checksum: 913aea60b8c94cd0009bbdd531d8a3594ec3275ca0e8d1cbcf783417884252b3c53113f6665fd2fb0076b8ce628ee12cd083d2af107ed26c0f2e75852d8bc074
+  checksum: 8b550c47c70cc1af9a58e5c572f2418f30bface5bf5d5afa0d938923978f40be4c55646f1ab260f6f1492ca6ab065d447de23cb3b30d7b38597c2cbf89f4cb21
   languageName: node
   linkType: hard
 
 "@types/estree-jsx@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "@types/estree-jsx@npm:1.0.0"
+  version: 1.0.1
+  resolution: "@types/estree-jsx@npm:1.0.1"
   dependencies:
     "@types/estree": "*"
-  checksum: faca4c8924cbc36095e11ac7677dce1875583cf8ea99b67911affbbcc2a06ef99e585c02fc7160e55406d3c127b447df5a8ba3b23c211e5bbaad45dd278cde97
+  checksum: 3aa4d648ba3ddffa73eff63904a4ef7f78fc78c2fc22ad0ef80908e7e5839e4622dc8d8dc46708b07a6e732e72692cf234db63650c3ca608cc5b41c3e81f37a2
   languageName: node
   linkType: hard
 
 "@types/estree@npm:*, @types/estree@npm:^1.0.0":
-  version: 1.0.1
-  resolution: "@types/estree@npm:1.0.1"
-  checksum: b4022067f834d86766f23074a1a7ac6c460e823b00cd8fe94c997bc491e7794615facd3e1520a934c42bd8c0689dbff81e5c643b01f1dee143fc758cac19669e
+  version: 1.0.2
+  resolution: "@types/estree@npm:1.0.2"
+  checksum: 4b5c601d435ea8e2205458de15fd1556b5ae6c9a8323bad8a940ea502d6c824664faca94234c0bf76bf9c87cbf6ac41abee550c9e20433256549d589c9b543bd
   languageName: node
   linkType: hard
 
@@ -616,9 +616,9 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:*":
-  version: 20.6.2
-  resolution: "@types/node@npm:20.6.2"
-  checksum: e490a743f97779797e1cccb2cba9eb7b753c376a401e88fd3ba9b999e0e8f9851417f250639663e42e5d068f885b650972f8edbd9a3175c2f7b14e4ef206479c
+  version: 20.6.5
+  resolution: "@types/node@npm:20.6.5"
+  checksum: 82202ecb917d6371fdbb44f8d7a1b41a6b41d2495774e9dff67c4bbeee317054bd4d1a537f435df1060bb304e30a6a5184daf8b4ef336bc6496fcab7adab7949
   languageName: node
   linkType: hard
 
@@ -630,16 +630,16 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:^18.0.0":
-  version: 18.17.17
-  resolution: "@types/node@npm:18.17.17"
-  checksum: 91aa000ec14e4920323c28aab7a05fe503c60266b4064fb1827c0f1fff4ef86c3c6940549a19c57c583fe2dc70a74df69d53cbbde402fba7c16274edc1f0dd0a
+  version: 18.17.19
+  resolution: "@types/node@npm:18.17.19"
+  checksum: e6103fa9add6f715a164b32a4a2845a0c9cd544a54f57dce4a1889241101f4e3c293bf62a9366ec6691489a6b09db9afa25a073a5e72aec326dfbda9a1eff646
   languageName: node
   linkType: hard
 
 "@types/normalize-package-data@npm:^2.4.0":
-  version: 2.4.1
-  resolution: "@types/normalize-package-data@npm:2.4.1"
-  checksum: c90b163741f27a1a4c3b1869d7d5c272adbd355eb50d5f060f9ce122ce4342cf35f5b0005f55ef780596cacfeb69b7eee54cd3c2e02d37f75e664945b6e75fc6
+  version: 2.4.2
+  resolution: "@types/normalize-package-data@npm:2.4.2"
+  checksum: e38713ca1befc341701c078d592d1fddc1d13eec73b4d81fbab14638221733029f03cdf410b4486b23d48fd8d3809fa36611de98220e76f71517d42b582b3509
   languageName: node
   linkType: hard
 
@@ -2266,8 +2266,8 @@ __metadata:
   linkType: hard
 
 "glob@npm:^10.2.2":
-  version: 10.3.4
-  resolution: "glob@npm:10.3.4"
+  version: 10.3.7
+  resolution: "glob@npm:10.3.7"
   dependencies:
     foreground-child: ^3.1.0
     jackspeak: ^2.0.3
@@ -2275,8 +2275,8 @@ __metadata:
     minipass: ^5.0.0 || ^6.0.2 || ^7.0.0
     path-scurry: ^1.10.1
   bin:
-    glob: dist/cjs/src/bin.js
-  checksum: fe075f8109749cb0c264fd6eee8bf0cc8bb23a02305619b7a88bf1f79766218cc3ef66a3e8f3cd2e826006f047a3a8833c1694f167e978a6e37c34a8c053e48e
+    glob: dist/esm/bin.mjs
+  checksum: be48deb0707ae115faa0bbcd6992adc67f0b7ab8b05a8812d1c0d89c3d3bdb5e91ce6a0cba28db7e9e2b84594f790ed781d14d89441324846bedc2d5f2f1bea5
   languageName: node
   linkType: hard
 
@@ -2308,11 +2308,11 @@ __metadata:
   linkType: hard
 
 "globals@npm:^13.19.0":
-  version: 13.21.0
-  resolution: "globals@npm:13.21.0"
+  version: 13.22.0
+  resolution: "globals@npm:13.22.0"
   dependencies:
     type-fest: ^0.20.2
-  checksum: 90573e825401adbe0ef25db1b52e8f74afe4a1087049edd972f1ace77b391753fc3fe51eba9b6962c62e2282645f0a27ce20251662cdc247631c4861f32d56eb
+  checksum: e7fda8fe048a3b4fdfb95602b7dcd87d719f4b3797a6ba7f43e50fe148cfe20edfd3abeb16cc301caf679ca0f3e059b561e2d5060f2133f20f52c85bb16ac394
   languageName: node
   linkType: hard
 
@@ -4678,9 +4678,9 @@ __metadata:
   linkType: hard
 
 "spdx-license-ids@npm:^3.0.0":
-  version: 3.0.13
-  resolution: "spdx-license-ids@npm:3.0.13"
-  checksum: a5cb77ea7be86d574c8876970920e34d9b37f2fb6e361e6b732b61267afbc63dd37831160b731f85c1478f5ba95ae00369742555920e3c694f047f7068d33318
+  version: 3.0.15
+  resolution: "spdx-license-ids@npm:3.0.15"
+  checksum: 1d44fa43d2024d4533816ceffac983149f9c76214698033496e13f6224d7fe6e61649a2bb9eb6c88b5f7f71bc19cc5f0aed3dba75b430e27c06e0f71cc251959
   languageName: node
   linkType: hard
 
