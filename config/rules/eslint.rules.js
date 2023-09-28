@@ -26,7 +26,7 @@ module.exports = {
 	// Suggestions [eslint](https://eslint.org/docs/latest/rules/#suggestions)
 	camelcase: ['error', { properties: 'never' }],
 	'capitalized-comments': 'error',
-	complexity: ['error', 10],
+	complexity: ['error', 30],
 	'consistent-this': ['error', 'self'],
 	curly: 'error',
 	'default-case-last': 'error',
