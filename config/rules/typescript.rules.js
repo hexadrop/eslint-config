@@ -152,5 +152,6 @@ module.exports = {
 	'@typescript-eslint/prefer-readonly': ['error'],
 	'@typescript-eslint/promise-function-async': ['error', { checkArrowFunctions: false }],
 	'@typescript-eslint/switch-exhaustiveness-check': ['error'],
+	'@typescript-eslint/no-extraneous-class': 'off',
 	'@typescript-eslint/no-unused-vars': 'off',
 };
