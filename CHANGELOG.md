@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 2.1.1
+
+### Patch Changes
+
+- 8be6a07: Disable `@typescript-eslint/no-extraneous-class` rule
+
 ## 2.1.0
 
 ### Major Changes
