@@ -37,7 +37,7 @@ module.exports = {
 	'grouped-accessor-pairs': 'error',
 	'guard-for-in': 'error',
 	'max-depth': ['error', 4],
-	'max-params': ['error', 4],
+	'max-params': ['error', 10],
 	'multiline-comment-style': ['error', 'starred-block'],
 	'new-cap': ['error', { capIsNew: false }],
 	'no-alert': 'error',
