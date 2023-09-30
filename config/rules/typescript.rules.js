@@ -154,4 +154,9 @@ module.exports = {
 	'@typescript-eslint/switch-exhaustiveness-check': ['error'],
 	'@typescript-eslint/no-extraneous-class': 'off',
 	'@typescript-eslint/no-unused-vars': 'off',
+
+	'import/named': 'off',
+	'import/namespace': 'off',
+	'import/default': 'off',
+	'import/no-named-as-default-member': 'off',
 };
