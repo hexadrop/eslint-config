@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 2.1.3
+
+### Patch Changes
+
+- a9fa535: Fix eslint-plugin-import plugin rules
+
 ## 2.1.2
 
 ### Patch Changes
