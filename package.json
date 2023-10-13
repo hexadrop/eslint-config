@@ -80,7 +80,7 @@
 		"typescript": "5.2.2"
 	},
 	"volta": {
-		"node": "20.8.0",
+		"node": "20.8.1",
 		"yarn": "3.6.4"
 	},
 	"packageManager": "yarn@3.6.4"
