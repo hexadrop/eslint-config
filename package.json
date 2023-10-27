@@ -52,12 +52,12 @@
 		"version": "changeset version"
 	},
 	"dependencies": {
-		"@rushstack/eslint-patch": "1.5.0",
+		"@rushstack/eslint-patch": "1.5.1",
 		"@typescript-eslint/eslint-plugin": "6.9.0",
 		"@typescript-eslint/parser": "6.9.0",
 		"eslint-config-prettier": "9.0.0",
 		"eslint-plugin-import": "2.29.0",
-		"eslint-plugin-jsonc": "2.9.0",
+		"eslint-plugin-jsonc": "2.10.0",
 		"eslint-plugin-mdx": "2.2.0",
 		"eslint-plugin-prettier": "5.0.1",
 		"eslint-plugin-simple-import-sort": "10.0.0",
