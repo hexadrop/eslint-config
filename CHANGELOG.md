@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 2.2.2
+
+### Patch Changes
+
+- de001a0: Disable `max-params` rule
+
 ## 2.2.1
 
 ### Patch Changes
