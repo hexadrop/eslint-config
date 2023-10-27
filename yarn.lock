@@ -332,7 +332,7 @@ __metadata:
   resolution: "@hexatool/eslint-config@workspace:."
   dependencies:
     "@changesets/cli": "npm:2.26.2"
-    "@rushstack/eslint-patch": "npm:1.5.0"
+    "@rushstack/eslint-patch": "npm:1.5.1"
     "@typescript-eslint/eslint-plugin": "npm:6.7.3"
     "@typescript-eslint/parser": "npm:6.7.3"
     eslint: "npm:8.52.0"
@@ -503,10 +503,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rushstack/eslint-patch@npm:1.5.0":
-  version: 1.5.0
-  resolution: "@rushstack/eslint-patch@npm:1.5.0"
-  checksum: a6da394a3f659a66eaca56cbf89df27bf7134b1e969c34a35b381a54b7057cf719a0ce8fa1b8b9b2776d00687f722ccf8beb0f99b2a955885df35893d7092e64
+"@rushstack/eslint-patch@npm:1.5.1":
+  version: 1.5.1
+  resolution: "@rushstack/eslint-patch@npm:1.5.1"
+  checksum: bef32de80a93aebf3db8a2fcb408e2644918f4382bfd0851baf054cd0de3ece86bab3916d06798c236e0c951e3fc88e0921cd7edf89abb21b2418056ff9a3621
   languageName: node
   linkType: hard
 
