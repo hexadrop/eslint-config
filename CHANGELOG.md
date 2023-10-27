@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 2.2.0
+
+### Minor Changes
+
+- 0775495: Update rule `max-params` to 4
+
 ## 2.1.3
 
 ### Patch Changes
