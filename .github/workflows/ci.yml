@@ -56,8 +56,8 @@ jobs:
             -   name: Create Release Pull Request or Publish to npm
                 uses: changesets/action@v1
                 with:
-                    publish: yarn publish
-                    version: yarn version
+                    publish: yarn run publish
+                    version: yarn run version
                     commit: 'chore: release'
                     title: 'chore: release'
                 env:
