@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 2.2.3
+
+### Patch Changes
+
+- 891e0c8: Update typescript-eslint monorepo to v6.10.0
+
 ## 2.2.2
 
 ### Patch Changes
