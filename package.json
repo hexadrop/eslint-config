@@ -78,10 +78,5 @@
 		"@changesets/cli": "2.27.1",
 		"eslint": "8.57.0",
 		"typescript": "5.4.2"
-	},
-	"volta": {
-		"node": "20.11.1",
-		"yarn": "4.1.1"
-	},
-	"packageManager": "yarn@4.1.1"
+	}
 }

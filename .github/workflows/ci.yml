@@ -14,21 +14,21 @@ jobs:
         permissions:
             contents: 'read'
             id-token: 'write'
+        strategy:
+            matrix:
+                command: [ lint ]
         steps:
             -   name: Checkout
                 uses: actions/checkout@v4
 
-            -   name: Setup Node
-                uses: actions/setup-node@v4
-                with:
-                    node-version-file: 'package.json'
-                    cache: 'yarn'
+            -   name: Setup bun
+                uses: oven-sh/setup-bun@v1
 
             -   name: Install dependencies
-                run: yarn install --immutable
+                run: bun install
 
-            -   name: Lint
-                run: yarn lint
+            -   name: ${{ matrix.command }}
+                run: bun ${{ matrix.command }}
 
     release:
         name: Release
@@ -44,20 +44,17 @@ jobs:
             -   name: Checkout
                 uses: actions/checkout@v4
 
-            -   name: Setup Node
-                uses: actions/setup-node@v4
-                with:
-                    node-version-file: 'package.json'
-                    cache: 'yarn'
+            -   name: Setup bun
+                uses: oven-sh/setup-bun@v1
 
             -   name: Install dependencies
-                run: yarn install --immutable
+                run: bun install
 
             -   name: Create Release Pull Request or Publish to npm
                 uses: changesets/action@v1
                 with:
-                    publish: yarn run publish
-                    version: yarn run version
+                    publish: bun changeset publish
+                    version: bun changeset version
                     commit: 'chore: release'
                     title: 'chore: release'
                 env:
