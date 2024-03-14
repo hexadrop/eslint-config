@@ -1,5 +1,21 @@
 # @hexatool/eslint-config
 
+## 3.0.0
+
+### Major Changes
+
+-   6e2f779: Update typescript-eslint monorepo to v7
+-   e1ac0ff: Update dependency eslint-plugin-simple-import-sort to v12
+-   afbb812: Remove `@rushstack/eslint-patch`
+
+### Minor Changes
+
+-   dd91071: update dependency prettier to v3.2.5
+-   0cf6c8a: Update dependency eslint-plugin-prettier to v5.1.3
+-   4de8a4c: Update dependency eslint-plugin-jsonc to v2.13.0
+-   3967d98: Update dependency eslint-plugin-unused-imports to v3.1.0
+-   39c4b0b: Update dependency eslint-plugin-mdx to v3.1.5
+
 ## 2.3.0
 
 ### Minor Changes
