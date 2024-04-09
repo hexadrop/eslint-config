@@ -26,23 +26,6 @@
 		"patch"
 	],
 	"type": "module",
-	"exports": {
-		".": {
-			"import": "./config/default.js"
-		},
-		"./astro": {
-			"import": "./config/astro.js"
-		},
-		"./json": {
-			"import": "./config/json.js"
-		},
-		"./markdown": {
-			"import": "./config/markdown.js"
-		},
-		"./recommended": {
-			"import": "./config/recommended.js"
-		}
-	},
 	"scripts": {
 		"lint": "eslint .",
 		"lint:fix": "eslint --fix .",
@@ -50,30 +33,15 @@
 		"version": "changeset version"
 	},
 	"dependencies": {
-		"@typescript-eslint/eslint-plugin": "7.6.0",
-		"@typescript-eslint/parser": "7.6.0",
-		"eslint-config-prettier": "9.1.0",
-		"eslint-plugin-import": "2.29.1",
-		"eslint-plugin-jsonc": "2.15.0",
-		"eslint-plugin-mdx": "3.1.5",
-		"eslint-plugin-prettier": "5.1.3",
-		"eslint-plugin-simple-import-sort": "12.0.0",
-		"eslint-plugin-unused-imports": "3.1.0",
-		"prettier": "3.2.5"
 	},
 	"peerDependencies": {
-		"astro-eslint-parser": ">=0.0.0",
-		"eslint": "^9.0.0",
-		"typescript": ">=4.7.0"
+		"eslint": ">=8.40.0"
 	},
 	"peerDependenciesMeta": {
-		"astro-eslint-parser": {
-			"optional": true
-		}
 	},
 	"devDependencies": {
-		"@changesets/cli": "2.27.1",
-		"eslint": "9.0.0",
-		"typescript": "5.4.5"
+		"@hexatool/tsconfig": "20.0.1",
+		"@types/eslint": "^8.56.7",
+		"eslint": "9.0.0"
 	}
 }
