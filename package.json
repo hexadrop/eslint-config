@@ -25,26 +25,27 @@
 		"config",
 		"patch"
 	],
+	"type": "module",
 	"exports": {
 		".": {
-			"require": "./config/default.js"
+			"import": "./config/default.js"
 		},
 		"./astro": {
-			"require": "./config/astro.js"
+			"import": "./config/astro.js"
 		},
 		"./json": {
-			"require": "./config/json.js"
+			"import": "./config/json.js"
 		},
 		"./markdown": {
-			"require": "./config/markdown.js"
+			"import": "./config/markdown.js"
 		},
 		"./recommended": {
-			"require": "./config/recommended.js"
+			"import": "./config/recommended.js"
 		}
 	},
 	"scripts": {
-		"lint": "eslint --ext .js,.ts,.jsx,.tsx,.astro,.json,.md,.mdx .",
-		"lint:fix": "eslint --ext .js,.ts,.jsx,.tsx,.astro,.json,.md,.mdx --fix .",
+		"lint": "eslint .",
+		"lint:fix": "eslint --fix .",
 		"publish": "changeset publish",
 		"version": "changeset version"
 	},
@@ -62,7 +63,7 @@
 	},
 	"peerDependencies": {
 		"astro-eslint-parser": ">=0.0.0",
-		"eslint": "^7.0.0 || ^8.0.0 || ^9.0.0",
+		"eslint": "^9.0.0",
 		"typescript": ">=4.7.0"
 	},
 	"peerDependenciesMeta": {
