@@ -1,0 +1,17 @@
+{
+	"extends": "@hexatool/tsconfig",
+	"compilerOptions": {
+		"baseUrl": ".",
+		// Enable latest features
+		"lib": ["ESNext"],
+		"module": "esnext",
+		"target": "esnext",
+
+		// If TS 5.x+
+		"moduleResolution": "bundler",
+		"moduleDetection": "force",
+
+		"esModuleInterop": true,
+	},
+	"exclude": ["**/dist/**", "node_modules"]
+}
