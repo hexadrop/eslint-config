@@ -1,3 +1,3 @@
-export interface OptionsIsInEditor {
+export interface IsInEditorOptions {
 	isInEditor?: boolean
 }

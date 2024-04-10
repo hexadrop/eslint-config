@@ -1,10 +1,10 @@
 import globals from 'globals';
 import { default as pluginUnusedImports } from 'eslint-plugin-unused-imports'
 
-import type { OptionsIsInEditor, OptionsOverrides, TypedFlatConfigItem } from '../../types';
+import type { IsInEditorOptions, OptionsOverrides, TypedFlatConfigItem } from '../../types';
 
 export default async function javascript(
-	options: OptionsIsInEditor & OptionsOverrides = {},
+	options: IsInEditorOptions & OptionsOverrides = {},
 ): Promise<TypedFlatConfigItem[]> {
 
 	const {
