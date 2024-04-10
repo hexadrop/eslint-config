@@ -28,12 +28,16 @@
 	"type": "module",
 	"scripts": {
 		"lint": "eslint .",
-		"lint:fix": "eslint --fix .",
+		"lint:fix": "eslint --debug --fix .",
 		"postinstall": "bun run scripts/typegen.ts",
 		"publish": "changeset publish",
 		"version": "changeset version"
 	},
 	"dependencies": {
+		"@typescript-eslint/eslint-plugin": "7.6.0",
+		"eslint-flat-config-utils": "0.2.1",
+		"eslint-plugin-unused-imports": "3.1.0",
+		"globals": "15.0.0"
 	},
 	"peerDependencies": {
 		"eslint": ">=8.40.0"
@@ -41,8 +45,13 @@
 	"peerDependenciesMeta": {
 	},
 	"devDependencies": {
+		"@eslint/config-inspector": "0.4.5",
 		"@hexatool/tsconfig": "20.0.1",
-		"@types/eslint": "^8.56.7",
-		"eslint": "9.0.0"
+		"@types/bun": "1.0.12",
+		"@types/eslint": "8.56.7",
+		"@changesets/cli": "2.27.1",
+		"eslint": "9.0.0",
+		"eslint-typegen": "0.2.2",
+		"jiti": "1.21.0"
 	}
 }
