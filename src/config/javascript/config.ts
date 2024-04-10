@@ -1,7 +1,8 @@
 import globals from 'globals';
 import { default as pluginUnusedImports } from 'eslint-plugin-unused-imports'
 
-import type { IsInEditorOptions, OptionsOverrides, TypedFlatConfigItem } from '../../types';
+import type { IsInEditorOptions, OptionsOverrides } from '../../options';
+import type { TypedFlatConfigItem } from '../../types';
 
 export default async function javascript(
 	options: IsInEditorOptions & OptionsOverrides = {},

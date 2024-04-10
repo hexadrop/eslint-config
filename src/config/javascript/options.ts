@@ -1,4 +1,4 @@
-import type { OptionsOverrides } from '../../types';
+import type { OptionsOverrides } from '../../options';
 
 export interface JavascriptOptions {
 	/**

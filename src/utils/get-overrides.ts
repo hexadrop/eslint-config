@@ -1,4 +1,4 @@
-import type { HexatoolEslintOptions } from '../types';
+import type { HexatoolEslintOptions } from '../options';
 import resolveSubOptions from './resolve-sub-options';
 
 export default function getOverrides<K extends keyof HexatoolEslintOptions>(
