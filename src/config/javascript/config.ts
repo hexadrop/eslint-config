@@ -205,9 +205,9 @@ export default async function javascript(
 				'no-useless-catch': 'error',
 				'no-useless-computed-key': 'error',
 				'no-useless-constructor': 'error',
+				'no-useless-escape': 'error',
 				'no-useless-rename': 'error',
 				'no-useless-return': 'error',
-				'no-useless-scape': 'error',
 				'no-var': 'error',
 				'no-with': 'error',
 				'object-shorthand': 'error',
@@ -251,7 +251,7 @@ export default async function javascript(
 				'yoda': 'error',
 
 				// Layout & Formatting [eslint](https://eslint.org/docs/latest/rules/#layout--formatting)
-				'eslint line-comment-position': ["error", { "position": "above" }],
+				'line-comment-position': ["error", { "position": "above" }],
 				'arrow-parens': ['error', 'as-needed'], // TODO: Utilizar stylistic
 				'lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true }], // TODO: Utilizar stylistic
 				'padding-line-between-statements': ['error', { blankLine: 'always', prev: '*', next: 'return' }], // TODO: Utilizar stylistic
