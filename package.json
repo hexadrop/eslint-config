@@ -29,6 +29,7 @@
 	"scripts": {
 		"lint": "eslint .",
 		"lint:fix": "eslint --fix .",
+		"postinstall": "bun run scripts/typegen.ts",
 		"publish": "changeset publish",
 		"version": "changeset version"
 	},
