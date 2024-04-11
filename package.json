@@ -35,7 +35,7 @@
 	},
 	"dependencies": {
 		"@typescript-eslint/eslint-plugin": "7.6.0",
-		"eslint-flat-config-utils": "0.2.1",
+		"eslint-flat-config-utils": "0.2.2",
 		"eslint-config-flat-gitignore": "0.1.5",
 		"eslint-plugin-unused-imports": "3.1.0",
 		"globals": "15.0.0"
@@ -49,10 +49,11 @@
 		"@eslint/config-inspector": "0.4.5",
 		"@hexatool/tsconfig": "20.0.1",
 		"@types/bun": "1.0.12",
-		"@types/eslint": "8.56.7",
+		"@types/eslint": "8.56.8",
 		"@changesets/cli": "2.27.1",
 		"eslint": "9.0.0",
 		"eslint-typegen": "0.2.2",
-		"jiti": "1.21.0"
+		"jiti": "1.21.0",
+		"typescript": "5.4.5"
 	}
 }
