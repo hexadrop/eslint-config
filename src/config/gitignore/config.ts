@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault } from '../../utils';
+import GLOB_EXCLUDE from './globs';
 import type { GitignoreOptions } from './options';
 
 export default async function gitignore(
@@ -8,17 +9,19 @@ export default async function gitignore(
 ): Promise<TypedFlatConfigItem[]> {
 
 	if (options) {
+		const ignores = {
+			ignores: GLOB_EXCLUDE,
+			name: 'hexatool/ignore',
+		};
 		if (typeof options === 'boolean') {
 			const gitignoreFlatConfig = await interopDefault(import('eslint-config-flat-gitignore'));
 			if (fs.existsSync('.gitignore'))
-				return [gitignoreFlatConfig()];
+				return [ignores, { ...gitignoreFlatConfig(), name: 'hexatool/ignore/gitignore' }];
 		} else {
 			const gitignoreFlatConfig = await interopDefault(import('eslint-config-flat-gitignore'));
-			return [gitignoreFlatConfig(options)];
+			return [ignores, { ...gitignoreFlatConfig(options), name: 'hexatool/ignore/gitignore' }];
 		}
 	}
 
-	return [
-
-	];
+	return [];
 }
