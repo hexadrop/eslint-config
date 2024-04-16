@@ -6,6 +6,7 @@ export default function getOverrides<K extends keyof HexatoolEslintOptions>(
 	key: K,
 ) {
 	const sub = resolveSubOptions(options, key)
+
 	return {
 		...'overrides' in sub
 			? sub.overrides

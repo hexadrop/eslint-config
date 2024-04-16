@@ -4,9 +4,9 @@ import { default as pluginUnusedImports } from 'eslint-plugin-unused-imports'
 import type { IsInEditorOptions, OptionsOverrides } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
 
-export default async function javascript(
+export default function javascript(
 	options: IsInEditorOptions & OptionsOverrides = {},
-): Promise<TypedFlatConfigItem[]> {
+): TypedFlatConfigItem[] {
 
 	const {
 		isInEditor,
@@ -113,14 +113,14 @@ export default async function javascript(
 				// Suggestions [eslint](https://eslint.org/docs/latest/rules/#suggestions)
 				'accessor-pairs': ['error', { enforceForClassMembers: true, setWithoutGet: true }],
 				'block-scoped-var': 'error',
-				'camelcase': ['error', { properties: 'never' }],
+				camelcase: ['error', { properties: 'never' }],
 				'capitalized-comments': 'error',
-				'complexity': ['error', 30],
+				complexity: ['error', 30],
 				'consistent-this': ['error', 'self'],
-				'curly': 'error',
+				curly: 'error',
 				'default-case-last': 'error',
 				'dot-notation': 'error',
-				'eqeqeq': 'error',
+				eqeqeq: 'error',
 				'func-name-matching': 'error',
 				'func-names': ['error', 'as-needed'],
 				'grouped-accessor-pairs': 'error',
@@ -234,7 +234,7 @@ export default async function javascript(
 				'require-await': 'error',
 				'require-yield': 'error',
 				'quote-props': ['error', 'as-needed'], // TODO: Utilizar stylistic
-				'radix': 'error',
+				radix: 'error',
 				'sort-imports': [
 					'error',
 					{
@@ -249,10 +249,10 @@ export default async function javascript(
 				'symbol-description': 'error',
 				'unicode-bom': ['error', 'never'],
 				'vars-on-top': 'error',
-				'yoda': 'error',
+				yoda: 'error',
 
 				// Layout & Formatting [eslint](https://eslint.org/docs/latest/rules/#layout--formatting)
-				'line-comment-position': ["error", { "position": "above" }],
+				'line-comment-position': ["error", { position: "above" }],
 				'arrow-parens': ['error', 'as-needed'], // TODO: Utilizar stylistic
 				'lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true }], // TODO: Utilizar stylistic
 				'padding-line-between-statements': ['error', { blankLine: 'always', prev: '*', next: 'return' }], // TODO: Utilizar stylistic
