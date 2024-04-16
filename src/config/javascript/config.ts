@@ -94,7 +94,8 @@ export default function javascript(
 				'no-unsafe-negation': 'error',
 				'no-unsafe-optional-chaining': 'error',
 				'no-unused-private-class-members': 'error',
-				'no-unused-vars': 'error',
+				// Disable in favor of 'unused-imports/no-unused-vars'
+				'no-unused-vars': 'off',
 				'no-use-before-define': [
 					'error',
 					{
