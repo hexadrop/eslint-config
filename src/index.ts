@@ -2,8 +2,7 @@ import process from 'node:process';
 
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 
-import { gitignore, imports, javascript } from './config';
-import typescript from './config/typescript';
+import { gitignore, imports, javascript, stylistic, typescript } from './config';
 import type { HexatoolEslintOptions } from './options';
 import type { Awaitable, TypedFlatConfigItem } from './types';
 
@@ -15,38 +14,47 @@ const defaultPluginRenaming = {
 	n: 'node',
 	vitest: 'test',
 	yml: 'yaml',
+};
+
+function isEditor() {
+	return Boolean(
+		(process.env.VSCODE_PID || process.env.VSCODE_CWD || process.env.JETBRAINS_IDE || process.env.VIM)
+		&& !process.env.CI,
+	);
 }
 
-export default async function hexatool(options: HexatoolEslintOptions = {}) {
+export default async function hexatool(
+	options: HexatoolEslintOptions = {},
+): Promise<FlatConfigComposer<TypedFlatConfigItem>> {
 	const {
 		autoRenamePlugins = true,
-		isInEditor = Boolean((process.env.VSCODE_PID || process.env.VSCODE_CWD || process.env.JETBRAINS_IDE || process.env.VIM) && !process.env.CI),
+		isInEditor = isEditor(),
 	} = options;
 
-
-	const stylistic = options.stylistic === false
+	const stylisticOptions = options.stylistic === false
 		? false
 		: typeof options.stylistic === 'object'
 			? options.stylistic
-			: {}
+			: {};
 
 	const configs: Awaitable<TypedFlatConfigItem[]>[] = [
 		gitignore(options.gitignore),
 		javascript(options.javascript, isInEditor),
-		imports(stylistic),
-		typescript(options.typescript, stylistic),
+		imports(stylisticOptions),
+		typescript(options.typescript, stylisticOptions),
+		stylistic(stylisticOptions),
 	];
 
-	let pipeline = new FlatConfigComposer<TypedFlatConfigItem>()
+	let pipeline = new FlatConfigComposer<TypedFlatConfigItem>();
 
 	pipeline = pipeline
 		.append(
-			...configs
-		)
+			...configs,
+		);
 
 	if (autoRenamePlugins) {
 		pipeline = pipeline
-			.renamePlugins(defaultPluginRenaming)
+			.renamePlugins(defaultPluginRenaming);
 	}
 
 	return pipeline;

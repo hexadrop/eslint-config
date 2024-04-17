@@ -4,5 +4,5 @@ export interface AutoRenamePluginsOptions {
 	 *
 	 * @default true
 	 */
-	autoRenamePlugins?: boolean
+	autoRenamePlugins?: boolean;
 }

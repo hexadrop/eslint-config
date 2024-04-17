@@ -1,4 +1,3 @@
-
 const GLOB_EXCLUDE = [
 	'**/node_modules',
 	'**/dist',
@@ -29,6 +28,6 @@ const GLOB_EXCLUDE = [
 	'**/*.min.*',
 	'**/LICENSE*',
 	'**/__snapshots__',
-]
+];
 
 export default GLOB_EXCLUDE;

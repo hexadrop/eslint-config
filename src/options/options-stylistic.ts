@@ -1,14 +1,19 @@
+import type { StylisticCustomizeOptions } from '@stylistic/eslint-plugin';
+
 import type { OptionsOverrides } from './options-override';
 
-export interface StylisticConfig  {
+type StylisticConfig = Omit<StylisticCustomizeOptions, 'pluginName' | 'flat'> & {
+	lineLength?: number;
+};
 
-}
-export interface StylisticOptions {
+interface StylisticOptions {
 
 	/**
 	 * Enable stylistic rules.
 	 *
 	 * @default true
 	 */
-	stylistic?: boolean | (StylisticConfig & OptionsOverrides)
+	stylistic?: boolean | (StylisticConfig & OptionsOverrides);
 }
+
+export type { StylisticConfig, StylisticOptions };

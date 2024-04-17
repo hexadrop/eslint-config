@@ -7,5 +7,5 @@ export default function resolveSubOptions<K extends keyof HexatoolEslintOptions>
 ): ResolvedOptions<HexatoolEslintOptions[K]> {
 	return typeof options[key] === 'boolean'
 		? {} as any
-		: options[key] || {}
+		: options[key] || {};
 }

@@ -4,11 +4,10 @@ import type { ParserOptions } from '@typescript-eslint/parser';
 import type { ClassicConfig } from '@typescript-eslint/utils/ts-eslint';
 import { isPackageExists } from 'local-pkg';
 
-import { GLOB_SRC } from '../../globs';
 import type { OptionsOverrides, StylisticConfig } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault, renameRules, toArray } from '../../utils';
-import GLOB_TYPESCRIPT from './globs';
+import { GLOB_SRC, GLOB_TYPESCRIPT } from './globs';
 import type { TypescriptOptions } from './options';
 
 interface MakeParserOptions {
@@ -42,14 +41,14 @@ function makeParser(parser: TypescriptParser, {
 				sourceType: 'module',
 				...typeAware
 					? {
-						project: tsconfigPath,
-						tsconfigRootDir: process.cwd(),
-					}
+							project: tsconfigPath,
+							tsconfigRootDir: process.cwd(),
+						}
 					: {},
 				...parserOptions as any,
 			},
 		},
-		name: `hexatool/typescript/${typeAware ? 'type-aware-parser' : 'parser'}`,
+		name: `hexatool/typescript/${typeAware ? 'parser/type-aware' : 'parser'}`,
 	};
 }
 
@@ -61,7 +60,11 @@ function getConfig(plugin: TypescriptPlugin, name: string): ClassicConfig.Config
 
 function getOverrides(plugin: TypescriptPlugin, name: string): ConfigOverride[];
 function getOverrides(plugin: TypescriptPlugin, name: string, index: number): ConfigOverride | undefined;
-function getOverrides(plugin: TypescriptPlugin, name: string, index?: number): ConfigOverride[] | ConfigOverride | undefined {
+function getOverrides(
+	plugin: TypescriptPlugin,
+	name: string,
+	index?: number,
+): ConfigOverride[] | ConfigOverride | undefined {
 	const config = getConfig(plugin, name);
 	const overrides = config?.overrides ?? [];
 
@@ -89,7 +92,9 @@ export default async function typescript(
 		GLOB_SRC,
 		...componentExtensions.map(ext => `**/*.${ext}`),
 	];
-	const filesTypeAware = 'filesTypeAware' in optionsObject && optionsObject.filesTypeAware ? optionsObject.filesTypeAware : GLOB_TYPESCRIPT;
+	const filesTypeAware = 'filesTypeAware' in optionsObject
+		? optionsObject.filesTypeAware
+		: GLOB_TYPESCRIPT;
 
 	const [
 		plugin,
@@ -110,13 +115,15 @@ export default async function typescript(
 	const eslintStylisticTypeCheckedConfig = getConfig(plugin, 'stylistic-type-checked-only');
 	const eslintStylisticTypeCheckedConfigRules = eslintStylisticTypeCheckedConfig?.rules ?? {};
 
-	const config: TypedFlatConfigItem[] = [{
+	const config: TypedFlatConfigItem[] = [
+		{
 		// Install the plugins without globs, so they can be configured separately.
-		name: 'hexatool/typescript/setup',
-		plugins: {
-			typescript: plugin,
+			name: 'hexatool/typescript/setup',
+			plugins: {
+				typescript: plugin,
+			},
 		},
-	}];
+	];
 
 	// Assign type-aware parser for type-aware files and type-unaware parser for the rest
 	if (isTypeAware) {
@@ -148,7 +155,6 @@ export default async function typescript(
 					eslintStrictConfigRules,
 					RENAME_RULES_MAP,
 				),
-
 
 				'typescript/explicit-module-boundary-types': ['error'],
 				'typescript/member-ordering': [
@@ -310,7 +316,7 @@ export default async function typescript(
 	if (stylistic) {
 		config.push({
 			files: filesTypeAware,
-			name: 'hexatool/typescript/rules-stylistic',
+			name: 'hexatool/typescript/rules/stylistic',
 			rules: {
 				...renameRules(
 					eslintStylisticConfigRules,
@@ -324,16 +330,22 @@ export default async function typescript(
 	if (isTypeAware) {
 		config.push({
 			files: filesTypeAware,
-			name: 'hexatool/typescript/rules-type-aware',
+			name: 'hexatool/typescript/rules/type-aware',
 			rules: {
 				...renameRules(
 					eslintStrictTypeCheckedConfigRules,
 					RENAME_RULES_MAP,
 				),
-				'typescript/no-confusing-void-expression': ['error', { ignoreArrowShorthand: true }],
+				'typescript/no-confusing-void-expression': [
+					'error',
+					{ ignoreArrowShorthand: true },
+				],
 				'typescript/no-unused-vars': 'off',
 				'typescript/prefer-readonly': ['error'],
-				'typescript/promise-function-async': ['error', { checkArrowFunctions: false }],
+				'typescript/promise-function-async': [
+					'error',
+					{ checkArrowFunctions: false },
+				],
 				'typescript/switch-exhaustiveness-check': ['error'],
 				...optionsObject.overrides,
 			},
@@ -342,7 +354,7 @@ export default async function typescript(
 		if (stylistic) {
 			config.push({
 				files: filesTypeAware,
-				name: 'hexatool/typescript/rules-type-aware-stylistic',
+				name: 'hexatool/typescript/rules/type-aware-stylistic',
 				rules: {
 					...renameRules(
 						eslintStylisticTypeCheckedConfigRules,
@@ -356,21 +368,22 @@ export default async function typescript(
 
 	config.push({
 		files: ['**/*.d.ts'],
-		name: 'hexatool/typescript/disables/dts',
+		name: 'hexatool/typescript/rules/dts',
 		rules: {
 			'@typescript-eslint/triple-slash-reference': 'off',
 			'multiline-comment-style': 'off',
-			'spaced-comment': 'off', // TODO: Utilizar stylistic
 		},
 	}, {
-		files: ['**/*.js', '**/*.cjs'],
-		name: 'hexatool/typescript/disables/cjs',
+		files: [
+			'**/*.js',
+			'**/*.cjs',
+		],
+		name: 'hexatool/typescript/rules/cjs',
 		rules: {
 			'typescript/no-require-imports': 'off',
 			'typescript/no-var-requires': 'off',
 		},
 	});
-
 
 	return config;
 }

@@ -8,7 +8,6 @@ export default function javascript(
 	options?: OptionsOverrides,
 	isInEditor?: boolean,
 ): TypedFlatConfigItem[] {
-
 	const { overrides } = options ?? {};
 
 	return [
@@ -41,7 +40,10 @@ export default function javascript(
 			},
 			rules: {
 				// Possible problems [eslint](https://eslint.org/docs/latest/rules/#possible-problems)
-				'array-callback-return': ['error', { checkForEach: true }],
+				'array-callback-return': [
+					'error',
+					{ checkForEach: true },
+				],
 				'constructor-super': 'error',
 				'for-direction': 'error',
 				'getter-return': 'error',
@@ -49,7 +51,10 @@ export default function javascript(
 				'no-await-in-loop': 'error',
 				'no-class-assign': 'error',
 				'no-compare-neg-zero': 'error',
-				'no-cond-assign': ['error', 'always'],
+				'no-cond-assign': [
+					'error',
+					'always',
+				],
 				'no-const-assign': 'error',
 				'no-constant-binary-expression': 'error',
 				'no-constant-condition': 'error',
@@ -106,28 +111,57 @@ export default function javascript(
 				'no-useless-assignment': 'error',
 				'no-useless-backreference': 'error',
 				'require-atomic-updates': 'error',
-				'use-isnan': ['error', { enforceForIndexOf: true, enforceForSwitchCase: true }],
-				'valid-typeof': ['error', { requireStringLiterals: true }],
+				'use-isnan': [
+					'error',
+					{ enforceForIndexOf: true, enforceForSwitchCase: true },
+				],
+				'valid-typeof': [
+					'error',
+					{ requireStringLiterals: true },
+				],
 
 				// Suggestions [eslint](https://eslint.org/docs/latest/rules/#suggestions)
-				'accessor-pairs': ['error', { enforceForClassMembers: true, setWithoutGet: true }],
+				'accessor-pairs': [
+					'error',
+					{ enforceForClassMembers: true, setWithoutGet: true },
+				],
 				'block-scoped-var': 'error',
-				camelcase: ['error', { properties: 'never' }],
+				camelcase: [
+					'error',
+					{ properties: 'never' },
+				],
 				'capitalized-comments': 'error',
-				complexity: ['error', 30],
-				'consistent-this': ['error', 'self'],
-				curly: 'error',
+				complexity: [
+					'error',
+					30,
+				],
+				'consistent-this': [
+					'error',
+					'self',
+				],
 				'default-case-last': 'error',
 				'dot-notation': 'error',
 				eqeqeq: 'error',
 				'func-name-matching': 'error',
-				'func-names': ['error', 'as-needed'],
+				'func-names': [
+					'error',
+					'as-needed',
+				],
 				'grouped-accessor-pairs': 'error',
 				'guard-for-in': 'error',
-				'max-depth': ['error', 4],
+				'max-depth': [
+					'error',
+					4,
+				],
 				'max-params': 'off',
-				'multiline-comment-style': ['error', 'starred-block'],
-				'new-cap': ['error', { capIsNew: false }],
+				'multiline-comment-style': [
+					'error',
+					'starred-block',
+				],
+				'new-cap': [
+					'error',
+					{ capIsNew: false },
+				],
 				'no-alert': 'error',
 				'no-array-constructor': 'error',
 				'no-bitwise': 'error',
@@ -135,8 +169,14 @@ export default function javascript(
 				'no-case-declarations': 'error',
 				'no-delete-var': 'error',
 				'no-eq-null': 'error',
-				'no-console': ['error', { allow: ['error'] }],
-				'no-else-return': ['error', { allowElseIf: false }],
+				'no-console': [
+					'error',
+					{ allow: ['error'] },
+				],
+				'no-else-return': [
+					'error',
+					{ allowElseIf: false },
+				],
 				'no-empty': 'error',
 				'no-empty-static-block': 'error',
 				'no-eval': 'error',
@@ -145,7 +185,6 @@ export default function javascript(
 				'no-extra-boolean-cast': 'error',
 				'no-extra-label': 'error',
 				'no-global-assign': 'error',
-				'no-floating-decimal': 'error', // TODO: Utilizar stylistic
 				'no-implicit-coercion': 'error',
 				'no-implicit-globals': 'error',
 				'no-implied-eval': 'error',
@@ -153,12 +192,14 @@ export default function javascript(
 				'no-invalid-this': 'error',
 				'no-iterator': 'error',
 				'no-label-var': 'error',
-				'no-labels': ['error', { allowLoop: false, allowSwitch: false }],
+				'no-labels': [
+					'error',
+					{ allowLoop: false, allowSwitch: false },
+				],
 				'no-multi-str': 'error',
 				'no-lone-blocks': 'error',
 				'no-loop-func': 'error',
 				'no-lonely-if': 'error',
-				'no-mixed-operators': 'error', // TODO: Utilizar stylistic
 				'no-multi-assign': 'error',
 				'no-negated-condition': 'error',
 				'no-new': 'error',
@@ -215,7 +256,10 @@ export default function javascript(
 				'no-with': 'error',
 				'object-shorthand': 'error',
 				'one-var': 'off',
-				'operator-assignment': ['error', 'always'],
+				'operator-assignment': [
+					'error',
+					'always',
+				],
 				'prefer-arrow-callback': [
 					'error',
 					{
@@ -229,13 +273,15 @@ export default function javascript(
 				'prefer-numeric-literals': 'error',
 				'prefer-object-has-own': 'error',
 				'prefer-promise-reject-errors': 'error',
-				'prefer-regex-literals': ['error', { disallowRedundantWrapping: true }],
+				'prefer-regex-literals': [
+					'error',
+					{ disallowRedundantWrapping: true },
+				],
 				'prefer-rest-params': 'error',
 				'prefer-spread': 'error',
 				'prefer-template': 'error',
 				'require-await': 'error',
 				'require-yield': 'error',
-				'quote-props': ['error', 'as-needed'], // TODO: Utilizar stylistic
 				radix: 'error',
 				'sort-imports': [
 					'error',
@@ -244,20 +290,27 @@ export default function javascript(
 						ignoreCase: false,
 						ignoreDeclarationSort: true,
 						ignoreMemberSort: false,
-						memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
+						memberSyntaxSortOrder: [
+							'none',
+							'all',
+							'multiple',
+							'single',
+						],
 					},
 				],
-				'spaced-comment': ['error', 'always'], // TODO: Utilizar stylistic
 				'symbol-description': 'error',
-				'unicode-bom': ['error', 'never'],
+				'unicode-bom': [
+					'error',
+					'never',
+				],
 				'vars-on-top': 'error',
 				yoda: 'error',
 
 				// Layout & Formatting [eslint](https://eslint.org/docs/latest/rules/#layout--formatting)
-				'line-comment-position': ['error', { position: 'above' }],
-				'arrow-parens': ['error', 'as-needed'], // TODO: Utilizar stylistic
-				'lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true }], // TODO: Utilizar stylistic
-				'padding-line-between-statements': ['error', { blankLine: 'always', prev: '*', next: 'return' }], // TODO: Utilizar stylistic
+				'line-comment-position': [
+					'error',
+					{ position: 'above' },
+				],
 
 				// Unused imports plugin
 				'unused-imports/no-unused-imports': isInEditor ? 'off' : 'error',
