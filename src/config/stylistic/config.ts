@@ -59,7 +59,7 @@ export default async function stylistic(
 						'style/jsx-sort-props': 'error',
 						'style/max-len': [
 							'error',
-							{ code: lineLength, ignoreUrls: true },
+							{ code: lineLength, ignoreUrls: true, ignoreComments: true },
 						],
 						'style/no-extra-semi': 'error',
 						'style/padding-line-between-statements': [

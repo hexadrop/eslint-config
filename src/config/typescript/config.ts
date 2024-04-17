@@ -36,6 +36,7 @@ function makeParser(parser: TypescriptParser, {
 		...ignores ? { ignores } : {},
 		languageOptions: {
 			parser,
+			// eslint-disable-next-line typescript/no-unsafe-assignment
 			parserOptions: {
 				extraFileExtensions: componentExtensions.map(ext => `.${ext}`),
 				sourceType: 'module',
@@ -45,6 +46,7 @@ function makeParser(parser: TypescriptParser, {
 							tsconfigRootDir: process.cwd(),
 						}
 					: {},
+				// eslint-disable-next-line typescript/no-explicit-any
 				...parserOptions as any,
 			},
 		},

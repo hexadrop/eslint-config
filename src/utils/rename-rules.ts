@@ -16,6 +16,7 @@
  * }]
  * ```
  */
+// eslint-disable-next-line typescript/no-explicit-any
 export default function renameRules(rules: Record<string, any>, map: Record<string, string>): Record<string, any> {
 	return Object.fromEntries(
 		Object.entries(rules)

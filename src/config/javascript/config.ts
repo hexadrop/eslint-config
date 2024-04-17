@@ -36,6 +36,7 @@ export default function javascript(
 			},
 			name: 'hexatool/javascript/rules',
 			plugins: {
+				// eslint-disable-next-line typescript/no-unsafe-assignment
 				'unused-imports': pluginUnusedImports,
 			},
 			rules: {
