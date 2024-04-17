@@ -3,6 +3,7 @@ import type { ClassicConfig } from '@typescript-eslint/utils/ts-eslint';
 import { isPackageExists } from 'local-pkg';
 import process from 'node:process';
 import { GLOB_SRC } from '../../globs';
+import type { OptionsOverrides, StylisticConfig } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault, renameRules, toArray } from '../../utils';
 import GLOB_TYPESCRIPT from './globs';
@@ -69,6 +70,7 @@ const RENAME_RULES_MAP = { '@typescript-eslint': 'typescript' };
 
 export default async function typescript(
 	typescriptOptions: TypescriptOptions['typescript'] = isPackageExists('typescript'),
+	stylisticOptions: false | (StylisticConfig & OptionsOverrides),
 	componentExtensions: string[] = [],
 ): Promise<TypedFlatConfigItem[]> {
 	if (!typescriptOptions) {
@@ -99,8 +101,12 @@ export default async function typescript(
 	const eslintRecommendedOverridesRules = eslintRecommendedOverrides?.rules ?? {};
 	const eslintStrictConfig = getConfig(plugin, 'strict');
 	const eslintStrictConfigRules = eslintStrictConfig?.rules ?? {};
-	const eslintStrictTypeCheckedConfig = getConfig(plugin, 'strict-type-checked');
+	const eslintStylisticConfig = getConfig(plugin, 'stylistic');
+	const eslintStylisticConfigRules = eslintStylisticConfig?.rules ?? {};
+	const eslintStrictTypeCheckedConfig = getConfig(plugin, 'strict-type-checked-only');
 	const eslintStrictTypeCheckedConfigRules = eslintStrictTypeCheckedConfig?.rules ?? {};
+	const eslintStylisticTypeCheckedConfig = getConfig(plugin, 'stylistic-type-checked-only');
+	const eslintStylisticTypeCheckedConfigRules = eslintStylisticTypeCheckedConfig?.rules ?? {};
 
 	const config: TypedFlatConfigItem[] = [{
 		// Install the plugins without globs, so they can be configured separately.
@@ -290,11 +296,7 @@ export default async function typescript(
 						},
 					},
 				],
-				'typescript/no-confusing-void-expression': ['error', { ignoreArrowShorthand: true }],
 				'typescript/no-require-imports': ['error'],
-				'typescript/prefer-readonly': ['error'],
-				'typescript/promise-function-async': ['error', { checkArrowFunctions: false }],
-				'typescript/switch-exhaustiveness-check': ['error'],
 				'typescript/no-extraneous-class': 'off',
 				'typescript/no-unused-vars': 'off',
 
@@ -302,6 +304,20 @@ export default async function typescript(
 			},
 		},
 	);
+
+	if (stylisticOptions) {
+		config.push({
+			files: filesTypeAware,
+			name: 'hexatool/typescript/rules-stylistic',
+			rules: {
+				...renameRules(
+					eslintStylisticConfigRules,
+					RENAME_RULES_MAP,
+				),
+				...optionsObject.overrides,
+			},
+		});
+	}
 
 	if (isTypeAware) {
 		config.push({
@@ -312,11 +328,46 @@ export default async function typescript(
 					eslintStrictTypeCheckedConfigRules,
 					RENAME_RULES_MAP,
 				),
+				'typescript/no-confusing-void-expression': ['error', { ignoreArrowShorthand: true }],
 				'typescript/no-unused-vars': 'off',
+				'typescript/prefer-readonly': ['error'],
+				'typescript/promise-function-async': ['error', { checkArrowFunctions: false }],
+				'typescript/switch-exhaustiveness-check': ['error'],
 				...optionsObject.overrides,
 			},
-		})
+		});
+
+		if (stylisticOptions) {
+			config.push({
+				files: filesTypeAware,
+				name: 'hexatool/typescript/rules-type-aware-stylistic',
+				rules: {
+					...renameRules(
+						eslintStylisticTypeCheckedConfigRules,
+						RENAME_RULES_MAP,
+					),
+					...optionsObject.overrides,
+				},
+			});
+		}
 	}
+
+	config.push({
+		files: ['**/*.d.ts'],
+		name: 'hexatool/typescript/disables/dts',
+		rules: {
+			'@typescript-eslint/triple-slash-reference': 'off',
+			'multiline-comment-style': 'off',
+			'spaced-comment': 'off', // TODO: Utilizar stylistic
+		},
+	}, {
+		files: ['**/*.js', '**/*.cjs'],
+		name: 'hexatool/typescript/disables/cjs',
+		rules: {
+			'typescript/no-require-imports': 'off',
+			'typescript/no-var-requires': 'off',
+		},
+	});
 
 
 	return config;

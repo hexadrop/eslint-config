@@ -15,11 +15,18 @@ const defaultPluginRenaming = {
 	yml: 'yaml',
 }
 
-export default function hexatool(options: HexatoolEslintOptions = {}) {
+export default async function hexatool(options: HexatoolEslintOptions = {}) {
 	const {
 		autoRenamePlugins = true,
 		isInEditor = Boolean((process.env.VSCODE_PID || process.env.VSCODE_CWD || process.env.JETBRAINS_IDE || process.env.VIM) && !process.env.CI),
 	} = options;
+
+
+	const stylistic = options.stylistic === false
+		? false
+		: typeof options.stylistic === 'object'
+			? options.stylistic
+			: {}
 
 	const configs: Awaitable<TypedFlatConfigItem[]>[] = [
 		gitignore(options.gitignore),
@@ -27,7 +34,7 @@ export default function hexatool(options: HexatoolEslintOptions = {}) {
 			isInEditor,
 			overrides: getOverrides(options, 'javascript'),
 		}),
-		typescript(options.typescript),
+		typescript(options.typescript, stylistic),
 	];
 
 	let pipeline = new FlatConfigComposer<TypedFlatConfigItem>()
