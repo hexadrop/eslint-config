@@ -1,17 +1,15 @@
+import { default as pluginUnusedImports } from 'eslint-plugin-unused-imports';
 import globals from 'globals';
-import { default as pluginUnusedImports } from 'eslint-plugin-unused-imports'
 
-import type { IsInEditorOptions, OptionsOverrides } from '../../options';
+import type { OptionsOverrides } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
 
 export default function javascript(
-	options: IsInEditorOptions & OptionsOverrides = {},
+	options?: OptionsOverrides,
+	isInEditor?: boolean,
 ): TypedFlatConfigItem[] {
 
-	const {
-		isInEditor,
-		overrides = {},
-	} = options;
+	const { overrides } = options ?? {};
 
 	return [
 		{
@@ -135,7 +133,7 @@ export default function javascript(
 				'no-bitwise': 'error',
 				'no-caller': 'error',
 				'no-case-declarations': 'error',
-				"no-delete-var": "error",
+				'no-delete-var': 'error',
 				'no-eq-null': 'error',
 				'no-console': ['error', { allow: ['error'] }],
 				'no-else-return': ['error', { allowElseIf: false }],
@@ -144,7 +142,7 @@ export default function javascript(
 				'no-eval': 'error',
 				'no-extend-native': 'error',
 				'no-extra-bind': 'error',
-				"no-extra-boolean-cast": "error",
+				'no-extra-boolean-cast': 'error',
 				'no-extra-label': 'error',
 				'no-global-assign': 'error',
 				'no-floating-decimal': 'error', // TODO: Utilizar stylistic
@@ -180,7 +178,10 @@ export default function javascript(
 				],
 				'no-restricted-properties': [
 					'error',
-					{ message: 'Use `Object.getPrototypeOf` or `Object.setPrototypeOf` instead.', property: '__proto__' },
+					{
+						message: 'Use `Object.getPrototypeOf` or `Object.setPrototypeOf` instead.',
+						property: '__proto__',
+					},
 					{ message: 'Use `Object.defineProperty` instead.', property: '__defineGetter__' },
 					{ message: 'Use `Object.defineProperty` instead.', property: '__defineSetter__' },
 					{ message: 'Use `Object.getOwnPropertyDescriptor` instead.', property: '__lookupGetter__' },
@@ -253,7 +254,7 @@ export default function javascript(
 				yoda: 'error',
 
 				// Layout & Formatting [eslint](https://eslint.org/docs/latest/rules/#layout--formatting)
-				'line-comment-position': ["error", { position: "above" }],
+				'line-comment-position': ['error', { position: 'above' }],
 				'arrow-parens': ['error', 'as-needed'], // TODO: Utilizar stylistic
 				'lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true }], // TODO: Utilizar stylistic
 				'padding-line-between-statements': ['error', { blankLine: 'always', prev: '*', next: 'return' }], // TODO: Utilizar stylistic

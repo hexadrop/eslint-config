@@ -1,15 +1,17 @@
-import { FlatConfigComposer } from 'eslint-flat-config-utils';
 import process from 'node:process';
-import { gitignore, javascript } from './config';
+
+import { FlatConfigComposer } from 'eslint-flat-config-utils';
+
+import { gitignore, imports, javascript } from './config';
 import typescript from './config/typescript';
 import type { HexatoolEslintOptions } from './options';
 import type { Awaitable, TypedFlatConfigItem } from './types';
-import { getOverrides } from './utils';
 
 const defaultPluginRenaming = {
 	'@stylistic': 'style',
 	'@typescript-eslint': 'typescript',
 	'import-x': 'import',
+	'simple-import-sort': 'import-sort',
 	n: 'node',
 	vitest: 'test',
 	yml: 'yaml',
@@ -30,10 +32,8 @@ export default async function hexatool(options: HexatoolEslintOptions = {}) {
 
 	const configs: Awaitable<TypedFlatConfigItem[]>[] = [
 		gitignore(options.gitignore),
-		javascript({
-			isInEditor,
-			overrides: getOverrides(options, 'javascript'),
-		}),
+		javascript(options.javascript, isInEditor),
+		imports(stylistic),
 		typescript(options.typescript, stylistic),
 	];
 

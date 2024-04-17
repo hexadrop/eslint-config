@@ -28,4 +28,4 @@ interface TypescriptOptions {
 		| (TypeScriptParserOptionsOptions & OptionsOverrides);
 }
 
-export type { TypescriptOptions, TypeScriptWithTypesOptions, TypeScriptParserOptionsOptions };
+export type { TypescriptOptions, TypeScriptParserOptionsOptions,TypeScriptWithTypesOptions };

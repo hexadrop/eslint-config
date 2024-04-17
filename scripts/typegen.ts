@@ -1,5 +1,6 @@
-import { flatConfigsToRulesDTS } from 'eslint-typegen/core'
 import { builtinRules } from 'eslint/use-at-your-own-risk'
+import { flatConfigsToRulesDTS } from 'eslint-typegen/core'
+
 import { javascript } from '../src/config';
 import { combine } from '../src/utils';
 

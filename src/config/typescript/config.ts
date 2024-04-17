@@ -1,7 +1,9 @@
+import process from 'node:process';
+
 import type { ParserOptions } from '@typescript-eslint/parser';
 import type { ClassicConfig } from '@typescript-eslint/utils/ts-eslint';
 import { isPackageExists } from 'local-pkg';
-import process from 'node:process';
+
 import { GLOB_SRC } from '../../globs';
 import type { OptionsOverrides, StylisticConfig } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
@@ -69,15 +71,15 @@ function getOverrides(plugin: TypescriptPlugin, name: string, index?: number): C
 const RENAME_RULES_MAP = { '@typescript-eslint': 'typescript' };
 
 export default async function typescript(
-	typescriptOptions: TypescriptOptions['typescript'] = isPackageExists('typescript'),
-	stylisticOptions: false | (StylisticConfig & OptionsOverrides),
+	options: TypescriptOptions['typescript'] = isPackageExists('typescript'),
+	stylistic: false | (StylisticConfig & OptionsOverrides),
 	componentExtensions: string[] = [],
 ): Promise<TypedFlatConfigItem[]> {
-	if (!typescriptOptions) {
+	if (!options) {
 		return [];
 	}
 
-	const optionsObject = typeof typescriptOptions === 'object' ? typescriptOptions : {};
+	const optionsObject = typeof options === 'object' ? options : {};
 
 	const tsconfigPath = 'tsconfigPath' in optionsObject && Boolean(optionsObject.tsconfigPath)
 		? toArray(optionsObject.tsconfigPath)
@@ -305,7 +307,7 @@ export default async function typescript(
 		},
 	);
 
-	if (stylisticOptions) {
+	if (stylistic) {
 		config.push({
 			files: filesTypeAware,
 			name: 'hexatool/typescript/rules-stylistic',
@@ -337,7 +339,7 @@ export default async function typescript(
 			},
 		});
 
-		if (stylisticOptions) {
+		if (stylistic) {
 			config.push({
 				files: filesTypeAware,
 				name: 'hexatool/typescript/rules-type-aware-stylistic',

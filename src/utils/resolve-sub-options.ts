@@ -1,5 +1,5 @@
-import type { ResolvedOptions } from '../types';
 import type { HexatoolEslintOptions } from '../options';
+import type { ResolvedOptions } from '../types';
 
 export default function resolveSubOptions<K extends keyof HexatoolEslintOptions>(
 	options: HexatoolEslintOptions,

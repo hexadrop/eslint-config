@@ -34,13 +34,17 @@
 		"version": "changeset version"
 	},
 	"dependencies": {
-		"@typescript-eslint/eslint-plugin": "7.6.0",
-		"@typescript-eslint/parser": "7.6.0",
-		"eslint-flat-config-utils": "0.2.2",
+		"@typescript-eslint/eslint-plugin": "7.7.0",
+		"@typescript-eslint/parser": "7.7.0",
+		"eslint-flat-config-utils": "0.2.3",
+		"eslint-import-resolver-typescript": "3.6.1",
 		"eslint-config-flat-gitignore": "0.1.5",
+		"eslint-plugin-import-x": "0.5.0",
 		"eslint-plugin-unused-imports": "3.1.0",
+		"eslint-plugin-simple-import-sort": "12.1.0",
 		"globals": "15.0.0",
-		"local-pkg": "0.5.0"
+		"local-pkg": "0.5.0",
+		"tslib": "2.6.2"
 	},
 	"peerDependencies": {
 		"eslint": ">=8.40.0"
@@ -50,7 +54,7 @@
 	"devDependencies": {
 		"@eslint/config-inspector": "0.4.6",
 		"@hexatool/tsconfig": "20.0.1",
-		"@types/bun": "1.0.12",
+		"@types/bun": "1.1.0",
 		"@types/eslint": "8.56.9",
 		"@changesets/cli": "2.27.1",
 		"eslint": "9.0.0",
