@@ -31,6 +31,7 @@
 		"lint:fix": "eslint --fix .",
 		"postinstall": "bun run scripts/typegen.ts",
 		"publish": "changeset publish",
+		"typecheck": "tsc --noEmit",
 		"version": "changeset version"
 	},
 	"dependencies": {
