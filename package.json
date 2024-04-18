@@ -12,20 +12,20 @@
 		"typescript",
 		"prettier"
 	],
-	"homepage": "https://github.com/hexatool/eslint-config",
-	"bugs": {
-		"url": "https://github.com/hexatool/eslint-config/issues"
-	},
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/hexatool/eslint-config"
 	},
+	"homepage": "https://github.com/hexatool/eslint-config",
+	"bugs": {
+		"url": "https://github.com/hexatool/eslint-config/issues"
+	},
 	"license": "MIT",
+	"type": "module",
 	"files": [
 		"config",
 		"patch"
 	],
-	"type": "module",
 	"scripts": {
 		"lint": "eslint .",
 		"lint:fix": "eslint --fix .",
@@ -34,31 +34,30 @@
 		"typecheck": "tsc --noEmit",
 		"version": "changeset version"
 	},
+	"peerDependencies": {
+		"eslint": ">=8.40.0"
+	},
 	"dependencies": {
+		"@stylistic/eslint-plugin": "1.7.2",
 		"@typescript-eslint/eslint-plugin": "7.7.0",
 		"@typescript-eslint/parser": "7.7.0",
-		"@stylistic/eslint-plugin": "1.7.2",
+		"eslint-config-flat-gitignore": "0.1.5",
 		"eslint-flat-config-utils": "0.2.3",
 		"eslint-import-resolver-typescript": "3.6.1",
-		"eslint-config-flat-gitignore": "0.1.5",
 		"eslint-plugin-import-x": "0.5.0",
-		"eslint-plugin-unused-imports": "3.1.0",
+		"eslint-plugin-jsonc": "2.15.1",
 		"eslint-plugin-simple-import-sort": "12.1.0",
+		"eslint-plugin-unused-imports": "3.1.0",
 		"globals": "15.0.0",
 		"local-pkg": "0.5.0",
 		"tslib": "2.6.2"
 	},
-	"peerDependencies": {
-		"eslint": ">=8.40.0"
-	},
-	"peerDependenciesMeta": {
-	},
 	"devDependencies": {
+		"@changesets/cli": "2.27.1",
 		"@eslint/config-inspector": "0.4.6",
 		"@hexatool/tsconfig": "20.0.1",
 		"@types/bun": "1.1.0",
 		"@types/eslint": "8.56.9",
-		"@changesets/cli": "2.27.1",
 		"eslint": "9.0.0",
 		"eslint-typegen": "0.2.2",
 		"jiti": "1.21.0",

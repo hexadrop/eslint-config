@@ -2,7 +2,7 @@ import type { OptionsOverrides, StylisticConfig } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault } from '../../utils';
 
-const StylisticConfigDefaults: StylisticConfig = {
+export const StylisticConfigDefaults: StylisticConfig = {
 	indent: 'tab',
 	jsx: true,
 	quotes: 'single',
@@ -34,7 +34,7 @@ export default async function stylistic(
 	return stylistic
 		? [
 				{
-					name: 'hexatool/stylistic/rules',
+					name: 'hexatool/style/rules',
 					plugins: {
 						style: pluginStylistic,
 					},
@@ -71,7 +71,7 @@ export default async function stylistic(
 				},
 				{
 					files: ['**/*.d.ts'],
-					name: 'hexatool/stylistic/disables/dts',
+					name: 'hexatool/style/disables/dts',
 					rules: {
 						'style/spaced-comment': 'off',
 					},

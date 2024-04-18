@@ -1,5 +1,4 @@
-import type { GitignoreOptions, JavascriptOptions } from '../config';
-import type { TypescriptOptions } from '../config/typescript';
+import type { GitignoreOptions, JavascriptOptions, JsonOptions, TypescriptOptions } from '../config';
 import type { TypedFlatConfigItem } from '../types';
 import type { AutoRenamePluginsOptions } from './options-auto-rename-plugins';
 import type { IsInEditorOptions } from './options-is-in-editor';
@@ -12,4 +11,5 @@ export type HexatoolEslintOptions =
 	& TypedFlatConfigItem
 	& AutoRenamePluginsOptions
 	& GitignoreOptions
-	& StylisticOptions;
+	& StylisticOptions
+	& JsonOptions;

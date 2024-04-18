@@ -1,18 +1,14 @@
 {
 	"extends": "@hexatool/tsconfig",
 	"compilerOptions": {
-		"baseUrl": ".",
-		// Enable latest features
-		"lib": ["ESNext"],
-		"module": "esnext",
 		"target": "esnext",
-
-		// If TS 5.x+
-		"moduleResolution": "bundler",
+		"lib": ["ESNext"],
 		"moduleDetection": "force",
-
-		"esModuleInterop": true,
+		"baseUrl": ".",
+		"module": "esnext",
+		"moduleResolution": "bundler",
+		"esModuleInterop": true
 	},
-	"exclude": ["**/dist/**", "node_modules"],
 	"include": ["src/**/*", "scripts/**/*", "global.d.ts"],
+	"exclude": ["**/dist/**", "node_modules"]
 }

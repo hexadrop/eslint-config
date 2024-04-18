@@ -318,7 +318,7 @@ export default async function typescript(
 	if (stylistic) {
 		config.push({
 			files: filesTypeAware,
-			name: 'hexatool/typescript/rules/stylistic',
+			name: 'hexatool/typescript/rules/style',
 			rules: {
 				...renameRules(
 					eslintStylisticConfigRules,
@@ -356,7 +356,7 @@ export default async function typescript(
 		if (stylistic) {
 			config.push({
 				files: filesTypeAware,
-				name: 'hexatool/typescript/rules/type-aware-stylistic',
+				name: 'hexatool/typescript/rules/type-aware/style',
 				rules: {
 					...renameRules(
 						eslintStylisticTypeCheckedConfigRules,
