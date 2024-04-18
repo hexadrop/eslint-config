@@ -3,25 +3,25 @@ import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault } from '../../utils';
 
 export const StylisticConfigDefaults: StylisticConfig = {
-	indent: 'tab',
-	jsx: true,
-	quotes: 'single',
-	semi: true,
-	commaDangle: 'always-multiline',
 	arrowParens: false,
 	blockSpacing: true,
 	braceStyle: '1tbs',
-	quoteProps: 'as-needed',
+	commaDangle: 'always-multiline',
+	indent: 'tab',
+	jsx: true,
 	lineLength: 120,
+	quoteProps: 'as-needed',
+	quotes: 'single',
+	semi: true,
 
 };
 
 export default async function stylistic(
-	stylistic: false | (StylisticConfig & OptionsOverrides),
+	stylistic: (OptionsOverrides & StylisticConfig) | false,
 ): Promise<TypedFlatConfigItem[]> {
 	const {
-		overrides = {},
 		lineLength,
+		overrides = {},
 		...rest
 	} = {
 		...StylisticConfigDefaults,
@@ -46,11 +46,11 @@ export default async function stylistic(
 						],
 						'style/array-bracket-newline': [
 							'error',
-							{ multiline: true, minItems: 2 },
+							{ minItems: 2, multiline: true },
 						],
 						'style/array-element-newline': [
 							'error',
-							{ multiline: true, minItems: 2 },
+							{ minItems: 2, multiline: true },
 						],
 						'style/implicit-arrow-linebreak': [
 							'error',
@@ -59,12 +59,12 @@ export default async function stylistic(
 						'style/jsx-sort-props': 'error',
 						'style/max-len': [
 							'error',
-							{ code: lineLength, ignoreUrls: true, ignoreComments: true },
+							{ code: lineLength, ignoreComments: true, ignoreUrls: true },
 						],
 						'style/no-extra-semi': 'error',
 						'style/padding-line-between-statements': [
 							'error',
-							{ blankLine: 'always', prev: '*', next: 'return' },
+							{ blankLine: 'always', next: 'return', prev: '*' },
 						],
 						...overrides,
 					},

@@ -25,11 +25,11 @@ type ConfigOverride = Required<ClassicConfig.Config>['overrides'][number];
 
 function makeParser(parser: TypescriptParser, {
 	componentExtensions,
-	tsconfigPath,
 	files,
 	ignores,
-	typeAware,
 	parserOptions,
+	tsconfigPath,
+	typeAware,
 }: MakeParserOptions): TypedFlatConfigItem {
 	return {
 		files,
@@ -66,7 +66,7 @@ function getOverrides(
 	plugin: TypescriptPlugin,
 	name: string,
 	index?: number,
-): ConfigOverride[] | ConfigOverride | undefined {
+): ConfigOverride | ConfigOverride[] | undefined {
 	const config = getConfig(plugin, name);
 	const overrides = config?.overrides ?? [];
 
@@ -77,7 +77,7 @@ const RENAME_RULES_MAP = { '@typescript-eslint': 'typescript' };
 
 export default async function typescript(
 	options: TypescriptOptions['typescript'] = isPackageExists('typescript'),
-	stylistic: false | (StylisticConfig & OptionsOverrides),
+	stylistic: (OptionsOverrides & StylisticConfig) | false,
 	componentExtensions: string[] = [],
 ): Promise<TypedFlatConfigItem[]> {
 	if (!options) {
@@ -130,12 +130,12 @@ export default async function typescript(
 	// Assign type-aware parser for type-aware files and type-unaware parser for the rest
 	if (isTypeAware) {
 		config.push(
-			makeParser(parser, { componentExtensions, tsconfigPath, files: filesTypeAware, typeAware: true }),
+			makeParser(parser, { componentExtensions, files: filesTypeAware, tsconfigPath, typeAware: true }),
 			makeParser(parser, {
 				componentExtensions,
-				tsconfigPath,
 				files,
 				ignores: filesTypeAware,
+				tsconfigPath,
 				typeAware: false,
 			}),
 		);
@@ -306,8 +306,8 @@ export default async function typescript(
 						},
 					},
 				],
-				'typescript/no-require-imports': ['error'],
 				'typescript/no-extraneous-class': 'off',
+				'typescript/no-require-imports': ['error'],
 				'typescript/no-unused-vars': 'off',
 
 				...optionsObject.overrides,

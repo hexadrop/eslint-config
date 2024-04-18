@@ -5,8 +5,8 @@ import { StylisticConfigDefaults } from '../stylistic';
 import GLOB_JSON from './globs';
 
 export default async function json(
-	options: boolean | OptionsOverrides = true,
-	stylistic: false | (StylisticConfig & OptionsOverrides),
+	options: OptionsOverrides | boolean = true,
+	stylistic: (OptionsOverrides & StylisticConfig) | false,
 ): Promise<TypedFlatConfigItem[]> {
 	if (!options) {
 		return [];
@@ -38,15 +38,15 @@ export default async function json(
 			},
 		},
 		{
-			name: 'hexatool/json/parser',
 			files: GLOB_JSON,
 			languageOptions: {
 				parser: parserJsonc,
 			},
+			name: 'hexatool/json/parser',
 		},
 		{
-			name: 'hexatool/json/rules',
 			files: GLOB_JSON,
+			name: 'hexatool/json/rules',
 			rules: {
 				'json/no-bigint-literals': 'error',
 				'json/no-binary-expression': 'error',
@@ -81,8 +81,8 @@ export default async function json(
 
 	if (stylistic) {
 		configs.push({
-			name: 'hexatool/json/rules/style',
 			files: GLOB_JSON,
+			name: 'hexatool/json/rules/style',
 			rules: {
 				'json/array-bracket-spacing': [
 					'error',
@@ -121,8 +121,8 @@ export default async function json(
 			},
 		});
 		configs.push({
-			name: 'hexatool/json/rules/style/package.json',
 			files: ['**/package.json'],
+			name: 'hexatool/json/rules/style/package.json',
 			rules: {
 				'jsonc/sort-array-values': [
 					'error',

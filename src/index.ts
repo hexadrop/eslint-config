@@ -2,7 +2,7 @@ import process from 'node:process';
 
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 
-import { gitignore, imports, javascript, json, stylistic, typescript } from './config';
+import { gitignore, imports, javascript, json, perfectionist, stylistic, typescript } from './config';
 import type { HexatoolEslintOptions } from './options';
 import type { Awaitable, TypedFlatConfigItem } from './types';
 
@@ -10,11 +10,11 @@ const defaultPluginRenaming = {
 	'@stylistic': 'style',
 	'@typescript-eslint': 'typescript',
 	'import-x': 'import',
-	'simple-import-sort': 'import-sort',
+	jsonc: 'json',
 	n: 'node',
+	'simple-import-sort': 'import-sort',
 	vitest: 'test',
 	yml: 'yaml',
-	jsonc: 'json',
 };
 
 function isEditor() {
@@ -45,6 +45,7 @@ export default async function hexatool(
 		typescript(options.typescript, stylisticOptions),
 		stylistic(stylisticOptions),
 		json(options.json, stylisticOptions),
+		perfectionist(options.perfectionist),
 	];
 
 	let pipeline = new FlatConfigComposer<TypedFlatConfigItem>();

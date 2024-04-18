@@ -23,9 +23,9 @@ interface TypeScriptWithTypesOptions {
 }
 
 interface TypescriptOptions {
-	typescript?: boolean
-	| (TypeScriptWithTypesOptions & OptionsOverrides)
-	| (TypeScriptParserOptionsOptions & OptionsOverrides);
+	typescript?: (OptionsOverrides & TypeScriptParserOptionsOptions)
+	| (OptionsOverrides & TypeScriptWithTypesOptions)
+	| boolean;
 }
 
 export type { TypescriptOptions, TypeScriptParserOptionsOptions, TypeScriptWithTypesOptions };

@@ -6,5 +6,5 @@ export interface JsonOptions {
 	 *
 	 * @default true
 	 */
-	json?: false | OptionsOverrides;
+	json?: OptionsOverrides | false;
 }

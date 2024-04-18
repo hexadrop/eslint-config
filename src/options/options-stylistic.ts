@@ -2,9 +2,9 @@ import type { StylisticCustomizeOptions } from '@stylistic/eslint-plugin';
 
 import type { OptionsOverrides } from './options-override';
 
-type StylisticConfig = Omit<StylisticCustomizeOptions, 'pluginName' | 'flat'> & {
+type StylisticConfig = {
 	lineLength?: number;
-};
+} & Omit<StylisticCustomizeOptions, 'flat' | 'pluginName'>;
 
 interface StylisticOptions {
 
@@ -13,7 +13,7 @@ interface StylisticOptions {
 	 *
 	 * @default true
 	 */
-	stylistic?: boolean | (StylisticConfig & OptionsOverrides);
+	stylistic?: (OptionsOverrides & StylisticConfig) | boolean;
 }
 
 export type { StylisticConfig, StylisticOptions };

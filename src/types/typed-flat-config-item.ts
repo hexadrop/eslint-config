@@ -4,7 +4,7 @@ import type { RuleOptions } from '../typegen';
 
 type Rules = RuleOptions;
 
-export type TypedFlatConfigItem = Omit<Linter.FlatConfig, 'plugins'> & {
+export type TypedFlatConfigItem = {
 	/**
 	 * Custom name of each config item
 	 */
@@ -24,4 +24,4 @@ export type TypedFlatConfigItem = Omit<Linter.FlatConfig, 'plugins'> & {
 	 * An object containing a name-value mapping of rules to use.
 	 */
 	rules?: Linter.RulesRecord & Rules;
-};
+} & Omit<Linter.FlatConfig, 'plugins'>;

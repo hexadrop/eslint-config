@@ -9,5 +9,5 @@ export interface GitignoreOptions {
 	 * @see https://github.com/antfu/eslint-config-flat-gitignore
 	 * @default true
 	 */
-	gitignore?: boolean | FlatGitignoreOptions;
+	gitignore?: FlatGitignoreOptions | boolean;
 }
