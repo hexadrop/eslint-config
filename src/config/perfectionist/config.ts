@@ -18,7 +18,7 @@ export default function perfectionist(
 	return [
 		{
 			...perfectionistNatural,
-			name: 'hexatool/perfectionist',
+			name: 'hexatool/perfectionist/rules',
 			// eslint-disable-next-line typescript/no-unsafe-assignment
 			rules: {
 				// eslint-disable-next-line typescript/no-unsafe-member-access

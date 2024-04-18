@@ -15,7 +15,7 @@ export default function unicorn(
 
 	return [
 		{
-			name: 'hexatool/unicorn',
+			name: 'hexatool/unicorn/rules',
 			plugins: {
 				// eslint-disable-next-line typescript/no-unsafe-assignment
 				unicorn: eslintPluginUnicorn,

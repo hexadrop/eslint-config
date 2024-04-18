@@ -1,6 +1,7 @@
 declare module 'eslint-plugin-perfectionist/configs/recommended-natural';
 declare module 'eslint-plugin-unicorn';
 declare module 'eslint-plugin-unused-imports';
+declare module 'eslint-plugin-n';
 
 declare namespace NodeJS {
 	interface ProcessEnv {

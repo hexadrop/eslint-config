@@ -5,6 +5,7 @@ export * from './javascript';
 export { default as javascript } from './javascript';
 export * from './json';
 export { default as json } from './json';
+export { default as node } from './node';
 export { default as perfectionist } from './perfectionist';
 export * from './perfectionist';
 export { default as stylistic } from './stylistic';

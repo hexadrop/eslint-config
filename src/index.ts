@@ -2,7 +2,7 @@ import process from 'node:process';
 
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 
-import { gitignore, imports, javascript, json, perfectionist, stylistic, typescript, unicorn } from './config';
+import { gitignore, imports, javascript, json, node, perfectionist, stylistic, typescript, unicorn } from './config';
 import type { HexatoolEslintOptions } from './options';
 import type { Awaitable, TypedFlatConfigItem } from './types';
 
@@ -47,6 +47,7 @@ export default async function hexatool(
 		json(options.json, stylisticOptions),
 		perfectionist(options.perfectionist),
 		unicorn(options.unicorn),
+		node(),
 	];
 
 	let pipeline = new FlatConfigComposer<TypedFlatConfigItem>();
