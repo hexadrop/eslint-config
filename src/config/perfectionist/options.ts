@@ -1,3 +1,5 @@
+import type { OptionsOverrides } from '../../options';
+
 export interface PerfectionistOptions {
 	/**
 	 * Enable perfectionist plugin for props and items sorting.
@@ -6,5 +8,5 @@ export interface PerfectionistOptions {
 	 *
 	 * @default true
 	 */
-	perfectionist?: boolean;
+	perfectionist?: OptionsOverrides | false;
 }

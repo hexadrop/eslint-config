@@ -119,8 +119,7 @@ export default async function json(
 				'json/quote-props': 'error',
 				'json/quotes': 'error',
 			},
-		});
-		configs.push({
+		}, {
 			files: ['**/package.json'],
 			name: 'hexatool/json/rules/style/package.json',
 			rules: {
@@ -217,8 +216,7 @@ export default async function json(
 					},
 				],
 			},
-		});
-		configs.push({
+		}, {
 			files: [
 				'**/tsconfig.json',
 				'**/tsconfig.*.json',

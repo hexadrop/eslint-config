@@ -10,3 +10,5 @@ export * from './perfectionist';
 export { default as stylistic } from './stylistic';
 export * from './typescript';
 export { default as typescript } from './typescript';
+export { default as unicorn } from './unicorn';
+export * from './unicorn';

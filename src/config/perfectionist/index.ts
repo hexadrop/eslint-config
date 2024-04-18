@@ -1,5 +1,2 @@
-import perfectionist from './config';
-
+export { default } from './config';
 export type * from './options';
-
-export default perfectionist;

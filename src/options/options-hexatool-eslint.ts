@@ -4,6 +4,7 @@ import type {
 	JsonOptions,
 	PerfectionistOptions,
 	TypescriptOptions,
+	UnicornOptions,
 } from '../config';
 import type { TypedFlatConfigItem } from '../types';
 import type { AutoRenamePluginsOptions } from './options-auto-rename-plugins';
@@ -19,4 +20,5 @@ export type HexatoolEslintOptions =
 	& PerfectionistOptions
 	& StylisticOptions
 	& TypedFlatConfigItem
-	& TypescriptOptions;
+	& TypescriptOptions
+	& UnicornOptions;

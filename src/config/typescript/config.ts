@@ -38,7 +38,7 @@ function makeParser(parser: TypescriptParser, {
 			parser,
 			// eslint-disable-next-line typescript/no-unsafe-assignment
 			parserOptions: {
-				extraFileExtensions: componentExtensions.map(ext => `.${ext}`),
+				extraFileExtensions: componentExtensions.map(extension => `.${extension}`),
 				sourceType: 'module',
 				...typeAware
 					? {
@@ -92,7 +92,7 @@ export default async function typescript(
 	const isTypeAware = Boolean(tsconfigPath);
 	const files = [
 		GLOB_SRC,
-		...componentExtensions.map(ext => `**/*.${ext}`),
+		...componentExtensions.map(extension => `**/*.${extension}`),
 	];
 	const filesTypeAware = 'filesTypeAware' in optionsObject
 		? optionsObject.filesTypeAware
