@@ -17,10 +17,10 @@ export const StylisticConfigDefaults: StylisticConfig = {
 };
 
 export default async function stylistic(
-	stylistic: (OptionsOverrides & StylisticConfig) | false,
+	stylistic: (OptionsOverrides & StylisticConfig) | false = {},
 ): Promise<TypedFlatConfigItem[]> {
 	const {
-		lineLength,
+		lineLength = 120,
 		overrides = {},
 		...rest
 	} = {

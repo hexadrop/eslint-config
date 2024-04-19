@@ -1,7 +1,9 @@
+import fs from 'node:fs/promises';
+
 import { builtinRules } from 'eslint/use-at-your-own-risk';
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 
-import { javascript } from '../src/config';
+import { imports, javascript, json, node, perfectionist, stylistic, unicorn } from '../src/config';
 import { combine } from '../src/utils';
 
 const configs = await combine(
@@ -12,11 +14,17 @@ const configs = await combine(
 			},
 		},
 	},
+	imports(),
 	javascript(),
+	json(),
+	node(),
+	perfectionist(),
+	stylistic(),
+	unicorn(),
 );
 
 const dts = await flatConfigsToRulesDTS(configs, {
 	includeAugmentation: false,
 });
 
-await Bun.write('src/typegen.d.ts', dts);
+await fs.writeFile('src/typegen.d.ts', dts);

@@ -6,7 +6,7 @@ import GLOB_JSON from './globs';
 
 export default async function json(
 	options: OptionsOverrides | boolean = true,
-	stylistic: (OptionsOverrides & StylisticConfig) | false,
+	stylistic: (OptionsOverrides & StylisticConfig) | false = {},
 ): Promise<TypedFlatConfigItem[]> {
 	if (!options) {
 		return [];
@@ -16,7 +16,7 @@ export default async function json(
 	} = typeof options === 'boolean' ? {} : options;
 
 	const {
-		indent,
+		indent = 'tab',
 	} = {
 		...StylisticConfigDefaults,
 		...stylistic,

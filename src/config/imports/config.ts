@@ -3,7 +3,7 @@ import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault } from '../../utils';
 
 export default async function imports(
-	stylistic: (OptionsOverrides & StylisticConfig) | false,
+	stylistic: (OptionsOverrides & StylisticConfig) | false = {},
 ): Promise<TypedFlatConfigItem[]> {
 	const pluginImport = await import('eslint-plugin-import-x');
 

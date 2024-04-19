@@ -18,8 +18,9 @@ export default async function gitignore(
 	};
 
 	if (typeof options === 'boolean') {
-		const gitignoreFlatConfig = await interopDefault(import('eslint-config-flat-gitignore'));
 		if (fs.existsSync('.gitignore')) {
+			const gitignoreFlatConfig = await interopDefault(import('eslint-config-flat-gitignore'));
+
 			return [
 				ignores,
 				{ ...gitignoreFlatConfig(), name: 'hexatool/ignore/gitignore' },
