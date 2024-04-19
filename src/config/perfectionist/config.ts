@@ -1,14 +1,17 @@
-import perfectionistNatural from 'eslint-plugin-perfectionist/configs/recommended-natural';
-
 import type { OptionsOverrides } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
+import { interopDefault } from '../../utils';
 
-export default function perfectionist(
+export default async function perfectionist(
 	options: OptionsOverrides | boolean = true,
-): TypedFlatConfigItem[] {
+): Promise<TypedFlatConfigItem[]> {
 	if (!options) {
 		return [];
 	}
+
+	// eslint-disable-next-line typescript/no-unsafe-assignment
+	const perfectionistNatural
+		= await interopDefault(import('eslint-plugin-perfectionist/configs/recommended-natural'));
 
 	const {
 		overrides = {},

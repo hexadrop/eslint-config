@@ -1,13 +1,13 @@
-import { default as pluginUnusedImports } from 'eslint-plugin-unused-imports';
 import globals from 'globals';
 
 import type { OptionsOverrides } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
+import { interopDefault } from '../../utils';
 
-export default function javascript(
+export default async function javascript(
 	options?: OptionsOverrides,
 	isInEditor?: boolean,
-): TypedFlatConfigItem[] {
+): Promise<TypedFlatConfigItem[]> {
 	const { overrides } = options ?? {};
 
 	return [
@@ -37,7 +37,7 @@ export default function javascript(
 			name: 'hexatool/javascript/rules',
 			plugins: {
 				// eslint-disable-next-line typescript/no-unsafe-assignment
-				'unused-imports': pluginUnusedImports,
+				'unused-imports': await interopDefault(import('eslint-plugin-unused-imports')),
 			},
 			rules: {
 				// Suggestions [eslint](https://eslint.org/docs/latest/rules/#suggestions)

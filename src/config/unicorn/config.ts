@@ -1,17 +1,19 @@
-import eslintPluginUnicorn from 'eslint-plugin-unicorn';
-
 import type { OptionsOverrides } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
+import { interopDefault } from '../../utils';
 
-export default function unicorn(
+export default async function unicorn(
 	options: OptionsOverrides | boolean = true,
-): TypedFlatConfigItem[] {
+): Promise<TypedFlatConfigItem[]> {
 	if (!options) {
 		return [];
 	}
 	const {
 		overrides = {},
 	} = typeof options === 'boolean' ? {} : options;
+
+	// eslint-disable-next-line typescript/no-unsafe-assignment
+	const eslintPluginUnicorn = await interopDefault(import('eslint-plugin-unicorn'));
 
 	return [
 		{

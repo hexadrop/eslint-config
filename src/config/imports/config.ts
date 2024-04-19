@@ -1,19 +1,19 @@
-import pluginImport from 'eslint-plugin-import-x';
-import pluginImportSort from 'eslint-plugin-simple-import-sort';
-
 import type { OptionsOverrides, StylisticConfig } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
+import { interopDefault } from '../../utils';
 
-export default function imports(
+export default async function imports(
 	stylistic: (OptionsOverrides & StylisticConfig) | false,
-): TypedFlatConfigItem[] {
+): Promise<TypedFlatConfigItem[]> {
+	const pluginImport = await import('eslint-plugin-import-x');
+
 	return [
 		{
 			name: 'hexatool/imports/rules',
 			plugins: stylistic
 				? {
 						import: pluginImport,
-						'import-sort': pluginImportSort,
+						'import-sort': await interopDefault(import('eslint-plugin-simple-import-sort')),
 					}
 				: {
 						import: pluginImport,

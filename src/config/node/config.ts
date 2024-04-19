@@ -1,15 +1,13 @@
-// eslint-disable-next-line import/namespace
-import { default as pluginNode } from 'eslint-plugin-n';
-
 import type { TypedFlatConfigItem } from '../../types';
+import { interopDefault } from '../../utils';
 
-export default function node(): TypedFlatConfigItem[] {
+export default async function node(): Promise<TypedFlatConfigItem[]> {
 	return [
 		{
 			name: 'hexatool/node/rules',
 			plugins: {
 				// eslint-disable-next-line typescript/no-unsafe-assignment
-				node: pluginNode,
+				node: await interopDefault(import('eslint-plugin-n')),
 			},
 			rules: {
 				'node/handle-callback-err': [
