@@ -29,7 +29,7 @@ const flatConfigProperties: (keyof TypedFlatConfigItem)[] = [
 	'plugins',
 	'rules',
 	'settings',
-];
+] as const;
 
 const defaultPluginRenaming = {
 	'@stylistic': 'style',
@@ -51,7 +51,12 @@ function isEditor() {
 
 export default async function hexatool(
 	options: HexatoolEslintOptions & TypedFlatConfigItem = {},
-	...userConfigs: Awaitable<FlatConfigComposer<any> | Linter.FlatConfig[] | TypedFlatConfigItem | TypedFlatConfigItem[]>[]
+	...userConfigs:
+	// eslint-disable-next-line typescript/no-explicit-any
+	Awaitable<FlatConfigComposer<any>
+	| Linter.FlatConfig[]
+	| TypedFlatConfigItem
+	| TypedFlatConfigItem[]>[]
 ): Promise<FlatConfigComposer<TypedFlatConfigItem>> {
 	const {
 		autoRenamePlugins = true,
@@ -82,13 +87,13 @@ export default async function hexatool(
 	 * User can optionally pass a flat config item to the first argument
 	 * We pick the known keys as ESLint would do schema validation
 	 */
-	const fusedConfig = flatConfigProperties.reduce<TypedFlatConfigItem>((accumulator, key) => {
+	const fusedConfig: TypedFlatConfigItem = {};
+	for (const key of flatConfigProperties) {
 		if (key in options) {
-			accumulator[key] = options[key] as any;
+			// eslint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-assignment
+			fusedConfig[key] = options[key] as any;
 		}
-
-		return accumulator;
-	}, {});
+	}
 	if (Object.keys(fusedConfig).length > 0) {
 		configs.push([fusedConfig]);
 	}
@@ -98,6 +103,7 @@ export default async function hexatool(
 	pipeline = pipeline
 		.append(
 			...configs,
+			// eslint-disable-next-line typescript/no-explicit-any,typescript/no-unsafe-argument
 			...userConfigs as any,
 		);
 

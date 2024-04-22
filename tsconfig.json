@@ -9,6 +9,5 @@
 		"moduleResolution": "bundler",
 		"esModuleInterop": true
 	},
-	"include": ["src/**/*", "scripts/**/*", "global.d.ts", "tsup.config.ts"],
 	"exclude": ["**/dist/**", "node_modules"]
 }

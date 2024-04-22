@@ -25,7 +25,7 @@ export default async function imports(
 				],
 				'import/default': 'error',
 				'import/named': 'error',
-				'import/namespace': 'error',
+				'import/namespace': 'off',
 				// Import plugin
 				'import/newline-after-import': 'error',
 				'import/no-absolute-path': 'error',

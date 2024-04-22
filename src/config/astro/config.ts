@@ -3,7 +3,7 @@ import { isPackageExists } from 'local-pkg';
 import type { OptionsOverrides, StylisticConfig } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
 import { ensurePackages, interopDefault } from '../../utils';
-import { GLOB_ASTRO } from './globs';
+import GLOB_ASTRO from './globs';
 import type { AstroOptions } from './options';
 
 export default async function astro(
@@ -48,6 +48,7 @@ export default async function astro(
 				parser: parserAstro,
 				parserOptions: {
 					extraFileExtensions: ['.astro'],
+					// eslint-disable-next-line typescript/no-explicit-any, typescript/no-unsafe-assignment
 					parser: parserTs as any,
 				},
 			},
