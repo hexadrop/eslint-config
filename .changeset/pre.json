@@ -4,5 +4,9 @@
   "initialVersions": {
     "@hexatool/eslint-config": "3.0.0"
   },
-  "changesets": []
+  "changesets": [
+    "loud-years-travel",
+    "mean-plums-grab",
+    "sour-elephants-attack"
+  ]
 }
