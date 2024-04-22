@@ -5,23 +5,8 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/.idea" />
       <excludeFolder url="file://$MODULE_DIR$/.github" />
-      <excludeFolder url="file://$MODULE_DIR$/.yarn" />
       <excludeFolder url="file://$MODULE_DIR$/.changeset" />
-      <excludePattern pattern=".npmignore" />
-      <excludePattern pattern=".yarnrc*" />
-      <excludePattern pattern=".pnp*" />
-      <excludePattern pattern=".eslintignore" />
-      <excludePattern pattern=".gitignore" />
-      <excludePattern pattern="LICENSE" />
-      <excludePattern pattern="tsconfig.*" />
-      <excludePattern pattern="vite.*" />
-      <excludePattern pattern="babel.*" />
-      <excludePattern pattern="*.lock" />
-      <excludePattern pattern="nest-cli.json" />
-      <excludePattern pattern="webpack.config.js" />
-      <excludePattern pattern=".editorconfig" />
-      <excludePattern pattern="renovate.json" />
-      <excludePattern pattern=".eslintrc.js" />
+      <excludeFolder url="file://$MODULE_DIR$/dist" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
