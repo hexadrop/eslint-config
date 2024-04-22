@@ -1,5 +1,7 @@
 export * from './astro';
 export { default as astro } from './astro';
+export * from './formatters';
+export { default as formatters } from './formatters';
 export * from './gitignore';
 export { default as gitignore } from './gitignore';
 export { default as imports } from './imports';

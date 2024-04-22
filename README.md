@@ -25,19 +25,19 @@ bun add eslint @hexatool/eslint-config --dev
 
 ## What it does
 
-- Single quotes, semi
+-   Single quotes, semi
 
-- Auto fix for formatting (aimed to be used standalone **without** Prettier)
-- Sorted imports, dangling commas
-- Reasonable defaults, best practices, only one line of config
-- Designed to work with TypeScript, JSX, React, Astro
-- Lints also for json, and markdown
-- Opinionated, but [very customizable](#customization)
-- [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new), compose easily!
-- Using [ESLint Stylistic](https://github.com/eslint-stylistic/eslint-stylistic)
-- Respects `.gitignore` by default
-- Optional [formatters](#formatters) support for CSS, HTML, etc.
-- **Style principle**: Minimal for reading, stable for diff, consistent
+-   Auto fix for formatting (aimed to be used standalone **without** Prettier)
+-   Sorted imports, dangling commas
+-   Reasonable defaults, best practices, only one line of config
+-   Designed to work with TypeScript, JSX, React, Astro
+-   Lints also for json, and markdown
+-   Opinionated, but [very customizable](#customization)
+-   [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new), compose easily!
+-   Using [ESLint Stylistic](https://github.com/eslint-stylistic/eslint-stylistic)
+-   Respects `.gitignore` by default
+-   Optional [formatters](#formatters) support for CSS, HTML, etc.
+-   **Style principle**: Minimal for reading, stable for diff, consistent
 
 ## How to use
 
@@ -57,15 +57,15 @@ bun add eslint @hexatool/eslint-config --dev
      eslint .
     ```
 
-   **Or adding to your package.json**
+    **Or adding to your package.json**
 
     ```json
-   {
+    {
     	"scripts": {
     		"lint": "eslint .",
     		"lint:fix": "eslint --fix ."
     	}
-   }
+    }
     ```
 
 ## VS Code support (auto fix on save)
@@ -236,7 +236,7 @@ Since flat config requires us to explicitly provide the plugin names (instead of
 package name), we renamed some plugins to make the overall scope more consistent and easier to write.
 
 | New Prefix      | Original Prefix                      | Source Plugin                      |
-|-----------------|--------------------------------------|------------------------------------|
+| --------------- | ------------------------------------ | ---------------------------------- |
 | `import/*`      | `import-x/*`                         | [eslint-plugin-import-x]           |
 | `node/*`        | `n/*`                                | [eslint-plugin-n]                  |
 | `json/*`        | `jsonc/*`                            | [eslint-plugin-jsonc]              |
@@ -521,25 +521,25 @@ bunx @eslint/config-inspector
 
 Here are some inspiration for this package.
 
-- [@antfu/eslint-config](https://github.com/antfu/eslint-config)
-- [eslint-config-codely](https://github.com/CodelyTV/eslint-config-codely)
+-   [@antfu/eslint-config](https://github.com/antfu/eslint-config)
+-   [eslint-config-codely](https://github.com/CodelyTV/eslint-config-codely)
 
 ## Hexatool Code Quality Standards
 
 Publishing this package we are committing ourselves to the following code quality standards:
 
-- Respect **Semantic Versioning**: No breaking changes in patch or minor versions
-- No surprises in transitive dependencies: Use the **bare minimum dependencies** needed to meet the purpose
-- **One specific purpose** to meet without having to carry a bunch of unnecessary other utilities
-- **Tests** as documentation and usage examples
-- **Well documented ReadMe** showing how to install and use
-- **License favoring Open Source** and collaboration
+-   Respect **Semantic Versioning**: No breaking changes in patch or minor versions
+-   No surprises in transitive dependencies: Use the **bare minimum dependencies** needed to meet the purpose
+-   **One specific purpose** to meet without having to carry a bunch of unnecessary other utilities
+-   **Tests** as documentation and usage examples
+-   **Well documented ReadMe** showing how to install and use
+-   **License favoring Open Source** and collaboration
 
-	[eslint-plugin-import-x]: 				https://github.com/un-es/eslint-plugin-import-x
-	[eslint-plugin-n]: 						https://github.com/eslint-community/eslint-plugin-n
-	[eslint-plugin-jsonc]: 					https://github.com/ota-meshi/eslint-plugin-jsonc
-	[@stylistic/eslint-plugin]: 			https://github.com/eslint-stylistic/eslint-stylistic
-	[eslint-plugin-simple-import-sort]: 	https://github.com/lydell/eslint-plugin-simple-import-sort
-	[eslint-plugin-vitest]: 				https://github.com/veritem/eslint-plugin-vitest
-	[eslint-plugin-no-only-tests]: 			https://github.com/levibuzolic/eslint-plugin-no-only-tests
-	[@typescript-eslint/eslint-plugin]: 	https://github.com/typescript-eslint/typescript-eslint
+    [eslint-plugin-import-x]: https://github.com/un-es/eslint-plugin-import-x
+    [eslint-plugin-n]: https://github.com/eslint-community/eslint-plugin-n
+    [eslint-plugin-jsonc]: https://github.com/ota-meshi/eslint-plugin-jsonc
+    [@stylistic/eslint-plugin]: https://github.com/eslint-stylistic/eslint-stylistic
+    [eslint-plugin-simple-import-sort]: https://github.com/lydell/eslint-plugin-simple-import-sort
+    [eslint-plugin-vitest]: https://github.com/veritem/eslint-plugin-vitest
+    [eslint-plugin-no-only-tests]: https://github.com/levibuzolic/eslint-plugin-no-only-tests
+    [@typescript-eslint/eslint-plugin]: https://github.com/typescript-eslint/typescript-eslint

@@ -5,6 +5,7 @@ import { FlatConfigComposer } from 'eslint-flat-config-utils';
 
 import {
 	astro,
+	formatters,
 	gitignore,
 	imports,
 	javascript,
@@ -80,6 +81,7 @@ export default async function hexatool(
 		unicorn(options.unicorn),
 		node(),
 		markdown(options.markdown),
+		formatters(options.formatters),
 		react(options.react, options.typescript),
 		astro(options.astro, stylisticOptions),
 	];

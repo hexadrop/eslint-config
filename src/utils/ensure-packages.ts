@@ -2,7 +2,7 @@ import process from 'node:process';
 
 import { isPackageExists } from 'local-pkg';
 
-export default function ensurePackages(...packages: string[]): void {
+export default function ensurePackages(...packages: (string | undefined)[]): void {
 	if (process.env.CI || !process.stdout.isTTY) {
 		return;
 	}

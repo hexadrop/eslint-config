@@ -5,7 +5,7 @@ import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 
 import {
 	astro,
-	combine,
+	combine, formatters,
 	imports,
 	javascript,
 	json,
@@ -27,6 +27,7 @@ const configs = await combine(
 		},
 	},
 	astro(true),
+	formatters(true),
 	imports(),
 	javascript(),
 	json(),
