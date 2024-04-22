@@ -75,6 +75,7 @@ export default async function markdown(
 			name: 'hexatool/markdown/code/disables',
 			rules: {
 				'import/default': 'off',
+				'import/no-unresolved': 'off',
 				'line-comment-position': 'off',
 				'no-inline-comments': 'off',
 				'unicorn/filename-case': 'off',
