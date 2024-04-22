@@ -57,6 +57,7 @@ jobs:
                     version: bun changeset version
                     commit: 'chore: release'
                     title: 'chore: release'
+                    setupGitUser: false
                 env:
-                    GITHUB_TOKEN: ${{ secrets.HEXATOOL_GITHUB_TOKEN }}
+                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                     NPM_TOKEN: ${{ secrets.HEXATOOL_NPM_TOKEN }}
