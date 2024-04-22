@@ -8,6 +8,8 @@ export { default as json } from './json';
 export { default as node } from './node';
 export { default as perfectionist } from './perfectionist';
 export * from './perfectionist';
+export * from './react';
+export { default as react } from './react';
 export { default as stylistic } from './stylistic';
 export * from './typescript';
 export { default as typescript } from './typescript';

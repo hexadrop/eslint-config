@@ -3,6 +3,7 @@ import type {
 	JavascriptOptions,
 	JsonOptions,
 	PerfectionistOptions,
+	ReactOptions,
 	TypescriptOptions,
 	UnicornOptions,
 } from '../config';
@@ -18,6 +19,7 @@ export type HexatoolEslintOptions =
 	& JavascriptOptions
 	& JsonOptions
 	& PerfectionistOptions
+	& ReactOptions
 	& StylisticOptions
 	& TypedFlatConfigItem
 	& TypescriptOptions

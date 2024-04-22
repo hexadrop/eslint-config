@@ -4,7 +4,7 @@
  *
  * @example
  * ```ts
- * import { renameRules } from '@antfu/eslint-config'
+ * import { renameRules } from '@hexatool/eslint-config'
  *
  * export default [{
  *   rules: renameRules(
