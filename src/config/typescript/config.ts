@@ -77,7 +77,7 @@ const RENAME_RULES_MAP = { '@typescript-eslint': 'typescript' };
 
 export default async function typescript(
 	options: TypescriptOptions['typescript'] = isPackageExists('typescript'),
-	stylistic: (OptionsOverrides & StylisticConfig) | false,
+	stylistic: (OptionsOverrides & StylisticConfig) | false = {},
 	componentExtensions: string[] = [],
 ): Promise<TypedFlatConfigItem[]> {
 	if (!options) {

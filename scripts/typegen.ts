@@ -3,8 +3,7 @@ import fs from 'node:fs/promises';
 import { builtinRules } from 'eslint/use-at-your-own-risk';
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 
-import { astro, imports, javascript, json, node, perfectionist, react, stylistic, unicorn } from '../src/config';
-import { combine } from '../src/utils';
+import { astro, combine, imports, javascript, json, node, perfectionist, react, stylistic, typescript, unicorn } from '../src';
 
 const configs = await combine(
 	{
@@ -14,15 +13,16 @@ const configs = await combine(
 			},
 		},
 	},
+	astro(true),
 	imports(),
 	javascript(),
 	json(),
 	node(),
 	perfectionist(),
-	stylistic(),
-	unicorn(),
 	react(true),
-	astro(true),
+	stylistic(),
+	typescript(),
+	unicorn(),
 );
 
 const dts = await flatConfigsToRulesDTS(configs, {
