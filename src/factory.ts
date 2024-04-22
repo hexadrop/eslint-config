@@ -8,7 +8,7 @@ import {
 	gitignore,
 	imports,
 	javascript,
-	json,
+	json, markdown,
 	node,
 	perfectionist,
 	react,
@@ -79,6 +79,7 @@ export default async function hexatool(
 		perfectionist(options.perfectionist),
 		unicorn(options.unicorn),
 		node(),
+		markdown(options.markdown),
 		react(options.react, options.typescript),
 		astro(options.astro, stylisticOptions),
 	];

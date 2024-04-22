@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  Opinionated ESLint ruleset designed for large teams and projects considering modern JavaScript best practices and 
+  Opinionated ESLint ruleset designed for large teams and projects considering modern JavaScript best practices and
   providing consistency to your code.
 </p>
 
@@ -47,7 +47,7 @@ bun add eslint @hexatool/eslint-config --dev
     ```js
     // eslint.config.js
     import hexatool from '@hexatool/eslint-config';
-    
+
     export default hexatool();
     ```
 
@@ -60,10 +60,12 @@ bun add eslint @hexatool/eslint-config --dev
    **Or adding to your package.json**
 
     ```json
-    "scripts": {
-        "lint": "eslint .",
-        "lint:fix": "eslint --fix ."
-    }
+   {
+    	"scripts": {
+    		"lint": "eslint .",
+    		"lint:fix": "eslint --fix ."
+    	}
+   }
     ```
 
 ## VS Code support (auto fix on save)
@@ -74,44 +76,44 @@ Add the following settings to your `.vscode/settings.json`:
 
 ```jsonc
 {
-  // Enable the ESlint flat config support
-  "eslint.experimental.useFlatConfig": true,
+	// Enable the ESlint flat config support
+	"eslint.experimental.useFlatConfig": true,
 
-  // Disable the default formatter, use eslint instead
-  "prettier.enable": false,
-  "editor.formatOnSave": false,
+	// Disable the default formatter, use eslint instead
+	"prettier.enable": false,
+	"editor.formatOnSave": false,
 
-  // Auto fix
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
-    "source.organizeImports": "never"
-  },
+	// Auto fix
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": "explicit",
+		"source.organizeImports": "never"
+	},
 
-  // Silent the stylistic rules in you IDE, but still auto fix them
-  "eslint.rules.customizations": [
-    { "rule": "style/*", "severity": "off" },
-    { "rule": "format/*", "severity": "off" },
-    { "rule": "*-indent", "severity": "off" },
-    { "rule": "*-spacing", "severity": "off" },
-    { "rule": "*-spaces", "severity": "off" },
-    { "rule": "*-order", "severity": "off" },
-    { "rule": "*-dangle", "severity": "off" },
-    { "rule": "*-newline", "severity": "off" },
-    { "rule": "*quotes", "severity": "off" },
-    { "rule": "*semi", "severity": "off" }
-  ],
+	// Silent the stylistic rules in you IDE, but still auto fix them
+	"eslint.rules.customizations": [
+		{ "rule": "style/*", "severity": "off" },
+		{ "rule": "format/*", "severity": "off" },
+		{ "rule": "*-indent", "severity": "off" },
+		{ "rule": "*-spacing", "severity": "off" },
+		{ "rule": "*-spaces", "severity": "off" },
+		{ "rule": "*-order", "severity": "off" },
+		{ "rule": "*-dangle", "severity": "off" },
+		{ "rule": "*-newline", "severity": "off" },
+		{ "rule": "*quotes", "severity": "off" },
+		{ "rule": "*semi", "severity": "off" }
+	],
 
-  // Enable eslint for all supported languages
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "html",
-    "markdown",
-    "json",
-    "jsonc",
-  ]
+	// Enable eslint for all supported languages
+	"eslint.validate": [
+		"javascript",
+		"javascriptreact",
+		"typescript",
+		"typescriptreact",
+		"html",
+		"markdown",
+		"json",
+		"jsonc"
+	]
 }
 ```
 
@@ -136,26 +138,28 @@ And that's it! Or you can configure each integration individually, for example:
 import hexatool from '@hexatool/eslint-config';
 
 export default hexatool({
-  // Enable stylistic formatting rules
-  // stylistic: true,
+	/*
+	 * Enable stylistic formatting rules
+	 * Stylistic: true,
+	 */
 
-  // Or customize the stylistic rules
-  stylistic: {
-    indent: 2, // 4, or 'tab'
-    quotes: 'single', // or 'double'
-  },
+	// `.eslintignore` is no longer supported in Flat config, use `ignores` instead
+	ignores: [
+		'**/fixtures',
+		// ...globs
+	],
 
-  // TypeScript and Vue are auto-detected, you can also explicitly enable them:
-  typescript: true,
+	// Disable jsonc
+	jsonc: false,
 
-  // Disable jsonc
-  jsonc: false,
+	// Or customize the stylistic rules
+	stylistic: {
+		indent: 2, // 4, or 'tab'
+		quotes: 'single', // Or 'double'
+	},
 
-  // `.eslintignore` is no longer supported in Flat config, use `ignores` instead
-  ignores: [
-    '**/fixtures',
-    // ...globs
-  ]
+	// TypeScript and Vue are auto-detected, you can also explicitly enable them:
+	typescript: true,
 });
 ```
 
@@ -166,19 +170,21 @@ The `hexatool` factory function also accepts any number of arbitrary custom conf
 import hexatool from '@hexatool/eslint-config';
 
 export default hexatool(
-  {
-    // Configures for hexatool's config
-  },
+	{
+		// Configures for hexatool's config
+	},
 
-  // From the second arguments they are ESLint Flat Configs
-  // you can have multiple configs
-  {
-    files: ['**/*.ts'],
-    rules: {},
-  },
-  {
-    rules: {},
-  },
+	/*
+	 * From the second arguments they are ESLint Flat Configs
+	 * You can have multiple configs
+	 */
+	{
+		files: ['**/*.ts'],
+		rules: {},
+	},
+	{
+		rules: {},
+	},
 );
 ```
 
@@ -193,32 +199,32 @@ options between configs and might need extra care to make them consistent.
 ```js
 // eslint.config.js
 import {
-  astro,
-  combine,
-  gitignore,
-  imports,
-  javascript,
-  json,
-  node,
-  perfectionist,
-  react,
-  stylistic,
-  typescript,
-  unicorn,
+	astro,
+	combine,
+	gitignore,
+	imports,
+	javascript,
+	json,
+	node,
+	perfectionist,
+	react,
+	stylistic,
+	typescript,
+	unicorn,
 } from '@hexatool/eslint-config';
 
 export default combine(
-  astro(),
-  gitignore(),
-  imports(),
-  javascript(),
-  json(),
-  node(),
-  perfectionist(),
-  react(),
-  stylistic(),
-  typescript(),
-  unicorn(),
+	astro(),
+	gitignore(),
+	imports(),
+	javascript(),
+	json(),
+	node(),
+	perfectionist(),
+	react(),
+	stylistic(),
+	typescript(),
+	unicorn(),
 );
 ```
 
@@ -229,16 +235,16 @@ export default combine(
 Since flat config requires us to explicitly provide the plugin names (instead of the mandatory convention from npm
 package name), we renamed some plugins to make the overall scope more consistent and easier to write.
 
-| New Prefix      | Original Prefix                      | Source Plugin                                                                                  |
-|-----------------|--------------------------------------|------------------------------------------------------------------------------------------------|
-| `import/*`      | `import-x/*`                         | [eslint-plugin-import-x](https://github.com/un-es/eslint-plugin-import-x)                      |
-| `node/*`        | `n/*`                                | [eslint-plugin-n](https://github.com/eslint-community/eslint-plugin-n)                         |
-| `json/*`        | `jsonc/*`                            | [eslint-plugin-jsonc](https://github.com/ota-meshi/eslint-plugin-jsonc)                        |
-| `style/*`       | `@stylistic/*`                       | [@stylistic/eslint-plugin](https://github.com/eslint-stylistic/eslint-stylistic)               |
-| `import-sort/*` | `eslint-plugin-simple-import-sort/*` | [eslint-plugin-simple-import-sort](https://github.com/lydell/eslint-plugin-simple-import-sort) |
-| `test/*`        | `vitest/*`                           | [eslint-plugin-vitest](https://github.com/veritem/eslint-plugin-vitest)                        |
-| `test/*`        | `no-only-tests/*`                    | [eslint-plugin-no-only-tests](https://github.com/levibuzolic/eslint-plugin-no-only-tests)      |
-| `typescript/*`  | `@typescript-eslint/*`               | [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint)     |
+| New Prefix      | Original Prefix                      | Source Plugin                      |
+|-----------------|--------------------------------------|------------------------------------|
+| `import/*`      | `import-x/*`                         | [eslint-plugin-import-x]           |
+| `node/*`        | `n/*`                                | [eslint-plugin-n]                  |
+| `json/*`        | `jsonc/*`                            | [eslint-plugin-jsonc]              |
+| `style/*`       | `@stylistic/*`                       | [@stylistic/eslint-plugin]         |
+| `import-sort/*` | `eslint-plugin-simple-import-sort/*` | [eslint-plugin-simple-import-sort] |
+| `test/*`        | `vitest/*`                           | [eslint-plugin-vitest]             |
+| `test/*`        | `no-only-tests/*`                    | [eslint-plugin-no-only-tests]      |
+| `typescript/*`  | `@typescript-eslint/*`               | [@typescript-eslint/eslint-plugin] |
 
 When you want to override rules, or disable them inline, you need to update to the new prefix:
 
@@ -280,23 +286,29 @@ extension:
 import hexatool from '@hexatool/eslint-config';
 
 export default hexatool(
-  {
-    vue: true,
-    typescript: true
-  },
-  {
-    // Remember to specify the file glob here, otherwise it might cause the vue plugin to handle non-vue files
-    files: ['**/*.ts'],
-    rules: {
-      'ts/consistent-type-definitions': ['error', 'interface'],
-    },
-  },
-  {
-    // Without `files`, they are general rules for all files
-    rules: {
-      'style/semi': ['error', 'never'],
-    },
-  }
+	{
+		typescript: true,
+		vue: true,
+	},
+	{
+		// Remember to specify the file glob here, otherwise it might cause the vue plugin to handle non-vue files
+		files: ['**/*.ts'],
+		rules: {
+			'ts/consistent-type-definitions': [
+				'error',
+				'interface',
+			],
+		},
+	},
+	{
+		// Without `files`, they are general rules for all files
+		rules: {
+			'style/semi': [
+				'error',
+				'never',
+			],
+		},
+	},
 );
 ```
 
@@ -307,16 +319,19 @@ We also provided a `overrides` options in each integration to make it easier:
 import hexatool from '@hexatool/eslint-config';
 
 export default hexatool({
-  astro: {
-    overrides: {
-      // ...
-    },
-  },
-  typescript: {
-    overrides: {
-      'ts/consistent-type-definitions': ['error', 'interface'],
-    },
-  },
+	astro: {
+		overrides: {
+			// ...
+		},
+	},
+	typescript: {
+		overrides: {
+			'ts/consistent-type-definitions': [
+				'error',
+				'interface',
+			],
+		},
+	},
 });
 ```
 
@@ -331,23 +346,26 @@ can chain the methods to compose the config even more flexibly.
 import hexatool from '@hexatool/eslint-config';
 
 export default hexatool()
-  .prepend(
-    // some configs before the main config
-  )
-  // overrides any named configs
-  .override(
-    'hexatool/imports',
-    {
-      rules: {
-        'import/order': ['error', { 'newlines-between': 'always' }],
-      }
-    }
-  )
-  // rename plugin prefixes
-  .renamePlugins({
-    'old-prefix': 'new-prefix',
-    // ...
-  });
+	.prepend(
+		// Some configs before the main config
+	)
+// Overrides any named configs
+	.override(
+		'hexatool/imports',
+		{
+			rules: {
+				'import/order': [
+					'error',
+					{ 'newlines-between': 'always' },
+				],
+			},
+		},
+	)
+// Rename plugin prefixes
+	.renamePlugins({
+		'old-prefix': 'new-prefix',
+		// ...
+	});
 // ...
 ```
 
@@ -362,28 +380,28 @@ by [`eslint-plugin-format`](https://github.com/antfu/eslint-plugin-format).
 
 ```js
 // eslint.config.js
-import hexatool from '@hexatool/eslint-config'
+import hexatool from '@hexatool/eslint-config';
 
 export default hexatool({
-  formatters: {
-    /**
-     * Format CSS, LESS, SCSS files, also the `<style>` blocks in Vue
-     * By default uses Prettier
-     */
-    css: true,
-    /**
-     * Format HTML files
-     * By default uses Prettier
-     */
-    html: true,
-    /**
-     * Format Markdown files
-     * Supports Prettier and dprint
-     * By default uses Prettier
-     */
-    markdown: 'prettier'
-  }
-})
+	formatters: {
+		/**
+		 * Format CSS, LESS, SCSS files, also the `<style>` blocks in Vue
+		 * By default uses Prettier
+		 */
+		css: true,
+		/**
+		 * Format HTML files
+		 * By default uses Prettier
+		 */
+		html: true,
+		/**
+		 * Format Markdown files
+		 * Supports Prettier and dprint
+		 * By default uses Prettier
+		 */
+		markdown: 'prettier',
+	},
+});
 ```
 
 Running `npx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
@@ -398,11 +416,11 @@ To enable astro support, you need to explicitly turn it on or have `react` depen
 
 ```js
 // eslint.config.js
-import hexatool from '@hexatool/eslint-config'
+import hexatool from '@hexatool/eslint-config';
 
 export default hexatool({
-  react: true,
-})
+	react: true,
+});
 ```
 
 You need to install required dependencies:
@@ -417,11 +435,11 @@ To enable astro support, you need to explicitly turn it on or have `astro` depen
 
 ```js
 // eslint.config.js
-import hexatool from '@hexatool/eslint-config'
+import hexatool from '@hexatool/eslint-config';
 
 export default hexatool({
-  astro: true,
-})
+	astro: true,
+});
 ```
 
 You need to install required dependencies:
@@ -437,13 +455,13 @@ options object to the `typescript` config:
 
 ```js
 // eslint.config.js
-import hexatool from '@hexatool/eslint-config'
+import hexatool from '@hexatool/eslint-config';
 
 export default hexatool({
-  typescript: {
-    tsconfigPath: 'tsconfig.json',
-  },
-})
+	typescript: {
+		tsconfigPath: 'tsconfig.json',
+	},
+});
 ```
 
 ### Editor Specific Disables
@@ -457,11 +475,11 @@ want this behavior, you can disable them:
 
 ```js
 // eslint.config.js
-import hexatool from '@hexatool/eslint-config'
+import hexatool from '@hexatool/eslint-config';
 
 export default hexatool({
-  isInEditor: false
-})
+	isInEditor: false,
+});
 ```
 
 ### Lint Staged
@@ -470,12 +488,12 @@ If you want to apply lint and auto-fix before every commit, you can add the foll
 
 ```json
 {
-  "simple-git-hooks": {
-    "pre-commit": "bun lint-staged"
-  },
-  "lint-staged": {
-    "*": "eslint --fix"
-  }
+	"simple-git-hooks": {
+		"pre-commit": "bun lint-staged"
+	},
+	"lint-staged": {
+		"*": "eslint --fix"
+	}
 }
 ```
 
@@ -516,3 +534,12 @@ Publishing this package we are committing ourselves to the following code qualit
 - **Tests** as documentation and usage examples
 - **Well documented ReadMe** showing how to install and use
 - **License favoring Open Source** and collaboration
+
+	[eslint-plugin-import-x]: 				https://github.com/un-es/eslint-plugin-import-x
+	[eslint-plugin-n]: 						https://github.com/eslint-community/eslint-plugin-n
+	[eslint-plugin-jsonc]: 					https://github.com/ota-meshi/eslint-plugin-jsonc
+	[@stylistic/eslint-plugin]: 			https://github.com/eslint-stylistic/eslint-stylistic
+	[eslint-plugin-simple-import-sort]: 	https://github.com/lydell/eslint-plugin-simple-import-sort
+	[eslint-plugin-vitest]: 				https://github.com/veritem/eslint-plugin-vitest
+	[eslint-plugin-no-only-tests]: 			https://github.com/levibuzolic/eslint-plugin-no-only-tests
+	[@typescript-eslint/eslint-plugin]: 	https://github.com/typescript-eslint/typescript-eslint

@@ -1,3 +1,4 @@
+declare module 'eslint-plugin-markdown';
 declare module 'eslint-plugin-n';
 declare module 'eslint-plugin-perfectionist/configs/recommended-natural';
 declare module 'eslint-plugin-react';

@@ -3,11 +3,10 @@ import type {
 	GitignoreOptions,
 	JavascriptOptions,
 	JsonOptions,
-	PerfectionistOptions,
+	MarkdownOptions,	PerfectionistOptions,
 	ReactOptions,
 	TypescriptOptions,
-	UnicornOptions,
-} from '../config';
+	UnicornOptions } from '../config';
 import type { TypedFlatConfigItem } from '../types';
 import type { AutoRenamePluginsOptions } from './options-auto-rename-plugins';
 import type { IsInEditorOptions } from './options-is-in-editor';
@@ -20,6 +19,7 @@ export type HexatoolEslintOptions =
 	& IsInEditorOptions
 	& JavascriptOptions
 	& JsonOptions
+	& MarkdownOptions
 	& PerfectionistOptions
 	& ReactOptions
 	& StylisticOptions
