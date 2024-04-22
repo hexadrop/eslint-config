@@ -23,12 +23,21 @@
 	"license": "MIT",
 	"type": "module",
 	"files": [
-		"config",
-		"patch"
+		"dist"
 	],
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
+		}
+	},
 	"scripts": {
+		"build": "tsup",
 		"lint": "eslint .",
 		"lint:fix": "eslint --fix .",
+		"prepublish": "tsup",
 		"postinstall": "esno scripts/typegen.ts",
 		"publish": "changeset publish",
 		"typecheck": "tsc --noEmit",
@@ -94,6 +103,7 @@
 		"esno": "4.7.0",
 		"jiti": "1.21.0",
 		"react": "18.2.0",
+		"tsup": "8.0.2",
 		"typescript": "5.4.5"
 	}
 }
