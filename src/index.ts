@@ -3,6 +3,7 @@ import process from 'node:process';
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 
 import {
+	astro,
 	gitignore,
 	imports,
 	javascript,
@@ -60,6 +61,7 @@ export default async function hexatool(
 		unicorn(options.unicorn),
 		node(),
 		react(options.react, options.typescript),
+		astro(options.astro, stylisticOptions),
 	];
 
 	let pipeline = new FlatConfigComposer<TypedFlatConfigItem>();

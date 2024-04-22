@@ -10,7 +10,7 @@ export interface ReactOptions {
 	 * - `eslint-plugin-react-hooks`
 	 * - `eslint-plugin-react-refresh`
 	 *
-	 * @default false
+	 * @default Detect if `react` is installed
 	 */
 	react?: OptionsOverrides | boolean;
 }

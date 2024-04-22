@@ -1,4 +1,5 @@
 import type {
+	AstroOptions,
 	GitignoreOptions,
 	JavascriptOptions,
 	JsonOptions,
@@ -13,7 +14,8 @@ import type { IsInEditorOptions } from './options-is-in-editor';
 import type { StylisticOptions } from './options-stylistic';
 
 export type HexatoolEslintOptions =
-	AutoRenamePluginsOptions
+	AstroOptions
+	& AutoRenamePluginsOptions
 	& GitignoreOptions
 	& IsInEditorOptions
 	& JavascriptOptions
