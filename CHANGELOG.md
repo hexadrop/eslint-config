@@ -1,5 +1,12 @@
 # @hexatool/eslint-config
 
+## 4.0.0-beta.2
+
+### Patch Changes
+
+- f8fb607: Disable `unicorn/consistent-function-scoping` rule
+- 96e1c7a: Disable `import/no-unresolved` rule
+
 ## 4.0.0-beta.0
 
 ### Major Changes

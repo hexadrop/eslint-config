@@ -5,8 +5,10 @@
     "@hexatool/eslint-config": "3.0.0"
   },
   "changesets": [
+    "chilly-balloons-appear",
     "loud-years-travel",
     "mean-plums-grab",
-    "sour-elephants-attack"
+    "sour-elephants-attack",
+    "twenty-jeans-lie"
   ]
 }
