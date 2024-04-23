@@ -36,7 +36,7 @@ export default async function imports(
 				'import/no-named-as-default': 'off',
 				'import/no-named-as-default-member': 'off',
 				'import/no-namespace': 'error',
-				'import/no-unresolved': 'error',
+				'import/no-unresolved': 'off',
 				'import/no-useless-path-segments': 'error',
 				'import/no-webpack-loader-syntax': 'error',
 
