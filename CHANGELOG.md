@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 4.0.0-beta.5
+
+### Patch Changes
+
+- 42fa060: Disable `perfectionist/sort-classes` and `perfectionist/sort-interfaces` rules
+
 ## 4.0.0-beta.4
 
 ### Patch Changes
