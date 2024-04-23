@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 4.0.0-beta.6
+
+### Patch Changes
+
+- Remove postinstall script
+
 ## 4.0.0-beta.5
 
 ### Patch Changes

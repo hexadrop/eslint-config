@@ -1,6 +1,6 @@
 {
 	"name": "@hexatool/eslint-config",
-	"version": "4.0.0-beta.5",
+	"version": "4.0.0-beta.6",
 	"description": "Opinionated ESLint ruleset designed for large teams and projects",
 	"keywords": [
 		"lint",
@@ -34,11 +34,11 @@
 		}
 	},
 	"scripts": {
-		"build": "tsup",
+		"build": "esno scripts/typegen.ts && tsup",
+		"build:types": "esno scripts/typegen.ts",
 		"lint": "eslint .",
 		"lint:fix": "eslint --fix .",
-		"prepublish": "tsup",
-		"postinstall": "esno scripts/typegen.ts",
+		"prepublish": "esno scripts/typegen.ts && tsup",
 		"publish": "changeset publish",
 		"typecheck": "tsc --noEmit",
 		"version": "changeset version"
