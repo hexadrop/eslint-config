@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 4.0.0-beta.4
+
+### Patch Changes
+
+- Disable `unicorn/no-static-only-class` rule
+
 ## 4.0.0-beta.3
 
 ### Patch Changes

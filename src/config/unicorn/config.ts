@@ -28,6 +28,7 @@ export default async function unicorn(
 				...eslintPluginUnicorn.configs['flat/recommended'].rules,
 				'unicorn/consistent-function-scoping': 'off',
 				'unicorn/no-array-reduce': 'off',
+				'unicorn/no-static-only-class': 'off',
 				'unicorn/prevent-abbreviations': [
 					'error',
 					{
