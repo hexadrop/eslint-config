@@ -26,6 +26,7 @@ export default async function unicorn(
 			rules: {
 				// eslint-disable-next-line typescript/no-unsafe-member-access
 				...eslintPluginUnicorn.configs['flat/recommended'].rules,
+				'unicorn/consistent-function-scoping': 'off',
 				'unicorn/no-array-reduce': 'off',
 				'unicorn/prevent-abbreviations': [
 					'error',
