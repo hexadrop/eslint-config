@@ -26,7 +26,9 @@ export default async function perfectionist(
 			rules: {
 				// eslint-disable-next-line typescript/no-unsafe-member-access
 				...perfectionistNatural.rules,
+				'perfectionist/sort-classes': 'off',
 				'perfectionist/sort-imports': 'off',
+				'perfectionist/sort-interfaces': 'off',
 				'perfectionist/sort-named-exports': 'off',
 				...overrides,
 			},
