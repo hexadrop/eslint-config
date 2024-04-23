@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 4.0.0-beta.3
+
+### Patch Changes
+
+- Disable `no-duplicate-imports` rule
+
 ## 4.0.0-beta.2
 
 ### Patch Changes

@@ -124,7 +124,7 @@ export default async function javascript(
 				'no-dupe-else-if': 'error',
 				'no-dupe-keys': 'error',
 				'no-duplicate-case': 'error',
-				'no-duplicate-imports': 'error',
+				'no-duplicate-imports': 'off',
 				'no-else-return': [
 					'error',
 					{ allowElseIf: false },
