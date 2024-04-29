@@ -44,7 +44,7 @@
 		"version": "changeset version"
 	},
 	"peerDependencies": {
-		"astro-eslint-parser": "^0.17.0",
+		"astro-eslint-parser": "^0.17.0 || ^1.0.0",
 		"eslint": ">=8.40.0",
 		"eslint-plugin-astro": "^0.34.0 || ^1.0.0",
 		"eslint-plugin-format": "^0.1.1",
@@ -104,7 +104,7 @@
 		"@types/bun": "1.1.0",
 		"@types/eslint": "8.56.10",
 		"astro": "4.7.0",
-		"astro-eslint-parser": "0.17.0",
+		"astro-eslint-parser": "1.0.1",
 		"eslint": "9.1.1",
 		"eslint-plugin-astro": "1.1.0",
 		"eslint-plugin-react": "7.34.1",
