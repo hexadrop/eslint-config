@@ -4,18 +4,7 @@ import { builtinRules } from 'eslint/use-at-your-own-risk';
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 
 import {
-	astro,
-	combine, formatters,
-	imports,
-	javascript,
-	json,
-	markdown,
-	node,
-	perfectionist,
-	react,
-	stylistic,
-	typescript,
-	unicorn,
+	combine,
 } from '../src';
 
 const configs = await combine(
@@ -26,18 +15,6 @@ const configs = await combine(
 			},
 		},
 	},
-	astro(true),
-	formatters(true),
-	imports(),
-	javascript(),
-	json(),
-	markdown(),
-	node(),
-	perfectionist(),
-	react(true),
-	stylistic(),
-	typescript(),
-	unicorn(),
 );
 
 const dts = await flatConfigsToRulesDTS(configs, {
