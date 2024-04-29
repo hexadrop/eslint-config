@@ -1,2 +1,2 @@
-export * from './awaitable';
-export * from './typed-flat-config-item';
+export type * from './awaitable';
+export type * from './typed-flat-config-item';
