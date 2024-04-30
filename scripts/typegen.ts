@@ -6,6 +6,7 @@ import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 import {
 	combine,
 } from '../src';
+import { ignore } from 'src/config';
 
 const configs = await combine(
 	{
@@ -15,6 +16,7 @@ const configs = await combine(
 			},
 		},
 	},
+	ignore()
 );
 
 const dts = await flatConfigsToRulesDTS(configs, {
