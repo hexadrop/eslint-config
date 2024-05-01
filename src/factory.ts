@@ -4,19 +4,7 @@ import { FlatConfigComposer } from 'eslint-flat-config-utils';
 import type { HexatoolEslintOptions } from './options';
 import type { Awaitable, TypedFlatConfigItem } from './types';
 import { extractTypedFlatConfigItem } from './utils';
-import { ignore } from './config';
-
-
-const defaultRenamePlugins = {
-	'@stylistic': 'style',
-	'@typescript-eslint': 'typescript',
-	'import-x': 'import',
-	jsonc: 'json',
-	n: 'node',
-	'simple-import-sort': 'import-sort',
-	vitest: 'test',
-	yml: 'yaml',
-} as const;
+import { ignore, core } from './config';
 
 export default async function hexatool(
 	options: HexatoolEslintOptions & TypedFlatConfigItem = {},
@@ -39,6 +27,7 @@ export default async function hexatool(
 
 	const configs: Awaitable<TypedFlatConfigItem[]>[] = [
 		ignore(options.ignore),
+		core(options.core),
 	];
 
 	let pipeline = new FlatConfigComposer<TypedFlatConfigItem>(...configs);

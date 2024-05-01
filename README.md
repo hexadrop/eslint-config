@@ -57,7 +57,25 @@ bun add eslint @hexatool/eslint-config --dev
 
 ## Configuration
 
+- [Core configuration](#core-configuration)
 - [Ignoring files](#ignoring-files)
+
+### Core configuration
+
+Core configuration can not be disabled, but you can extend it with your own rules.
+
+```js
+// eslint.config.js
+import hexatool from '@hexatool/eslint-config';
+
+export default hexatool({
+  core: {
+    overrides: {
+      'no-console': 'off',
+    },
+  },
+});
+```
 
 ### Ignoring files
 

@@ -1,6 +1,10 @@
-import type { IgnoreOptions } from '../config';
+import type { CoreOptions, IgnoreOptions } from '../config';
 
 export interface HexatoolEslintOptions {
+	/**
+	 * Core rules. Can't be disabled.
+	 */
+	core?: CoreOptions;
 
 	/**
 	 * Enable gitignore support.
