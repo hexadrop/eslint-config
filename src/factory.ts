@@ -22,6 +22,7 @@ export default async function hexatool(
 	const configs: Awaitable<TypedFlatConfigItem[]>[] = [
 		ignore(options.ignore),
 		core(options.core),
+		typescript(options.typescript),
 		imports(options.imports, options.node, options.typescript),
 	];
 
