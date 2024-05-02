@@ -5,7 +5,7 @@ import { renamePlugins } from './const';
 import type { HexatoolEslintOptions } from './options';
 import type { Awaitable, TypedFlatConfigItem } from './types';
 import { extractTypedFlatConfigItem } from './utils';
-import { ignore, core } from './config';
+import { ignore, core, imports } from './config';
 
 export default async function hexatool(
 	options: HexatoolEslintOptions & TypedFlatConfigItem = {},
@@ -17,18 +17,11 @@ export default async function hexatool(
 			| TypedFlatConfigItem[]
 		>[]
 ): Promise<FlatConfigComposer<TypedFlatConfigItem>> {
-	const {
-		renamePlugins = true,
-	} = options;
-
-	const renamePluginsMap = {
-		...defaultRenamePlugins,
-		...(typeof renamePlugins === 'object' ? renamePlugins : {}),
-	};
 
 	const configs: Awaitable<TypedFlatConfigItem[]>[] = [
 		ignore(options.ignore),
 		core(options.core),
+		imports(options.imports, options.node, options.typescript),
 	];
 
 	let pipeline = new FlatConfigComposer<TypedFlatConfigItem>(...configs)
