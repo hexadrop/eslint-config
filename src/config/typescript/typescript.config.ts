@@ -44,13 +44,13 @@ export default async function typescript(
 		config.push(
 			typescriptParser({
 				parser,
-				files: TYPESCRIPT_GLOBS,
-				tsconfigPath: toArray(tsconfigPath),
+				files: SOURCE_GLOBS,
+				ignores: TYPESCRIPT_GLOBS,
 			}),
 			typescriptParser({
 				parser,
-				files: SOURCE_GLOBS,
-				ignores: TYPESCRIPT_GLOBS,
+				files: TYPESCRIPT_GLOBS,
+				tsconfigPath: toArray(tsconfigPath),
 			}),
 		);
 	} else {
