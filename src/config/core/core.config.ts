@@ -6,9 +6,9 @@ import type { CoreOptions } from './core.options';
 
 const CORE_CONFIG_NAME = 'hexatool/core';
 
-export default async function core(
+export default function core(
 	options?: CoreOptions
-): Promise<TypedFlatConfigItem[]> {
+): TypedFlatConfigItem[] {
 	const { overrides } = options ?? {};
 
 	return [
@@ -51,10 +51,6 @@ export default async function core(
 					{ properties: 'never' },
 				],
 				'capitalized-comments': 'error',
-				complexity: [
-					'error',
-					30,
-				],
 				'consistent-this': [
 					'error',
 					'self',
