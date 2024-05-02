@@ -55,6 +55,33 @@ export default async function imports(
 	}
 
 	const configs: TypedFlatConfigItem[] = [];
+
+	if (typescript && useImports) {
+		const typeScriptExtensions = ['.ts', '.tsx'] as const;
+		const allExtensions = [...typeScriptExtensions, '.js', '.jsx'] as const;
+
+		configs.push({
+			name: `${IMPORT_CONFIG_NAME}/setup`,
+			files: [...TYPESCRIPT_GLOBS],
+			plugins: {
+				[importXPluginRename]: await interopDefault(import('eslint-plugin-import-x')),
+			},
+			settings: {
+				[`${importXPlugin}/extensions`]: typeScriptExtensions,
+				[`${importXPlugin}/external-module-folders`]: ['node_modules', 'node_modules/@types'],
+				[`${importXPlugin}/parsers`]: {
+					'@typescript-eslint/parser': [...typeScriptExtensions, '.cts', '.mts'],
+				},
+				[`${importXPlugin}/resolver`]: {
+					node: {
+						extensions: allExtensions,
+					},
+					typescript: true,
+				},
+			},
+		});
+	}
+
 	const config: TypedFlatConfigItem = {
 		name: `${IMPORT_CONFIG_NAME}/rules`,
 		plugins,
@@ -168,34 +195,15 @@ export default async function imports(
 
 	configs.push(config);
 
-	if (typescript && useImports) {
-		const typeScriptExtensions = ['.ts', '.tsx'] as const;
-		const allExtensions = [...typeScriptExtensions, '.js', '.jsx'] as const;
 
+	if (typescript && useImports) {
 		configs.push({
 			name: `${IMPORT_CONFIG_NAME}/rules/typescript`,
 			files: [...TYPESCRIPT_GLOBS],
-			plugins: {
-				[importXPluginRename]: await interopDefault(import('eslint-plugin-import-x')),
-			},
 			rules: {
 				[`${importXPluginRename}/named`]: 'off',
-			},
-			settings: {
-				[`${importXPlugin}/extensions`]: typeScriptExtensions,
-				[`${importXPlugin}/external-module-folders`]: ['node_modules', 'node_modules/@types'],
-				[`${importXPlugin}/parsers`]: {
-					'@typescript-eslint/parser': [...typeScriptExtensions, '.cts', '.mts'],
-				},
-				[`${importXPlugin}/resolver`]: {
-					node: {
-						extensions: allExtensions,
-					},
-					typescript: true,
-				},
-			},
+			}
 		});
-
 	}
 
 	return configs;
