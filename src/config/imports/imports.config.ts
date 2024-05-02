@@ -1,10 +1,12 @@
 import type { ESLint } from 'eslint';
 import { isPackageExists } from 'local-pkg';
+
 import { renamePlugins } from '../../const';
 import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault } from '../../utils';
 import type { NodeOptions } from '../node';
-import { TYPESCRIPT_GLOBS, type TypescriptOptions } from '../typescript';
+import type {TypescriptOptions} from '../typescript';
+import { TYPESCRIPT_GLOBS  } from '../typescript';
 import type { ImportsOptions } from './imports.options';
 
 
@@ -108,14 +110,9 @@ export default async function imports(
 					'prefer-top-level',
 				],
 				[`${importsPrefix}/exports-last`]: 'error',
-				[`${importsPrefix}/extensions`]: ['error', 'never', {
-					'css': 'always',
-					'jpeg': 'always',
-					'jpg': 'always',
-					'json': 'always',
-					'png': 'always',
-					'svg': 'always',
-					'webp': 'always',
+				[`${importsPrefix}/extensions`]: ['error', 'always', {
+					'ts': 'never',
+					'js': 'never',
 				}],
 				[`${importsPrefix}/first`]: 'error',
 				[`${importsPrefix}/group-exports`]: 'error',
