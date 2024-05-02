@@ -1,7 +1,8 @@
 import type { Linter } from 'eslint';
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
-import { renamePlugins } from './const';
 
+import { core, ignore, imports, typescript } from './config';
+import PLUGIN_MAP from './const/plugin-rename';
 import type { HexatoolEslintOptions } from './options';
 import type { Awaitable, TypedFlatConfigItem } from './types';
 import { extractTypedFlatConfigItem } from './utils';
@@ -25,7 +26,7 @@ export default async function hexatool(
 	];
 
 	let pipeline = new FlatConfigComposer<TypedFlatConfigItem>(...configs)
-		.renamePlugins(renamePlugins);
+		.renamePlugins(PLUGIN_MAP);
 
 	/*
 	 * User can optionally pass a flat config item to the first argument

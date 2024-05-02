@@ -1,7 +1,7 @@
 import type { ESLint } from 'eslint';
 import { isPackageExists } from 'local-pkg';
 
-import { renamePlugins } from '../../const';
+import PLUGINS_MAP from '../../const/plugin-rename';
 import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault } from '../../utils';
 import type { NodeOptions } from '../node';
@@ -32,9 +32,9 @@ export default async function imports(
 	} = typeof options === 'boolean' ? {} : options;
 
 	const importXPlugin = 'import-x';
-	const importXPluginRename = renamePlugins[importXPlugin];
-	const unusedImportsPrefix = renamePlugins['unused-imports'];
-	const importSortPrefix = renamePlugins['simple-import-sort'];
+	const importXPluginRename = PLUGINS_MAP[importXPlugin];
+	const unusedImportsPrefix = PLUGINS_MAP['unused-imports'];
+	const importSortPrefix = PLUGINS_MAP['simple-import-sort'];
 	const useImports = warnings || !node || amd || commonjs || !webpack || stylistic;
 
 	const plugins: Record<string, ESLint.Plugin> = {};
