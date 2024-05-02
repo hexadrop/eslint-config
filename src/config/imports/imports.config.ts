@@ -31,7 +31,8 @@ export default async function imports(
 		stylistic = true,
 	} = typeof options === 'boolean' ? {} : options;
 
-	const importsPrefix = renamePlugins['import-x'];
+	const importXPlugin = 'import-x';
+	const importXPluginRename = renamePlugins[importXPlugin];
 	const unusedImportsPrefix = renamePlugins['unused-imports'];
 	const importSortPrefix = renamePlugins['simple-import-sort'];
 	const useImports = warnings || !node || amd || commonjs || !webpack || stylistic;
@@ -40,8 +41,8 @@ export default async function imports(
 	const settings: Record<string, unknown> = {};
 
 	if (useImports) {
-		plugins[importsPrefix] = await interopDefault(import('eslint-plugin-import-x'));
-		settings[`${importsPrefix}/resolver`] = {
+		plugins[importXPluginRename] = await interopDefault(import('eslint-plugin-import-x'));
+		settings[`${importXPlugin}/resolver`] = {
 			node: true,
 		};
 	}
@@ -60,69 +61,68 @@ export default async function imports(
 		rules: {
 			// Warnings rules https://github.com/un-ts/eslint-plugin-import-x?tab=readme-ov-file#helpful-warnings
 			...warnings && {
-				[`${importsPrefix}/export`]: 'error',
-				[`${importsPrefix}/no-deprecated`]: 'warn',
-				[`${importsPrefix}/no-empty-named-blocks`]: 'error',
-				[`${importsPrefix}/no-mutable-exports`]: 'error',
-				[`${importsPrefix}/no-named-as-default`]: 'warn',
-				[`${importsPrefix}/no-named-as-default-member`]: 'warn',
+				[`${importXPluginRename}/export`]: 'error',
+				[`${importXPluginRename}/no-deprecated`]: 'warn',
+				[`${importXPluginRename}/no-empty-named-blocks`]: 'error',
+				[`${importXPluginRename}/no-mutable-exports`]: 'error',
+				[`${importXPluginRename}/no-named-as-default`]: 'warn',
+				[`${importXPluginRename}/no-named-as-default-member`]: 'warn',
 			},
 			// Module system rules https://github.com/un-ts/eslint-plugin-import-x?tab=readme-ov-file#module-systems
 			...!amd && {
-				[`${importsPrefix}/no-amd`]: 'error',
+				[`${importXPluginRename}/no-amd`]: 'error',
 			},
 			...!commonjs && {
-				[`${importsPrefix}/no-commonjs`]: 'error',
+				[`${importXPluginRename}/no-commonjs`]: 'error',
 			},
 			...!node && {
-				[`${importsPrefix}/no-nodejs-modules`]: 'error',
+				[`${importXPluginRename}/no-nodejs-modules`]: 'error',
 			},
 			...{
-				[`${importsPrefix}/no-import-module-exports`]: 'error',
+				[`${importXPluginRename}/no-import-module-exports`]: 'error',
 			},
 			// Static analysis rules https://github.com/un-ts/eslint-plugin-import-x?tab=readme-ov-file#static-analysis
 			...{
-				[`${importsPrefix}/default`]: 'error',
-				[`${importsPrefix}/named`]: 'error',
-				[`${importsPrefix}/namespace`]: 'error',
-				[`${importsPrefix}/no-absolute-path`]: 'error',
-				[`${importsPrefix}/no-cycle`]: 'error',
-				[`${importsPrefix}/no-relative-packages`]: 'error',
-				[`${importsPrefix}/no-relative-parent-imports`]: 'error',
-				[`${importsPrefix}/no-restricted-paths`]: 'off',
-				[`${importsPrefix}/no-self-import`]: 'error',
-				[`${importsPrefix}/no-unresolved`]: ['error', { commonjs: commonjs !== false, amd: amd !== false }],
-				[`${importsPrefix}/no-useless-path-segments`]: ['error', {
+				[`${importXPluginRename}/default`]: 'error',
+				[`${importXPluginRename}/named`]: 'error',
+				[`${importXPluginRename}/namespace`]: 'error',
+				[`${importXPluginRename}/no-absolute-path`]: 'error',
+				[`${importXPluginRename}/no-cycle`]: 'error',
+				[`${importXPluginRename}/no-relative-packages`]: 'error',
+				[`${importXPluginRename}/no-restricted-paths`]: 'off',
+				[`${importXPluginRename}/no-self-import`]: 'error',
+				[`${importXPluginRename}/no-unresolved`]: ['error', { commonjs: commonjs !== false, amd: amd !== false }],
+				[`${importXPluginRename}/no-useless-path-segments`]: ['error', {
 					noUselessIndex: true,
 					commonjs: commonjs !== false,
 				}],
 			},
 			...!webpack && {
-				[`${importsPrefix}/no-webpack-loader-syntax`]: 'error',
+				[`${importXPluginRename}/no-webpack-loader-syntax`]: 'error',
 			},
 			...commonjs && {
-				[`${importsPrefix}/no-dynamic-require`]: 'error',
+				[`${importXPluginRename}/no-dynamic-require`]: 'error',
 			},
 			// Style guide
 			...stylistic && {
-				[`${importsPrefix}/consistent-type-specifier-style`]: [
+				[`${importXPluginRename}/consistent-type-specifier-style`]: [
 					'error',
 					'prefer-top-level',
 				],
-				[`${importsPrefix}/exports-last`]: 'error',
-				[`${importsPrefix}/first`]: 'error',
-				[`${importsPrefix}/group-exports`]: 'error',
-				[`${importsPrefix}/newline-after-import`]: [
+				[`${importXPluginRename}/exports-last`]: 'error',
+				[`${importXPluginRename}/first`]: 'error',
+				[`${importXPluginRename}/group-exports`]: 'error',
+				[`${importXPluginRename}/newline-after-import`]: [
 					'error',
 					{ count: 1 },
 				],
-				[`${importsPrefix}/no-anonymous-default-export`]: 'error',
-				[`${importsPrefix}/no-duplicates`]: 'error',
-				[`${importsPrefix}/no-namespace`]: 'error',
-				[`${importsPrefix}/prefer-default-export`]: 'error',
+				[`${importXPluginRename}/no-anonymous-default-export`]: 'error',
+				[`${importXPluginRename}/no-duplicates`]: 'error',
+				[`${importXPluginRename}/no-namespace`]: 'error',
+				[`${importXPluginRename}/prefer-default-export`]: 'error',
 			},
 			...webpack && stylistic && {
-				[`${importsPrefix}/dynamic-import-chunkname`]: 'error',
+				[`${importXPluginRename}/dynamic-import-chunkname`]: 'error',
 			},
 			// Sorting rules
 			...sort && {
@@ -176,18 +176,18 @@ export default async function imports(
 			name: `${IMPORT_CONFIG_NAME}/rules/typescript`,
 			files: [...TYPESCRIPT_GLOBS],
 			plugins: {
-				[importsPrefix]: await interopDefault(import('eslint-plugin-import-x')),
+				[importXPluginRename]: await interopDefault(import('eslint-plugin-import-x')),
 			},
 			rules: {
-				[`${importsPrefix}/named`]: 'off',
+				[`${importXPluginRename}/named`]: 'off',
 			},
 			settings: {
-				[`${importsPrefix}/extensions`]: typeScriptExtensions,
-				[`${importsPrefix}/external-module-folders`]: ['node_modules', 'node_modules/@types'],
-				[`${importsPrefix}/parsers`]: {
+				[`${importXPlugin}/extensions`]: typeScriptExtensions,
+				[`${importXPlugin}/external-module-folders`]: ['node_modules', 'node_modules/@types'],
+				[`${importXPlugin}/parsers`]: {
 					'@typescript-eslint/parser': [...typeScriptExtensions, '.cts', '.mts'],
 				},
-				[`${importsPrefix}/resolver`]: {
+				[`${importXPlugin}/resolver`]: {
 					node: {
 						extensions: allExtensions,
 					},
