@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+
 import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault } from '../../utils';
 import IGNORE_GLOB from './ignore.globs';

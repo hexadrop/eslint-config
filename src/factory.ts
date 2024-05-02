@@ -6,9 +6,8 @@ import PLUGIN_MAP from './const/plugin-rename';
 import type { HexatoolEslintOptions } from './options';
 import type { Awaitable, TypedFlatConfigItem } from './types';
 import { extractTypedFlatConfigItem } from './utils';
-import { ignore, core, imports } from './config';
 
-export default async function hexatool(
+export default function hexatool(
 	options: HexatoolEslintOptions & TypedFlatConfigItem = {},
 	...userConfigs:
 		Awaitable<
@@ -17,7 +16,7 @@ export default async function hexatool(
 			| TypedFlatConfigItem
 			| TypedFlatConfigItem[]
 		>[]
-): Promise<FlatConfigComposer<TypedFlatConfigItem>> {
+): FlatConfigComposer<TypedFlatConfigItem> {
 
 	const configs: Awaitable<TypedFlatConfigItem[]>[] = [
 		ignore(options.ignore),
