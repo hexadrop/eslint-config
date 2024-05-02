@@ -110,10 +110,6 @@ export default async function imports(
 					'prefer-top-level',
 				],
 				[`${importsPrefix}/exports-last`]: 'error',
-				[`${importsPrefix}/extensions`]: ['error', 'always', {
-					'ts': 'never',
-					'js': 'never',
-				}],
 				[`${importsPrefix}/first`]: 'error',
 				[`${importsPrefix}/group-exports`]: 'error',
 				[`${importsPrefix}/newline-after-import`]: [
