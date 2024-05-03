@@ -97,6 +97,8 @@ export default hexatool({
 Or pass custom configuration to `eslint-config-flat-gitignore`
 ([See full configuration](https://github.com/antfu/eslint-config-flat-gitignore/blob/main/src/index.ts#L7)).
 
+Also includes additional `ignores` option to ignore additional files and directories using glob patterns.
+
 ```js
 // eslint.config.js
 import hexatool from '@hexatool/eslint-config';
