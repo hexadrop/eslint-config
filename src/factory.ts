@@ -1,34 +1,25 @@
-import type { Linter } from 'eslint';
+import type { ResolvableFlatConfig } from 'eslint-flat-config-utils';
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 
 import { core, ignore, imports, node, typescript } from './config';
 import { PLUGIN_RENAME } from './const';
 import type { HexatoolEslintOptions } from './options';
-import type { Awaitable, TypedFlatConfigItem } from './types';
+import type { TypedFlatConfigItem } from './types';
 import { extractTypedFlatConfigItem } from './utils';
 
 // eslint-disable-next-line typescript/promise-function-async
 export default function hexatool(
 	options: HexatoolEslintOptions & TypedFlatConfigItem = {},
-	...userConfigs:
-		Awaitable<
-			// eslint-disable-next-line typescript/no-explicit-any
-			| FlatConfigComposer<any>
-			| Linter.FlatConfig[]
-			| TypedFlatConfigItem
-			| TypedFlatConfigItem[]
-		>[]
+	...configs: ResolvableFlatConfig<TypedFlatConfigItem>[]
 ): FlatConfigComposer<TypedFlatConfigItem> {
 
-	const configs: Awaitable<TypedFlatConfigItem[]>[] = [
+	let pipeline = new FlatConfigComposer<TypedFlatConfigItem>(
 		ignore(options.ignore),
 		core(options.core),
 		typescript(options.typescript),
 		imports(options.imports, options.node, options.typescript),
 		node(options.node),
-	];
-
-	let pipeline = new FlatConfigComposer<TypedFlatConfigItem>(...configs)
+	)
 		.renamePlugins(PLUGIN_RENAME);
 
 	/*
@@ -40,8 +31,7 @@ export default function hexatool(
 		pipeline = pipeline.append(flatConfig);
 	}
 
-	// eslint-disable-next-line typescript/no-explicit-any,typescript/no-unsafe-argument
-	pipeline = pipeline.append(...userConfigs as any);
+	pipeline = pipeline.append(...configs);
 
 	return pipeline;
 }
