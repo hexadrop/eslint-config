@@ -1,7 +1,7 @@
 import type { Linter } from 'eslint';
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 
-import { core, ignore, imports, typescript } from './config';
+import { core, ignore, imports, node, typescript } from './config';
 import { PLUGIN_RENAME } from './const';
 import type { HexatoolEslintOptions } from './options';
 import type { Awaitable, TypedFlatConfigItem } from './types';
@@ -25,6 +25,7 @@ export default function hexatool(
 		core(options.core),
 		typescript(options.typescript),
 		imports(options.imports, options.node, options.typescript),
+		node(options.node),
 	];
 
 	let pipeline = new FlatConfigComposer<TypedFlatConfigItem>(...configs)

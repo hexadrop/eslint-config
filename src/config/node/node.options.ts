@@ -1,10 +1,10 @@
-import type { TypedFlatConfigItem } from '../../types';
+import type { PickRules, TypedFlatConfigItem } from '../../types';
 
 interface NodeOptionsObject {
 	/**
 	 * Overrides for rules.
 	 */
-	overrides: TypedFlatConfigItem['rules'];
+	overrides: PickRules<TypedFlatConfigItem['rules'], 'node'>;
 }
 
 export type NodeOptions = boolean | NodeOptionsObject;

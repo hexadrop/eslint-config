@@ -1,10 +1,11 @@
-import type { TypedFlatConfigItem } from '../../types';
+import type { PickRules, TypedFlatConfigItem } from '../../types';
 
 interface TypescriptOptionsObject {
 	/**
 	 * Overrides for rules.
 	 */
-	overrides: TypedFlatConfigItem['rules'];
+	overrides: PickRules<TypedFlatConfigItem['rules'], 'typescript'>;
+
 	/**
 	 * Enable stylistic rules.
 	 *
