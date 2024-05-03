@@ -61,6 +61,7 @@ bun add eslint @hexatool/eslint-config --dev
 - [Ignoring files](#ignoring-files)
 - [Imports](#imports)
 - [Typescript](#typescript)
+- [Node](#node)
 
 ### Core configuration
 
@@ -158,6 +159,7 @@ export default hexatool({
 ### Typescript
 
 This rules automatically detects if typescript is installed in your project and enables the typescript rules.
+It uses [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint/tree/main).
 
 You can disable these rules by setting:
 
@@ -188,6 +190,37 @@ export default hexatool({
   imports: {
     typescript: {
       'typescript/prefer-readonly': 'off',
+    },
+  },
+});
+```
+
+### Node
+
+This rules care about the node environment and enable some rules to enforce best practices for node projects.
+It uses [eslint-plugin-n](https://github.com/eslint-community/eslint-plugin-n).
+
+You can disable these rules by setting:
+
+```js
+// eslint.config.js
+import hexatool from '@hexatool/eslint-config';
+
+export default hexatool({
+  node: false,
+});
+```
+
+You can extend or override the rules by setting:
+
+```js
+// eslint.config.js
+import hexatool from '@hexatool/eslint-config';
+
+export default hexatool({
+  imports: {
+    node: {
+      'node/no-new-require': 'off',
     },
   },
 });
