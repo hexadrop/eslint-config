@@ -103,6 +103,7 @@ import hexatool from '@hexatool/eslint-config';
 
 export default hexatool({
   ignore: {
+   ignores: ['**/nested/**'],
    files: ['./nested/.gitignore'],
    strict: true,
   },
