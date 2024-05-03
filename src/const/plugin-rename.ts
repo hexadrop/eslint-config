@@ -1,6 +1,8 @@
-const renamePlugins = {
+import PLUGIN_RENAME_TYPESCRIPT from './plugin-rename-typescript';
+
+const PLUGIN_RENAME = {
+	...PLUGIN_RENAME_TYPESCRIPT,
 	'@stylistic': 'style',
-	'@typescript-eslint': 'typescript',
 	'import-x': 'import',
 	'simple-import-sort': 'import-sort',
 	'unused-imports': 'import-unused',
@@ -10,4 +12,4 @@ const renamePlugins = {
 	yml: 'yaml',
 } as const;
 
-export default renamePlugins;
+export default PLUGIN_RENAME;

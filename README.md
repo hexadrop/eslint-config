@@ -60,6 +60,7 @@ bun add eslint @hexatool/eslint-config --dev
 - [Core configuration](#core-configuration)
 - [Ignoring files](#ignoring-files)
 - [Imports](#imports)
+- [Typescript](#typescript)
 
 ### Core configuration
 
@@ -139,7 +140,6 @@ These plugin can be configured by setting the following options:
 | warnings     | `boolean` | `true`      | Enable warnings rules           |
 | webpack      | `boolean` | `false`     | Enable webpack support          |
 
-
 You can extend or override the rules of these plugins by setting:
 
 ```js
@@ -150,6 +150,44 @@ export default hexatool({
   imports: {
     overrides: {
       'import/default': 'off',
+    },
+  },
+});
+```
+
+### Typescript
+
+This rules automatically detects if typescript is installed in your project and enables the typescript rules.
+
+You can disable these rules by setting:
+
+```js
+// eslint.config.js
+import hexatool from '@hexatool/eslint-config';
+
+export default hexatool({
+  typescript: false,
+});
+```
+
+These rules can be configured by setting the following options:
+
+| Option       | Type                          | Default                                                                  | Description                |
+|--------------|-------------------------------|--------------------------------------------------------------------------|----------------------------|
+| overrides    | `Rules`                       | `undefined`                                                              | Overrides for rules.       |
+| stylistic    | `boolean`                     | `true`                                                                   | Enable style related rules |
+| tsconfigPath | `false \| string \| string[]` | Detects if there is a file named `tsconfig.json` in root of the project. | Enable type aware rules    |
+
+You can extend or override the rules by setting:
+
+```js
+// eslint.config.js
+import hexatool from '@hexatool/eslint-config';
+
+export default hexatool({
+  imports: {
+    typescript: {
+      'typescript/prefer-readonly': 'off',
     },
   },
 });

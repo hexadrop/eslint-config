@@ -1,7 +1,7 @@
 import type { ESLint } from 'eslint';
 import { isPackageExists } from 'local-pkg';
 
-import PLUGINS_MAP from '../../const/plugin-rename';
+import { PLUGIN_RENAME } from '../../const';
 import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault } from '../../utils';
 import type { NodeOptions } from '../node';
@@ -32,9 +32,9 @@ export default async function imports(
 	} = typeof options === 'boolean' ? {} : options;
 
 	const importXPlugin = 'import-x';
-	const importXPluginRename = PLUGINS_MAP[importXPlugin];
-	const unusedImportsPrefix = PLUGINS_MAP['unused-imports'];
-	const importSortPrefix = PLUGINS_MAP['simple-import-sort'];
+	const importXPluginRename = PLUGIN_RENAME[importXPlugin];
+	const unusedImportsPrefix = PLUGIN_RENAME['unused-imports'];
+	const importSortPrefix = PLUGIN_RENAME['simple-import-sort'];
 	const useImports = warnings || !node || amd || commonjs || !webpack || stylistic;
 
 	const plugins: Record<string, ESLint.Plugin> = {};
@@ -118,10 +118,10 @@ export default async function imports(
 				[`${importXPluginRename}/no-relative-packages`]: 'error',
 				[`${importXPluginRename}/no-restricted-paths`]: 'off',
 				[`${importXPluginRename}/no-self-import`]: 'error',
-				[`${importXPluginRename}/no-unresolved`]: ['error', { commonjs: commonjs !== false, amd: amd !== false }],
+				[`${importXPluginRename}/no-unresolved`]: ['error', { commonjs, amd }],
 				[`${importXPluginRename}/no-useless-path-segments`]: ['error', {
 					noUselessIndex: true,
-					commonjs: commonjs !== false,
+					commonjs,
 				}],
 			},
 			...!webpack && {
