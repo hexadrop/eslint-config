@@ -1,3 +1,5 @@
+import {cwd} from 'node:process';
+
 import type { Linter } from 'eslint';
 
 import type { TypedFlatConfigItem } from '../../types';
@@ -24,7 +26,7 @@ export default function typescriptParser({ files, ignores, parser, tsconfigPath,
 				sourceType: 'module',
 				...tsconfigPath ? {
 					project: tsconfigPath,
-					tsconfigRootDir: process.cwd(),
+					tsconfigRootDir: cwd(),
 				} : {},
 				...parserOptions,
 			}

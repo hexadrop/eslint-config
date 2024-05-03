@@ -27,7 +27,7 @@ export default function core(
 					ecmaFeatures: {
 						jsx: true,
 					},
-					ecmaVersion: 2022,
+					ecmaVersion: 'latest',
 					sourceType: 'module',
 				},
 				sourceType: 'module',
