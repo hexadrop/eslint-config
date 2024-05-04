@@ -1,10 +1,9 @@
-import type { ESLint } from 'eslint';
 import { isPackageExists } from 'local-pkg';
 
 import { PLUGIN_RENAME } from '../../const';
 import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault } from '../../utils';
-import type { NodeOptions } from '../node';
+import type { CoreOptions } from '../core';
 import type {TypescriptOptions} from '../typescript';
 import { TYPESCRIPT_GLOBS  } from '../typescript';
 import type { ImportsOptions } from './imports.options';
@@ -14,54 +13,57 @@ const IMPORT_CONFIG_NAME = 'hexatool/imports';
 
 export default async function imports(
 	options: ImportsOptions = true,
-	node: NodeOptions = true,
+	core: CoreOptions = {},
 	typescript: TypescriptOptions = isPackageExists('typescript'),
 ): Promise<TypedFlatConfigItem[]> {
 	if (options === false) {
 		return [];
 	}
 	const {
-		amd = false,
-		commonjs = false,
-		sort = true,
-		removeUnused = true,
-		overrides = undefined,
-		warnings = true,
-		webpack = false,
 		stylistic = true,
 	} = typeof options === 'boolean' ? {} : options;
+	const {
+		amd = false,
+		commonjs = false,
+		node = true,
+		webpack = false,
+	} = core;
 
 	const importXPlugin = 'import-x';
 	const importXPluginRename = PLUGIN_RENAME[importXPlugin];
 	const unusedImportsPrefix = PLUGIN_RENAME['unused-imports'];
 	const importSortPrefix = PLUGIN_RENAME['simple-import-sort'];
-	const useImports = warnings || !node || amd || commonjs || !webpack || stylistic;
-
-	const plugins: Record<string, ESLint.Plugin> = {};
-	const settings: Record<string, unknown> = {};
-
-	if (useImports) {
-		plugins[importXPluginRename] = await interopDefault(import('eslint-plugin-import-x'));
-		settings[`${importXPlugin}/resolver`] = {
-			node: true,
-		};
-	}
-	if (removeUnused) {
-		plugins[unusedImportsPrefix] = await interopDefault(import('eslint-plugin-unused-imports'));
-	}
-
-	if (sort) {
-		plugins[importSortPrefix] = await interopDefault(import('eslint-plugin-simple-import-sort'));
-	}
 
 	const configs: TypedFlatConfigItem[] = [];
 
-	if (typescript && useImports) {
+	configs.push({
+		name: `${IMPORT_CONFIG_NAME}/setup`,
+		plugins: {
+			[importXPluginRename]: await interopDefault(import('eslint-plugin-import-x')),
+		},
+		settings: {
+			[`${importXPlugin}/resolver`]: {
+				node: true,
+			}
+		}
+	});
+
+	if (stylistic) {
+		configs.push({
+			name: `${IMPORT_CONFIG_NAME}/setup/stylistic`,
+			plugins: {
+				[unusedImportsPrefix]: await interopDefault(import('eslint-plugin-unused-imports')),
+				[importSortPrefix]: await interopDefault(import('eslint-plugin-simple-import-sort')),
+			},
+		});
+	}
+
+	if (typescript) {
 		const typeScriptExtensions = ['.ts', '.tsx'] as const;
 		const allExtensions = [...typeScriptExtensions, '.js', '.jsx'] as const;
 
 		configs.push({
-			name: `${IMPORT_CONFIG_NAME}/setup`,
+			name: `${IMPORT_CONFIG_NAME}/setup/typescript`,
 			files: [...TYPESCRIPT_GLOBS],
 			plugins: {
 				[importXPluginRename]: await interopDefault(import('eslint-plugin-import-x')),
@@ -82,12 +84,11 @@ export default async function imports(
 		});
 	}
 
-	const config: TypedFlatConfigItem = {
+	configs.push({
 		name: `${IMPORT_CONFIG_NAME}/rules`,
-		plugins,
 		rules: {
 			// Warnings rules https://github.com/un-ts/eslint-plugin-import-x?tab=readme-ov-file#helpful-warnings
-			...warnings && {
+			...{
 				[`${importXPluginRename}/export`]: 'error',
 				[`${importXPluginRename}/no-deprecated`]: 'warn',
 				[`${importXPluginRename}/no-empty-named-blocks`]: 'error',
@@ -95,7 +96,7 @@ export default async function imports(
 				[`${importXPluginRename}/no-named-as-default`]: 'warn',
 				[`${importXPluginRename}/no-named-as-default-member`]: 'warn',
 			},
-			// Module system rules https://github.com/un-ts/eslint-plugin-import-x?tab=readme-ov-file#module-systems
+			// Module system rules
 			...!amd && {
 				[`${importXPluginRename}/no-amd`]: 'error',
 			},
@@ -130,73 +131,72 @@ export default async function imports(
 			...commonjs && {
 				[`${importXPluginRename}/no-dynamic-require`]: 'error',
 			},
-			// Style guide
-			...stylistic && {
-				[`${importXPluginRename}/consistent-type-specifier-style`]: [
-					'error',
-					'prefer-top-level',
-				],
-				[`${importXPluginRename}/exports-last`]: 'error',
-				[`${importXPluginRename}/first`]: 'error',
-				[`${importXPluginRename}/group-exports`]: 'error',
-				[`${importXPluginRename}/newline-after-import`]: [
-					'error',
-					{ count: 1 },
-				],
-				[`${importXPluginRename}/no-anonymous-default-export`]: 'error',
-				[`${importXPluginRename}/no-duplicates`]: 'error',
-				[`${importXPluginRename}/no-namespace`]: 'error',
-				[`${importXPluginRename}/prefer-default-export`]: 'error',
-			},
-			...webpack && stylistic && {
-				[`${importXPluginRename}/dynamic-import-chunkname`]: 'error',
-			},
-			// Sorting rules
-			...sort && {
-				'sort-imports': [
-					'error',
-					{
-						allowSeparatedGroups: false,
-						ignoreCase: false,
-						ignoreDeclarationSort: true,
-						ignoreMemberSort: false,
-						memberSyntaxSortOrder: [
-							'none',
-							'all',
-							'multiple',
-							'single',
-						],
-					},
-				],
-				[`${importSortPrefix}/exports`]: 'error',
-				[`${importSortPrefix}/imports`]: 'error',
-			},
-			// Unused imports rules
-			...removeUnused && {
-				[`${unusedImportsPrefix}/no-unused-imports`]: 'error',
-				[`${unusedImportsPrefix}/no-unused-vars`]: [
-					'warn',
-					{
-						args: 'after-used',
-						argsIgnorePattern: '^_',
-						ignoreRestSiblings: true,
-						vars: 'all',
-						varsIgnorePattern: '^_',
-					},
-				],
-			},
-			...overrides,
-		},
-	};
+		}
+	});
 
-	if (Object.keys(settings).length > 0) {
-		config.settings = settings;
+	if (stylistic) {
+		configs.push({
+			name: `${IMPORT_CONFIG_NAME}/rules/stylistic`,
+			rules: {
+				...{
+					[`${importXPluginRename}/consistent-type-specifier-style`]: [
+						'error',
+						'prefer-top-level',
+					],
+					[`${importXPluginRename}/exports-last`]: 'error',
+					[`${importXPluginRename}/first`]: 'error',
+					[`${importXPluginRename}/group-exports`]: 'error',
+					[`${importXPluginRename}/newline-after-import`]: [
+						'error',
+						{ count: 1 },
+					],
+					[`${importXPluginRename}/no-anonymous-default-export`]: 'error',
+					[`${importXPluginRename}/no-duplicates`]: 'error',
+					[`${importXPluginRename}/no-namespace`]: 'error',
+					[`${importXPluginRename}/prefer-default-export`]: 'error',
+				},
+				...webpack && stylistic && {
+					[`${importXPluginRename}/dynamic-import-chunkname`]: 'error',
+				},
+				// Sorting rules
+				...{
+					'sort-imports': [
+						'error',
+						{
+							allowSeparatedGroups: false,
+							ignoreCase: false,
+							ignoreDeclarationSort: true,
+							ignoreMemberSort: false,
+							memberSyntaxSortOrder: [
+								'none',
+								'all',
+								'multiple',
+								'single',
+							],
+						},
+					],
+					[`${importSortPrefix}/exports`]: 'error',
+					[`${importSortPrefix}/imports`]: 'error',
+				},
+				// Unused imports rules
+				...{
+					[`${unusedImportsPrefix}/no-unused-imports`]: 'error',
+					[`${unusedImportsPrefix}/no-unused-vars`]: [
+						'warn',
+						{
+							args: 'after-used',
+							argsIgnorePattern: '^_',
+							ignoreRestSiblings: true,
+							vars: 'all',
+							varsIgnorePattern: '^_',
+						},
+					],
+				},
+			}
+		});
 	}
 
-	configs.push(config);
-
-
-	if (typescript && useImports) {
+	if (typescript) {
 		configs.push({
 			name: `${IMPORT_CONFIG_NAME}/rules/typescript`,
 			files: [...TYPESCRIPT_GLOBS],
