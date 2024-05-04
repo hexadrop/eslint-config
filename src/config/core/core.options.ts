@@ -1,4 +1,3 @@
-import type { TypedFlatConfigItem } from '../../types';
 
 export interface CoreOptions {
 	/*
@@ -14,11 +13,6 @@ export interface CoreOptions {
 	 * @default false
 	 */
 	commonjs?: boolean;
-
-	/**
-	 * Overrides for rules.
-	 */
-	overrides?: TypedFlatConfigItem['rules'];
 
 	/**
 	 * Enable use of core node modules.

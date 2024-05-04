@@ -15,7 +15,7 @@ export default function hexatool(
 
 	let pipeline = new FlatConfigComposer<TypedFlatConfigItem>(
 		ignore(options.ignore),
-		core(options.core),
+		core(),
 		typescript(options.typescript),
 		imports(options.imports, options.core, options.typescript),
 		node(options.node),

@@ -1,15 +1,11 @@
 import globals from 'globals';
 
 import type { TypedFlatConfigItem } from '../../types';
-import type { CoreOptions } from './core.options';
 
 
 const CORE_CONFIG_NAME = 'hexatool/core';
 
-export default function core(
-	options?: CoreOptions
-): TypedFlatConfigItem[] {
-	const { overrides } = options ?? {};
+export default function core(): TypedFlatConfigItem[] {
 
 	return [
 		{
@@ -286,7 +282,6 @@ export default function core(
 
 				'vars-on-top': 'error',
 				yoda: 'error',
-				...overrides,
 			},
 		},
 	];
