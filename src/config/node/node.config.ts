@@ -10,13 +10,9 @@ const NODE_CONFIG_NAME = 'hexatool/node';
 export default async function node(
 	options: NodeOptions = true,
 ): Promise<TypedFlatConfigItem[]> {
-	if (options === false) {
+	if (!options) {
 		return [];
 	}
-
-	const {
-		overrides = undefined
-	} = typeof options === 'object' ? options : {};
 
 	const nodePluginName = PLUGIN_RENAME.n;
 
@@ -43,7 +39,6 @@ export default async function node(
 				'never',
 			],
 			[`${nodePluginName}/process-exit-as-throw`]: 'error',
-			...overrides
 		},
 	}];
 }
