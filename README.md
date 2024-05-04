@@ -65,7 +65,13 @@ bun add eslint @hexatool/eslint-config --dev
 
 ### Core configuration
 
-Core configuration can not be disabled, but you can extend it with your own rules.
+Core configuration can not be disabled. There is some configuration that can be enabled or disabled.
+
+| Option   | Type      | Default | Description              |
+|----------|-----------|---------|--------------------------|
+| amd      | `boolean` | `false` | Enable AMD support.      |
+| commonjs | `boolean` | `false` | Enable CommonJS support. |
+| webpack  | `boolean` | `false` | Enable webpack support   |
 
 ```js
 // eslint.config.js
@@ -73,17 +79,17 @@ import hexatool from '@hexatool/eslint-config';
 
 export default hexatool({
   core: {
-    overrides: {
-      'no-console': 'off',
-    },
+    amd: true,
+    commonjs: true,
+    webpack: true,
   },
 });
 ```
 
 ### Ignoring files
 
-By default, the configuration will respect `.gitignore` file and exclude some files and directories from linting
-([See more](./src/config/ignore/ignore.globs.ts)). You can disable this behavior by setting:
+By default, the configuration will respect `.gitignore` file and exclude some files and directories from linting by 
+default ([See more](./src/config/ignore/ignore.globs.ts)). You can disable this behavior by setting:
 
 ```js
 // eslint.config.js
@@ -94,10 +100,9 @@ export default hexatool({
 });
 ```
 
-Or pass custom configuration to `eslint-config-flat-gitignore`
+You can pass custom configuration to `eslint-config-flat-gitignore`
 ([See full configuration](https://github.com/antfu/eslint-config-flat-gitignore/blob/main/src/index.ts#L7)).
-
-Also includes additional `ignores` option to ignore additional files and directories using glob patterns.
+It also includes additional `ignores` option to ignore additional files and directories using glob patterns.
 
 ```js
 // eslint.config.js
@@ -135,16 +140,7 @@ These plugin can be configured by setting the following options:
 
 | Option       | Type      | Default     | Description                     |
 |--------------|-----------|-------------|---------------------------------|
-| amd          | `boolean` | `false`     | Enable AMD support.             |
-| commonjs     | `boolean` | `false`     | Enable CommonJS support.        |
-| overrides    | `Rules`   | `undefined` | Overrides for rules.            |
-| removeUnused | `boolean` | `true`      | Enable removing unused imports. |
-| sort         | `boolean` | `true`      | Sort imports and exports.       |
 | stylistic    | `boolean` | `true`      | Enable style related rules      |
-| warnings     | `boolean` | `true`      | Enable warnings rules           |
-| webpack      | `boolean` | `false`     | Enable webpack support          |
-
-You can extend or override the rules of these plugins by setting:
 
 ```js
 // eslint.config.js
@@ -152,9 +148,7 @@ import hexatool from '@hexatool/eslint-config';
 
 export default hexatool({
   imports: {
-    overrides: {
-      'import/default': 'off',
-    },
+    stylistic: false,
   },
 });
 ```
@@ -179,21 +173,17 @@ These rules can be configured by setting the following options:
 
 | Option       | Type                          | Default                                                                  | Description                |
 |--------------|-------------------------------|--------------------------------------------------------------------------|----------------------------|
-| overrides    | `Rules`                       | `undefined`                                                              | Overrides for rules.       |
 | stylistic    | `boolean`                     | `true`                                                                   | Enable style related rules |
 | tsconfigPath | `false \| string \| string[]` | Detects if there is a file named `tsconfig.json` in root of the project. | Enable type aware rules    |
-
-You can extend or override the rules by setting:
 
 ```js
 // eslint.config.js
 import hexatool from '@hexatool/eslint-config';
 
 export default hexatool({
-  imports: {
-    typescript: {
-      'typescript/prefer-readonly': 'off',
-    },
+  typescript: {
+    stylistic: false,
+    tsconfigPath: ['./tsconfig.json', './nested/tsconfig.json'],
   },
 });
 ```
@@ -211,21 +201,6 @@ import hexatool from '@hexatool/eslint-config';
 
 export default hexatool({
   node: false,
-});
-```
-
-You can extend or override the rules by setting:
-
-```js
-// eslint.config.js
-import hexatool from '@hexatool/eslint-config';
-
-export default hexatool({
-  imports: {
-    node: {
-      'node/no-new-require': 'off',
-    },
-  },
 });
 ```
 
