@@ -21,9 +21,8 @@ export default async function typescript(
 	}
 
 	const {
-		overrides = undefined,
 		stylistic = true,
-		tsconfigPath = getCwdTsconfigPath(),
+		tsconfig = getCwdTsconfigPath(),
 	} = typeof options === 'object' ? options : {};
 
 	const [
@@ -36,7 +35,7 @@ export default async function typescript(
 
 	const config: TypedFlatConfigItem[] = [];
 	const typescriptPluginRename = PLUGIN_RENAME['@typescript-eslint'];
-	const isTypeAware = Boolean(tsconfigPath && tsconfigPath.length > 0);
+	const isTypeAware = Boolean(tsconfig && tsconfig.length > 0);
 
 	// Install the plugins without globs, so they can be configured separately.
 	config.push({
@@ -46,7 +45,7 @@ export default async function typescript(
 		},
 	});
 
-	if (tsconfigPath && tsconfigPath.length > 0) {
+	if (tsconfig && tsconfig.length > 0) {
 		config.push(
 			typescriptParser({
 				parser,
@@ -56,7 +55,7 @@ export default async function typescript(
 			typescriptParser({
 				parser,
 				files: TYPESCRIPT_GLOBS,
-				tsconfigPath: toArray(tsconfigPath),
+				tsconfigPath: toArray(tsconfig),
 			}),
 		);
 	} else {
@@ -78,7 +77,6 @@ export default async function typescript(
 			[`${typescriptPluginRename}/no-extraneous-class`]: 'off',
 			// Disable the following rules, as they are covered by the eslint-plugin-unused-imports
 			[`${typescriptPluginRename}/no-unused-vars`]: 'off',
-			...overrides,
 		}
 	});
 
@@ -235,7 +233,6 @@ export default async function typescript(
 						},
 					},
 				],
-				...overrides,
 			},
 		});
 	}
@@ -257,7 +254,6 @@ export default async function typescript(
 					{ checkArrowFunctions: false },
 				],
 				[`${typescriptPluginRename}/switch-exhaustiveness-check`]: ['error'],
-				...overrides,
 			},
 		});
 		if (stylistic) {
@@ -266,7 +262,6 @@ export default async function typescript(
 				name: `${TYPESCRIPT_CONFIG_NAME}/rules/type-aware/stylistic`,
 				rules: {
 					...pluginConfigRules(plugin, 'stylistic-type-checked-only', PLUGIN_RENAME_TYPESCRIPT),
-					...overrides,
 				}
 			});
 		}
