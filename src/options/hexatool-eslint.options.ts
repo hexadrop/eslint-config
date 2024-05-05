@@ -1,4 +1,4 @@
-import type { CoreOptions, IgnoreOptions, ImportsOptions, NodeOptions, TypescriptOptions } from '../config';
+import type { CoreOptions, IgnoreOptions, ImportsOptions, NodeOptions, StylisticOptions,TypescriptOptions  } from '../config';
 
 export interface HexatoolEslintOptions {
 	/**
@@ -38,6 +38,15 @@ export interface HexatoolEslintOptions {
 	 * @default true
 	 */
 	node?: NodeOptions;
+
+	/**
+	 * Enable stylistic rules.
+	 *
+	 * Passing an object to configure the options.
+	 *
+	 * @default true
+	 */
+	stylistic?: StylisticOptions;
 
 	/**
 	 * Enable typescript rules.

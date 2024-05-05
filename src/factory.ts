@@ -1,7 +1,7 @@
 import type { ResolvableFlatConfig } from 'eslint-flat-config-utils';
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 
-import { core, ignore, imports, node, typescript } from './config';
+import { core, ignore, imports, node, stylistic,typescript } from './config';
 import { PLUGIN_RENAME } from './const';
 import type { HexatoolEslintOptions } from './options';
 import type { TypedFlatConfigItem } from './types';
@@ -19,6 +19,7 @@ export default function hexatool(
 		typescript(options.typescript),
 		imports(options.imports, options.core, options.typescript),
 		node(options.node),
+		stylistic(options.stylistic, options.typescript),
 	)
 		.renamePlugins(PLUGIN_RENAME);
 
