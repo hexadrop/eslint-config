@@ -3,9 +3,7 @@ import fs from 'node:fs/promises';
 import { builtinRules } from 'eslint/use-at-your-own-risk';
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 
-import {
-	combine,
-} from '../src';
+import { combine } from '../src';
 import { core, ignore, imports, node, stylistic, typescript } from '../src/config';
 
 const configs = await combine(
@@ -21,7 +19,7 @@ const configs = await combine(
 	typescript(),
 	imports(),
 	node(),
-	stylistic(),
+	stylistic()
 );
 
 const dts = await flatConfigsToRulesDTS(configs, {

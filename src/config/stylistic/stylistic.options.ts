@@ -1,5 +1,4 @@
 interface StylisticOptionsObject {
-
 	/**
 	 * Include parentheses around a sole arrow function parameter.
 	 *
@@ -49,35 +48,30 @@ interface StylisticOptionsObject {
 	 * @default 120
 	 */
 	printWidth?: number;
-
-	/**
-	 * Quote style.
-	 *
-	 * @default 'single'
-	 */
-	quotes?: 'single' | 'double';
-
 	/**
 	 * Change when properties in objects are quoted.
 	 *
 	 * @default 'as-needed'
 	 */
 	quoteProps?: 'as-needed' | 'consistent' | 'preserve';
-
 	/**
-	 * Use single attribute per line in HTML, Vue and JSX.
+	 * Quote style.
 	 *
-	 * @default false
+	 * @default 'single'
 	 */
-	singleAttributePerLine?: boolean;
-
+	quotes?: 'single' | 'double';
 	/**
 	 * Use semicolons at the end of statements.
 	 *
 	 * @default true
 	 */
 	semicolons?: boolean;
-
+	/**
+	 * Use single attribute per line in HTML, Vue and JSX.
+	 *
+	 * @default false
+	 */
+	singleAttributePerLine?: boolean;
 	/**
 	 * Use trailing commas in multi-line object literals.
 	 *

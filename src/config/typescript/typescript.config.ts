@@ -2,7 +2,7 @@ import { isPackageExists } from 'local-pkg';
 
 import { PLUGIN_RENAME, PLUGIN_RENAME_TYPESCRIPT } from '../../const';
 import type { TypedFlatConfigItem } from '../../types';
-import { interopDefault, pluginConfigOverrideRules,toArray  } from '../../utils';
+import { interopDefault, pluginConfigOverrideRules, toArray } from '../../utils';
 import pluginConfigRules from '../../utils/plugin-config-rules';
 import { SOURCE_GLOBS } from '../core';
 import TYPESCRIPT_GLOBS from './typescript.globs';
@@ -10,25 +10,18 @@ import type { TypescriptOptions } from './typescript.options';
 import typescriptParser from './typescript.parser';
 import getCwdTsconfigPath from './typescript.tsconfig';
 
-
 const TYPESCRIPT_CONFIG_NAME = 'hexatool/typescript';
 
 export default async function typescript(
-	options: TypescriptOptions = isPackageExists('typescript'),
+	options: TypescriptOptions = isPackageExists('typescript')
 ): Promise<TypedFlatConfigItem[]> {
 	if (options === false) {
 		return [];
 	}
 
-	const {
-		stylistic = true,
-		tsconfig = getCwdTsconfigPath(),
-	} = typeof options === 'object' ? options : {};
+	const { stylistic = true, tsconfig = getCwdTsconfigPath() } = typeof options === 'object' ? options : {};
 
-	const [
-		plugin,
-		parser,
-	] = await Promise.all([
+	const [plugin, parser] = await Promise.all([
 		interopDefault(import('@typescript-eslint/eslint-plugin')),
 		interopDefault(import('@typescript-eslint/parser')),
 	] as const);
@@ -56,14 +49,14 @@ export default async function typescript(
 				parser,
 				files: TYPESCRIPT_GLOBS,
 				tsconfigPath: toArray(tsconfig),
-			}),
+			})
 		);
 	} else {
 		config.push(
 			typescriptParser({
 				parser,
 				files: SOURCE_GLOBS,
-			}),
+			})
 		);
 	}
 
@@ -77,7 +70,7 @@ export default async function typescript(
 			[`${typescriptPluginRename}/no-extraneous-class`]: 'off',
 			// Disable the following rules, as they are covered by the eslint-plugin-unused-imports
 			[`${typescriptPluginRename}/no-unused-vars`]: 'off',
-		}
+		},
 	});
 
 	if (stylistic) {
@@ -243,16 +236,10 @@ export default async function typescript(
 			name: `${TYPESCRIPT_CONFIG_NAME}/rules/type-aware`,
 			rules: {
 				...pluginConfigRules(plugin, 'strict-type-checked-only', PLUGIN_RENAME_TYPESCRIPT),
-				[`${typescriptPluginRename}/no-confusing-void-expression`]: [
-					'error',
-					{ ignoreArrowShorthand: true },
-				],
+				[`${typescriptPluginRename}/no-confusing-void-expression`]: ['error', { ignoreArrowShorthand: true }],
 				[`${typescriptPluginRename}/no-unused-vars`]: 'off',
 				[`${typescriptPluginRename}/prefer-readonly`]: ['error'],
-				[`${typescriptPluginRename}/promise-function-async`]: [
-					'error',
-					{ checkArrowFunctions: false },
-				],
+				[`${typescriptPluginRename}/promise-function-async`]: ['error', { checkArrowFunctions: false }],
 				[`${typescriptPluginRename}/switch-exhaustiveness-check`]: ['error'],
 			},
 		});
@@ -262,7 +249,7 @@ export default async function typescript(
 				name: `${TYPESCRIPT_CONFIG_NAME}/rules/type-aware/stylistic`,
 				rules: {
 					...pluginConfigRules(plugin, 'stylistic-type-checked-only', PLUGIN_RENAME_TYPESCRIPT),
-				}
+				},
 			});
 		}
 	}

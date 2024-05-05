@@ -1,5 +1,4 @@
 interface ImportsOptionsObject {
-
 	/**
 	 * Enable stylistic rules.
 	 *

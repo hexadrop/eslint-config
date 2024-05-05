@@ -1,4 +1,3 @@
-
 export interface CoreOptions {
 	/*
 	 * Enable AMD support.

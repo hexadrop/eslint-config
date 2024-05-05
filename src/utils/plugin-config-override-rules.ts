@@ -3,9 +3,23 @@ import { ESLint, Linter } from 'eslint';
 import type { RuleOptions } from '../typegen';
 import renameRules from './rename-rules';
 
-function pluginConfigOverrideRules(plugin: ESLint.Plugin, configName: string, indexOrMap?: number | Record<string, string>): Linter.RulesRecord & RuleOptions;
-function pluginConfigOverrideRules(plugin: ESLint.Plugin, configName: string, indexOrMap: number, map: Record<string, string>): Linter.RulesRecord & RuleOptions;
-function pluginConfigOverrideRules(plugin: ESLint.Plugin, configName: string, indexOrMap?: number | Record<string, string>, map2?: Record<string, string>): Linter.RulesRecord & RuleOptions {
+function pluginConfigOverrideRules(
+	plugin: ESLint.Plugin,
+	configName: string,
+	indexOrMap?: number | Record<string, string>
+): Linter.RulesRecord & RuleOptions;
+function pluginConfigOverrideRules(
+	plugin: ESLint.Plugin,
+	configName: string,
+	indexOrMap: number,
+	map: Record<string, string>
+): Linter.RulesRecord & RuleOptions;
+function pluginConfigOverrideRules(
+	plugin: ESLint.Plugin,
+	configName: string,
+	indexOrMap?: number | Record<string, string>,
+	map2?: Record<string, string>
+): Linter.RulesRecord & RuleOptions {
 	let index = 0;
 	let map: Record<string, string> = {};
 	if (typeof indexOrMap === 'number') {

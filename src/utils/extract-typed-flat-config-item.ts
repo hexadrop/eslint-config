@@ -1,6 +1,5 @@
 import type { TypedFlatConfigItem } from '../types';
 
-
 const flatConfigProperties: (keyof TypedFlatConfigItem)[] = [
 	'name',
 	'files',
@@ -13,7 +12,9 @@ const flatConfigProperties: (keyof TypedFlatConfigItem)[] = [
 	'settings',
 ] as const;
 
-export default function extractTypedFlatConfigItem<T extends TypedFlatConfigItem>(config: T): TypedFlatConfigItem | undefined {
+export default function extractTypedFlatConfigItem<T extends TypedFlatConfigItem>(
+	config: T
+): TypedFlatConfigItem | undefined {
 	const result: TypedFlatConfigItem = {};
 	for (const key of flatConfigProperties) {
 		if (key in config) {

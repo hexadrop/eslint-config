@@ -6,12 +6,11 @@ import { JAVASCRIPT_GLOBS, SOURCE_GLOBS } from '../core';
 import type { TypescriptOptions } from '../typescript';
 import type { StylisticOptions } from './stylistic.options';
 
-
 const STYLISTIC_CONFIG_NAME = 'hexatool/stylistic';
 
 export default async function stylistic(
 	options: StylisticOptions = true,
-	typescript: TypescriptOptions = true,
+	typescript: TypescriptOptions = true
 ): Promise<TypedFlatConfigItem[]> {
 	if (!options) {
 		return [];
@@ -58,10 +57,7 @@ export default async function stylistic(
 			format: await interopDefault(import('eslint-plugin-format')),
 		},
 		rules: {
-			'format/prettier': [
-				'error',
-				prettierOptions,
-			],
+			'format/prettier': ['error', prettierOptions],
 		},
 	});
 

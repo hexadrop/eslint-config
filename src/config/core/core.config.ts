@@ -2,11 +2,9 @@ import globals from 'globals';
 
 import type { TypedFlatConfigItem } from '../../types';
 
-
 const CORE_CONFIG_NAME = 'hexatool/core';
 
 export default function core(): TypedFlatConfigItem[] {
-
 	return [
 		{
 			languageOptions: {
@@ -33,54 +31,27 @@ export default function core(): TypedFlatConfigItem[] {
 			},
 			name: `${CORE_CONFIG_NAME}/rules`,
 			rules: {
-				'accessor-pairs': [
-					'error',
-					{ enforceForClassMembers: true, setWithoutGet: true },
-				],
-				'array-callback-return': [
-					'error',
-					{ checkForEach: true },
-				],
+				'accessor-pairs': ['error', { enforceForClassMembers: true, setWithoutGet: true }],
+				'array-callback-return': ['error', { checkForEach: true }],
 				'block-scoped-var': 'error',
-				camelcase: [
-					'error',
-					{ properties: 'never' },
-				],
+				camelcase: ['error', { properties: 'never' }],
 				'capitalized-comments': 'error',
-				'consistent-this': [
-					'error',
-					'self',
-				],
+				'consistent-this': ['error', 'self'],
 				'constructor-super': 'error',
 				'default-case-last': 'error',
 				'dot-notation': 'error',
 				eqeqeq: 'error',
 				'for-direction': 'error',
 				'func-name-matching': 'error',
-				'func-names': [
-					'error',
-					'as-needed',
-				],
+				'func-names': ['error', 'as-needed'],
 				'getter-return': 'error',
 				'grouped-accessor-pairs': 'error',
 				'guard-for-in': 'error',
-				'line-comment-position': [
-					'error',
-					{ position: 'above' },
-				],
-				'max-depth': [
-					'error',
-					4,
-				],
+				'line-comment-position': ['error', { position: 'above' }],
+				'max-depth': ['error', 4],
 				'max-params': 'off',
-				'multiline-comment-style': [
-					'error',
-					'starred-block',
-				],
-				'new-cap': [
-					'error',
-					{ capIsNew: false },
-				],
+				'multiline-comment-style': ['error', 'starred-block'],
+				'new-cap': ['error', { capIsNew: false }],
 				'no-alert': 'error',
 				'no-array-constructor': 'error',
 				'no-async-promise-executor': 'error',
@@ -90,14 +61,8 @@ export default function core(): TypedFlatConfigItem[] {
 				'no-case-declarations': 'error',
 				'no-class-assign': 'error',
 				'no-compare-neg-zero': 'error',
-				'no-cond-assign': [
-					'error',
-					'always',
-				],
-				'no-console': [
-					'error',
-					{ allow: ['error'] },
-				],
+				'no-cond-assign': ['error', 'always'],
+				'no-console': ['error', { allow: ['error'] }],
 				'no-const-assign': 'error',
 				'no-constant-binary-expression': 'error',
 				'no-constant-condition': 'error',
@@ -111,10 +76,7 @@ export default function core(): TypedFlatConfigItem[] {
 				'no-dupe-keys': 'error',
 				'no-duplicate-case': 'error',
 				'no-duplicate-imports': 'off',
-				'no-else-return': [
-					'error',
-					{ allowElseIf: false },
-				],
+				'no-else-return': ['error', { allowElseIf: false }],
 				'no-empty': 'error',
 				'no-empty-character-class': 'error',
 				'no-empty-pattern': 'error',
@@ -141,10 +103,7 @@ export default function core(): TypedFlatConfigItem[] {
 				'no-irregular-whitespace': 'error',
 				'no-iterator': 'error',
 				'no-label-var': 'error',
-				'no-labels': [
-					'error',
-					{ allowLoop: false, allowSwitch: false },
-				],
+				'no-labels': ['error', { allowLoop: false, allowSwitch: false }],
 				'no-lone-blocks': 'error',
 				'no-lonely-if': 'error',
 				'no-loop-func': 'error',
@@ -237,10 +196,7 @@ export default function core(): TypedFlatConfigItem[] {
 				'no-with': 'error',
 				'object-shorthand': 'error',
 				'one-var': 'off',
-				'operator-assignment': [
-					'error',
-					'always',
-				],
+				'operator-assignment': ['error', 'always'],
 				'prefer-arrow-callback': [
 					'error',
 					{
@@ -254,10 +210,7 @@ export default function core(): TypedFlatConfigItem[] {
 				'prefer-numeric-literals': 'error',
 				'prefer-object-has-own': 'error',
 				'prefer-promise-reject-errors': 'error',
-				'prefer-regex-literals': [
-					'error',
-					{ disallowRedundantWrapping: true },
-				],
+				'prefer-regex-literals': ['error', { disallowRedundantWrapping: true }],
 				'prefer-rest-params': 'error',
 				'prefer-spread': 'error',
 				'prefer-template': 'error',
@@ -266,19 +219,10 @@ export default function core(): TypedFlatConfigItem[] {
 				'require-await': 'error',
 				'require-yield': 'error',
 				'symbol-description': 'error',
-				'unicode-bom': [
-					'error',
-					'never',
-				],
-				'use-isnan': [
-					'error',
-					{ enforceForIndexOf: true, enforceForSwitchCase: true },
-				],
+				'unicode-bom': ['error', 'never'],
+				'use-isnan': ['error', { enforceForIndexOf: true, enforceForSwitchCase: true }],
 
-				'valid-typeof': [
-					'error',
-					{ requireStringLiterals: true },
-				],
+				'valid-typeof': ['error', { requireStringLiterals: true }],
 
 				'vars-on-top': 'error',
 				yoda: 'error',

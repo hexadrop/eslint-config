@@ -1,4 +1,11 @@
-import type { CoreOptions, IgnoreOptions, ImportsOptions, NodeOptions, StylisticOptions,TypescriptOptions  } from '../config';
+import type {
+	CoreOptions,
+	IgnoreOptions,
+	ImportsOptions,
+	NodeOptions,
+	StylisticOptions,
+	TypescriptOptions,
+} from '../config';
 
 export interface HexatoolEslintOptions {
 	/**

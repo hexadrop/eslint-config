@@ -12,10 +12,12 @@ export default async function ignore(options: IgnoreOptions = true): Promise<Typ
 		return [];
 	}
 
-	const config: TypedFlatConfigItem[] = [{
-		ignores: IGNORE_GLOB,
-		name: IGNORE_CONFIG_NAME,
-	}];
+	const config: TypedFlatConfigItem[] = [
+		{
+			ignores: IGNORE_GLOB,
+			name: IGNORE_CONFIG_NAME,
+		},
+	];
 
 	if (typeof options === 'object' && options.ignore) {
 		config.push({
@@ -28,10 +30,7 @@ export default async function ignore(options: IgnoreOptions = true): Promise<Typ
 		if (fs.existsSync('.gitignore')) {
 			const gitignore = await interopDefault(import('eslint-config-flat-gitignore'));
 
-			return [
-				...config,
-				{ ...gitignore(), name: `${IGNORE_CONFIG_NAME}/gitignore` },
-			];
+			return [...config, { ...gitignore(), name: `${IGNORE_CONFIG_NAME}/gitignore` }];
 		}
 
 		return [];
@@ -39,8 +38,5 @@ export default async function ignore(options: IgnoreOptions = true): Promise<Typ
 
 	const gitignore = await interopDefault(import('eslint-config-flat-gitignore'));
 
-	return [
-		...config,
-		{ ...gitignore(options), name: `${IGNORE_CONFIG_NAME}/gitignore` },
-	];
+	return [...config, { ...gitignore(options), name: `${IGNORE_CONFIG_NAME}/gitignore` }];
 }

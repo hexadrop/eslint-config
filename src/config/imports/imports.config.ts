@@ -4,30 +4,22 @@ import { PLUGIN_RENAME } from '../../const';
 import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault } from '../../utils';
 import type { CoreOptions } from '../core';
-import type {TypescriptOptions} from '../typescript';
-import { TYPESCRIPT_GLOBS  } from '../typescript';
+import type { TypescriptOptions } from '../typescript';
+import { TYPESCRIPT_GLOBS } from '../typescript';
 import type { ImportsOptions } from './imports.options';
-
 
 const IMPORT_CONFIG_NAME = 'hexatool/imports';
 
 export default async function imports(
 	options: ImportsOptions = true,
 	core: CoreOptions = {},
-	typescript: TypescriptOptions = isPackageExists('typescript'),
+	typescript: TypescriptOptions = isPackageExists('typescript')
 ): Promise<TypedFlatConfigItem[]> {
 	if (options === false) {
 		return [];
 	}
-	const {
-		stylistic = true,
-	} = typeof options === 'boolean' ? {} : options;
-	const {
-		amd = false,
-		commonjs = false,
-		node = true,
-		webpack = false,
-	} = core;
+	const { stylistic = true } = typeof options === 'boolean' ? {} : options;
+	const { amd = false, commonjs = false, node = true, webpack = false } = core;
 
 	const importXPlugin = 'import-x';
 	const importXPluginRename = PLUGIN_RENAME[importXPlugin];
@@ -44,8 +36,8 @@ export default async function imports(
 		settings: {
 			[`${importXPlugin}/resolver`]: {
 				node: true,
-			}
-		}
+			},
+		},
 	});
 
 	if (stylistic) {
@@ -97,15 +89,15 @@ export default async function imports(
 				[`${importXPluginRename}/no-named-as-default-member`]: 'warn',
 			},
 			// Module system rules
-			...!amd && {
+			...(!amd && {
 				[`${importXPluginRename}/no-amd`]: 'error',
-			},
-			...!commonjs && {
+			}),
+			...(!commonjs && {
 				[`${importXPluginRename}/no-commonjs`]: 'error',
-			},
-			...!node && {
+			}),
+			...(!node && {
 				[`${importXPluginRename}/no-nodejs-modules`]: 'error',
-			},
+			}),
 			...{
 				[`${importXPluginRename}/no-import-module-exports`]: 'error',
 			},
@@ -120,18 +112,21 @@ export default async function imports(
 				[`${importXPluginRename}/no-restricted-paths`]: 'off',
 				[`${importXPluginRename}/no-self-import`]: 'error',
 				[`${importXPluginRename}/no-unresolved`]: ['error', { commonjs, amd }],
-				[`${importXPluginRename}/no-useless-path-segments`]: ['error', {
-					noUselessIndex: true,
-					commonjs,
-				}],
+				[`${importXPluginRename}/no-useless-path-segments`]: [
+					'error',
+					{
+						noUselessIndex: true,
+						commonjs,
+					},
+				],
 			},
-			...!webpack && {
+			...(!webpack && {
 				[`${importXPluginRename}/no-webpack-loader-syntax`]: 'error',
-			},
-			...commonjs && {
+			}),
+			...(commonjs && {
 				[`${importXPluginRename}/no-dynamic-require`]: 'error',
-			},
-		}
+			}),
+		},
 	});
 
 	if (stylistic) {
@@ -139,25 +134,19 @@ export default async function imports(
 			name: `${IMPORT_CONFIG_NAME}/rules/stylistic`,
 			rules: {
 				...{
-					[`${importXPluginRename}/consistent-type-specifier-style`]: [
-						'error',
-						'prefer-top-level',
-					],
+					[`${importXPluginRename}/consistent-type-specifier-style`]: ['error', 'prefer-top-level'],
 					[`${importXPluginRename}/exports-last`]: 'error',
 					[`${importXPluginRename}/first`]: 'error',
 					[`${importXPluginRename}/group-exports`]: 'error',
-					[`${importXPluginRename}/newline-after-import`]: [
-						'error',
-						{ count: 1 },
-					],
+					[`${importXPluginRename}/newline-after-import`]: ['error', { count: 1 }],
 					[`${importXPluginRename}/no-anonymous-default-export`]: 'error',
 					[`${importXPluginRename}/no-duplicates`]: 'error',
 					[`${importXPluginRename}/no-namespace`]: 'error',
 					[`${importXPluginRename}/prefer-default-export`]: 'error',
 				},
-				...webpack && stylistic && {
+				...(webpack && {
 					[`${importXPluginRename}/dynamic-import-chunkname`]: 'error',
-				},
+				}),
 				// Sorting rules
 				...{
 					'sort-imports': [
@@ -167,12 +156,7 @@ export default async function imports(
 							ignoreCase: false,
 							ignoreDeclarationSort: true,
 							ignoreMemberSort: false,
-							memberSyntaxSortOrder: [
-								'none',
-								'all',
-								'multiple',
-								'single',
-							],
+							memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
 						},
 					],
 					[`${importSortPrefix}/exports`]: 'error',
@@ -192,7 +176,7 @@ export default async function imports(
 						},
 					],
 				},
-			}
+			},
 		});
 	}
 
@@ -202,7 +186,7 @@ export default async function imports(
 			files: [...TYPESCRIPT_GLOBS],
 			rules: {
 				[`${importXPluginRename}/named`]: 'off',
-			}
+			},
 		});
 	}
 
