@@ -22,6 +22,7 @@ export default function renameRules(rules: Linter.RulesRecord, map: Record<strin
 	if (Object.keys(map).length === 0) {
 		return rules;
 	}
+
 	return Object.fromEntries(
 		Object.entries(rules).map(([key, value]) => {
 			for (const [from, to] of Object.entries(map)) {

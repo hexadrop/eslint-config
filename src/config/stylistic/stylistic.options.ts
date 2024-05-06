@@ -7,6 +7,12 @@ interface StylisticOptionsObject {
 	arrowParens?: 'always' | 'avoid';
 
 	/**
+	 * Which brace style to use
+	 * @default '1tbs'
+	 */
+	braceStyle?: '1tbs' | 'stroustrup' | 'allman';
+
+	/**
 	 * Put the > of a multi-line HTML (HTML, JSX, Vue, Angular) element
 	 * at the end of the last line instead of being alone on the next line.
 	 *
@@ -27,6 +33,13 @@ interface StylisticOptionsObject {
 	 * @default 'lf'
 	 */
 	endOfLine?: 'auto' | 'lf' | 'crlf' | 'cr';
+
+	/**
+	 * Format the code using Prettier.
+	 *
+	 * @default 'prettier'
+	 */
+	format?: 'prettier' | false;
 
 	/**
 	 * Indentation style.
