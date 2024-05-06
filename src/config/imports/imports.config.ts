@@ -80,14 +80,12 @@ export default async function imports(
 		name: `${IMPORT_CONFIG_NAME}/rules`,
 		rules: {
 			// Warnings rules https://github.com/un-ts/eslint-plugin-import-x?tab=readme-ov-file#helpful-warnings
-			...{
-				[`${importXPluginRename}/export`]: 'error',
-				[`${importXPluginRename}/no-deprecated`]: 'warn',
-				[`${importXPluginRename}/no-empty-named-blocks`]: 'error',
-				[`${importXPluginRename}/no-mutable-exports`]: 'error',
-				[`${importXPluginRename}/no-named-as-default`]: 'warn',
-				[`${importXPluginRename}/no-named-as-default-member`]: 'warn',
-			},
+			[`${importXPluginRename}/export`]: 'error',
+			[`${importXPluginRename}/no-deprecated`]: 'warn',
+			[`${importXPluginRename}/no-empty-named-blocks`]: 'error',
+			[`${importXPluginRename}/no-mutable-exports`]: 'error',
+			[`${importXPluginRename}/no-named-as-default`]: 'warn',
+			[`${importXPluginRename}/no-named-as-default-member`]: 'warn',
 			// Module system rules
 			...(!amd && {
 				[`${importXPluginRename}/no-amd`]: 'error',
@@ -98,28 +96,26 @@ export default async function imports(
 			...(!node && {
 				[`${importXPluginRename}/no-nodejs-modules`]: 'error',
 			}),
-			...{
-				[`${importXPluginRename}/no-import-module-exports`]: 'error',
-			},
+
+			[`${importXPluginRename}/default`]: 'error',
+
 			// Static analysis rules https://github.com/un-ts/eslint-plugin-import-x?tab=readme-ov-file#static-analysis
-			...{
-				[`${importXPluginRename}/default`]: 'error',
-				[`${importXPluginRename}/named`]: 'error',
-				[`${importXPluginRename}/namespace`]: 'error',
-				[`${importXPluginRename}/no-absolute-path`]: 'error',
-				[`${importXPluginRename}/no-cycle`]: 'error',
-				[`${importXPluginRename}/no-relative-packages`]: 'error',
-				[`${importXPluginRename}/no-restricted-paths`]: 'off',
-				[`${importXPluginRename}/no-self-import`]: 'error',
-				[`${importXPluginRename}/no-unresolved`]: ['error', { amd, commonjs }],
-				[`${importXPluginRename}/no-useless-path-segments`]: [
-					'error',
-					{
-						commonjs,
-						noUselessIndex: true,
-					},
-				],
-			},
+			[`${importXPluginRename}/named`]: 'error',
+			[`${importXPluginRename}/namespace`]: 'error',
+			[`${importXPluginRename}/no-absolute-path`]: 'error',
+			[`${importXPluginRename}/no-cycle`]: 'error',
+			[`${importXPluginRename}/no-import-module-exports`]: 'error',
+			[`${importXPluginRename}/no-relative-packages`]: 'error',
+			[`${importXPluginRename}/no-restricted-paths`]: 'off',
+			[`${importXPluginRename}/no-self-import`]: 'error',
+			[`${importXPluginRename}/no-unresolved`]: ['error', { amd, commonjs }],
+			[`${importXPluginRename}/no-useless-path-segments`]: [
+				'error',
+				{
+					commonjs,
+					noUselessIndex: true,
+				},
+			],
 			...(!webpack && {
 				[`${importXPluginRename}/no-webpack-loader-syntax`]: 'error',
 			}),
@@ -133,49 +129,45 @@ export default async function imports(
 		configs.push({
 			name: `${IMPORT_CONFIG_NAME}/rules/stylistic`,
 			rules: {
-				...{
-					[`${importXPluginRename}/consistent-type-specifier-style`]: ['error', 'prefer-top-level'],
-					[`${importXPluginRename}/exports-last`]: 'error',
-					[`${importXPluginRename}/first`]: 'error',
-					[`${importXPluginRename}/group-exports`]: 'error',
-					[`${importXPluginRename}/newline-after-import`]: ['error', { count: 1 }],
-					[`${importXPluginRename}/no-anonymous-default-export`]: 'error',
-					[`${importXPluginRename}/no-duplicates`]: 'error',
-					[`${importXPluginRename}/no-namespace`]: 'error',
-					[`${importXPluginRename}/prefer-default-export`]: 'error',
-				},
+				[`${importXPluginRename}/consistent-type-specifier-style`]: ['error', 'prefer-top-level'],
+				[`${importXPluginRename}/exports-last`]: 'error',
+				[`${importXPluginRename}/first`]: 'error',
+				[`${importXPluginRename}/group-exports`]: 'error',
+				[`${importXPluginRename}/newline-after-import`]: ['error', { count: 1 }],
+				[`${importXPluginRename}/no-anonymous-default-export`]: 'error',
+				[`${importXPluginRename}/no-duplicates`]: 'error',
+				[`${importXPluginRename}/no-namespace`]: 'error',
+				[`${importXPluginRename}/prefer-default-export`]: 'error',
 				...(webpack && {
 					[`${importXPluginRename}/dynamic-import-chunkname`]: 'error',
 				}),
+
 				// Sorting rules
-				...{
-					[`${importSortPrefix}/exports`]: 'error',
-					[`${importSortPrefix}/imports`]: 'error',
-					'sort-imports': [
-						'error',
-						{
-							allowSeparatedGroups: false,
-							ignoreCase: false,
-							ignoreDeclarationSort: true,
-							ignoreMemberSort: false,
-							memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
-						},
-					],
-				},
+				[`${importSortPrefix}/exports`]: 'error',
+
+				[`${importSortPrefix}/imports`]: 'error',
+				[`${unusedImportsPrefix}/no-unused-imports`]: 'error',
 				// Unused imports rules
-				...{
-					[`${unusedImportsPrefix}/no-unused-imports`]: 'error',
-					[`${unusedImportsPrefix}/no-unused-vars`]: [
-						'warn',
-						{
-							args: 'after-used',
-							argsIgnorePattern: '^_',
-							ignoreRestSiblings: true,
-							vars: 'all',
-							varsIgnorePattern: '^_',
-						},
-					],
-				},
+				[`${unusedImportsPrefix}/no-unused-vars`]: [
+					'warn',
+					{
+						args: 'after-used',
+						argsIgnorePattern: '^_',
+						ignoreRestSiblings: true,
+						vars: 'all',
+						varsIgnorePattern: '^_',
+					},
+				],
+				'sort-imports': [
+					'error',
+					{
+						allowSeparatedGroups: false,
+						ignoreCase: false,
+						ignoreDeclarationSort: true,
+						ignoreMemberSort: false,
+						memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
+					},
+				],
 			},
 		});
 	}
