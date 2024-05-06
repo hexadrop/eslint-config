@@ -16,6 +16,12 @@ declare module 'eslint-plugin-unused-imports' {
 	export default ESLint.Plugin;
 }
 
+declare module 'eslint-plugin-unicorn' {
+	import type { ESLint } from 'eslint';
+
+	export default ESLint.Plugin;
+}
+
 declare module 'eslint-plugin-perfectionist/configs/recommended-natural' {
 	import type { ESLint } from 'eslint';
 

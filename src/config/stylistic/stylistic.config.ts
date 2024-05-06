@@ -53,6 +53,11 @@ export default async function stylistic(
 		semi: semicolons,
 	};
 
+	const unicorn = (await interopDefault(import('eslint-plugin-unicorn'))) as ESLint.Plugin;
+	const unicornFlatRecommended = unicorn.configs
+		? (unicorn.configs['flat/recommended'] as Linter.FlatConfig)
+		: undefined;
+	const unicornRules = unicornFlatRecommended?.rules as Linter.RulesRecord;
 	const { rules } = pluginStylistic.configs.customize(pluginStylisticOptions);
 
 	if (rules) {
@@ -72,6 +77,28 @@ export default async function stylistic(
 					'style/padding-line-between-statements': [
 						'error',
 						{ blankLine: 'always', next: 'return', prev: '*' },
+					],
+				},
+			},
+			{
+				name: `${STYLISTIC_CONFIG_NAME}/rules/unicorn`,
+				plugins: {
+					unicorn,
+				},
+				rules: {
+					...unicornRules,
+					'unicorn/consistent-function-scoping': 'off',
+					'unicorn/no-array-reduce': 'off',
+					'unicorn/no-nested-ternary': 'off',
+					'unicorn/no-static-only-class': 'off',
+					'unicorn/prevent-abbreviations': [
+						'error',
+						{
+							allowList: {
+								ProcessEnv: true,
+								Props: true,
+							},
+						},
 					],
 				},
 			},
