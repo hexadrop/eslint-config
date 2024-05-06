@@ -8,6 +8,7 @@ interface StylisticOptionsObject {
 
 	/**
 	 * Which brace style to use
+	 *
 	 * @default '1tbs'
 	 */
 	braceStyle?: '1tbs' | 'allman' | 'stroustrup';

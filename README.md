@@ -62,6 +62,7 @@ bun add eslint @hexatool/eslint-config --dev
 - [Imports](#imports)
 - [Typescript](#typescript)
 - [Node](#node)
+- [Stylistic](#stylistic)
 
 ### Core configuration
 
@@ -88,7 +89,7 @@ export default hexatool({
 
 ### Ignoring files
 
-By default, the configuration will respect `.gitignore` file and exclude some files and directories from linting by 
+By default, the configuration will respect `.gitignore` file and exclude some files and directories from linting by
 default ([See more](./src/config/ignore/ignore.globs.ts)). You can disable this behavior by setting:
 
 ```js
@@ -138,9 +139,9 @@ export default hexatool({
 
 These plugin can be configured by setting the following options:
 
-| Option       | Type      | Default     | Description                     |
-|--------------|-----------|-------------|---------------------------------|
-| stylistic    | `boolean` | `true`      | Enable style related rules      |
+| Option    | Type      | Default | Description                |
+|-----------|-----------|---------|----------------------------|
+| stylistic | `boolean` | `true`  | Enable style related rules |
 
 ```js
 // eslint.config.js
@@ -203,6 +204,39 @@ export default hexatool({
   node: false,
 });
 ```
+
+### Stylistic
+
+These rules are style related rules that can be disabled by setting:
+
+```js
+// eslint.config.js
+import hexatool from '@hexatool/eslint-config';
+
+export default hexatool({
+  stylistic: false,
+});
+```
+
+All the rules can be configured by setting the following options:
+
+| Option                 | Type                                        | Default       | Description                                                                                                                           |
+|------------------------|---------------------------------------------|---------------|---------------------------------------------------------------------------------------------------------------------------------------|
+| arrowParens            | `'always' \| 'avoid'`                       | `'avoid'`     | Include parentheses around a sole arrow function parameter.                                                                           |
+| braceStyle             | `'1tbs' \| 'allman' \| 'stroustrup'`        | `'1tbs'`      | Which brace style to use.                                                                                                             |
+| bracketSameLine        | `boolean`                                   | `true`        | Put the > of a multi-line HTML (HTML, JSX, Vue, Angular) element at the end of the last line instead of being alone on the next line. |
+| bracketSpacing         | `boolean`                                   | `true`        | Use spaces between brackets in object literals.                                                                                       |
+| endOfLine              | `'auto' \| 'cr' \| 'crlf' \| 'lf'`          | `'lf'`        | End of line character.                                                                                                                |
+| format                 | `'prettier' \| false`                       | `'prettier'`  | Format the code using Prettier.                                                                                                       |
+| indent                 | `'space' \| 'tab'`                          | `'tab'`       | Indentation style.                                                                                                                    |
+| indentSize             | `number`                                    | `4`           | Number of spaces to use for indentation.                                                                                              |
+| printWidth             | `number`                                    | `120`         | Specify the line length that the printer will wrap on.                                                                                |
+| quoteProps             | `'as-needed' \| 'consistent' \| 'preserve'` | `'as-needed'` | Change when properties in objects are quoted.                                                                                         |
+| quotes                 | `'double' \| 'single'`                      | `'single'`    | Quote style.                                                                                                                          |
+| semicolons             | `boolean`                                   | `true`        | Use semicolons at the end of statements.                                                                                              |
+| singleAttributePerLine | `boolean`                                   | `false`       | Use single attribute per line in HTML, Vue and JSX.                                                                                   |
+| sort                   | `boolean`                                   | `true`        | Sort props.                                                                                                                           |
+| trailingComma          | `'all' \| 'es5' \| 'none'`                  | `'es5'`       | Use trailing commas in multi-line object literals.                                                                                    |
 
 ## View what rules are enabled
 
