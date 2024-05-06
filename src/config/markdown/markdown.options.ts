@@ -1,0 +1,1 @@
+export type MarkdownOptions = boolean;

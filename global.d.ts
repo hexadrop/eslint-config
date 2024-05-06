@@ -22,6 +22,12 @@ declare module 'eslint-plugin-unicorn' {
 	export default ESLint.Plugin;
 }
 
+declare module 'eslint-plugin-markdown' {
+	import type { ESLint } from 'eslint';
+
+	export default ESLint.Plugin;
+}
+
 declare module 'eslint-plugin-perfectionist/configs/recommended-natural' {
 	import type { ESLint } from 'eslint';
 

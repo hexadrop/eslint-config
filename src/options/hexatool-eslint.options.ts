@@ -2,6 +2,7 @@ import type {
 	CoreOptions,
 	IgnoreOptions,
 	ImportsOptions,
+	MarkdownOptions,
 	NodeOptions,
 	StylisticOptions,
 	TypescriptOptions,
@@ -36,6 +37,13 @@ export interface HexatoolEslintOptions {
 	 * @default true
 	 */
 	imports?: ImportsOptions;
+
+	/**
+	 * Enable markdown processing.
+	 *
+	 * @default true
+	 */
+	markdown?: MarkdownOptions;
 
 	/**
 	 * Enable node rules.
