@@ -114,5 +114,23 @@ export default async function stylistic(
 		});
 	}
 
+	if (sort) {
+		const perfectionist = await interopDefault(import('eslint-plugin-perfectionist/configs/recommended-natural'));
+
+		configs.push({
+			name: `${STYLISTIC_CONFIG_NAME}/rules/sort`,
+			plugins: {
+				sort: perfectionist.plugins.perfectionist,
+			},
+			rules: {
+				...renameRules(perfectionist.rules as unknown as Linter.RulesRecord, PLUGIN_RENAME),
+				'sort/sort-classes': 'off',
+				'sort/sort-imports': 'off',
+				'sort/sort-interfaces': 'off',
+				'sort/sort-named-exports': 'off',
+			},
+		});
+	}
+
 	return configs;
 }
