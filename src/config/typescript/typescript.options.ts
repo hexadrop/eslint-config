@@ -15,4 +15,4 @@ interface TypescriptOptionsObject {
 	tsconfig?: false | string | string[];
 }
 
-export type TypescriptOptions = boolean | TypescriptOptionsObject;
+export type TypescriptOptions = TypescriptOptionsObject | boolean;

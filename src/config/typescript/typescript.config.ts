@@ -41,21 +41,21 @@ export default async function typescript(
 	if (tsconfig && tsconfig.length > 0) {
 		config.push(
 			typescriptParser({
-				parser,
 				files: SOURCE_GLOBS,
 				ignores: TYPESCRIPT_GLOBS,
+				parser,
 			}),
 			typescriptParser({
-				parser,
 				files: TYPESCRIPT_GLOBS,
+				parser,
 				tsconfigPath: toArray(tsconfig),
 			})
 		);
 	} else {
 		config.push(
 			typescriptParser({
-				parser,
 				files: SOURCE_GLOBS,
+				parser,
 			})
 		);
 	}

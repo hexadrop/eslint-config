@@ -20,8 +20,8 @@ export default function typescriptParser({
 	files,
 	ignores,
 	parser,
-	tsconfigPath,
 	parserOptions,
+	tsconfigPath,
 }: TypescriptParserOptions): TypedFlatConfigItem {
 	const config: TypedFlatConfigItem = {
 		files,

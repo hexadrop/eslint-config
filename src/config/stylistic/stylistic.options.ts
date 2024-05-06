@@ -10,7 +10,7 @@ interface StylisticOptionsObject {
 	 * Which brace style to use
 	 * @default '1tbs'
 	 */
-	braceStyle?: '1tbs' | 'stroustrup' | 'allman';
+	braceStyle?: '1tbs' | 'allman' | 'stroustrup';
 
 	/**
 	 * Put the > of a multi-line HTML (HTML, JSX, Vue, Angular) element
@@ -32,7 +32,7 @@ interface StylisticOptionsObject {
 	 *
 	 * @default 'lf'
 	 */
-	endOfLine?: 'auto' | 'lf' | 'crlf' | 'cr';
+	endOfLine?: 'auto' | 'cr' | 'crlf' | 'lf';
 
 	/**
 	 * Format the code using Prettier.
@@ -46,7 +46,7 @@ interface StylisticOptionsObject {
 	 *
 	 * @default 'tab'
 	 */
-	indent?: 'tab' | 'space';
+	indent?: 'space' | 'tab';
 
 	/**
 	 * Number of spaces to use for indentation.
@@ -72,7 +72,7 @@ interface StylisticOptionsObject {
 	 *
 	 * @default 'single'
 	 */
-	quotes?: 'single' | 'double';
+	quotes?: 'double' | 'single';
 	/**
 	 * Use semicolons at the end of statements.
 	 *
@@ -86,11 +86,17 @@ interface StylisticOptionsObject {
 	 */
 	singleAttributePerLine?: boolean;
 	/**
+	 * Sort props.
+	 *
+	 * @default true
+	 */
+	sort?: boolean;
+	/**
 	 * Use trailing commas in multi-line object literals.
 	 *
 	 * @default 'es5'
 	 */
-	trailingComma?: 'none' | 'es5' | 'all';
+	trailingComma?: 'all' | 'es5' | 'none';
 }
 
-export type StylisticOptions = boolean | StylisticOptionsObject;
+export type StylisticOptions = StylisticOptionsObject | boolean;

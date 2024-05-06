@@ -21,20 +21,21 @@ export default async function stylistic(
 	}
 
 	const {
+		arrowParens = 'avoid',
 		braceStyle = '1tbs',
-		semicolons = true,
-		quotes = 'single',
-		printWidth = 120,
+		bracketSameLine = true,
+		bracketSpacing = true,
+		endOfLine = 'lf',
+		format = 'prettier',
 		indent = 'tab',
 		indentSize = 4,
-		trailingComma = 'es5',
-		bracketSpacing = true,
-		bracketSameLine = true,
-		arrowParens = 'avoid',
-		endOfLine = 'lf',
-		singleAttributePerLine = false,
+		printWidth = 120,
 		quoteProps = 'as-needed',
-		format = 'prettier',
+		quotes = 'single',
+		semicolons = true,
+		singleAttributePerLine = false,
+		sort = true,
+		trailingComma = 'es5',
 	} = typeof options === 'object' ? options : {};
 
 	const configs: TypedFlatConfigItem[] = [];
@@ -44,12 +45,12 @@ export default async function stylistic(
 		arrowParens: format ? false : Boolean(arrowParens),
 		blockSpacing: bracketSpacing,
 		braceStyle,
-		quotes,
-		semi: semicolons,
+		commaDangle: trailingComma === 'es5' ? 'only-multiline' : trailingComma === 'none' ? 'never' : 'always',
 		indent: indent === 'tab' ? 'tab' : indentSize,
 		jsx: true,
-		commaDangle: trailingComma === 'es5' ? 'only-multiline' : trailingComma === 'none' ? 'never' : 'always',
 		quoteProps: quoteProps === 'preserve' ? 'as-needed' : quoteProps,
+		quotes,
+		semi: semicolons,
 	};
 
 	const { rules } = pluginStylistic.configs.customize(pluginStylisticOptions);
@@ -86,25 +87,25 @@ export default async function stylistic(
 
 	if (format) {
 		const prettierOptions: Partial<RequiredOptions> = {
-			semi: semicolons,
-			parser: typescript ? 'typescript' : 'babel',
-			singleQuote: quotes === 'single',
+			arrowParens,
+			bracketSameLine,
+			bracketSpacing,
+			endOfLine,
 			jsxSingleQuote: quotes === 'single',
+			parser: typescript ? 'typescript' : 'babel',
 			printWidth,
-			useTabs: indent === 'tab',
+			quoteProps,
+			semi: semicolons,
+			singleAttributePerLine,
+			singleQuote: quotes === 'single',
 			tabWidth: indentSize,
 			trailingComma,
-			bracketSpacing,
-			bracketSameLine,
-			arrowParens,
-			endOfLine,
-			singleAttributePerLine,
-			quoteProps,
+			useTabs: indent === 'tab',
 		};
 
 		configs.push({
-			name: `${STYLISTIC_CONFIG_NAME}/prettier`,
 			files: typescript ? SOURCE_GLOBS : JAVASCRIPT_GLOBS,
+			name: `${STYLISTIC_CONFIG_NAME}/rules/prettier`,
 			plugins: {
 				format: await interopDefault(import('eslint-plugin-format')),
 			},

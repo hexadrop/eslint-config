@@ -7,4 +7,4 @@ interface ImportsOptionsObject {
 	stylistic?: boolean;
 }
 
-export type ImportsOptions = boolean | ImportsOptionsObject;
+export type ImportsOptions = ImportsOptionsObject | boolean;

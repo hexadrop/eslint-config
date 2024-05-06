@@ -44,8 +44,8 @@ export default async function imports(
 		configs.push({
 			name: `${IMPORT_CONFIG_NAME}/setup/stylistic`,
 			plugins: {
-				[unusedImportsPrefix]: await interopDefault(import('eslint-plugin-unused-imports')),
 				[importSortPrefix]: await interopDefault(import('eslint-plugin-simple-import-sort')),
+				[unusedImportsPrefix]: await interopDefault(import('eslint-plugin-unused-imports')),
 			},
 		});
 	}
@@ -55,8 +55,8 @@ export default async function imports(
 		const allExtensions = [...typeScriptExtensions, '.js', '.jsx'] as const;
 
 		configs.push({
-			name: `${IMPORT_CONFIG_NAME}/setup/typescript`,
 			files: [...TYPESCRIPT_GLOBS],
+			name: `${IMPORT_CONFIG_NAME}/setup/typescript`,
 			plugins: {
 				[importXPluginRename]: await interopDefault(import('eslint-plugin-import-x')),
 			},
@@ -111,12 +111,12 @@ export default async function imports(
 				[`${importXPluginRename}/no-relative-packages`]: 'error',
 				[`${importXPluginRename}/no-restricted-paths`]: 'off',
 				[`${importXPluginRename}/no-self-import`]: 'error',
-				[`${importXPluginRename}/no-unresolved`]: ['error', { commonjs, amd }],
+				[`${importXPluginRename}/no-unresolved`]: ['error', { amd, commonjs }],
 				[`${importXPluginRename}/no-useless-path-segments`]: [
 					'error',
 					{
-						noUselessIndex: true,
 						commonjs,
+						noUselessIndex: true,
 					},
 				],
 			},
@@ -149,6 +149,8 @@ export default async function imports(
 				}),
 				// Sorting rules
 				...{
+					[`${importSortPrefix}/exports`]: 'error',
+					[`${importSortPrefix}/imports`]: 'error',
 					'sort-imports': [
 						'error',
 						{
@@ -159,8 +161,6 @@ export default async function imports(
 							memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
 						},
 					],
-					[`${importSortPrefix}/exports`]: 'error',
-					[`${importSortPrefix}/imports`]: 'error',
 				},
 				// Unused imports rules
 				...{
@@ -182,8 +182,8 @@ export default async function imports(
 
 	if (typescript) {
 		configs.push({
-			name: `${IMPORT_CONFIG_NAME}/rules/typescript`,
 			files: [...TYPESCRIPT_GLOBS],
+			name: `${IMPORT_CONFIG_NAME}/rules/typescript`,
 			rules: {
 				[`${importXPluginRename}/named`]: 'off',
 			},

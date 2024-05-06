@@ -4,10 +4,11 @@ const PLUGIN_RENAME = {
 	...PLUGIN_RENAME_TYPESCRIPT,
 	'@stylistic': 'style',
 	'import-x': 'import',
-	'simple-import-sort': 'import-sort',
-	'unused-imports': 'import-unused',
 	jsonc: 'json',
 	n: 'node',
+	perfectionist: 'sort',
+	'simple-import-sort': 'import-sort',
+	'unused-imports': 'import-unused',
 	vitest: 'test',
 	yml: 'yaml',
 } as const;
