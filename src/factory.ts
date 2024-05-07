@@ -5,15 +5,15 @@ import { core, ignore, imports, node, stylistic, typescript } from './config';
 import markdown from './config/markdown/markdown.config';
 import { PLUGIN_RENAME } from './const';
 import type { HexatoolEslintOptions } from './options';
-import type { TypedFlatConfigItem } from './types';
+import type { ConfigNames, TypedFlatConfigItem } from './types';
 import { extractTypedFlatConfigItem } from './utils';
 
 // eslint-disable-next-line typescript/promise-function-async
 export default function hexatool(
 	options: HexatoolEslintOptions & TypedFlatConfigItem = {},
 	...configs: ResolvableFlatConfig<TypedFlatConfigItem>[]
-): FlatConfigComposer<TypedFlatConfigItem> {
-	let pipeline = new FlatConfigComposer<TypedFlatConfigItem>(
+): FlatConfigComposer<TypedFlatConfigItem, ConfigNames> {
+	let pipeline = new FlatConfigComposer<TypedFlatConfigItem, ConfigNames>(
 		ignore(options.ignore),
 		core(),
 		imports(options.imports, options.core, options.typescript),
