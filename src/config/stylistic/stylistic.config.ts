@@ -1,4 +1,3 @@
-import type { StylisticCustomizeOptions } from '@stylistic/eslint-plugin';
 import { ESLint, Linter } from 'eslint';
 
 import { PLUGIN_RENAME } from '../../const';
@@ -8,8 +7,12 @@ import renameRules from '../../utils/rename-rules';
 import { JAVASCRIPT_GLOBS, SOURCE_GLOBS } from '../core';
 import type { TypescriptOptions } from '../typescript';
 import type { StylisticOptions } from './stylistic.options';
+import stylisticOptionsDefault from './stylistic.options-default';
+import prettierOptions from './stylistic.options-prettier';
+import stylisticOptions from './stylistic.options-stylistic';
 
 const STYLISTIC_CONFIG_NAME = 'hexatool/stylistic';
+const PRETTIER_CONFIG_NAME = 'hexatool/prettier';
 
 export default async function stylistic(
 	options: StylisticOptions = true,
@@ -19,38 +22,12 @@ export default async function stylistic(
 		return [];
 	}
 
-	const {
-		arrowParens = 'avoid',
-		braceStyle = '1tbs',
-		bracketSameLine = true,
-		bracketSpacing = true,
-		endOfLine = 'lf',
-		format = 'prettier',
-		indent = 'tab',
-		indentSize = 4,
-		printWidth = 120,
-		quoteProps = 'as-needed',
-		quotes = 'single',
-		semicolons = true,
-		singleAttributePerLine = false,
-		sort = true,
-		trailingComma = 'es5',
-	} = typeof options === 'object' ? options : {};
+	const requiredOptions = stylisticOptionsDefault(options);
 
 	const configs: TypedFlatConfigItem[] = [];
 
 	const pluginStylistic = await interopDefault(import('@stylistic/eslint-plugin'));
-	const pluginStylisticOptions: StylisticCustomizeOptions = {
-		arrowParens: format ? false : Boolean(arrowParens),
-		blockSpacing: bracketSpacing,
-		braceStyle,
-		commaDangle: trailingComma === 'es5' ? 'only-multiline' : trailingComma === 'none' ? 'never' : 'always',
-		indent: indent === 'tab' ? 'tab' : indentSize,
-		jsx: true,
-		quoteProps: quoteProps === 'preserve' ? 'as-needed' : quoteProps,
-		quotes,
-		semi: semicolons,
-	};
+	const pluginStylisticOptions = stylisticOptions(requiredOptions);
 
 	const unicorn = (await interopDefault(import('eslint-plugin-unicorn'))) as ESLint.Plugin;
 	const unicornFlatRecommended = unicorn.configs
@@ -71,7 +48,10 @@ export default async function stylistic(
 					curly: ['error', 'all'],
 					'style/implicit-arrow-linebreak': ['error', 'beside'],
 					'style/jsx-sort-props': 'error',
-					'style/max-len': ['error', { code: printWidth, ignoreComments: true, ignoreUrls: true }],
+					'style/max-len': [
+						'error',
+						{ code: requiredOptions.printWidth, ignoreComments: true, ignoreUrls: true },
+					],
 					'style/no-extra-semi': 'error',
 					'style/padding-line-between-statements': [
 						'error',
@@ -111,37 +91,7 @@ export default async function stylistic(
 		);
 	}
 
-	if (format) {
-		const prettierOptions = {
-			arrowParens,
-			bracketSameLine,
-			bracketSpacing,
-			endOfLine,
-			jsxSingleQuote: quotes === 'single',
-			parser: typescript ? 'typescript' : 'babel',
-			printWidth,
-			quoteProps,
-			semi: semicolons,
-			singleAttributePerLine,
-			singleQuote: quotes === 'single',
-			tabWidth: indentSize,
-			trailingComma,
-			useTabs: indent === 'tab',
-		};
-
-		configs.push({
-			files: typescript ? SOURCE_GLOBS : JAVASCRIPT_GLOBS,
-			name: `${STYLISTIC_CONFIG_NAME}/rules/prettier`,
-			plugins: {
-				format: await interopDefault(import('eslint-plugin-format')),
-			},
-			rules: {
-				'format/prettier': ['error', prettierOptions],
-			},
-		});
-	}
-
-	if (sort) {
+	if (requiredOptions.sort) {
 		const perfectionist = await interopDefault(import('eslint-plugin-perfectionist/configs/recommended-natural'));
 
 		configs.push({
@@ -157,6 +107,26 @@ export default async function stylistic(
 				'sort/sort-named-exports': 'off',
 			},
 		});
+	}
+
+	if (requiredOptions.format) {
+		const prettier = prettierOptions(requiredOptions);
+
+		configs.push(
+			{
+				name: `${PRETTIER_CONFIG_NAME}/setup`,
+				plugins: {
+					format: await interopDefault(import('eslint-plugin-format')),
+				},
+			},
+			{
+				files: typescript ? SOURCE_GLOBS : JAVASCRIPT_GLOBS,
+				name: `${PRETTIER_CONFIG_NAME}/rules`,
+				rules: {
+					'format/prettier': ['error', prettier],
+				},
+			}
+		);
 	}
 
 	return configs;

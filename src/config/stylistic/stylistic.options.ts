@@ -100,4 +100,6 @@ interface StylisticOptionsObject {
 	trailingComma?: 'all' | 'es5' | 'none';
 }
 
-export type StylisticOptions = StylisticOptionsObject | boolean;
+type StylisticOptions = StylisticOptionsObject | boolean;
+
+export type { StylisticOptions, StylisticOptionsObject };
