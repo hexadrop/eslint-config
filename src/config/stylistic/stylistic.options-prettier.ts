@@ -1,31 +1,16 @@
-import type { StylisticOptions, StylisticOptionsObject } from './stylistic.options';
+import type { StylisticOptionsObject } from './stylistic.options';
 
-export default function prettierOptions(options: StylisticOptions = true): Required<StylisticOptionsObject> {
+interface PrettierOptions {
+	[k: string]: unknown;
+	parser?: string;
+}
+
+export default function prettierOptions(options: Required<StylisticOptionsObject>): PrettierOptions {
 	const {
-		arrowParens = 'avoid',
-		braceStyle = '1tbs',
-		bracketSameLine = true,
-		bracketSpacing = true,
-		endOfLine = 'lf',
-		format = 'prettier',
-		indent = 'tab',
-		indentSize = 4,
-		printWidth = 120,
-		quoteProps = 'as-needed',
-		quotes = 'single',
-		semicolons = true,
-		singleAttributePerLine = false,
-		sort = true,
-		trailingComma = 'es5',
-	} = typeof options === 'object' ? options : {};
-
-	return {
 		arrowParens,
-		braceStyle,
 		bracketSameLine,
 		bracketSpacing,
 		endOfLine,
-		format,
 		indent,
 		indentSize,
 		printWidth,
@@ -33,7 +18,22 @@ export default function prettierOptions(options: StylisticOptions = true): Requi
 		quotes,
 		semicolons,
 		singleAttributePerLine,
-		sort,
 		trailingComma,
+	} = options;
+
+	return {
+		arrowParens,
+		bracketSameLine,
+		bracketSpacing,
+		endOfLine,
+		jsxSingleQuote: quotes === 'single',
+		printWidth,
+		quoteProps,
+		semi: semicolons,
+		singleAttributePerLine,
+		singleQuote: quotes === 'single',
+		tabWidth: indentSize,
+		trailingComma,
+		useTabs: indent === 'tab',
 	};
 }
