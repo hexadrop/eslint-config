@@ -1,3 +1,3 @@
-import type { IgnoreConfigNames } from '../config';
+import type { CoreConfigNames, IgnoreConfigNames } from '../config';
 
-export type ConfigNames = IgnoreConfigNames;
+export type ConfigNames = CoreConfigNames | IgnoreConfigNames;

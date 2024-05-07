@@ -2,7 +2,11 @@ import fs from 'node:fs';
 
 import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault } from '../../utils';
-import { IGNORE_CONFIG_NAME, IGNORE_CONFIG_NAME_ADDITIONAL, IGNORE_CONFIG_NAME_GITIGNORE } from './ignore.config-name';
+import {
+	IGNORE_CONFIG_NAME_ADDITIONAL,
+	IGNORE_CONFIG_NAME_DEFAULT,
+	IGNORE_CONFIG_NAME_GITIGNORE,
+} from './ignore.config-name';
 import IGNORE_GLOB from './ignore.globs';
 import type { IgnoreOptions } from './ignore.options';
 
@@ -14,7 +18,7 @@ export default async function ignore(options: IgnoreOptions = true): Promise<Typ
 	const config: TypedFlatConfigItem[] = [
 		{
 			ignores: IGNORE_GLOB,
-			name: IGNORE_CONFIG_NAME,
+			name: IGNORE_CONFIG_NAME_DEFAULT,
 		},
 	];
 

@@ -1,8 +1,7 @@
 import globals from 'globals';
 
 import type { TypedFlatConfigItem } from '../../types';
-
-const CORE_CONFIG_NAME = 'hexatool/core';
+import { CORE_CONFIG_NAME_RULES, CORE_CONFIG_NAME_SETUP } from './core.config-name';
 
 export default function core(): TypedFlatConfigItem[] {
 	return [
@@ -29,7 +28,10 @@ export default function core(): TypedFlatConfigItem[] {
 			linterOptions: {
 				reportUnusedDisableDirectives: true,
 			},
-			name: `${CORE_CONFIG_NAME}/rules`,
+			name: CORE_CONFIG_NAME_SETUP,
+		},
+		{
+			name: CORE_CONFIG_NAME_RULES,
 			rules: {
 				'accessor-pairs': ['error', { enforceForClassMembers: true, setWithoutGet: true }],
 				'array-callback-return': ['error', { checkForEach: true }],
