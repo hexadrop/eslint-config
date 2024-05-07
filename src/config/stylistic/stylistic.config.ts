@@ -1,6 +1,5 @@
 import type { StylisticCustomizeOptions } from '@stylistic/eslint-plugin';
 import { ESLint, Linter } from 'eslint';
-import type { RequiredOptions } from 'prettier';
 
 import { PLUGIN_RENAME } from '../../const';
 import type { TypedFlatConfigItem } from '../../types';
@@ -113,7 +112,7 @@ export default async function stylistic(
 	}
 
 	if (format) {
-		const prettierOptions: Partial<RequiredOptions> = {
+		const prettierOptions = {
 			arrowParens,
 			bracketSameLine,
 			bracketSpacing,
