@@ -1,1 +1,1 @@
-export type * from './hexatool-eslint.options';
+export type * from './hexatool-eslint.options-old';

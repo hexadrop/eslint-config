@@ -8,7 +8,7 @@ import type {
 	TypescriptOptions,
 } from '../config';
 
-export interface HexatoolEslintOptions {
+export interface HexatoolEslintOptionsOld {
 	/**
 	 * Core rules. Can't be disabled.
 	 */
