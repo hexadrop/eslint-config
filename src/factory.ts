@@ -16,11 +16,11 @@ export default function hexatool(
 	let pipeline = new FlatConfigComposer<TypedFlatConfigItem>(
 		ignore(options.ignore),
 		core(),
-		typescript(options.typescript),
 		imports(options.imports, options.core, options.typescript),
+		stylistic(options.stylistic, options.typescript),
 		node(options.node),
-		markdown(options.markdown),
-		stylistic(options.stylistic, options.typescript)
+		typescript(options.typescript),
+		markdown(options.markdown)
 	).renamePlugins(PLUGIN_RENAME);
 
 	/*
