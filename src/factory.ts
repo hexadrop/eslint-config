@@ -17,9 +17,9 @@ export default function hexatool(
 		ignore(options.ignore),
 		core(),
 		imports(options.imports, options.core, options.typescript),
-		stylistic(options.stylistic, options.typescript),
 		node(options.node),
 		typescript(options.typescript),
+		stylistic(options.stylistic, options.typescript),
 		markdown(options.markdown)
 	).renamePlugins(PLUGIN_RENAME);
 
