@@ -5,7 +5,7 @@ import { parseForESLint } from 'eslint-parser-plain';
 
 import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault } from '../../utils';
-import { GLOB_MARKDOWN, GLOB_MARKDOWN_IN_MARKDOWN } from './markdown.globs';
+import { GLOB_MARKDOWN, GLOB_MARKDOWN_IN_MARKDOWN, GLOB_MARKDOWN_SOURCE } from './markdown.globs';
 import type { MarkdownOptions } from './markdown.options';
 
 const MARKDOWN_CONFIG_NAME = 'hexatool/markdown';
@@ -30,9 +30,6 @@ export default async function markdown(options: MarkdownOptions = true): Promise
 			files: GLOB_MARKDOWN,
 			ignores: GLOB_MARKDOWN_IN_MARKDOWN,
 			name: `${MARKDOWN_CONFIG_NAME}/processor`,
-			plugins: {
-				markdown,
-			},
 			/*
 			 * `eslint-plugin-markdown` only creates virtual files for code blocks,
 			 * but not the markdown file itself. We use `eslint-merge-processors` to
@@ -51,8 +48,23 @@ export default async function markdown(options: MarkdownOptions = true): Promise
 		},
 		{
 			files: GLOB_MARKDOWN,
-			name: `${MARKDOWN_CONFIG_NAME}/rules/disable`,
+			name: `${MARKDOWN_CONFIG_NAME}/rules`,
 			rules: {
+				'style/max-len': 'off',
+				'unicorn/filename-case': 'off',
+			},
+		},
+		{
+			files: GLOB_MARKDOWN_SOURCE,
+			name: `${MARKDOWN_CONFIG_NAME}/code/rules`,
+
+			plugins: {
+				format: await interopDefault(import('eslint-plugin-format')),
+			},
+			rules: {
+				'format/prettier': 'off',
+				'import/no-unresolved': 'off',
+				'style/indent': ['error', 2],
 				'unicorn/filename-case': 'off',
 			},
 		},
