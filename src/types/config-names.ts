@@ -3,6 +3,7 @@ import type {
 	IgnoreConfigNames,
 	JsonConfigNames,
 	MarkdownConfigNames,
+	ReactConfigNames,
 	StylisticConfigNames,
 	TypescriptConfigNames,
 } from '../config';
@@ -12,5 +13,6 @@ export type ConfigNames =
 	| IgnoreConfigNames
 	| JsonConfigNames
 	| MarkdownConfigNames
+	| ReactConfigNames
 	| StylisticConfigNames
 	| TypescriptConfigNames;

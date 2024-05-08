@@ -39,3 +39,21 @@ declare module 'eslint-plugin-perfectionist/configs/recommended-natural' {
 
 	export default config;
 }
+
+declare module 'eslint-plugin-react' {
+	import type { ESLint } from 'eslint';
+
+	export default ESLint.Plugin;
+}
+
+declare module 'eslint-plugin-react-hooks' {
+	import type { ESLint } from 'eslint';
+
+	export default ESLint.Plugin;
+}
+
+declare module 'eslint-plugin-react-refresh' {
+	import type { ESLint } from 'eslint';
+
+	export default ESLint.Plugin;
+}

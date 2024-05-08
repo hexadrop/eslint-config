@@ -1,8 +1,7 @@
 import { PLUGIN_RENAME, PLUGIN_RENAME_TYPESCRIPT } from '../../const';
 import type { HexatoolEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
-import { interopDefault, pluginConfigOverrideRules, toArray } from '../../utils';
-import pluginConfigRules from '../../utils/plugin-config-rules';
+import { interopDefault, pluginConfigOverrideRules, pluginConfigRules, toArray } from '../../utils';
 import { SOURCE_GLOBS } from '../core';
 import {
 	TYPESCRIPT_CONFIG_NAME_RULES,

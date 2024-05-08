@@ -4,7 +4,7 @@ import { builtinRules } from 'eslint/use-at-your-own-risk';
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 
 import { combine } from '../src';
-import { core, ignore, json, markdown, stylistic, typescript } from '../src/config';
+import { core, ignore, json, markdown, react, stylistic, typescript } from '../src/config';
 import { defaultOptions } from '../src/options';
 
 const options = defaultOptions();
@@ -20,6 +20,7 @@ const configs = await combine(
 	ignore(options),
 	core(options),
 	typescript(options),
+	react(options),
 	json(options),
 	markdown(options),
 	stylistic(options)

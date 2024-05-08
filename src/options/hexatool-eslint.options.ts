@@ -3,6 +3,7 @@ import path from 'node:path';
 import process from 'node:process';
 
 import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore';
+import { isPackageExists } from 'local-pkg';
 
 interface HexatoolEslintStylisticOptions {
 	/**
@@ -211,6 +212,14 @@ interface HexatoolEslintOptions {
 	node: boolean;
 
 	/**
+	 * Enable react support.
+	 *
+	 * If `false`, react support will be disabled.
+	 * If `true`, or empty it will be enabled.
+	 */
+	react: boolean;
+
+	/**
 	 * Configure stylistic rules.
 	 *
 	 * @default {
@@ -259,13 +268,17 @@ export type { HexatoolEslintOptions, HexatoolEslintStylisticOptions };
 
 export default function defaultOptions(options: Partial<HexatoolEslintOptions> = {}): HexatoolEslintOptions {
 	let typescript: boolean | string | string[] = false;
+	const installedTypescript = isPackageExists('typescript');
+	const installedReact = isPackageExists('react');
 
 	if (options.typescript === true) {
 		typescript = true;
-	} else if (options.typescript === undefined) {
-		typescript = getCwdTsconfigPath() ?? true;
-	} else if (options.typescript === 'string' || Array.isArray(options.typescript)) {
-		typescript = options.typescript.length > 0 ? options.typescript : true;
+	} else if (installedTypescript) {
+		if (options.typescript === undefined) {
+			typescript = getCwdTsconfigPath() ?? true;
+		} else if (options.typescript === 'string' || Array.isArray(options.typescript)) {
+			typescript = options.typescript.length > 0 ? options.typescript : true;
+		}
 	}
 
 	return {
@@ -281,6 +294,7 @@ export default function defaultOptions(options: Partial<HexatoolEslintOptions> =
 			...options.module,
 		},
 		node: options.node ?? true,
+		react: options.react ?? installedReact,
 		stylistic:
 			options.stylistic === false
 				? false
