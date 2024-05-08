@@ -48,15 +48,5 @@ export default async function markdown(options: HexatoolEslintOptions): Promise<
 			},
 			name: MARKDOWN_CONFIG_NAME_SETUP_PARSER,
 		},
-		/*
-		 * {
-		 * 	files: GLOB_MARKDOWN_SOURCE,
-		 * 	name: MARKDOWN_CONFIG_NAME_RULES_SOURCE,
-		 * 	rules: {
-		 * 		'format/prettier': 'off',
-		 * 		'style/indent': ['error', 2],
-		 * 	},
-		 * },
-		 */
 	];
 }

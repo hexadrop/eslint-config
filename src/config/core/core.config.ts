@@ -4,7 +4,7 @@ import { PLUGIN_RENAME } from '../../const';
 import type { HexatoolEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault } from '../../utils';
-import { GLOB_MARKDOWN_SOURCE } from '../markdown';
+import { GLOB_MARKDOWN_SOURCE, GLOB_MARKDOWN_SOURCE_WITH_JSON } from '../markdown';
 import {
 	CORE_CONFIG_NAME_RULES,
 	CORE_CONFIG_NAME_RULES_IMPORTS_STATIC,
@@ -17,6 +17,7 @@ import {
 export default async function core(options: HexatoolEslintOptions): Promise<TypedFlatConfigItem[]> {
 	const {
 		imports,
+		json,
 		markdown,
 		module: { amd, commonjs, node: useNodeModules, webpack },
 		node,
@@ -326,7 +327,7 @@ export default async function core(options: HexatoolEslintOptions): Promise<Type
 		);
 		if (markdown) {
 			configs.push({
-				files: GLOB_MARKDOWN_SOURCE,
+				files: json ? GLOB_MARKDOWN_SOURCE_WITH_JSON : GLOB_MARKDOWN_SOURCE,
 				name: CORE_CONFIG_NAME_RULES_IMPORTS_STATIC_MARKDOWN_SOURCE,
 				rules: {
 					'import/no-unresolved': 'off',

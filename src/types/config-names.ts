@@ -1,6 +1,7 @@
 import type {
 	CoreConfigNames,
 	IgnoreConfigNames,
+	JsonConfigNames,
 	MarkdownConfigNames,
 	StylisticConfigNames,
 	TypescriptConfigNames,
@@ -9,6 +10,7 @@ import type {
 export type ConfigNames =
 	| CoreConfigNames
 	| IgnoreConfigNames
+	| JsonConfigNames
 	| MarkdownConfigNames
 	| StylisticConfigNames
 	| TypescriptConfigNames;

@@ -183,6 +183,13 @@ interface HexatoolEslintOptions {
 	imports: boolean;
 
 	/**
+	 * Enable json support.
+	 *
+	 * @default true
+	 */
+	json: boolean;
+
+	/**
 	 * Enable markdown support.
 	 *
 	 * @default true
@@ -264,6 +271,7 @@ export default function defaultOptions(options: Partial<HexatoolEslintOptions> =
 	return {
 		ignore: options.ignore ?? true,
 		imports: options.imports ?? true,
+		json: options.json ?? true,
 		markdown: options.markdown ?? true,
 		module: {
 			amd: false,

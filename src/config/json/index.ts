@@ -1,1 +1,3 @@
-export { default as GLOB_JSON } from './json.globs';
+export { default as json } from './json.config';
+export type * from './json.config-name';
+export * from './json.globs';

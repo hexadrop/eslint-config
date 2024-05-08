@@ -7,15 +7,20 @@ import { interopDefault } from '../../utils';
 import pluginConfigRules from '../../utils/plugin-config-rules';
 import renameRules from '../../utils/rename-rules';
 import { JAVASCRIPT_GLOBS, SOURCE_GLOBS } from '../core';
-import { GLOB_MARKDOWN, GLOB_MARKDOWN_SOURCE } from '../markdown';
+import { GLOB_JSON, GLOB_JSON_PACKAGE, GLOB_JSON_TSCONFIG } from '../json';
+import { GLOB_MARKDOWN, GLOB_MARKDOWN_JSON, GLOB_MARKDOWN_SOURCE, GLOB_MARKDOWN_SOURCE_WITH_JSON } from '../markdown';
 import { DTS_GLOBS, TYPESCRIPT_GLOBS } from '../typescript';
 import {
 	STYLISTIC_CONFIG_NAME_RULES,
 	STYLISTIC_CONFIG_NAME_RULES_IMPORTS,
+	STYLISTIC_CONFIG_NAME_RULES_JSON,
+	STYLISTIC_CONFIG_NAME_RULES_JSON_PACKAGE,
+	STYLISTIC_CONFIG_NAME_RULES_JSON_TSCONFIG,
 	STYLISTIC_CONFIG_NAME_RULES_MARKDOWN,
 	STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_SOURCE,
 	STYLISTIC_CONFIG_NAME_RULES_PERFECTIONIST,
 	STYLISTIC_CONFIG_NAME_RULES_PRETTIER,
+	STYLISTIC_CONFIG_NAME_RULES_PRETTIER_JSON,
 	STYLISTIC_CONFIG_NAME_RULES_PRETTIER_MARKDOWN_SOURCE,
 	STYLISTIC_CONFIG_NAME_RULES_TYPESCRIPT,
 	STYLISTIC_CONFIG_NAME_RULES_TYPESCRIPT_DTS,
@@ -31,6 +36,7 @@ import stylisticOptions from './stylistic.options-stylistic';
 export default async function stylistic(options: HexatoolEslintOptions): Promise<TypedFlatConfigItem[]> {
 	const {
 		imports,
+		json,
 		markdown,
 		module: { webpack },
 		stylistic,
@@ -39,7 +45,7 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 	if (stylistic === false) {
 		return [];
 	}
-	const { format, perfectionist, printWidth, unicorn } = stylistic;
+	const { format, indent, indentSize, perfectionist, printWidth, unicorn } = stylistic;
 	const isTypeAware = typeof typescript !== 'boolean';
 	const typescriptPluginRename = PLUGIN_RENAME['@typescript-eslint'];
 	const importXPlugin = 'import-x';
@@ -103,7 +109,7 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 				},
 			},
 			{
-				files: GLOB_MARKDOWN_SOURCE,
+				files: json ? GLOB_MARKDOWN_SOURCE_WITH_JSON : GLOB_MARKDOWN_SOURCE,
 				name: STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_SOURCE,
 				rules: {
 					'style/indent': ['error', 2],
@@ -335,6 +341,238 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 		});
 	}
 
+	if (json) {
+		config.push(
+			{
+				files: GLOB_JSON,
+				name: STYLISTIC_CONFIG_NAME_RULES_JSON,
+				rules: {
+					'json/array-bracket-spacing': ['error', 'never'],
+					'json/comma-dangle': ['error', 'never'],
+					'json/comma-style': ['error', 'last'],
+					'json/indent': ['error', indent === 'space' ? indentSize : indent],
+					'json/key-spacing': ['error', { afterColon: true, beforeColon: false }],
+					'json/object-curly-newline': ['error', { consistent: true, multiline: true }],
+					'json/object-curly-spacing': ['error', 'always'],
+					'json/object-property-newline': ['error', { allowMultiplePropertiesPerLine: true }],
+					'json/quote-props': 'error',
+					'json/quotes': 'error',
+				},
+			},
+			{
+				files: GLOB_JSON_PACKAGE,
+				name: STYLISTIC_CONFIG_NAME_RULES_JSON_PACKAGE,
+				rules: {
+					'jsonc/sort-array-values': [
+						'error',
+						{
+							order: { type: 'asc' },
+							pathPattern: '^files$',
+						},
+					],
+					'jsonc/sort-keys': [
+						'error',
+						{
+							order: [
+								'name',
+								'displayName',
+								'version',
+								'author',
+								'publisher',
+								'description',
+								'keywords',
+								'categories',
+								'repository',
+								'homepage',
+								'bugs',
+								'funding',
+								'license',
+								'private',
+								'publishConfig',
+								'type',
+								'sideEffects',
+								'bin',
+								'icon',
+								'files',
+								'main',
+								'module',
+								'unpkg',
+								'jsdelivr',
+								'types',
+								'exports',
+								'typesVersions',
+								'scripts',
+								'peerDependencies',
+								'peerDependenciesMeta',
+								'dependencies',
+								'optionalDependencies',
+								'devDependencies',
+								'overrides',
+								'resolutions',
+								'engines',
+								'packageManager',
+								'pnpm',
+								'activationEvents',
+								'contributes',
+								'husky',
+								'simple-git-hooks',
+								'lint-staged',
+								'eslintConfig',
+							],
+							pathPattern: '^$',
+						},
+						{
+							order: { type: 'asc' },
+							pathPattern: '^(?:dev|peer|optional|bundled)?[Dd]ependencies(Meta)?$',
+						},
+						{
+							order: { type: 'asc' },
+							pathPattern: '^(?:resolutions|overrides|pnpm.overrides)$',
+						},
+						{
+							order: { type: 'asc' },
+							pathPattern: '^(?:scripts)$',
+						},
+						{
+							order: ['types', 'import', 'require', 'default'],
+							pathPattern: '^exports.*$',
+						},
+						{
+							order: [
+								// Client hooks only
+								'pre-commit',
+								'prepare-commit-msg',
+								'commit-msg',
+								'post-commit',
+								'pre-rebase',
+								'post-rewrite',
+								'post-checkout',
+								'post-merge',
+								'pre-push',
+								'pre-auto-gc',
+							],
+							pathPattern: '^(?:gitHooks|husky|simple-git-hooks)$',
+						},
+					],
+				},
+			},
+			{
+				files: GLOB_JSON_TSCONFIG,
+				name: STYLISTIC_CONFIG_NAME_RULES_JSON_TSCONFIG,
+				rules: {
+					'jsonc/sort-keys': [
+						'error',
+						{
+							order: ['extends', 'compilerOptions', 'references', 'files', 'include', 'exclude'],
+							pathPattern: '^$',
+						},
+						{
+							order: [
+								/* Projects */
+								'incremental',
+								'composite',
+								'tsBuildInfoFile',
+								'disableSourceOfProjectReferenceRedirect',
+								'disableSolutionSearching',
+								'disableReferencedProjectLoad',
+								/* Language and Environment */
+								'target',
+								'jsx',
+								'jsxFactory',
+								'jsxFragmentFactory',
+								'jsxImportSource',
+								'lib',
+								'moduleDetection',
+								'noLib',
+								'reactNamespace',
+								'useDefineForClassFields',
+								'emitDecoratorMetadata',
+								'experimentalDecorators',
+								/* Modules */
+								'baseUrl',
+								'rootDir',
+								'rootDirs',
+								'customConditions',
+								'module',
+								'moduleResolution',
+								'moduleSuffixes',
+								'noResolve',
+								'paths',
+								'resolveJsonModule',
+								'resolvePackageJsonExports',
+								'resolvePackageJsonImports',
+								'typeRoots',
+								'types',
+								'allowArbitraryExtensions',
+								'allowImportingTsExtensions',
+								'allowUmdGlobalAccess',
+								/* JavaScript Support */
+								'allowJs',
+								'checkJs',
+								'maxNodeModuleJsDepth',
+								/* Type Checking */
+								'strict',
+								'strictBindCallApply',
+								'strictFunctionTypes',
+								'strictNullChecks',
+								'strictPropertyInitialization',
+								'allowUnreachableCode',
+								'allowUnusedLabels',
+								'alwaysStrict',
+								'exactOptionalPropertyTypes',
+								'noFallthroughCasesInSwitch',
+								'noImplicitAny',
+								'noImplicitOverride',
+								'noImplicitReturns',
+								'noImplicitThis',
+								'noPropertyAccessFromIndexSignature',
+								'noUncheckedIndexedAccess',
+								'noUnusedLocals',
+								'noUnusedParameters',
+								'useUnknownInCatchVariables',
+								/* Emit */
+								'declaration',
+								'declarationDir',
+								'declarationMap',
+								'downlevelIteration',
+								'emitBOM',
+								'emitDeclarationOnly',
+								'importHelpers',
+								'importsNotUsedAsValues',
+								'inlineSourceMap',
+								'inlineSources',
+								'mapRoot',
+								'newLine',
+								'noEmit',
+								'noEmitHelpers',
+								'noEmitOnError',
+								'outDir',
+								'outFile',
+								'preserveConstEnums',
+								'preserveValueImports',
+								'removeComments',
+								'sourceMap',
+								'sourceRoot',
+								'stripInternal',
+								/* Interop Constraints */
+								'allowSyntheticDefaultImports',
+								'esModuleInterop',
+								'forceConsistentCasingInFileNames',
+								'isolatedModules',
+								'preserveSymlinks',
+								'verbatimModuleSyntax',
+								/* Completeness */
+								'skipDefaultLibCheck',
+								'skipLibCheck',
+							],
+							pathPattern: '^compilerOptions$',
+						},
+					],
+				},
+			}
+		);
+	}
+
 	if (unicorn) {
 		const unicornFlatRecommended = pluginUnicorn.configs
 			? (pluginUnicorn.configs['flat/recommended'] as Linter.FlatConfig)
@@ -371,7 +609,7 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 					},
 				},
 				{
-					files: GLOB_MARKDOWN_SOURCE,
+					files: json ? GLOB_MARKDOWN_SOURCE_WITH_JSON : GLOB_MARKDOWN_SOURCE,
 					name: STYLISTIC_CONFIG_NAME_RULES_UNICORN_MARKDOWN_SOURCE,
 					rules: {
 						'unicorn/filename-case': 'off',
@@ -398,7 +636,7 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 		const prettierConfig = prettierOptions(stylistic);
 		config.push({
 			files: typescript ? SOURCE_GLOBS : JAVASCRIPT_GLOBS,
-			ignores: GLOB_MARKDOWN_SOURCE,
+			ignores: json ? GLOB_MARKDOWN_SOURCE_WITH_JSON : GLOB_MARKDOWN_SOURCE,
 			name: STYLISTIC_CONFIG_NAME_RULES_PRETTIER,
 			rules: {
 				'format/prettier': ['error', prettierConfig],
@@ -407,10 +645,20 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 
 		if (markdown) {
 			config.push({
-				files: GLOB_MARKDOWN_SOURCE,
+				files: json ? GLOB_MARKDOWN_SOURCE_WITH_JSON : GLOB_MARKDOWN_SOURCE,
 				name: STYLISTIC_CONFIG_NAME_RULES_PRETTIER_MARKDOWN_SOURCE,
 				rules: {
 					'format/prettier': ['error', { ...prettierConfig, tabWidth: 2, useTabs: false }],
+				},
+			});
+		}
+
+		if (json) {
+			config.push({
+				files: GLOB_MARKDOWN_JSON,
+				name: STYLISTIC_CONFIG_NAME_RULES_PRETTIER_JSON,
+				rules: {
+					'json/indent': ['error', 2],
 				},
 			});
 		}
