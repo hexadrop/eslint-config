@@ -1,4 +1,4 @@
-import { SOURCE_GLOBS } from '../core';
+import { SOURCE_GLOBS } from '../core/core.globs';
 import { GLOB_JSON } from '../json';
 
 const GLOB_MARKDOWN = ['**/*.md'];

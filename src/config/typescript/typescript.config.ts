@@ -1,44 +1,54 @@
-import { isPackageExists } from 'local-pkg';
-
 import { PLUGIN_RENAME, PLUGIN_RENAME_TYPESCRIPT } from '../../const';
+import type { HexatoolEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault, pluginConfigOverrideRules, toArray } from '../../utils';
 import pluginConfigRules from '../../utils/plugin-config-rules';
 import { SOURCE_GLOBS } from '../core';
-import TYPESCRIPT_GLOBS from './typescript.globs';
-import type { TypescriptOptions } from './typescript.options';
+import {
+	TYPESCRIPT_CONFIG_NAME_RULES,
+	TYPESCRIPT_CONFIG_NAME_RULES_DTS,
+	TYPESCRIPT_CONFIG_NAME_RULES_IMPORTS,
+	TYPESCRIPT_CONFIG_NAME_RULES_TYPEAWARE,
+	TYPESCRIPT_CONFIG_NAME_SETUP,
+	TYPESCRIPT_CONFIG_NAME_SETUP_IMPORTS,
+} from './typescript.config-name';
+import { DTS_GLOBS, TYPESCRIPT_GLOBS } from './typescript.globs';
 import typescriptParser from './typescript.parser';
-import getCwdTsconfigPath from './typescript.tsconfig';
 
-const TYPESCRIPT_CONFIG_NAME = 'hexatool/typescript';
-
-export default async function typescript(
-	options: TypescriptOptions = isPackageExists('typescript')
-): Promise<TypedFlatConfigItem[]> {
-	if (options === false) {
+export default async function typescript(options: HexatoolEslintOptions): Promise<TypedFlatConfigItem[]> {
+	const { imports, typescript } = options;
+	if (typescript === false) {
 		return [];
 	}
-
-	const { stylistic = true, tsconfig = getCwdTsconfigPath() } = typeof options === 'object' ? options : {};
 
 	const [plugin, parser] = await Promise.all([
 		interopDefault(import('@typescript-eslint/eslint-plugin')),
 		interopDefault(import('@typescript-eslint/parser')),
 	] as const);
 
-	const config: TypedFlatConfigItem[] = [];
+	const importXPlugin = 'import-x';
+	const importXPluginRename = PLUGIN_RENAME[importXPlugin];
 	const typescriptPluginRename = PLUGIN_RENAME['@typescript-eslint'];
-	const isTypeAware = Boolean(tsconfig && tsconfig.length > 0);
+
+	const config: TypedFlatConfigItem[] = [];
+	const isTypeAware = typeof typescript !== 'boolean';
 
 	// Install the plugins without globs, so they can be configured separately.
 	config.push({
-		name: `${TYPESCRIPT_CONFIG_NAME}/setup`,
+		name: TYPESCRIPT_CONFIG_NAME_SETUP,
 		plugins: {
 			typescript: plugin,
 		},
 	});
 
-	if (tsconfig && tsconfig.length > 0) {
+	if (typescript === true) {
+		config.push(
+			typescriptParser({
+				files: SOURCE_GLOBS,
+				parser,
+			})
+		);
+	} else {
 		config.push(
 			typescriptParser({
 				files: SOURCE_GLOBS,
@@ -48,192 +58,60 @@ export default async function typescript(
 			typescriptParser({
 				files: TYPESCRIPT_GLOBS,
 				parser,
-				tsconfigPath: toArray(tsconfig),
-			})
-		);
-	} else {
-		config.push(
-			typescriptParser({
-				files: SOURCE_GLOBS,
-				parser,
+				tsconfigPath: toArray(typescript),
 			})
 		);
 	}
 
-	config.push({
-		files: SOURCE_GLOBS,
-		name: `${TYPESCRIPT_CONFIG_NAME}/rules`,
-		rules: {
-			...pluginConfigOverrideRules(plugin, 'eslint-recommended', PLUGIN_RENAME_TYPESCRIPT),
-			...pluginConfigRules(plugin, 'strict', PLUGIN_RENAME_TYPESCRIPT),
-			[`${typescriptPluginRename}/explicit-module-boundary-types`]: ['error'],
-			[`${typescriptPluginRename}/no-extraneous-class`]: 'off',
-			// Disable the following rules, as they are covered by the eslint-plugin-unused-imports
-			[`${typescriptPluginRename}/no-unused-vars`]: 'off',
-		},
-	});
-
-	if (stylistic) {
+	if (imports) {
+		const typeScriptExtensions = ['.ts', '.tsx'] as const;
+		const allExtensions = [...typeScriptExtensions, '.js', '.jsx'] as const;
 		config.push({
-			files: SOURCE_GLOBS,
-			name: `${TYPESCRIPT_CONFIG_NAME}/rules/stylistic`,
-			rules: {
-				...pluginConfigRules(plugin, 'stylistic', PLUGIN_RENAME_TYPESCRIPT),
-				[`${typescriptPluginRename}/member-ordering`]: [
-					'error',
-					{
-						default: {
-							memberTypes: [
-								// Index signature
-								'signature',
-								'call-signature',
-
-								// Fields
-								'public-static-field',
-								'protected-static-field',
-								'private-static-field',
-								'#private-static-field',
-
-								'public-decorated-field',
-								'protected-decorated-field',
-								'private-decorated-field',
-
-								'public-instance-field',
-								'protected-instance-field',
-								'private-instance-field',
-								'#private-instance-field',
-
-								'public-abstract-field',
-								'protected-abstract-field',
-
-								'public-field',
-								'protected-field',
-								'private-field',
-								'#private-field',
-
-								'static-field',
-								'instance-field',
-								'abstract-field',
-
-								'decorated-field',
-
-								'field',
-
-								// Static initialization
-								'static-initialization',
-
-								// Constructors
-								'public-constructor',
-								'protected-constructor',
-								'private-constructor',
-
-								'constructor',
-
-								// Getters
-								'public-static-get',
-								'protected-static-get',
-								'private-static-get',
-								'#private-static-get',
-
-								'public-decorated-get',
-								'protected-decorated-get',
-								'private-decorated-get',
-
-								'public-instance-get',
-								'protected-instance-get',
-								'private-instance-get',
-								'#private-instance-get',
-
-								'public-abstract-get',
-								'protected-abstract-get',
-
-								'public-get',
-								'protected-get',
-								'private-get',
-								'#private-get',
-
-								'static-get',
-								'instance-get',
-								'abstract-get',
-
-								'decorated-get',
-
-								'get',
-
-								// Setters
-								'public-static-set',
-								'protected-static-set',
-								'private-static-set',
-								'#private-static-set',
-
-								'public-decorated-set',
-								'protected-decorated-set',
-								'private-decorated-set',
-
-								'public-instance-set',
-								'protected-instance-set',
-								'private-instance-set',
-								'#private-instance-set',
-
-								'public-abstract-set',
-								'protected-abstract-set',
-
-								'public-set',
-								'protected-set',
-								'private-set',
-								'#private-set',
-
-								'static-set',
-								'instance-set',
-								'abstract-set',
-
-								'decorated-set',
-
-								'set',
-
-								// Methods
-								'public-static-method',
-								'protected-static-method',
-								'private-static-method',
-								'#private-static-method',
-
-								'public-decorated-method',
-								'protected-decorated-method',
-								'private-decorated-method',
-
-								'public-instance-method',
-								'protected-instance-method',
-								'private-instance-method',
-								'#private-instance-method',
-
-								'public-abstract-method',
-								'protected-abstract-method',
-
-								'public-method',
-								'protected-method',
-								'private-method',
-								'#private-method',
-
-								'static-method',
-								'instance-method',
-								'abstract-method',
-
-								'decorated-method',
-
-								'method',
-							],
-							order: 'alphabetically-case-insensitive',
-						},
+			files: TYPESCRIPT_GLOBS,
+			name: TYPESCRIPT_CONFIG_NAME_SETUP_IMPORTS,
+			settings: {
+				[`${importXPlugin}/extensions`]: typeScriptExtensions,
+				[`${importXPlugin}/external-module-folders`]: ['node_modules', 'node_modules/@types'],
+				[`${importXPlugin}/parsers`]: {
+					'@typescript-eslint/parser': [...typeScriptExtensions, '.cts', '.mts'],
+				},
+				[`${importXPlugin}/resolver`]: {
+					node: {
+						extensions: allExtensions,
 					},
-				],
+					typescript: true,
+				},
 			},
 		});
 	}
 
+	config.push(
+		{
+			files: SOURCE_GLOBS,
+			name: TYPESCRIPT_CONFIG_NAME_RULES,
+			rules: {
+				...pluginConfigOverrideRules(plugin, 'eslint-recommended', PLUGIN_RENAME_TYPESCRIPT),
+				...pluginConfigRules(plugin, 'strict', PLUGIN_RENAME_TYPESCRIPT),
+				[`${typescriptPluginRename}/explicit-module-boundary-types`]: ['error'],
+				[`${typescriptPluginRename}/no-extraneous-class`]: 'off',
+				// Disable the following rules, as they are covered by the eslint-plugin-unused-imports
+				[`${typescriptPluginRename}/no-unused-vars`]: 'off',
+			},
+		},
+		{
+			files: DTS_GLOBS,
+			name: TYPESCRIPT_CONFIG_NAME_RULES_DTS,
+			rules: {
+				[`${typescriptPluginRename}/triple-slash-reference`]: 'off',
+				'multiline-comment-style': 'off',
+			},
+		}
+	);
+
 	if (isTypeAware) {
 		config.push({
 			files: TYPESCRIPT_GLOBS,
-			name: `${TYPESCRIPT_CONFIG_NAME}/rules/type-aware`,
+			name: TYPESCRIPT_CONFIG_NAME_RULES_TYPEAWARE,
 			rules: {
 				...pluginConfigRules(plugin, 'strict-type-checked-only', PLUGIN_RENAME_TYPESCRIPT),
 				[`${typescriptPluginRename}/no-confusing-void-expression`]: ['error', { ignoreArrowShorthand: true }],
@@ -243,25 +121,17 @@ export default async function typescript(
 				[`${typescriptPluginRename}/switch-exhaustiveness-check`]: ['error'],
 			},
 		});
-		if (stylistic) {
-			config.push({
-				files: TYPESCRIPT_GLOBS,
-				name: `${TYPESCRIPT_CONFIG_NAME}/rules/type-aware/stylistic`,
-				rules: {
-					...pluginConfigRules(plugin, 'stylistic-type-checked-only', PLUGIN_RENAME_TYPESCRIPT),
-				},
-			});
-		}
 	}
 
-	config.push({
-		files: ['**/*.d.ts'],
-		name: `${TYPESCRIPT_CONFIG_NAME}/rules/dts`,
-		rules: {
-			[`${typescriptPluginRename}/triple-slash-reference`]: 'off',
-			'multiline-comment-style': 'off',
-		},
-	});
+	if (imports) {
+		config.push({
+			files: TYPESCRIPT_GLOBS,
+			name: TYPESCRIPT_CONFIG_NAME_RULES_IMPORTS,
+			rules: {
+				[`${importXPluginRename}/named`]: 'off',
+			},
+		});
+	}
 
 	return config;
 }

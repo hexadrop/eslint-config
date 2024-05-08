@@ -13,8 +13,11 @@ const flatConfigProperties: (keyof TypedFlatConfigItem)[] = [
 ] as const;
 
 export default function extractTypedFlatConfigItem<T extends TypedFlatConfigItem>(
-	config: T
+	config?: T
 ): TypedFlatConfigItem | undefined {
+	if (!config) {
+		return undefined;
+	}
 	const result: TypedFlatConfigItem = {};
 	for (const key of flatConfigProperties) {
 		if (key in config) {

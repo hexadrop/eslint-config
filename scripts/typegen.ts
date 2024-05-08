@@ -4,7 +4,10 @@ import { builtinRules } from 'eslint/use-at-your-own-risk';
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 
 import { combine } from '../src';
-import { core, ignore, imports, markdown, node, stylistic, typescript } from '../src/config';
+import { core, ignore, markdown, stylistic, typescript } from '../src/config';
+import { defaultOptions } from '../src/options';
+
+const options = defaultOptions();
 
 const configs = await combine(
 	{
@@ -14,13 +17,11 @@ const configs = await combine(
 			},
 		},
 	},
-	ignore(),
-	core(),
-	typescript(),
-	imports(),
-	node(),
-	markdown(),
-	stylistic()
+	ignore(options),
+	core(options),
+	typescript(options),
+	markdown(options),
+	stylistic(options)
 );
 
 const dts = await flatConfigsToRulesDTS(configs, {

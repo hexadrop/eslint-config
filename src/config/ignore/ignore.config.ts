@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 
+import type { HexatoolEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault } from '../../utils';
 import {
@@ -8,10 +9,9 @@ import {
 	IGNORE_CONFIG_NAME_GITIGNORE,
 } from './ignore.config-name';
 import IGNORE_GLOB from './ignore.globs';
-import type { IgnoreOptions } from './ignore.options';
 
-export default async function ignore(options: IgnoreOptions = true): Promise<TypedFlatConfigItem[]> {
-	if (options === false) {
+export default async function ignore({ ignore }: HexatoolEslintOptions): Promise<TypedFlatConfigItem[]> {
+	if (ignore === false) {
 		return [];
 	}
 
@@ -22,14 +22,14 @@ export default async function ignore(options: IgnoreOptions = true): Promise<Typ
 		},
 	];
 
-	if (typeof options === 'object' && options.ignore) {
+	if (typeof ignore === 'object' && ignore.globs) {
 		config.push({
-			ignores: options.ignore,
+			ignores: ignore.globs,
 			name: IGNORE_CONFIG_NAME_ADDITIONAL,
 		});
 	}
 
-	if (typeof options === 'boolean') {
+	if (typeof ignore === 'boolean') {
 		if (fs.existsSync('.gitignore')) {
 			const gitignore = await interopDefault(import('eslint-config-flat-gitignore'));
 
@@ -41,5 +41,5 @@ export default async function ignore(options: IgnoreOptions = true): Promise<Typ
 
 	const gitignore = await interopDefault(import('eslint-config-flat-gitignore'));
 
-	return [...config, { ...gitignore(options), name: IGNORE_CONFIG_NAME_GITIGNORE }];
+	return [...config, { ...gitignore(ignore), name: IGNORE_CONFIG_NAME_GITIGNORE }];
 }

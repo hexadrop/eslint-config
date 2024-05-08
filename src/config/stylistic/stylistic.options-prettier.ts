@@ -1,11 +1,11 @@
-import type { StylisticOptionsObject } from './stylistic.options';
+import type { HexatoolEslintStylisticOptions } from '../../options';
 
 interface PrettierOptions {
 	[k: string]: unknown;
 	parser?: string;
 }
 
-export default function prettierOptions(options: Required<StylisticOptionsObject>): PrettierOptions {
+export default function prettierOptions(options: HexatoolEslintStylisticOptions): PrettierOptions {
 	const {
 		arrowParens,
 		bracketSameLine,

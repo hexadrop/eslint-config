@@ -1,3 +1,14 @@
-import type { CoreConfigNames, IgnoreConfigNames } from '../config';
+import type {
+	CoreConfigNames,
+	IgnoreConfigNames,
+	MarkdownConfigNames,
+	StylisticConfigNames,
+	TypescriptConfigNames,
+} from '../config';
 
-export type ConfigNames = CoreConfigNames | IgnoreConfigNames;
+export type ConfigNames =
+	| CoreConfigNames
+	| IgnoreConfigNames
+	| MarkdownConfigNames
+	| StylisticConfigNames
+	| TypescriptConfigNames;

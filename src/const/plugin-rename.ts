@@ -6,7 +6,6 @@ const PLUGIN_RENAME = {
 	'import-x': 'import',
 	jsonc: 'json',
 	n: 'node',
-	perfectionist: 'sort',
 	'simple-import-sort': 'import-sort',
 	'unused-imports': 'import-unused',
 	vitest: 'test',

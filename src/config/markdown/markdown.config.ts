@@ -1,35 +1,37 @@
-import type { ESLint } from 'eslint';
-import { Linter } from 'eslint';
+import type { ESLint, Linter } from 'eslint';
 import { mergeProcessors, processorPassThrough } from 'eslint-merge-processors';
 import { parseForESLint } from 'eslint-parser-plain';
 
+import type { HexatoolEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault } from '../../utils';
-import { GLOB_MARKDOWN, GLOB_MARKDOWN_IN_MARKDOWN, GLOB_MARKDOWN_SOURCE } from './markdown.globs';
-import type { MarkdownOptions } from './markdown.options';
+import {
+	MARKDOWN_CONFIG_NAME_SETUP,
+	MARKDOWN_CONFIG_NAME_SETUP_PARSER,
+	MARKDOWN_CONFIG_NAME_SETUP_PROCESSOR,
+} from './markdown.config-name';
+import { GLOB_MARKDOWN, GLOB_MARKDOWN_IN_MARKDOWN } from './markdown.globs';
 
-const MARKDOWN_CONFIG_NAME = 'hexatool/markdown';
-
-export default async function markdown(options: MarkdownOptions = true): Promise<TypedFlatConfigItem[]> {
-	if (!options) {
+export default async function markdown(options: HexatoolEslintOptions): Promise<TypedFlatConfigItem[]> {
+	const { markdown } = options;
+	if (!markdown) {
 		return [];
 	}
-
-	const markdown = (await interopDefault(import('eslint-plugin-markdown'))) as ESLint.Plugin;
-	const processors = markdown.processors;
+	const pluginMarkdown = (await interopDefault(import('eslint-plugin-markdown'))) as ESLint.Plugin;
+	const processors = pluginMarkdown.processors;
 	const processor = processors?.['markdown'];
 
 	return [
 		{
-			name: `${MARKDOWN_CONFIG_NAME}/setup`,
+			name: MARKDOWN_CONFIG_NAME_SETUP,
 			plugins: {
-				markdown,
+				markdown: pluginMarkdown,
 			},
 		},
 		{
 			files: GLOB_MARKDOWN,
 			ignores: GLOB_MARKDOWN_IN_MARKDOWN,
-			name: `${MARKDOWN_CONFIG_NAME}/processor`,
+			name: MARKDOWN_CONFIG_NAME_SETUP_PROCESSOR,
 			/*
 			 * `eslint-plugin-markdown` only creates virtual files for code blocks,
 			 * but not the markdown file itself. We use `eslint-merge-processors` to
@@ -44,29 +46,17 @@ export default async function markdown(options: MarkdownOptions = true): Promise
 					parseForESLint,
 				},
 			},
-			name: `${MARKDOWN_CONFIG_NAME}/parser`,
+			name: MARKDOWN_CONFIG_NAME_SETUP_PARSER,
 		},
-		{
-			files: GLOB_MARKDOWN,
-			name: `${MARKDOWN_CONFIG_NAME}/rules`,
-			rules: {
-				'style/max-len': 'off',
-				'unicorn/filename-case': 'off',
-			},
-		},
-		{
-			files: GLOB_MARKDOWN_SOURCE,
-			name: `${MARKDOWN_CONFIG_NAME}/code/rules`,
-
-			plugins: {
-				format: await interopDefault(import('eslint-plugin-format')),
-			},
-			rules: {
-				'format/prettier': 'off',
-				'import/no-unresolved': 'off',
-				'style/indent': ['error', 2],
-				'unicorn/filename-case': 'off',
-			},
-		},
+		/*
+		 * {
+		 * 	files: GLOB_MARKDOWN_SOURCE,
+		 * 	name: MARKDOWN_CONFIG_NAME_RULES_SOURCE,
+		 * 	rules: {
+		 * 		'format/prettier': 'off',
+		 * 		'style/indent': ['error', 2],
+		 * 	},
+		 * },
+		 */
 	];
 }

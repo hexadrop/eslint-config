@@ -3,10 +3,12 @@ import { cwd } from 'node:process';
 import type { Linter } from 'eslint';
 
 import type { TypedFlatConfigItem } from '../../types';
+import {
+	TYPESCRIPT_CONFIG_NAME_SETUP_PARSER,
+	TYPESCRIPT_CONFIG_NAME_SETUP_PARSER_TYPEAWARE,
+} from './typescript.config-name';
 
 type TypescriptParser = typeof import('@typescript-eslint/parser');
-
-const TYPESCRIPT_PARSER_CONFIG_NAME = 'hexatool/typescript/parser';
 
 interface TypescriptParserOptions {
 	files: string[];
@@ -38,7 +40,7 @@ export default function typescriptParser({
 				...parserOptions,
 			},
 		},
-		name: `${TYPESCRIPT_PARSER_CONFIG_NAME}${tsconfigPath ? '/type-aware' : ''}`,
+		name: tsconfigPath ? TYPESCRIPT_CONFIG_NAME_SETUP_PARSER_TYPEAWARE : TYPESCRIPT_CONFIG_NAME_SETUP_PARSER,
 	};
 
 	if (ignores) {

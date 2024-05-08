@@ -1,13 +1,12 @@
 import type { StylisticCustomizeOptions } from '@stylistic/eslint-plugin';
 
-import type { StylisticOptionsObject } from './stylistic.options';
+import type { HexatoolEslintStylisticOptions } from '../../options';
 
-export default function stylisticOptions(options: Required<StylisticOptionsObject>): StylisticCustomizeOptions {
+export default function stylisticOptions(options: HexatoolEslintStylisticOptions): StylisticCustomizeOptions {
 	const {
 		arrowParens,
 		braceStyle,
 		bracketSpacing,
-		format,
 		indent,
 		indentSize,
 		quoteProps,
@@ -17,7 +16,7 @@ export default function stylisticOptions(options: Required<StylisticOptionsObjec
 	} = options;
 
 	return {
-		arrowParens: format ? false : Boolean(arrowParens),
+		arrowParens: arrowParens === 'always',
 		blockSpacing: bracketSpacing,
 		braceStyle,
 		commaDangle: trailingComma === 'es5' ? 'only-multiline' : trailingComma === 'none' ? 'never' : 'always',
