@@ -1,3 +1,3 @@
-export { default } from './config';
-export * from './globs';
-export type * from './options';
+export { default as markdown } from './markdown.config';
+export type * from './markdown.config-name';
+export * from './markdown.globs';

@@ -6,9 +6,4 @@ const importer = Importer(import.meta.url);
  */
 const hexatool = importer('./src').default;
 
-export default hexatool({
-	formatters: true,
-	typescript: {
-		tsconfigPath: './tsconfig.json',
-	},
-});
+export default hexatool();

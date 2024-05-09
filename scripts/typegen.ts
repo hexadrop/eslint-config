@@ -3,20 +3,11 @@ import fs from 'node:fs/promises';
 import { builtinRules } from 'eslint/use-at-your-own-risk';
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 
-import {
-	astro,
-	combine, formatters,
-	imports,
-	javascript,
-	json,
-	markdown,
-	node,
-	perfectionist,
-	react,
-	stylistic,
-	typescript,
-	unicorn,
-} from '../src';
+import { combine } from '../src';
+import { astro, core, ignore, json, markdown, react, stylistic, typescript } from '../src/config';
+import { defaultOptions } from '../src/options';
+
+const options = defaultOptions();
 
 const configs = await combine(
 	{
@@ -26,18 +17,14 @@ const configs = await combine(
 			},
 		},
 	},
-	astro(true),
-	formatters(true),
-	imports(),
-	javascript(),
-	json(),
-	markdown(),
-	node(),
-	perfectionist(),
-	react(true),
-	stylistic(),
-	typescript(),
-	unicorn(),
+	ignore(options),
+	core(options),
+	typescript(options),
+	react(options),
+	astro(options),
+	json(options),
+	markdown(options),
+	stylistic(options)
 );
 
 const dts = await flatConfigsToRulesDTS(configs, {

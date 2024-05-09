@@ -1,7 +1,7 @@
 export { default as combine } from './combine';
 export { default as ensurePackages } from './ensure-packages';
+export { default as extractTypedFlatConfigItem } from './extract-typed-flat-config-item';
 export { default as interopDefault } from './interop-default';
-export { default as parserPlain } from './parse-plain';
-export { default as renameRules } from './rename-rules';
-export { default as resolveSubOptions } from './resolve-sub-options';
+export { default as pluginConfigOverrideRules } from './plugin-config-override-rules';
+export { default as pluginConfigRules } from './plugin-config-rules';
 export { default as toArray } from './to-array';

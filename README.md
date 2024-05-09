@@ -25,24 +25,21 @@ bun add eslint @hexatool/eslint-config --dev
 
 ## What it does
 
--   Single quotes, semi
-
--   Auto fix for formatting (aimed to be used standalone **without** Prettier)
--   Sorted imports, dangling commas
--   Reasonable defaults, best practices, only one line of config
--   Designed to work with TypeScript, JSX, React, Astro
--   Lints also for json, and markdown
--   Opinionated, but [very customizable](#customization)
--   [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new), compose easily!
--   Using [ESLint Stylistic](https://github.com/eslint-stylistic/eslint-stylistic)
--   Respects `.gitignore` by default
--   Optional [formatters](#formatters) support for CSS, HTML, etc.
--   **Style principle**: Minimal for reading, stable for diff, consistent
+- Auto fix for formatting (aimed to be used standalone **without** Prettier)
+- Respects .gitignore by default
+- **Style principle**: Minimal for reading, stable for diff, consistent
+   - Sorted imports, dangling commas
+   - Single quotes, use of semicolons
+   - Using [ESLint Stylistic](https://github.com/eslint-stylistic/eslint-stylistic)
+- Opinionated, but [very customizable](#customization)
+- Reasonable defaults, best practices, only one line of config
+- Designed to work with TypeScript, JSX, JSON, Markdown, etc. Out-of-box.
+- Supports ESLint v9 or v8.50.0+
+- [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new), compose easily!
 
 ## How to use
 
-1. Create `eslint.config.js` (or `eslint.config.mjs` if you not set `"type": "module"` in your `package.json`) in your
-   project root:
+1. Create `eslint.config.js` in your project root:
 
     ```js
     // eslint.config.js
@@ -57,70 +54,22 @@ bun add eslint @hexatool/eslint-config --dev
      eslint .
     ```
 
-    **Or adding to your package.json**
+   **Or adding to your package.json**
 
     ```json
     {
-    	"scripts": {
-    		"lint": "eslint .",
-    		"lint:fix": "eslint --fix ."
-    	}
+      "scripts": {
+        "lint": "eslint .",
+        "lint:fix": "eslint --fix ."
+      }
     }
     ```
 
-## VS Code support (auto fix on save)
-
-Install [VS Code ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
-
-Add the following settings to your `.vscode/settings.json`:
-
-```jsonc
-{
-	// Enable the ESlint flat config support
-	"eslint.experimental.useFlatConfig": true,
-
-	// Disable the default formatter, use eslint instead
-	"prettier.enable": false,
-	"editor.formatOnSave": false,
-
-	// Auto fix
-	"editor.codeActionsOnSave": {
-		"source.fixAll.eslint": "explicit",
-		"source.organizeImports": "never"
-	},
-
-	// Silent the stylistic rules in you IDE, but still auto fix them
-	"eslint.rules.customizations": [
-		{ "rule": "style/*", "severity": "off" },
-		{ "rule": "format/*", "severity": "off" },
-		{ "rule": "*-indent", "severity": "off" },
-		{ "rule": "*-spacing", "severity": "off" },
-		{ "rule": "*-spaces", "severity": "off" },
-		{ "rule": "*-order", "severity": "off" },
-		{ "rule": "*-dangle", "severity": "off" },
-		{ "rule": "*-newline", "severity": "off" },
-		{ "rule": "*quotes", "severity": "off" },
-		{ "rule": "*semi", "severity": "off" }
-	],
-
-	// Enable eslint for all supported languages
-	"eslint.validate": [
-		"javascript",
-		"javascriptreact",
-		"typescript",
-		"typescriptreact",
-		"html",
-		"markdown",
-		"json",
-		"jsonc"
-	]
-}
-```
+> Note that `.eslintignore` no longer works in Flat config, see [customization](#customization) for more details.
 
 ## Customization
 
-Since v1.0, we migrated to [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new).
-It provides much better organization and composition.
+Since v4.0, we migrated to [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new). It provides much better organization and composition.
 
 Normally you only need to import the `hexatool` preset:
 
@@ -138,28 +87,20 @@ And that's it! Or you can configure each integration individually, for example:
 import hexatool from '@hexatool/eslint-config';
 
 export default hexatool({
-	/*
-	 * Enable stylistic formatting rules
-	 * Stylistic: true,
-	 */
+  // React are auto-detected, you can also explicitly enable them:
+  react: true,
 
-	// `.eslintignore` is no longer supported in Flat config, use `ignores` instead
-	ignores: [
-		'**/fixtures',
-		// ...globs
-	],
+  // Disable stylistic formatting rules
+  // stylistic: false,
 
-	// Disable jsonc
-	jsonc: false,
+  // Or customize the stylistic rules
+  stylistic: {
+    indent: 'spaces', // or 'tab'
+    quotes: 'single', // or 'double'
+  },
 
-	// Or customize the stylistic rules
-	stylistic: {
-		indent: 2, // 4, or 'tab'
-		quotes: 'single', // Or 'double'
-	},
-
-	// TypeScript and Vue are auto-detected, you can also explicitly enable them:
-	typescript: true,
+  // TypeScript are auto-detected, you can also explicitly enable them:
+  typescript: true,
 });
 ```
 
@@ -170,81 +111,38 @@ The `hexatool` factory function also accepts any number of arbitrary custom conf
 import hexatool from '@hexatool/eslint-config';
 
 export default hexatool(
-	{
-		// Configures for hexatool's config
-	},
+  {
+    // Configures for hexatool's config
+  },
 
-	/*
-	 * From the second arguments they are ESLint Flat Configs
-	 * You can have multiple configs
-	 */
-	{
-		files: ['**/*.ts'],
-		rules: {},
-	},
-	{
-		rules: {},
-	},
+  // From the second arguments they are ESLint Flat Configs
+  // you can have multiple configs
+  {
+    files: ['**/*.ts'],
+    rules: {},
+  },
+  {
+    rules: {},
+  }
 );
 ```
 
-Going more advanced, you can also import fine-grained configs and compose them as you wish:
-
-<details>
-<summary>Advanced Example</summary>
-
-We wouldn't recommend using this style in general unless you know exactly what they are doing, as there are shared
-options between configs and might need extra care to make them consistent.
-
-```js
-// eslint.config.js
-import {
-	astro,
-	combine,
-	gitignore,
-	imports,
-	javascript,
-	json,
-	node,
-	perfectionist,
-	react,
-	stylistic,
-	typescript,
-	unicorn,
-} from '@hexatool/eslint-config';
-
-export default combine(
-	astro(),
-	gitignore(),
-	imports(),
-	javascript(),
-	json(),
-	node(),
-	perfectionist(),
-	react(),
-	stylistic(),
-	typescript(),
-	unicorn(),
-);
-```
-
-</details>
+Check out the [options](https://github.com/hexattol/eslint-config/blob/main/src/options/hexatool-eslint.options.ts) and [factory](https://github.com/hexatool/eslint-config/blob/main/src/factory.ts) for more details.
 
 ### Plugins Renaming
 
 Since flat config requires us to explicitly provide the plugin names (instead of the mandatory convention from npm
 package name), we renamed some plugins to make the overall scope more consistent and easier to write.
 
-| New Prefix      | Original Prefix                      | Source Plugin                      |
-| --------------- | ------------------------------------ | ---------------------------------- |
-| `import/*`      | `import-x/*`                         | [eslint-plugin-import-x]           |
-| `node/*`        | `n/*`                                | [eslint-plugin-n]                  |
-| `json/*`        | `jsonc/*`                            | [eslint-plugin-jsonc]              |
-| `style/*`       | `@stylistic/*`                       | [@stylistic/eslint-plugin]         |
-| `import-sort/*` | `eslint-plugin-simple-import-sort/*` | [eslint-plugin-simple-import-sort] |
-| `test/*`        | `vitest/*`                           | [eslint-plugin-vitest]             |
-| `test/*`        | `no-only-tests/*`                    | [eslint-plugin-no-only-tests]      |
-| `typescript/*`  | `@typescript-eslint/*`               | [@typescript-eslint/eslint-plugin] |
+| New Prefix        | Original Prefix        | Source Plugin                      |
+|-------------------|------------------------|------------------------------------|
+| `style/*`         | `@stylistic/*`         | [@stylistic/eslint-plugin]         |
+| `typescript/*`    | `@typescript-eslint/*` | [@typescript-eslint/eslint-plugin] |
+| `import/*`        | `import-x/*`           | [eslint-plugin-import-x]           |
+| `json/*`          | `jsonc/*`              | [eslint-plugin-jsonc]              |
+| `node/*`          | `n/*`                  | [eslint-plugin-n]                  |
+| `import-sort/*`   | `simple-import-sort/*` | [eslint-plugin-simple-import-sort] |
+| `import-unused/*` | `unused-imports/*`     | [eslint-plugin-unused-imports]     |
 
 When you want to override rules, or disable them inline, you need to update to the new prefix:
 
@@ -277,209 +175,58 @@ type foo = { bar: 2 }
 
 ### Rules Overrides
 
-Certain rules would only be enabled in specific files, for example, `ts/*` rules would only be enabled in `.ts` files
-and `vue/*` rules would only be enabled in `.vue` files. If you want to override the rules, you need to specify the file
-extension:
+Certain rules would only be enabled in specific files, for example, `ts/*` rules would only be enabled in `.ts` files and `vue/*` rules would only be enabled in `.vue` files. If you want to override the rules, you need to specify the file extension:
 
 ```js
 // eslint.config.js
 import hexatool from '@hexatool/eslint-config';
 
 export default hexatool(
-	{
-		typescript: true,
-		vue: true,
-	},
-	{
-		// Remember to specify the file glob here, otherwise it might cause the vue plugin to handle non-vue files
-		files: ['**/*.ts'],
-		rules: {
-			'ts/consistent-type-definitions': [
-				'error',
-				'interface',
-			],
-		},
-	},
-	{
-		// Without `files`, they are general rules for all files
-		rules: {
-			'style/semi': [
-				'error',
-				'never',
-			],
-		},
-	},
+  {
+    react: true,
+    typescript: true,
+  },
+  {
+    // Remember to specify the file glob here, otherwise it might cause the vue plugin to handle non-vue files
+    files: ['**/*.jsx'],
+    rules: {
+      'style/jsx-indent': 'off',
+    },
+  },
+  {
+    // Without `files`, they are general rules for all files
+    rules: {
+      'style/semi': ['error', 'never'],
+    },
+  }
 );
 ```
 
-We also provided a `overrides` options in each integration to make it easier:
+### Config Composer
 
-```js
-// eslint.config.js
-import hexatool from '@hexatool/eslint-config';
-
-export default hexatool({
-	astro: {
-		overrides: {
-			// ...
-		},
-	},
-	typescript: {
-		overrides: {
-			'ts/consistent-type-definitions': [
-				'error',
-				'interface',
-			],
-		},
-	},
-});
-```
-
-### Pipeline
-
-Since v4.0.0, the factory function `hexatool()` returns
-a [pipeline object from `eslint-flat-config-utils`](https://github.com/antfu/eslint-flat-config-utils#pipe) where you
-can chain the methods to compose the config even more flexibly.
+Since v2.10.0, the factory function `hexatool()` returns a [`FlatConfigComposer` object from `eslint-flat-config-utils`](https://github.com/antfu/eslint-flat-config-utils#composer) where you can chain the methods to compose the config even more flexibly.
 
 ```js
 // eslint.config.js
 import hexatool from '@hexatool/eslint-config';
 
 export default hexatool()
-	.prepend(
-		// Some configs before the main config
-	)
-// Overrides any named configs
-	.override(
-		'hexatool/imports',
-		{
-			rules: {
-				'import/order': [
-					'error',
-					{ 'newlines-between': 'always' },
-				],
-			},
-		},
-	)
-// Rename plugin prefixes
-	.renamePlugins({
-		'old-prefix': 'new-prefix',
-		// ...
-	});
+  // some configs before the main config
+  .prepend()
+  // overrides any named configs
+  .override('hexatool/core/rules', {
+    rules: {
+      'no-console': 'off',
+    },
+  })
+  // directly remove a named config
+  .remove('hexatool/typescript/rules/dts')
+  // rename plugin prefixes
+  .renamePlugins({
+    'old-prefix': 'new-prefix',
+    // ...
+  });
 // ...
-```
-
-### Optional Configs
-
-We provide some optional configs for specific use cases, that we don't include their dependencies by default.
-
-#### Formatters
-
-Use external formatters to format files that ESLint cannot handle yet (`.css`, `.html`, etc). Powered
-by [`eslint-plugin-format`](https://github.com/antfu/eslint-plugin-format).
-
-```js
-// eslint.config.js
-import hexatool from '@hexatool/eslint-config';
-
-export default hexatool({
-	formatters: {
-		/**
-		 * Format CSS, LESS, SCSS files, also the `<style>` blocks in Vue
-		 * By default uses Prettier
-		 */
-		css: true,
-		/**
-		 * Format HTML files
-		 * By default uses Prettier
-		 */
-		html: true,
-		/**
-		 * Format Markdown files
-		 * Supports Prettier and dprint
-		 * By default uses Prettier
-		 */
-		markdown: 'prettier',
-	},
-});
-```
-
-Running `npx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
-
-```bash
-bun add eslint-plugin-format --dev
-```
-
-#### React
-
-To enable astro support, you need to explicitly turn it on or have `react` dependency installed in your project:
-
-```js
-// eslint.config.js
-import hexatool from '@hexatool/eslint-config';
-
-export default hexatool({
-	react: true,
-});
-```
-
-You need to install required dependencies:
-
-```bash
-bun add eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-react-refresh --dev
-```
-
-#### Astro
-
-To enable astro support, you need to explicitly turn it on or have `astro` dependency installed in your project:
-
-```js
-// eslint.config.js
-import hexatool from '@hexatool/eslint-config';
-
-export default hexatool({
-	astro: true,
-});
-```
-
-You need to install required dependencies:
-
-```bash
-bun add eslint-plugin-astro --dev
-```
-
-### Type Aware Rules
-
-You can optionally enable the [type aware rules](https://typescript-eslint.io/linting/typed-linting/) by passing the
-options object to the `typescript` config:
-
-```js
-// eslint.config.js
-import hexatool from '@hexatool/eslint-config';
-
-export default hexatool({
-	typescript: {
-		tsconfigPath: 'tsconfig.json',
-	},
-});
-```
-
-### Editor Specific Disables
-
-Some rules are disabled when inside ESLint IDE integrations,
-namely [`unused-imports/no-unused-imports`](https://www.npmjs.com/package/eslint-plugin-unused-imports)
-
-This is to prevent unused imports from getting removed by the IDE during refactoring to get a better developer
-experience. Those rules will be applied when you run ESLint in the terminal or [Lint Staged](#lint-staged). If you don't
-want this behavior, you can disable them:
-
-```js
-// eslint.config.js
-import hexatool from '@hexatool/eslint-config';
-
-export default hexatool({
-	isInEditor: false,
-});
 ```
 
 ### Lint Staged
@@ -488,28 +235,27 @@ If you want to apply lint and auto-fix before every commit, you can add the foll
 
 ```json
 {
-	"simple-git-hooks": {
-		"pre-commit": "bun lint-staged"
-	},
-	"lint-staged": {
-		"*": "eslint --fix"
-	}
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
+  }
 }
 ```
 
 and then
 
 ```bash
-bun add lint-staged simple-git-hooks --dev
+npm i -D lint-staged simple-git-hooks
 
-// to activate the hooks
-bunx simple-git-hooks
+// to active the hooks
+npx simple-git-hooks
 ```
 
 ## View what rules are enabled
 
-I built a visual tool to help you view what rules are enabled in your project and apply them to what
-files, [@eslint/config-inspector](https://github.com/eslint/config-inspector)
+There is a [visual tool](https://github.com/eslint/config-inspector) to help you view what rules are enabled in your  project and apply them to what files.
 
 Go to your project root that contains `eslint.config.js` and run:
 
@@ -521,25 +267,24 @@ bunx @eslint/config-inspector
 
 Here are some inspiration for this package.
 
--   [@antfu/eslint-config](https://github.com/antfu/eslint-config)
--   [eslint-config-codely](https://github.com/CodelyTV/eslint-config-codely)
+- [@antfu/eslint-config](https://github.com/antfu/eslint-config)
+- [eslint-config-codely](https://github.com/CodelyTV/eslint-config-codely)
 
 ## Hexatool Code Quality Standards
 
 Publishing this package we are committing ourselves to the following code quality standards:
 
--   Respect **Semantic Versioning**: No breaking changes in patch or minor versions
--   No surprises in transitive dependencies: Use the **bare minimum dependencies** needed to meet the purpose
--   **One specific purpose** to meet without having to carry a bunch of unnecessary other utilities
--   **Tests** as documentation and usage examples
--   **Well documented ReadMe** showing how to install and use
--   **License favoring Open Source** and collaboration
+- Respect **Semantic Versioning**: No breaking changes in patch or minor versions
+- No surprises in transitive dependencies: Use the **bare minimum dependencies** needed to meet the purpose
+- **One specific purpose** to meet without having to carry a bunch of unnecessary other utilities
+- **Tests** as documentation and usage examples
+- **Well documented ReadMe** showing how to install and use
+- **License favoring Open Source** and collaboration
 
-    [eslint-plugin-import-x]: https://github.com/un-es/eslint-plugin-import-x
-    [eslint-plugin-n]: https://github.com/eslint-community/eslint-plugin-n
-    [eslint-plugin-jsonc]: https://github.com/ota-meshi/eslint-plugin-jsonc
-    [@stylistic/eslint-plugin]: https://github.com/eslint-stylistic/eslint-stylistic
-    [eslint-plugin-simple-import-sort]: https://github.com/lydell/eslint-plugin-simple-import-sort
-    [eslint-plugin-vitest]: https://github.com/veritem/eslint-plugin-vitest
-    [eslint-plugin-no-only-tests]: https://github.com/levibuzolic/eslint-plugin-no-only-tests
-    [@typescript-eslint/eslint-plugin]: https://github.com/typescript-eslint/typescript-eslint
+  [@stylistic/eslint-plugin]: https://github.com/eslint-stylistic/eslint-stylistic
+  [@typescript-eslint/eslint-plugin]: https://github.com/typescript-eslint/typescript-eslint
+  [eslint-plugin-jsonc]: https://github.com/ota-meshi/eslint-plugin-jsonc
+  [eslint-plugin-import-x]: https://github.com/un-es/eslint-plugin-import-x
+  [eslint-plugin-n]: https://github.com/eslint-community/eslint-plugin-n
+  [eslint-plugin-simple-import-sort]: https://github.com/lydell/eslint-plugin-simple-import-sort
+  [eslint-plugin-unused-imports]: https://github.com/sweepline/eslint-plugin-unused-imports

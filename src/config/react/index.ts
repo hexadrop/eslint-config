@@ -1,3 +1,3 @@
-export { default } from './config';
-export * from './globs';
-export type * from './options';
+export { default as react } from './react.config';
+export type * from './react.config-name';
+export * from './react.globs';
