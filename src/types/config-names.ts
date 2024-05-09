@@ -1,4 +1,5 @@
 import type {
+	AstroConfigNames,
 	CoreConfigNames,
 	IgnoreConfigNames,
 	JsonConfigNames,
@@ -9,6 +10,7 @@ import type {
 } from '../config';
 
 export type ConfigNames =
+	| AstroConfigNames
 	| CoreConfigNames
 	| IgnoreConfigNames
 	| JsonConfigNames

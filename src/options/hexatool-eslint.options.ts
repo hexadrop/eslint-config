@@ -166,6 +166,14 @@ interface HexatoolEslintModulesOptions {
 
 interface HexatoolEslintOptions {
 	/**
+	 * Enable astro support.
+	 *
+	 * If `false`, astro support will be disabled.
+	 * If `true`, or empty it will be enabled.
+	 */
+	astro: boolean;
+
+	/**
 	 * Enable ignore support.
 	 *
 	 * Passing an object to configure the options.
@@ -270,6 +278,7 @@ export default function defaultOptions(options: Partial<HexatoolEslintOptions> =
 	let typescript: boolean | string | string[] = false;
 	const installedTypescript = isPackageExists('typescript');
 	const installedReact = isPackageExists('react');
+	const installedAstro = isPackageExists('astro');
 
 	if (options.typescript === true) {
 		typescript = true;
@@ -282,6 +291,7 @@ export default function defaultOptions(options: Partial<HexatoolEslintOptions> =
 	}
 
 	return {
+		astro: options.astro ?? installedAstro,
 		ignore: options.ignore ?? true,
 		imports: options.imports ?? true,
 		json: options.json ?? true,

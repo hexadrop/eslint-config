@@ -3,14 +3,16 @@ import type { ESLint, Linter } from 'eslint';
 import { PLUGIN_RENAME, PLUGIN_RENAME_TYPESCRIPT } from '../../const';
 import type { HexatoolEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
-import { interopDefault, pluginConfigRules } from '../../utils';
+import { ensurePackages, interopDefault, pluginConfigRules } from '../../utils';
 import renameRules from '../../utils/rename-rules';
+import { GLOB_ASTRO } from '../astro';
 import { JAVASCRIPT_GLOBS, SOURCE_GLOBS } from '../core';
 import { GLOB_JSON, GLOB_JSON_PACKAGE, GLOB_JSON_TSCONFIG } from '../json';
 import { GLOB_MARKDOWN, GLOB_MARKDOWN_JSON, GLOB_MARKDOWN_SOURCE, GLOB_MARKDOWN_SOURCE_WITH_JSON } from '../markdown';
 import { DTS_GLOBS, TYPESCRIPT_GLOBS } from '../typescript';
 import {
 	STYLISTIC_CONFIG_NAME_RULES,
+	STYLISTIC_CONFIG_NAME_RULES_ASTRO,
 	STYLISTIC_CONFIG_NAME_RULES_IMPORTS,
 	STYLISTIC_CONFIG_NAME_RULES_JSON,
 	STYLISTIC_CONFIG_NAME_RULES_JSON_PACKAGE,
@@ -19,6 +21,7 @@ import {
 	STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_SOURCE,
 	STYLISTIC_CONFIG_NAME_RULES_PERFECTIONIST,
 	STYLISTIC_CONFIG_NAME_RULES_PRETTIER,
+	STYLISTIC_CONFIG_NAME_RULES_PRETTIER_ASTRO,
 	STYLISTIC_CONFIG_NAME_RULES_PRETTIER_JSON,
 	STYLISTIC_CONFIG_NAME_RULES_PRETTIER_MARKDOWN_SOURCE,
 	STYLISTIC_CONFIG_NAME_RULES_TYPESCRIPT,
@@ -34,6 +37,7 @@ import stylisticOptions from './stylistic.options-stylistic';
 
 export default async function stylistic(options: HexatoolEslintOptions): Promise<TypedFlatConfigItem[]> {
 	const {
+		astro,
 		imports,
 		json,
 		markdown,
@@ -572,6 +576,20 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 		);
 	}
 
+	if (astro) {
+		config.push({
+			files: GLOB_ASTRO,
+			name: STYLISTIC_CONFIG_NAME_RULES_ASTRO,
+			rules: {
+				'astro/prefer-class-list-directive': 'error',
+				'astro/prefer-object-class-list': 'error',
+				'astro/prefer-split-class-list': 'error',
+				'astro/semi': 'error',
+				'style/jsx-indent': 'off',
+			},
+		});
+	}
+
 	if (unicorn) {
 		const unicornFlatRecommended = pluginUnicorn.configs
 			? (pluginUnicorn.configs['flat/recommended'] as Linter.FlatConfig)
@@ -641,6 +659,24 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 				'format/prettier': ['error', prettierConfig],
 			},
 		});
+
+		if (astro) {
+			ensurePackages('prettier-plugin-astro');
+			config.push({
+				files: GLOB_ASTRO,
+				name: STYLISTIC_CONFIG_NAME_RULES_PRETTIER_ASTRO,
+				rules: {
+					'format/prettier': [
+						'error',
+						{
+							...prettierConfig,
+							parser: 'astro',
+							plugins: ['prettier-plugin-astro'],
+						},
+					],
+				},
+			});
+		}
 
 		if (markdown) {
 			config.push({
