@@ -3,6 +3,7 @@ import type { HexatoolEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault, pluginConfigOverrideRules, pluginConfigRules, toArray } from '../../utils';
 import { SOURCE_GLOBS } from '../core';
+import { GLOB_MARKDOWN_SOURCE } from '../markdown';
 import {
 	TYPESCRIPT_CONFIG_NAME_RULES,
 	TYPESCRIPT_CONFIG_NAME_RULES_DTS,
@@ -50,12 +51,13 @@ export default async function typescript(options: HexatoolEslintOptions): Promis
 	} else {
 		config.push(
 			typescriptParser({
-				files: SOURCE_GLOBS,
+				files: [...SOURCE_GLOBS, ...GLOB_MARKDOWN_SOURCE],
 				ignores: TYPESCRIPT_GLOBS,
 				parser,
 			}),
 			typescriptParser({
 				files: TYPESCRIPT_GLOBS,
+				ignores: GLOB_MARKDOWN_SOURCE,
 				parser,
 				tsconfigPath: toArray(typescript),
 			})
@@ -110,6 +112,7 @@ export default async function typescript(options: HexatoolEslintOptions): Promis
 	if (isTypeAware) {
 		config.push({
 			files: TYPESCRIPT_GLOBS,
+			ignores: GLOB_MARKDOWN_SOURCE,
 			name: TYPESCRIPT_CONFIG_NAME_RULES_TYPEAWARE,
 			rules: {
 				...pluginConfigRules(plugin, 'strict-type-checked-only', PLUGIN_RENAME_TYPESCRIPT),

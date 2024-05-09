@@ -175,6 +175,7 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 			name: STYLISTIC_CONFIG_NAME_RULES_TYPESCRIPT,
 			rules: {
 				...pluginConfigRules(plugin, 'stylistic', PLUGIN_RENAME_TYPESCRIPT),
+				[`${typescriptPluginRename}/consistent-type-assertions`]: 'off',
 				[`${typescriptPluginRename}/member-ordering`]: [
 					'error',
 					{
@@ -328,9 +329,12 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 		if (isTypeAware) {
 			config.push({
 				files: TYPESCRIPT_GLOBS,
+				ignores: GLOB_MARKDOWN_SOURCE,
 				name: STYLISTIC_CONFIG_NAME_RULES_TYPESCRIPT_TYPE_AWARE,
 				rules: {
 					...pluginConfigRules(plugin, 'stylistic-type-checked-only', PLUGIN_RENAME_TYPESCRIPT),
+					// Move this rule here cause needs tsconfig.json
+					[`${typescriptPluginRename}/consistent-type-assertions`]: 'error',
 				},
 			});
 		}
