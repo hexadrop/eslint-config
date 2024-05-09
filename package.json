@@ -96,7 +96,7 @@
 	},
 	"devDependencies": {
 		"@changesets/cli": "2.27.1",
-		"@eslint/config-inspector": "0.4.7",
+		"@eslint/config-inspector": "0.4.8",
 		"@hexatool/tsconfig": "20.0.1",
 		"@types/bun": "1.1.0",
 		"@types/eslint": "8.56.10",
