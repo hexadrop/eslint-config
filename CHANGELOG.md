@@ -1,5 +1,15 @@
 # @hexatool/eslint-config
 
+## 4.0.0-beta.8
+
+### Minor Changes
+
+- 154c3f4: Include `module.ignore` options to exclude some modules in `import/no-unresolved` rule
+
+### Patch Changes
+
+- ae31f91: Exclude type aware rules from typescript code blocks in markdown files
+
 ## 4.0.0-beta.7
 
 ### Patch Changes
