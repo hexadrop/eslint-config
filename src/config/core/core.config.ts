@@ -20,7 +20,7 @@ export default async function core(options: HexatoolEslintOptions): Promise<Type
 		imports,
 		json,
 		markdown,
-		module: { amd, commonjs, node: useNodeModules, webpack },
+		module: { amd, commonjs, ignore: ignoreModules, node: useNodeModules, webpack },
 		node,
 	} = options;
 
@@ -308,7 +308,7 @@ export default async function core(options: HexatoolEslintOptions): Promise<Type
 					[`${importXPluginRename}/no-relative-packages`]: 'error',
 					[`${importXPluginRename}/no-restricted-paths`]: 'off',
 					[`${importXPluginRename}/no-self-import`]: 'error',
-					[`${importXPluginRename}/no-unresolved`]: ['error', { amd, commonjs }],
+					[`${importXPluginRename}/no-unresolved`]: ['error', { amd, commonjs, ignore: ignoreModules }],
 					[`${importXPluginRename}/no-useless-path-segments`]: [
 						'error',
 						{

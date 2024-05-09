@@ -13,6 +13,11 @@ export interface HexatoolEslintModulesOptions {
 	 */
 	commonjs: boolean;
 
+	/*
+	 * Ignore node modules to prevent `import/no-unresolved` false positives.
+	 */
+	ignore: string[];
+
 	/**
 	 * Enable use of core node modules.
 	 *
