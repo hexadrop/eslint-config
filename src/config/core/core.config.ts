@@ -10,6 +10,7 @@ import {
 	CORE_CONFIG_NAME_RULES_IMPORTS_STATIC,
 	CORE_CONFIG_NAME_RULES_IMPORTS_STATIC_MARKDOWN_SOURCE,
 	CORE_CONFIG_NAME_RULES_IMPORTS_WARNINGS,
+	CORE_CONFIG_NAME_RULES_MARKDOWN_SOURCE,
 	CORE_CONFIG_NAME_RULES_NODE,
 	CORE_CONFIG_NAME_SETUP,
 } from './core.config-name';
@@ -75,7 +76,6 @@ export default async function core(options: HexatoolEslintOptions): Promise<Type
 				'array-callback-return': ['error', { checkForEach: true }],
 				'block-scoped-var': 'error',
 				camelcase: ['error', { properties: 'never' }],
-				'capitalized-comments': 'error',
 				'consistent-this': ['error', 'self'],
 				'constructor-super': 'error',
 				'default-case-last': 'error',
@@ -350,6 +350,18 @@ export default async function core(options: HexatoolEslintOptions): Promise<Type
 					[`${nodePluginName}/prefer-global/process`]: ['error', 'never'],
 					[`${nodePluginName}/process-exit-as-throw`]: 'error',
 				}),
+			},
+		});
+	}
+
+	if (markdown) {
+		configs.push({
+			files: GLOB_MARKDOWN_SOURCE,
+			name: CORE_CONFIG_NAME_RULES_MARKDOWN_SOURCE,
+			rules: {
+				'line-comment-position': 'off',
+				'multiline-comment-style': 'off',
+				'no-inline-comments': 'off',
 			},
 		});
 	}
