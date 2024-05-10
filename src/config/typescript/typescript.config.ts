@@ -2,7 +2,7 @@ import { PLUGIN_RENAME, PLUGIN_RENAME_TYPESCRIPT } from '../../const';
 import type { HexatoolEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault, pluginConfigOverrideRules, pluginConfigRules, toArray } from '../../utils';
-import { SOURCE_GLOBS } from '../core';
+import { JAVASCRIPT_GLOBS, SOURCE_GLOBS } from '../core';
 import { GLOB_MARKDOWN_SOURCE } from '../markdown';
 import {
 	TYPESCRIPT_CONFIG_NAME_RULES,
@@ -51,8 +51,7 @@ export default async function typescript(options: HexatoolEslintOptions): Promis
 	} else {
 		config.push(
 			typescriptParser({
-				files: [...SOURCE_GLOBS, ...GLOB_MARKDOWN_SOURCE],
-				ignores: TYPESCRIPT_GLOBS,
+				files: [...JAVASCRIPT_GLOBS, ...GLOB_MARKDOWN_SOURCE],
 				parser,
 			}),
 			typescriptParser({
