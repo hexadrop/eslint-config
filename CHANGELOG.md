@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 4.0.0-beta.9
+
+### Patch Changes
+
+- a2b2631: Fix typescript type aware in markdown
+
 ## 4.0.0-beta.8
 
 ### Minor Changes
