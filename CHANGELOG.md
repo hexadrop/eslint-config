@@ -1,89 +1,11 @@
 # @hexatool/eslint-config
 
-## 4.0.0-beta.12
-
-### Patch Changes
-
-- Extract `imports` rules to its own config
-
-## 4.0.0-beta.11
-
-### Patch Changes
-
-- Fix `import-unused/no-unused-vars` rule for markdown codeblocks
-
-## 4.0.0-beta.10
-
-### Patch Changes
-
-- 8a05426: Disable `no-console` rule for markdown codeblocks
-- 8a05426: Disable `implicit-arrow-linebreak` stylistic rule
-- 8a05426: Remove `import-unused/no-unused-vars` for markdown codeblocks
-- 8a05426: Change `style/arrow-parens` rule as needed
-
-## 4.0.0-beta.9
-
-### Patch Changes
-
-- a2b2631: Fix typescript type aware in markdown
-
-## 4.0.0-beta.8
-
-### Minor Changes
-
-- 154c3f4: Include `module.ignore` options to exclude some modules in `import/no-unresolved` rule
-
-### Patch Changes
-
-- ae31f91: Exclude type aware rules from typescript code blocks in markdown files
-
-## 4.0.0-beta.7
-
-### Patch Changes
-
-- Change options
-
-## 4.0.0-beta.6
-
-### Patch Changes
-
-- Remove postinstall script
-
-## 4.0.0-beta.5
-
-### Patch Changes
-
-- 42fa060: Disable `perfectionist/sort-classes` and `perfectionist/sort-interfaces` rules
-
-## 4.0.0-beta.4
-
-### Patch Changes
-
-- Disable `unicorn/no-static-only-class` rule
-
-## 4.0.0-beta.3
-
-### Patch Changes
-
-- Disable `no-duplicate-imports` rule
-
-## 4.0.0-beta.2
-
-### Patch Changes
-
-- f8fb607: Disable `unicorn/consistent-function-scoping` rule
-- 96e1c7a: Disable `import/no-unresolved` rule
-
-## 4.0.0-beta.0
+## 4.0.0
 
 ### Major Changes
 
 - 6b61859: Update dependency eslint to v9
-
-### Patch Changes
-
-- 6162536: Update dependency eslint-plugin-jsonc to v2.15.
-- 6162536: Update typescript-eslint monorepo to v7.6.0
+- Move to flat configuration
 
 ## 3.0.0
 
