@@ -10,7 +10,7 @@ import { extractTypedFlatConfigItem } from './utils';
 
 // eslint-disable-next-line typescript/promise-function-async
 export default function hexatool(
-	optionsOrFlatConfigItem?: HexatoolEslintOptions & TypedFlatConfigItem,
+	optionsOrFlatConfigItem?: Partial<HexatoolEslintOptions> & TypedFlatConfigItem,
 	...configs: ResolvableFlatConfig<TypedFlatConfigItem>[]
 ): FlatConfigComposer<TypedFlatConfigItem, ConfigNames> {
 	const options = defaultOptions(optionsOrFlatConfigItem);
