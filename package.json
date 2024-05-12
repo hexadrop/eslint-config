@@ -39,9 +39,7 @@
 		"lint": "eslint .",
 		"lint:fix": "eslint --fix .",
 		"prepublish": "esno scripts/typegen.ts && tsup",
-		"publish": "changeset publish",
-		"typecheck": "tsc --noEmit",
-		"version": "changeset version"
+		"typecheck": "tsc --noEmit"
 	},
 	"peerDependencies": {
 		"astro-eslint-parser": "^1.0.0",
