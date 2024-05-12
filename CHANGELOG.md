@@ -1,5 +1,14 @@
 # @hexatool/eslint-config
 
+## 4.0.0-beta.10
+
+### Patch Changes
+
+- 8a05426: Disable `no-console` rule for markdown codeblocks
+- 8a05426: Disable `implicit-arrow-linebreak` stylistic rule
+- 8a05426: Remove `import-unused/no-unused-vars` for markdown codeblocks
+- 8a05426: Change `style/arrow-parens` rule as needed
+
 ## 4.0.0-beta.9
 
 ### Patch Changes
