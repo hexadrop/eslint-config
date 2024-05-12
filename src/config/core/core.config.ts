@@ -331,6 +331,7 @@ export default async function core(options: HexatoolEslintOptions): Promise<Type
 				name: CORE_CONFIG_NAME_RULES_IMPORTS_STATIC_MARKDOWN_SOURCE,
 				rules: {
 					'import/no-unresolved': 'off',
+					'import-unused/no-unused-vars': 'off',
 				},
 			});
 		}
@@ -361,6 +362,7 @@ export default async function core(options: HexatoolEslintOptions): Promise<Type
 			rules: {
 				'line-comment-position': 'off',
 				'multiline-comment-style': 'off',
+				'no-console': 'off',
 				'no-inline-comments': 'off',
 			},
 		});

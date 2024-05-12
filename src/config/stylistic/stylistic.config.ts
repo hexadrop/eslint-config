@@ -90,7 +90,8 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 			rules: {
 				...renameRules(pluginStylisticRules, PLUGIN_RENAME),
 				curly: ['error', 'all'],
-				'style/implicit-arrow-linebreak': ['error', 'beside'],
+				'style/arrow-parens': ['error', 'as-needed'],
+				'style/implicit-arrow-linebreak': 'off',
 				'style/jsx-sort-props': 'error',
 				'style/max-len': ['error', { code: printWidth, ignoreComments: true, ignoreUrls: true }],
 				'style/no-extra-semi': 'error',
