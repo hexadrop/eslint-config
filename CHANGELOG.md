@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 4.0.1
+
+### Patch Changes
+
+- ea77317: Disable `import/default`, `import/no-deprecated`, `import/no-named-as-default`, `import/no-named-as-default-member`, `import/namespace` from eslint.config.js
+
 ## 4.0.0
 
 ### Major Changes
