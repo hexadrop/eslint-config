@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 4.0.2
+
+### Patch Changes
+
+- 3f30be3: Makes HexatoolEslintOptions partial
+
 ## 4.0.1
 
 ### Patch Changes
