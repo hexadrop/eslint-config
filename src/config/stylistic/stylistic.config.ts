@@ -14,6 +14,7 @@ import {
 	STYLISTIC_CONFIG_NAME_RULES,
 	STYLISTIC_CONFIG_NAME_RULES_ASTRO,
 	STYLISTIC_CONFIG_NAME_RULES_IMPORTS,
+	STYLISTIC_CONFIG_NAME_RULES_IMPORTS_MARKDOWN_SOURCE,
 	STYLISTIC_CONFIG_NAME_RULES_JSON,
 	STYLISTIC_CONFIG_NAME_RULES_JSON_PACKAGE,
 	STYLISTIC_CONFIG_NAME_RULES_JSON_TSCONFIG,
@@ -167,6 +168,15 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 				],
 			},
 		});
+		if (markdown) {
+			config.push({
+				files: GLOB_MARKDOWN_SOURCE,
+				name: STYLISTIC_CONFIG_NAME_RULES_IMPORTS_MARKDOWN_SOURCE,
+				rules: {
+					[`${unusedImportsPrefix}/no-unused-vars`]: ['off'],
+				},
+			});
+		}
 	}
 
 	if (typescript) {

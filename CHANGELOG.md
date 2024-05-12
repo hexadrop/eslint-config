@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 4.0.0-beta.11
+
+### Patch Changes
+
+- Fix `import-unused/no-unused-vars` rule for markdown codeblocks
+
 ## 4.0.0-beta.10
 
 ### Patch Changes

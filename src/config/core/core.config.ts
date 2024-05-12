@@ -330,8 +330,7 @@ export default async function core(options: HexatoolEslintOptions): Promise<Type
 				files: json ? GLOB_MARKDOWN_SOURCE_WITH_JSON : GLOB_MARKDOWN_SOURCE,
 				name: CORE_CONFIG_NAME_RULES_IMPORTS_STATIC_MARKDOWN_SOURCE,
 				rules: {
-					'import/no-unresolved': 'off',
-					'import-unused/no-unused-vars': 'off',
+					[`${importXPluginRename}/no-unresolved`]: 'off',
 				},
 			});
 		}
