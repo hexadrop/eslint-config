@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 4.0.0-beta.12
+
+### Patch Changes
+
+- Extract `imports` rules to its own config
+
 ## 4.0.0-beta.11
 
 ### Patch Changes

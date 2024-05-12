@@ -1,7 +1,7 @@
 import type { ResolvableFlatConfig } from 'eslint-flat-config-utils';
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 
-import { astro, core, ignore, json, markdown, react, stylistic, typescript } from './config';
+import { astro, core, ignore, imports, json, markdown, react, stylistic, typescript } from './config';
 import { PLUGIN_RENAME } from './const';
 import type { HexatoolEslintOptions } from './options';
 import defaultOptions from './options/hexatool-eslint.options';
@@ -23,6 +23,7 @@ export default function hexatool(
 		react(options),
 		json(options),
 		markdown(options),
+		imports(options),
 		stylistic(options)
 	).renamePlugins(PLUGIN_RENAME);
 

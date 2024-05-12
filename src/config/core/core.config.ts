@@ -4,12 +4,9 @@ import { PLUGIN_RENAME } from '../../const';
 import type { HexatoolEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault } from '../../utils';
-import { GLOB_MARKDOWN_SOURCE, GLOB_MARKDOWN_SOURCE_WITH_JSON } from '../markdown';
+import { GLOB_MARKDOWN_SOURCE } from '../markdown';
 import {
 	CORE_CONFIG_NAME_RULES,
-	CORE_CONFIG_NAME_RULES_IMPORTS_STATIC,
-	CORE_CONFIG_NAME_RULES_IMPORTS_STATIC_MARKDOWN_SOURCE,
-	CORE_CONFIG_NAME_RULES_IMPORTS_WARNINGS,
 	CORE_CONFIG_NAME_RULES_MARKDOWN_SOURCE,
 	CORE_CONFIG_NAME_RULES_NODE,
 	CORE_CONFIG_NAME_SETUP,
@@ -17,15 +14,11 @@ import {
 
 export default async function core(options: HexatoolEslintOptions): Promise<TypedFlatConfigItem[]> {
 	const {
-		imports,
-		json,
 		markdown,
-		module: { amd, commonjs, ignore: ignoreModules, node: useNodeModules, webpack },
+		module: { node: useNodeModules },
 		node,
 	} = options;
 
-	const importXPlugin = 'import-x';
-	const importXPluginRename = PLUGIN_RENAME[importXPlugin];
 	const nodePluginName = PLUGIN_RENAME.n;
 
 	const configs: TypedFlatConfigItem[] = [
@@ -54,18 +47,8 @@ export default async function core(options: HexatoolEslintOptions): Promise<Type
 			},
 			name: CORE_CONFIG_NAME_SETUP,
 			plugins: {
-				...(imports && {
-					[importXPluginRename]: await interopDefault(import('eslint-plugin-import-x')),
-				}),
 				...(node && {
 					[nodePluginName]: await interopDefault(import('eslint-plugin-n')),
-				}),
-			},
-			settings: {
-				...(imports && {
-					[`${importXPlugin}/resolver`]: {
-						node: true,
-					},
 				}),
 			},
 		},
@@ -269,72 +252,6 @@ export default async function core(options: HexatoolEslintOptions): Promise<Type
 			},
 		},
 	];
-
-	if (imports) {
-		configs.push(
-			{
-				name: CORE_CONFIG_NAME_RULES_IMPORTS_WARNINGS,
-				rules: {
-					// Warnings rules https://github.com/un-ts/eslint-plugin-import-x?tab=readme-ov-file#helpful-warnings
-					[`${importXPluginRename}/export`]: 'error',
-					[`${importXPluginRename}/no-deprecated`]: 'warn',
-					[`${importXPluginRename}/no-empty-named-blocks`]: 'error',
-					[`${importXPluginRename}/no-mutable-exports`]: 'error',
-					[`${importXPluginRename}/no-named-as-default`]: 'warn',
-					[`${importXPluginRename}/no-named-as-default-member`]: 'warn',
-					// Module system rules
-					...(!amd && {
-						[`${importXPluginRename}/no-amd`]: 'error',
-					}),
-					...(!commonjs && {
-						[`${importXPluginRename}/no-commonjs`]: 'error',
-					}),
-					...(!useNodeModules && {
-						[`${importXPluginRename}/no-nodejs-modules`]: 'error',
-					}),
-
-					[`${importXPluginRename}/default`]: 'error',
-				},
-			},
-			{
-				name: CORE_CONFIG_NAME_RULES_IMPORTS_STATIC,
-				rules: {
-					// Static analysis rules https://github.com/un-ts/eslint-plugin-import-x?tab=readme-ov-file#static-analysis
-					[`${importXPluginRename}/named`]: 'error',
-					[`${importXPluginRename}/namespace`]: 'error',
-					[`${importXPluginRename}/no-absolute-path`]: 'error',
-					[`${importXPluginRename}/no-cycle`]: 'error',
-					[`${importXPluginRename}/no-import-module-exports`]: 'error',
-					[`${importXPluginRename}/no-relative-packages`]: 'error',
-					[`${importXPluginRename}/no-restricted-paths`]: 'off',
-					[`${importXPluginRename}/no-self-import`]: 'error',
-					[`${importXPluginRename}/no-unresolved`]: ['error', { amd, commonjs, ignore: ignoreModules }],
-					[`${importXPluginRename}/no-useless-path-segments`]: [
-						'error',
-						{
-							commonjs,
-							noUselessIndex: true,
-						},
-					],
-					...(!webpack && {
-						[`${importXPluginRename}/no-webpack-loader-syntax`]: 'error',
-					}),
-					...(commonjs && {
-						[`${importXPluginRename}/no-dynamic-require`]: 'error',
-					}),
-				},
-			}
-		);
-		if (markdown) {
-			configs.push({
-				files: json ? GLOB_MARKDOWN_SOURCE_WITH_JSON : GLOB_MARKDOWN_SOURCE,
-				name: CORE_CONFIG_NAME_RULES_IMPORTS_STATIC_MARKDOWN_SOURCE,
-				rules: {
-					[`${importXPluginRename}/no-unresolved`]: 'off',
-				},
-			});
-		}
-	}
 
 	if (node) {
 		configs.push({

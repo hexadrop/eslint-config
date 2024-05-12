@@ -7,16 +7,14 @@ import { GLOB_MARKDOWN_SOURCE } from '../markdown';
 import {
 	TYPESCRIPT_CONFIG_NAME_RULES,
 	TYPESCRIPT_CONFIG_NAME_RULES_DTS,
-	TYPESCRIPT_CONFIG_NAME_RULES_IMPORTS,
 	TYPESCRIPT_CONFIG_NAME_RULES_TYPEAWARE,
 	TYPESCRIPT_CONFIG_NAME_SETUP,
-	TYPESCRIPT_CONFIG_NAME_SETUP_IMPORTS,
 } from './typescript.config-name';
 import { DTS_GLOBS, TYPESCRIPT_GLOBS } from './typescript.globs';
 import typescriptParser from './typescript.parser';
 
 export default async function typescript(options: HexatoolEslintOptions): Promise<TypedFlatConfigItem[]> {
-	const { imports, typescript } = options;
+	const { typescript } = options;
 	if (typescript === false) {
 		return [];
 	}
@@ -26,8 +24,6 @@ export default async function typescript(options: HexatoolEslintOptions): Promis
 		interopDefault(import('@typescript-eslint/parser')),
 	] as const);
 
-	const importXPlugin = 'import-x';
-	const importXPluginRename = PLUGIN_RENAME[importXPlugin];
 	const typescriptPluginRename = PLUGIN_RENAME['@typescript-eslint'];
 
 	const config: TypedFlatConfigItem[] = [];
@@ -61,28 +57,6 @@ export default async function typescript(options: HexatoolEslintOptions): Promis
 				tsconfigPath: toArray(typescript),
 			})
 		);
-	}
-
-	if (imports) {
-		const typeScriptExtensions = ['.ts', '.tsx'] as const;
-		const allExtensions = [...typeScriptExtensions, '.js', '.jsx'] as const;
-		config.push({
-			files: TYPESCRIPT_GLOBS,
-			name: TYPESCRIPT_CONFIG_NAME_SETUP_IMPORTS,
-			settings: {
-				[`${importXPlugin}/extensions`]: typeScriptExtensions,
-				[`${importXPlugin}/external-module-folders`]: ['node_modules', 'node_modules/@types'],
-				[`${importXPlugin}/parsers`]: {
-					'@typescript-eslint/parser': [...typeScriptExtensions, '.cts', '.mts'],
-				},
-				[`${importXPlugin}/resolver`]: {
-					node: {
-						extensions: allExtensions,
-					},
-					typescript: true,
-				},
-			},
-		});
 	}
 
 	config.push(
@@ -120,16 +94,6 @@ export default async function typescript(options: HexatoolEslintOptions): Promis
 				[`${typescriptPluginRename}/prefer-readonly`]: ['error'],
 				[`${typescriptPluginRename}/promise-function-async`]: ['error', { checkArrowFunctions: false }],
 				[`${typescriptPluginRename}/switch-exhaustiveness-check`]: ['error'],
-			},
-		});
-	}
-
-	if (imports) {
-		config.push({
-			files: TYPESCRIPT_GLOBS,
-			name: TYPESCRIPT_CONFIG_NAME_RULES_IMPORTS,
-			rules: {
-				[`${importXPluginRename}/named`]: 'off',
 			},
 		});
 	}

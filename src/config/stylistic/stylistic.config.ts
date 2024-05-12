@@ -13,8 +13,6 @@ import { DTS_GLOBS, TYPESCRIPT_GLOBS } from '../typescript';
 import {
 	STYLISTIC_CONFIG_NAME_RULES,
 	STYLISTIC_CONFIG_NAME_RULES_ASTRO,
-	STYLISTIC_CONFIG_NAME_RULES_IMPORTS,
-	STYLISTIC_CONFIG_NAME_RULES_IMPORTS_MARKDOWN_SOURCE,
 	STYLISTIC_CONFIG_NAME_RULES_JSON,
 	STYLISTIC_CONFIG_NAME_RULES_JSON_PACKAGE,
 	STYLISTIC_CONFIG_NAME_RULES_JSON_TSCONFIG,
@@ -37,25 +35,13 @@ import prettierOptions from './stylistic.options-prettier';
 import stylisticOptions from './stylistic.options-stylistic';
 
 export default async function stylistic(options: HexatoolEslintOptions): Promise<TypedFlatConfigItem[]> {
-	const {
-		astro,
-		imports,
-		json,
-		markdown,
-		module: { webpack },
-		stylistic,
-		typescript,
-	} = options;
+	const { astro, json, markdown, stylistic, typescript } = options;
 	if (stylistic === false) {
 		return [];
 	}
 	const { format, indent, indentSize, perfectionist, printWidth, unicorn } = stylistic;
 	const isTypeAware = typeof typescript !== 'boolean';
 	const typescriptPluginRename = PLUGIN_RENAME['@typescript-eslint'];
-	const importXPlugin = 'import-x';
-	const importXPluginRename = PLUGIN_RENAME[importXPlugin];
-	const unusedImportsPrefix = PLUGIN_RENAME['unused-imports'];
-	const importSortPrefix = PLUGIN_RENAME['simple-import-sort'];
 
 	const pluginStylistic = await interopDefault(import('@stylistic/eslint-plugin'));
 	const pluginStylisticOptions = stylisticOptions(stylistic);
@@ -76,10 +62,6 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 				}),
 				...(perfectionist && {
 					perfectionist: pluginPerfectionist.plugins.perfectionist,
-				}),
-				...(imports && {
-					[importSortPrefix]: await interopDefault(import('eslint-plugin-simple-import-sort')),
-					[unusedImportsPrefix]: await interopDefault(import('eslint-plugin-unused-imports')),
 				}),
 				...(format && {
 					format: await interopDefault(import('eslint-plugin-format')),
@@ -121,62 +103,6 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 				},
 			}
 		);
-	}
-
-	if (imports) {
-		config.push({
-			name: STYLISTIC_CONFIG_NAME_RULES_IMPORTS,
-			rules: {
-				[`${importXPluginRename}/consistent-type-specifier-style`]: ['error', 'prefer-top-level'],
-				[`${importXPluginRename}/exports-last`]: 'error',
-				[`${importXPluginRename}/first`]: 'error',
-				[`${importXPluginRename}/group-exports`]: 'error',
-				[`${importXPluginRename}/newline-after-import`]: ['error', { count: 1 }],
-				[`${importXPluginRename}/no-anonymous-default-export`]: 'error',
-				[`${importXPluginRename}/no-duplicates`]: 'error',
-				[`${importXPluginRename}/no-namespace`]: 'error',
-				[`${importXPluginRename}/prefer-default-export`]: 'error',
-				...(webpack && {
-					[`${importXPluginRename}/dynamic-import-chunkname`]: 'error',
-				}),
-
-				// Sorting rules
-				[`${importSortPrefix}/exports`]: 'error',
-				[`${importSortPrefix}/imports`]: 'error',
-
-				// Unused imports rules
-				[`${unusedImportsPrefix}/no-unused-imports`]: 'error',
-				[`${unusedImportsPrefix}/no-unused-vars`]: [
-					'warn',
-					{
-						args: 'after-used',
-						argsIgnorePattern: '^_',
-						ignoreRestSiblings: true,
-						vars: 'all',
-						varsIgnorePattern: '^_',
-					},
-				],
-				'sort-imports': [
-					'error',
-					{
-						allowSeparatedGroups: false,
-						ignoreCase: false,
-						ignoreDeclarationSort: true,
-						ignoreMemberSort: false,
-						memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
-					},
-				],
-			},
-		});
-		if (markdown) {
-			config.push({
-				files: GLOB_MARKDOWN_SOURCE,
-				name: STYLISTIC_CONFIG_NAME_RULES_IMPORTS_MARKDOWN_SOURCE,
-				rules: {
-					[`${unusedImportsPrefix}/no-unused-vars`]: ['off'],
-				},
-			});
-		}
 	}
 
 	if (typescript) {
