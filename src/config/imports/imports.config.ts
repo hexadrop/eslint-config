@@ -2,15 +2,18 @@ import { PLUGIN_RENAME } from '../../const';
 import type { HexatoolEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault } from '../../utils';
+import { ESLINT_CONFIG_GLOBS } from '../core';
 import { GLOB_MARKDOWN_SOURCE, GLOB_MARKDOWN_SOURCE_WITH_JSON } from '../markdown';
 import { TYPESCRIPT_GLOBS } from '../typescript';
 import {
 	IMPORTS_CONFIG_NAME_RULES_STATIC,
+	IMPORTS_CONFIG_NAME_RULES_STATIC_ESLINT_CONFIG,
 	IMPORTS_CONFIG_NAME_RULES_STATIC_MARKDOWN_SOURCE,
 	IMPORTS_CONFIG_NAME_RULES_STYLISTIC,
 	IMPORTS_CONFIG_NAME_RULES_STYLISTIC_MARKDOWN_SOURCE,
 	IMPORTS_CONFIG_NAME_RULES_TYPESCRIPT,
 	IMPORTS_CONFIG_NAME_RULES_WARNINGS,
+	IMPORTS_CONFIG_NAME_RULES_WARNINGS_ESLINT_CONFIG,
 	IMPORTS_CONFIG_NAME_SETUP,
 	IMPORTS_CONFIG_NAME_SETUP_TYPESCRIPT,
 } from './imports.config-name';
@@ -123,6 +126,23 @@ export default async function imports(options: HexatoolEslintOptions): Promise<T
 				...(commonjs && {
 					[`${importXPluginRename}/no-dynamic-require`]: 'error',
 				}),
+			},
+		},
+		{
+			files: ESLINT_CONFIG_GLOBS,
+			name: IMPORTS_CONFIG_NAME_RULES_WARNINGS_ESLINT_CONFIG,
+			rules: {
+				[`${importXPluginRename}/default`]: 'off',
+				[`${importXPluginRename}/no-deprecated`]: 'off',
+				[`${importXPluginRename}/no-named-as-default`]: 'off',
+				[`${importXPluginRename}/no-named-as-default-member`]: 'off',
+			},
+		},
+		{
+			files: ESLINT_CONFIG_GLOBS,
+			name: IMPORTS_CONFIG_NAME_RULES_STATIC_ESLINT_CONFIG,
+			rules: {
+				[`${importXPluginRename}/namespace`]: 'off',
 			},
 		}
 	);
