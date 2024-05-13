@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 4.0.3
+
+### Patch Changes
+
+- 3c5623c: Update `eslint` `peerDependency`
+
 ## 4.0.2
 
 ### Patch Changes
