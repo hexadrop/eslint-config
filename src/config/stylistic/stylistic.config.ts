@@ -8,7 +8,7 @@ import renameRules from '../../utils/rename-rules';
 import { GLOB_ASTRO } from '../astro';
 import { JAVASCRIPT_GLOBS, SOURCE_GLOBS } from '../core';
 import { GLOB_JSON, GLOB_JSON_PACKAGE, GLOB_JSON_TSCONFIG } from '../json';
-import { GLOB_MARKDOWN, GLOB_MARKDOWN_JSON, GLOB_MARKDOWN_SOURCE, GLOB_MARKDOWN_SOURCE_WITH_JSON } from '../markdown';
+import { GLOB_MARKDOWN, GLOB_MARKDOWN_ASTRO, GLOB_MARKDOWN_JSON, GLOB_MARKDOWN_SOURCE } from '../markdown';
 import { DTS_GLOBS, TYPESCRIPT_GLOBS } from '../typescript';
 import {
 	STYLISTIC_CONFIG_NAME_RULES,
@@ -106,7 +106,11 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 				},
 			},
 			{
-				files: json ? GLOB_MARKDOWN_SOURCE_WITH_JSON : GLOB_MARKDOWN_SOURCE,
+				files: [
+					...GLOB_MARKDOWN_SOURCE,
+					...(json ? GLOB_MARKDOWN_JSON : []),
+					...(astro ? GLOB_MARKDOWN_ASTRO : []),
+				],
 				name: STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_SOURCE,
 				rules: {
 					'style/indent': ['error', 2],
@@ -580,7 +584,11 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 					},
 				},
 				{
-					files: json ? GLOB_MARKDOWN_SOURCE_WITH_JSON : GLOB_MARKDOWN_SOURCE,
+					files: [
+						...GLOB_MARKDOWN_SOURCE,
+						...(json ? GLOB_MARKDOWN_JSON : []),
+						...(astro ? GLOB_MARKDOWN_ASTRO : []),
+					],
 					name: STYLISTIC_CONFIG_NAME_RULES_UNICORN_MARKDOWN_SOURCE,
 					rules: {
 						'unicorn/filename-case': 'off',
@@ -607,7 +615,11 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 		const prettierConfig = prettierOptions(stylistic);
 		config.push({
 			files: typescript ? SOURCE_GLOBS : JAVASCRIPT_GLOBS,
-			ignores: json ? GLOB_MARKDOWN_SOURCE_WITH_JSON : GLOB_MARKDOWN_SOURCE,
+			ignores: [
+				...GLOB_MARKDOWN_SOURCE,
+				...(json ? GLOB_MARKDOWN_JSON : []),
+				...(astro ? GLOB_MARKDOWN_ASTRO : []),
+			],
 			name: STYLISTIC_CONFIG_NAME_RULES_PRETTIER,
 			rules: {
 				'format/prettier': ['error', prettierConfig],
@@ -634,7 +646,11 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 
 		if (markdown) {
 			config.push({
-				files: json ? GLOB_MARKDOWN_SOURCE_WITH_JSON : GLOB_MARKDOWN_SOURCE,
+				files: [
+					...GLOB_MARKDOWN_SOURCE,
+					...(json ? GLOB_MARKDOWN_JSON : []),
+					...(astro ? GLOB_MARKDOWN_ASTRO : []),
+				],
 				name: STYLISTIC_CONFIG_NAME_RULES_PRETTIER_MARKDOWN_SOURCE,
 				rules: {
 					'format/prettier': ['error', { ...prettierConfig, tabWidth: 2, useTabs: false }],
