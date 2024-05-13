@@ -16,7 +16,6 @@ import {
 	STYLISTIC_CONFIG_NAME_RULES_JSON,
 	STYLISTIC_CONFIG_NAME_RULES_JSON_PACKAGE,
 	STYLISTIC_CONFIG_NAME_RULES_JSON_TSCONFIG,
-	STYLISTIC_CONFIG_NAME_RULES_MARKDOWN,
 	STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_ASRTO,
 	STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_JSON,
 	STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_SOURCE,
@@ -41,7 +40,7 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 	if (stylistic === false) {
 		return [];
 	}
-	const { format, indent, indentSize, perfectionist, printWidth, unicorn } = stylistic;
+	const { format, indent, indentSize, perfectionist, unicorn } = stylistic;
 	const isTypeAware = typeof typescript !== 'boolean';
 	const typescriptPluginRename = PLUGIN_RENAME['@typescript-eslint'];
 	const stylisticPluginRename = PLUGIN_RENAME['@stylistic'];
@@ -76,50 +75,44 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 			name: STYLISTIC_CONFIG_NAME_RULES,
 			rules: {
 				...renameRules(pluginStylisticRules, PLUGIN_RENAME),
-				curly: ['error', 'all'],
-				'style/arrow-parens': ['error', 'as-needed'],
-				'style/implicit-arrow-linebreak': 'off',
-				'style/indent-binary-ops': 'off',
-				'style/jsx-closing-bracket-location': [
+				[`${stylisticPluginRename}/arrow-parens`]: ['error', 'as-needed'],
+				[`${stylisticPluginRename}/implicit-arrow-linebreak`]: 'off',
+				[`${stylisticPluginRename}/indent-binary-ops`]: 'off',
+				[`${stylisticPluginRename}/jsx-closing-bracket-location`]: [
 					'error',
 					{
 						nonEmpty: 'after-props',
 						selfClosing: 'tag-aligned',
 					},
 				],
-				'style/jsx-quotes': ['error', 'prefer-single'],
-				'style/jsx-sort-props': 'error',
-				'style/max-len': ['error', { code: printWidth, ignoreComments: true, ignoreUrls: true }],
-				'style/no-extra-semi': 'error',
-				'style/padding-line-between-statements': ['error', { blankLine: 'always', next: 'return', prev: '*' }],
+				[`${stylisticPluginRename}/jsx-quotes`]: ['error', 'prefer-single'],
+				[`${stylisticPluginRename}/jsx-sort-props`]: 'error',
+				[`${stylisticPluginRename}/max-len`]: 'off',
+				[`${stylisticPluginRename}/no-extra-semi`]: 'error',
+				[`${stylisticPluginRename}/padding-line-between-statements`]: [
+					'error',
+					{ blankLine: 'always', next: 'return', prev: '*' },
+				],
+				curly: ['error', 'all'],
 				...(format && {
-					'style/operator-linebreak': 'off',
+					[`${stylisticPluginRename}/operator-linebreak`]: 'off',
 				}),
 			},
 		},
 	];
 
 	if (markdown) {
-		config.push(
-			{
-				files: GLOB_MARKDOWN,
-				name: STYLISTIC_CONFIG_NAME_RULES_MARKDOWN,
-				rules: {
-					'style/max-len': 'off',
-				},
+		config.push({
+			files: [
+				...GLOB_MARKDOWN_SOURCE,
+				...(json ? GLOB_MARKDOWN_JSON : []),
+				...(astro ? GLOB_MARKDOWN_ASTRO : []),
+			],
+			name: STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_SOURCE,
+			rules: {
+				[`${stylisticPluginRename}/indent`]: ['error', 2],
 			},
-			{
-				files: [
-					...GLOB_MARKDOWN_SOURCE,
-					...(json ? GLOB_MARKDOWN_JSON : []),
-					...(astro ? GLOB_MARKDOWN_ASTRO : []),
-				],
-				name: STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_SOURCE,
-				rules: {
-					'style/indent': ['error', 2],
-				},
-			}
-		);
+		});
 	}
 
 	if (typescript) {
@@ -321,7 +314,6 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 					],
 					[`${jsonPluginRename}/quote-props`]: 'error',
 					[`${jsonPluginRename}/quotes`]: 'error',
-					[`${stylisticPluginRename}/max-len`]: 'off',
 				},
 			},
 			{
@@ -543,12 +535,12 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 			files: GLOB_ASTRO,
 			name: STYLISTIC_CONFIG_NAME_RULES_ASTRO,
 			rules: {
+				[`${stylisticPluginRename}/jsx-indent`]: 'off',
+				[`${stylisticPluginRename}/jsx-one-expression-per-line`]: 'off',
 				'astro/prefer-class-list-directive': 'error',
 				'astro/prefer-object-class-list': 'error',
 				'astro/prefer-split-class-list': 'error',
 				'astro/semi': 'error',
-				'style/jsx-indent': 'off',
-				'style/jsx-one-expression-per-line': 'off',
 			},
 		});
 	}
@@ -698,7 +690,7 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 			name: STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_ASRTO,
 
 			rules: {
-				'style/indent': ['error', 2],
+				[`${stylisticPluginRename}/indent`]: ['error', 2],
 			},
 		});
 	}
