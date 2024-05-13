@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 4.1.0-beta.3
+
+### Patch Changes
+
+- 67cc847: Fix `style/indent` rule in astro markdown codeblock
+
 ## 4.1.0-beta.2
 
 ### Patch Changes
