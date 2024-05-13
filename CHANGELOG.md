@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 4.0.5
+
+### Patch Changes
+
+- f7e4071: Remove `style/max-len` rule form json files
+
 ## 4.0.3
 
 ### Patch Changes
