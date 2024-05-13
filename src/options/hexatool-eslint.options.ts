@@ -143,7 +143,7 @@ export default function defaultOptions(options: Partial<HexatoolEslintOptions> =
 		module: {
 			amd: false,
 			commonjs: false,
-			ignore: ['bun:test', ...(options.module?.ignore ?? [])],
+			ignore: [String.raw`bun\:.*`, String.raw`astro\:.*`, ...(options.module?.ignore ?? [])],
 			node: true,
 			webpack: false,
 			...options.module,
