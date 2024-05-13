@@ -21,7 +21,7 @@ import {
 	STYLISTIC_CONFIG_NAME_RULES_PERFECTIONIST,
 	STYLISTIC_CONFIG_NAME_RULES_PRETTIER,
 	STYLISTIC_CONFIG_NAME_RULES_PRETTIER_ASTRO,
-	STYLISTIC_CONFIG_NAME_RULES_PRETTIER_JSON,
+	STYLISTIC_CONFIG_NAME_RULES_PRETTIER_MARKDOWN_JSON,
 	STYLISTIC_CONFIG_NAME_RULES_PRETTIER_MARKDOWN_SOURCE,
 	STYLISTIC_CONFIG_NAME_RULES_TYPESCRIPT,
 	STYLISTIC_CONFIG_NAME_RULES_TYPESCRIPT_DTS,
@@ -646,11 +646,7 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 
 		if (markdown) {
 			config.push({
-				files: [
-					...GLOB_MARKDOWN_SOURCE,
-					...(json ? GLOB_MARKDOWN_JSON : []),
-					...(astro ? GLOB_MARKDOWN_ASTRO : []),
-				],
+				files: GLOB_MARKDOWN_SOURCE,
 				name: STYLISTIC_CONFIG_NAME_RULES_PRETTIER_MARKDOWN_SOURCE,
 				rules: {
 					'format/prettier': ['error', { ...prettierConfig, tabWidth: 2, useTabs: false }],
@@ -661,7 +657,8 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 		if (json) {
 			config.push({
 				files: GLOB_MARKDOWN_JSON,
-				name: STYLISTIC_CONFIG_NAME_RULES_PRETTIER_JSON,
+				name: STYLISTIC_CONFIG_NAME_RULES_PRETTIER_MARKDOWN_JSON,
+
 				rules: {
 					'json/indent': ['error', 2],
 				},
