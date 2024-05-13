@@ -80,7 +80,7 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 					'error',
 					{
 						nonEmpty: 'after-props',
-						selfClosing: 'after-props',
+						selfClosing: 'tag-aligned',
 					},
 				],
 				'style/jsx-quotes': ['error', 'prefer-single'],
