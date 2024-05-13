@@ -96,7 +96,7 @@
 		"@changesets/cli": "2.27.1",
 		"@eslint/config-inspector": "0.4.8",
 		"@hexatool/tsconfig": "20.0.1",
-		"@types/bun": "1.1.1",
+		"@types/bun": "1.1.2",
 		"@types/eslint": "8.56.10",
 		"astro": "4.8.2",
 		"astro-eslint-parser": "1.0.2",
