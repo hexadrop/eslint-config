@@ -1,5 +1,12 @@
 # @hexatool/eslint-config
 
+## 4.1.0-beta.1
+
+### Patch Changes
+
+- e8b08d4: Fix `module.ignore` default options
+- 87e970f: Change MARKDOWN_SOURCE globs
+
 ## 4.1.0-beta.0
 
 ### Minor Changes
