@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 4.0.8
+
+### Patch Changes
+
+- 4241145: Fix rules `style/jsx-closing-bracket-location` and `style/jsx-quotes`
+
 ## 4.0.7
 
 ### Patch Changes
