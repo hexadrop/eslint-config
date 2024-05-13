@@ -537,6 +537,7 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 				'astro/prefer-split-class-list': 'error',
 				'astro/semi': 'error',
 				'style/jsx-indent': 'off',
+				'style/jsx-one-expression-per-line': 'off',
 			},
 		});
 	}
