@@ -555,6 +555,7 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 				'unicorn/no-array-reduce': 'off',
 				'unicorn/no-nested-ternary': 'off',
 				'unicorn/no-static-only-class': 'off',
+				'unicorn/prefer-dom-node-dataset': 'off',
 				'unicorn/prevent-abbreviations': [
 					'error',
 					{
