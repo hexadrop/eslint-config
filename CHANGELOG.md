@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 4.1.0-beta.6
+
+### Patch Changes
+
+- 841f608: Fix `formar/prettier` parser plugin in astro markdown codeblock
+
 ## 4.1.0-beta.5
 
 ### Patch Changes
