@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 4.1.2
+
+### Patch Changes
+
+- 9f049b8: Disable `style/max-len` rule
+
 ## 4.1.1
 
 ### Patch Changes
