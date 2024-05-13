@@ -7,7 +7,6 @@ import { GLOB_MARKDOWN_SOURCE, GLOB_MARKDOWN_SOURCE_WITH_JSON } from '../markdow
 import { TYPESCRIPT_GLOBS } from '../typescript';
 import {
 	IMPORTS_CONFIG_NAME_RULES_STATIC,
-	IMPORTS_CONFIG_NAME_RULES_STATIC_ESLINT_CONFIG,
 	IMPORTS_CONFIG_NAME_RULES_STATIC_MARKDOWN_SOURCE,
 	IMPORTS_CONFIG_NAME_RULES_STYLISTIC,
 	IMPORTS_CONFIG_NAME_RULES_STYLISTIC_MARKDOWN_SOURCE,
@@ -105,7 +104,6 @@ export default async function imports(options: HexatoolEslintOptions): Promise<T
 			rules: {
 				// Static analysis rules https://github.com/un-ts/eslint-plugin-import-x?tab=readme-ov-file#static-analysis
 				[`${importXPluginRename}/named`]: 'error',
-				[`${importXPluginRename}/namespace`]: 'error',
 				[`${importXPluginRename}/no-absolute-path`]: 'error',
 				[`${importXPluginRename}/no-cycle`]: 'error',
 				[`${importXPluginRename}/no-import-module-exports`]: 'error',
@@ -136,13 +134,6 @@ export default async function imports(options: HexatoolEslintOptions): Promise<T
 				[`${importXPluginRename}/no-deprecated`]: 'off',
 				[`${importXPluginRename}/no-named-as-default`]: 'off',
 				[`${importXPluginRename}/no-named-as-default-member`]: 'off',
-			},
-		},
-		{
-			files: ESLINT_CONFIG_GLOBS,
-			name: IMPORTS_CONFIG_NAME_RULES_STATIC_ESLINT_CONFIG,
-			rules: {
-				[`${importXPluginRename}/namespace`]: 'off',
 			},
 		}
 	);
