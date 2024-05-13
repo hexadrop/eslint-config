@@ -665,7 +665,13 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 					rules: {
 						'format/prettier': [
 							'error',
-							{ ...prettierConfig, parser: 'astro', tabWidth: 2, useTabs: false },
+							{
+								...prettierConfig,
+								parser: 'astro',
+								plugins: ['prettier-plugin-astro'],
+								tabWidth: 2,
+								useTabs: false,
+							},
 						],
 					},
 				});
