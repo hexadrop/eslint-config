@@ -17,12 +17,13 @@ import {
 	STYLISTIC_CONFIG_NAME_RULES_JSON_PACKAGE,
 	STYLISTIC_CONFIG_NAME_RULES_JSON_TSCONFIG,
 	STYLISTIC_CONFIG_NAME_RULES_MARKDOWN,
+	STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_ASRTO,
+	STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_JSON,
 	STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_SOURCE,
 	STYLISTIC_CONFIG_NAME_RULES_PERFECTIONIST,
 	STYLISTIC_CONFIG_NAME_RULES_PRETTIER,
 	STYLISTIC_CONFIG_NAME_RULES_PRETTIER_ASTRO,
-	STYLISTIC_CONFIG_NAME_RULES_PRETTIER_MARKDOWN_ASRTO,
-	STYLISTIC_CONFIG_NAME_RULES_PRETTIER_MARKDOWN_JSON,
+	STYLISTIC_CONFIG_NAME_RULES_PRETTIER_MARKDOWN_ASTRO,
 	STYLISTIC_CONFIG_NAME_RULES_PRETTIER_MARKDOWN_SOURCE,
 	STYLISTIC_CONFIG_NAME_RULES_TYPESCRIPT,
 	STYLISTIC_CONFIG_NAME_RULES_TYPESCRIPT_DTS,
@@ -44,6 +45,7 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 	const isTypeAware = typeof typescript !== 'boolean';
 	const typescriptPluginRename = PLUGIN_RENAME['@typescript-eslint'];
 	const stylisticPluginRename = PLUGIN_RENAME['@stylistic'];
+	const jsonPluginRename = PLUGIN_RENAME.jsonc;
 
 	const pluginStylistic = await interopDefault(import('@stylistic/eslint-plugin'));
 	const pluginStylisticOptions = stylisticOptions(stylistic);
@@ -306,17 +308,20 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 				files: GLOB_JSON,
 				name: STYLISTIC_CONFIG_NAME_RULES_JSON,
 				rules: {
+					[`${jsonPluginRename}/array-bracket-spacing`]: ['error', 'never'],
+					[`${jsonPluginRename}/comma-dangle`]: ['error', 'never'],
+					[`${jsonPluginRename}/comma-style`]: ['error', 'last'],
+					[`${jsonPluginRename}/indent`]: ['error', indent === 'space' ? indentSize : indent],
+					[`${jsonPluginRename}/key-spacing`]: ['error', { afterColon: true, beforeColon: false }],
+					[`${jsonPluginRename}/object-curly-newline`]: ['error', { consistent: true, multiline: true }],
+					[`${jsonPluginRename}/object-curly-spacing`]: ['error', 'always'],
+					[`${jsonPluginRename}/object-property-newline`]: [
+						'error',
+						{ allowMultiplePropertiesPerLine: true },
+					],
+					[`${jsonPluginRename}/quote-props`]: 'error',
+					[`${jsonPluginRename}/quotes`]: 'error',
 					[`${stylisticPluginRename}/max-len`]: 'off',
-					'json/array-bracket-spacing': ['error', 'never'],
-					'json/comma-dangle': ['error', 'never'],
-					'json/comma-style': ['error', 'last'],
-					'json/indent': ['error', indent === 'space' ? indentSize : indent],
-					'json/key-spacing': ['error', { afterColon: true, beforeColon: false }],
-					'json/object-curly-newline': ['error', { consistent: true, multiline: true }],
-					'json/object-curly-spacing': ['error', 'always'],
-					'json/object-property-newline': ['error', { allowMultiplePropertiesPerLine: true }],
-					'json/quote-props': 'error',
-					'json/quotes': 'error',
 				},
 			},
 			{
@@ -653,29 +658,38 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 					'format/prettier': ['error', { ...prettierConfig, tabWidth: 2, useTabs: false }],
 				},
 			});
-
-			if (json) {
-				config.push({
-					files: GLOB_MARKDOWN_JSON,
-					name: STYLISTIC_CONFIG_NAME_RULES_PRETTIER_MARKDOWN_JSON,
-
-					rules: {
-						'json/indent': ['error', 2],
-					},
-				});
-			}
-
 			if (astro) {
 				config.push({
 					files: GLOB_MARKDOWN_ASTRO,
-					name: STYLISTIC_CONFIG_NAME_RULES_PRETTIER_MARKDOWN_ASRTO,
-
+					name: STYLISTIC_CONFIG_NAME_RULES_PRETTIER_MARKDOWN_ASTRO,
 					rules: {
-						'style/indent': ['error', 2],
+						'format/prettier': ['error', { ...prettierConfig, tabWidth: 2, useTabs: false }],
 					},
 				});
 			}
 		}
+	}
+
+	if (json) {
+		config.push({
+			files: GLOB_MARKDOWN_JSON,
+			name: STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_JSON,
+
+			rules: {
+				'json/indent': ['error', 2],
+			},
+		});
+	}
+
+	if (astro) {
+		config.push({
+			files: GLOB_MARKDOWN_ASTRO,
+			name: STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_ASRTO,
+
+			rules: {
+				'style/indent': ['error', 2],
+			},
+		});
 	}
 
 	return config;

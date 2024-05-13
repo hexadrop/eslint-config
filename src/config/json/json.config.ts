@@ -1,5 +1,6 @@
 import type { ESLint } from 'eslint';
 
+import { PLUGIN_RENAME } from '../../const';
 import type { HexatoolEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault } from '../../utils';
@@ -17,11 +18,13 @@ export default async function json(options: HexatoolEslintOptions): Promise<Type
 		interopDefault(import('jsonc-eslint-parser')),
 	] as const);
 
+	const jsonPluginRename = PLUGIN_RENAME.jsonc;
+
 	return [
 		{
 			name: JSON_CONFIG_NAME_SETUP,
 			plugins: {
-				json: pluginJsonc as unknown as ESLint.Plugin,
+				[jsonPluginRename]: pluginJsonc as unknown as ESLint.Plugin,
 			},
 		},
 		{
@@ -35,32 +38,32 @@ export default async function json(options: HexatoolEslintOptions): Promise<Type
 			files: GLOB_JSON,
 			name: JSON_CONFIG_NAME_RULES,
 			rules: {
-				'json/no-bigint-literals': 'error',
-				'json/no-binary-expression': 'error',
-				'json/no-binary-numeric-literals': 'error',
-				'json/no-dupe-keys': 'error',
-				'json/no-escape-sequence-in-identifier': 'error',
-				'json/no-floating-decimal': 'error',
-				'json/no-hexadecimal-numeric-literals': 'error',
-				'json/no-infinity': 'error',
-				'json/no-multi-str': 'error',
-				'json/no-nan': 'error',
-				'json/no-number-props': 'error',
-				'json/no-numeric-separators': 'error',
-				'json/no-octal': 'error',
-				'json/no-octal-escape': 'error',
-				'json/no-octal-numeric-literals': 'error',
-				'json/no-parenthesized': 'error',
-				'json/no-plus-sign': 'error',
-				'json/no-regexp-literals': 'error',
-				'json/no-sparse-arrays': 'error',
-				'json/no-template-literals': 'error',
-				'json/no-undefined-value': 'error',
-				'json/no-unicode-codepoint-escapes': 'error',
-				'json/no-useless-escape': 'error',
-				'json/space-unary-ops': 'error',
-				'json/valid-json-number': 'error',
-				'json/vue-custom-block/no-parsing-error': 'error',
+				[`${jsonPluginRename}/no-bigint-literals`]: 'error',
+				[`${jsonPluginRename}/no-binary-expression`]: 'error',
+				[`${jsonPluginRename}/no-binary-numeric-literals`]: 'error',
+				[`${jsonPluginRename}/no-dupe-keys`]: 'error',
+				[`${jsonPluginRename}/no-escape-sequence-in-identifier`]: 'error',
+				[`${jsonPluginRename}/no-floating-decimal`]: 'error',
+				[`${jsonPluginRename}/no-hexadecimal-numeric-literals`]: 'error',
+				[`${jsonPluginRename}/no-infinity`]: 'error',
+				[`${jsonPluginRename}/no-multi-str`]: 'error',
+				[`${jsonPluginRename}/no-nan`]: 'error',
+				[`${jsonPluginRename}/no-number-props`]: 'error',
+				[`${jsonPluginRename}/no-numeric-separators`]: 'error',
+				[`${jsonPluginRename}/no-octal`]: 'error',
+				[`${jsonPluginRename}/no-octal-escape`]: 'error',
+				[`${jsonPluginRename}/no-octal-numeric-literals`]: 'error',
+				[`${jsonPluginRename}/no-parenthesized`]: 'error',
+				[`${jsonPluginRename}/no-plus-sign`]: 'error',
+				[`${jsonPluginRename}/no-regexp-literals`]: 'error',
+				[`${jsonPluginRename}/no-sparse-arrays`]: 'error',
+				[`${jsonPluginRename}/no-template-literals`]: 'error',
+				[`${jsonPluginRename}/no-undefined-value`]: 'error',
+				[`${jsonPluginRename}/no-unicode-codepoint-escapes`]: 'error',
+				[`${jsonPluginRename}/no-useless-escape`]: 'error',
+				[`${jsonPluginRename}/space-unary-ops`]: 'error',
+				[`${jsonPluginRename}/valid-json-number`]: 'error',
+				[`${jsonPluginRename}/vue-custom-block/no-parsing-error`]: 'error',
 			},
 		},
 	];
