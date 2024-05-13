@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 4.0.9
+
+### Patch Changes
+
+- b1ab130: Fix rules `style/jsx-closing-bracket-location`
+
 ## 4.0.8
 
 ### Patch Changes
