@@ -42,6 +42,7 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 	const { format, indent, indentSize, perfectionist, printWidth, unicorn } = stylistic;
 	const isTypeAware = typeof typescript !== 'boolean';
 	const typescriptPluginRename = PLUGIN_RENAME['@typescript-eslint'];
+	const stylisticPluginRename = PLUGIN_RENAME['@stylistic'];
 
 	const pluginStylistic = await interopDefault(import('@stylistic/eslint-plugin'));
 	const pluginStylisticOptions = stylisticOptions(stylistic);
@@ -291,6 +292,7 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 				files: GLOB_JSON,
 				name: STYLISTIC_CONFIG_NAME_RULES_JSON,
 				rules: {
+					[`${stylisticPluginRename}/max-len`]: 'off',
 					'json/array-bracket-spacing': ['error', 'never'],
 					'json/comma-dangle': ['error', 'never'],
 					'json/comma-style': ['error', 'last'],
