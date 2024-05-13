@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 4.0.7
+
+### Patch Changes
+
+- cc4b76b: Disable `typescript/no-confusing-void-expression` in tests files
+
 ## 4.0.6
 
 ### Patch Changes
