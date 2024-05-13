@@ -663,7 +663,10 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 					files: GLOB_MARKDOWN_ASTRO,
 					name: STYLISTIC_CONFIG_NAME_RULES_PRETTIER_MARKDOWN_ASTRO,
 					rules: {
-						'format/prettier': ['error', { ...prettierConfig, tabWidth: 2, useTabs: false }],
+						'format/prettier': [
+							'error',
+							{ ...prettierConfig, parser: 'astro', tabWidth: 2, useTabs: false },
+						],
 					},
 				});
 			}
