@@ -80,13 +80,6 @@ export default async function typescript(options: HexatoolEslintOptions): Promis
 				[`${typescriptPluginRename}/triple-slash-reference`]: 'off',
 				'multiline-comment-style': 'off',
 			},
-		},
-		{
-			files: TEST_GLOBS,
-			name: TYPESCRIPT_CONFIG_NAME_RULES_TEST,
-			rules: {
-				[`${typescriptPluginRename}/no-confusing-void-expression`]: 'off',
-			},
 		}
 	);
 
@@ -105,6 +98,14 @@ export default async function typescript(options: HexatoolEslintOptions): Promis
 			},
 		});
 	}
+
+	config.push({
+		files: TEST_GLOBS,
+		name: TYPESCRIPT_CONFIG_NAME_RULES_TEST,
+		rules: {
+			[`${typescriptPluginRename}/no-confusing-void-expression`]: 'off',
+		},
+	});
 
 	return config;
 }
