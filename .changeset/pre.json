@@ -4,5 +4,12 @@
   "initialVersions": {
     "@hexatool/eslint-config": "4.0.9"
   },
-  "changesets": []
+  "changesets": [
+    "fast-horses-battle",
+    "fresh-dancers-press",
+    "lazy-geese-develop",
+    "light-cooks-smash",
+    "six-nails-grow",
+    "two-items-argue"
+  ]
 }

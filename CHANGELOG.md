@@ -1,5 +1,19 @@
 # @hexatool/eslint-config
 
+## 4.1.0-beta.0
+
+### Minor Changes
+
+- 9ecc723: Update ignore modules in `import/no-unresolved` rule
+
+### Patch Changes
+
+- b7505fe: Disable `no-useless-assignment` on Astro files
+- c29edc9: Disable `import/namespace` rule
+- 26b57bd: Disable `style/jsx-one-expression-per-line` rule
+- 63231fe: Disable `unicorn/prefer-dom-node-dataset` rule
+- 4cd8bd4: Disable `style/indent-binary-ops` rule
+
 ## 4.0.9
 
 ### Patch Changes
