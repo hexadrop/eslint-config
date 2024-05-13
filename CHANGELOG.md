@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 4.1.0-beta.2
+
+### Patch Changes
+
+- d9480d5: Fix `prettier` in astro markdown
+
 ## 4.1.0-beta.1
 
 ### Patch Changes
