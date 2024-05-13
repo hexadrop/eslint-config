@@ -3,7 +3,7 @@ import type { HexatoolEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault } from '../../utils';
 import { ESLINT_CONFIG_GLOBS } from '../core';
-import { GLOB_MARKDOWN_SOURCE, GLOB_MARKDOWN_SOURCE_WITH_JSON } from '../markdown';
+import { GLOB_MARKDOWN_ASTRO, GLOB_MARKDOWN_JSON, GLOB_MARKDOWN_SOURCE } from '../markdown';
 import { TYPESCRIPT_GLOBS } from '../typescript';
 import {
 	IMPORTS_CONFIG_NAME_RULES_STATIC,
@@ -19,6 +19,7 @@ import {
 
 export default async function imports(options: HexatoolEslintOptions): Promise<TypedFlatConfigItem[]> {
 	const {
+		astro,
 		imports,
 		json,
 		markdown,
@@ -140,7 +141,11 @@ export default async function imports(options: HexatoolEslintOptions): Promise<T
 
 	if (markdown) {
 		configs.push({
-			files: json ? GLOB_MARKDOWN_SOURCE_WITH_JSON : GLOB_MARKDOWN_SOURCE,
+			files: [
+				...GLOB_MARKDOWN_SOURCE,
+				...(json ? GLOB_MARKDOWN_JSON : []),
+				...(astro ? GLOB_MARKDOWN_ASTRO : []),
+			],
 			name: IMPORTS_CONFIG_NAME_RULES_STATIC_MARKDOWN_SOURCE,
 			rules: {
 				[`${importXPluginRename}/no-unresolved`]: 'off',
