@@ -7,10 +7,11 @@ import { GLOB_MARKDOWN_SOURCE } from '../markdown';
 import {
 	TYPESCRIPT_CONFIG_NAME_RULES,
 	TYPESCRIPT_CONFIG_NAME_RULES_DTS,
+	TYPESCRIPT_CONFIG_NAME_RULES_TEST,
 	TYPESCRIPT_CONFIG_NAME_RULES_TYPEAWARE,
 	TYPESCRIPT_CONFIG_NAME_SETUP,
 } from './typescript.config-name';
-import { DTS_GLOBS, TYPESCRIPT_GLOBS } from './typescript.globs';
+import { DTS_GLOBS, TEST_GLOBS, TYPESCRIPT_GLOBS } from './typescript.globs';
 import typescriptParser from './typescript.parser';
 
 export default async function typescript(options: HexatoolEslintOptions): Promise<TypedFlatConfigItem[]> {
@@ -78,6 +79,13 @@ export default async function typescript(options: HexatoolEslintOptions): Promis
 			rules: {
 				[`${typescriptPluginRename}/triple-slash-reference`]: 'off',
 				'multiline-comment-style': 'off',
+			},
+		},
+		{
+			files: TEST_GLOBS,
+			name: TYPESCRIPT_CONFIG_NAME_RULES_TEST,
+			rules: {
+				[`${typescriptPluginRename}/no-confusing-void-expression`]: 'off',
 			},
 		}
 	);
