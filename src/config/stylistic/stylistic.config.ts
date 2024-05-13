@@ -572,8 +572,10 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 					'error',
 					{
 						allowList: {
+							Env: true,
 							ProcessEnv: true,
 							Props: true,
+							env: true,
 						},
 					},
 				],
