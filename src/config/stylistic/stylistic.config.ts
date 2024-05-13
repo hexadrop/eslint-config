@@ -76,6 +76,7 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 				curly: ['error', 'all'],
 				'style/arrow-parens': ['error', 'as-needed'],
 				'style/implicit-arrow-linebreak': 'off',
+				'style/indent-binary-ops': 'off',
 				'style/jsx-closing-bracket-location': [
 					'error',
 					{
