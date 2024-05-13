@@ -16,7 +16,7 @@ jobs:
             id-token: 'write'
         strategy:
             matrix:
-                command: [ lint ]
+                command: [ lint, typecheck ]
         steps:
             -   name: Checkout
                 uses: actions/checkout@v4
@@ -28,7 +28,7 @@ jobs:
                 run: bun install
 
             -   name: Build types
-                run: bun run build:types
+                run: bun build:types
 
             -   name: ${{ matrix.command }}
                 run: bun ${{ matrix.command }}
