@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 4.1.1
+
+### Patch Changes
+
+- 61ab403: Include `env` as an allow abbreviations
+
 ## 4.1.0
 
 ### Minor Changes
