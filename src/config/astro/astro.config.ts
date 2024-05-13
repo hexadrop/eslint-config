@@ -91,6 +91,7 @@ export default async function astro(options: HexatoolEslintOptions): Promise<Typ
 			'astro/no-deprecated-getentrybyslug': 'error',
 			'astro/no-unused-define-vars-in-style': 'error',
 			'astro/valid-compile': 'error',
+			'no-useless-assignment': 'off',
 		},
 	});
 
