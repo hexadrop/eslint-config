@@ -1,6 +1,6 @@
 {
 	"name": "@hexatool/eslint-config",
-	"version": "4.0.3",
+	"version": "4.0.4",
 	"description": "Opinionated ESLint ruleset designed for large teams and projects",
 	"keywords": [
 		"lint",
@@ -43,7 +43,7 @@
 	},
 	"peerDependencies": {
 		"astro-eslint-parser": "^1.0.0",
-		"eslint": ">=8.40.0 || ^9.0.0",
+		"eslint": "^9.0.0",
 		"eslint-plugin-astro": "^1.0.0",
 		"eslint-plugin-react": "^7.34.1",
 		"eslint-plugin-react-hooks": "^4.6.0",
