@@ -1,5 +1,26 @@
 # @hexatool/eslint-config
 
+## 4.1.0
+
+### Minor Changes
+
+- 9ecc723: Update ignore modules in `import/no-unresolved` rule
+
+### Patch Changes
+
+- e8b08d4: Fix `module.ignore` default options
+- 67cc847: Fix `style/indent` rule in astro markdown codeblock
+- b7505fe: Disable `no-useless-assignment` on Astro files
+- c29edc9: Disable `import/namespace` rule
+- 26b57bd: Disable `style/jsx-one-expression-per-line` rule
+- 63231fe: Disable `unicorn/prefer-dom-node-dataset` rule
+- c84816d: Fix `formar/prettier` rule in astro markdown codeblock
+- 32896ca: Fix `formar/prettier` parser in astro markdown codeblock
+- 87e970f: Change MARKDOWN_SOURCE globs
+- 4cd8bd4: Disable `style/indent-binary-ops` rule
+- 841f608: Fix `formar/prettier` parser plugin in astro markdown codeblock
+- d9480d5: Fix `prettier` in astro markdown
+
 ## 4.1.0-beta.6
 
 ### Patch Changes
