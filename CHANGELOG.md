@@ -1,5 +1,12 @@
 # @hexatool/eslint-config
 
+## 4.1.3
+
+### Patch Changes
+
+- dba9070: Disable `perfectionist/sort-named-imports`
+- 2033582: Disable `perfectionist/sort-exports`
+
 ## 4.1.2
 
 ### Patch Changes
