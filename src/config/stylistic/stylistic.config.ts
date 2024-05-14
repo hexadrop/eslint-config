@@ -608,6 +608,7 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 				'perfectionist/sort-imports': 'off',
 				'perfectionist/sort-interfaces': 'off',
 				'perfectionist/sort-named-exports': 'off',
+				'perfectionist/sort-named-imports': 'off',
 			},
 		});
 	}
