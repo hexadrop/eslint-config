@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 4.1.5
+
+### Patch Changes
+
+- 776ad8d: Disable `style/indent` rule
+
 ## 4.1.4
 
 ### Patch Changes
