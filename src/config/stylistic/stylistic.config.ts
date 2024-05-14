@@ -604,6 +604,7 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 			rules: {
 				...pluginPerfectionist.rules,
 				'perfectionist/sort-classes': 'off',
+				'perfectionist/sort-exports': 'off',
 				'perfectionist/sort-imports': 'off',
 				'perfectionist/sort-interfaces': 'off',
 				'perfectionist/sort-named-exports': 'off',
