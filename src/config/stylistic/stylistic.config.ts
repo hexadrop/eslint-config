@@ -77,6 +77,7 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 				...renameRules(pluginStylisticRules, PLUGIN_RENAME),
 				[`${stylisticPluginRename}/arrow-parens`]: ['error', 'as-needed'],
 				[`${stylisticPluginRename}/implicit-arrow-linebreak`]: 'off',
+				[`${stylisticPluginRename}/indent`]: 'off',
 				[`${stylisticPluginRename}/indent-binary-ops`]: 'off',
 				[`${stylisticPluginRename}/jsx-closing-bracket-location`]: [
 					'error',
