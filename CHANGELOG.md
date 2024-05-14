@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 4.1.4
+
+### Patch Changes
+
+- 199b60b: Set `ignoreMemberSort` to `true` for `sort-imports` rule
+
 ## 4.1.3
 
 ### Patch Changes
