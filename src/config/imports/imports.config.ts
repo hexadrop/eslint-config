@@ -202,7 +202,7 @@ export default async function imports(options: HexatoolEslintOptions): Promise<T
 						allowSeparatedGroups: false,
 						ignoreCase: false,
 						ignoreDeclarationSort: true,
-						ignoreMemberSort: false,
+						ignoreMemberSort: true,
 						memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
 					},
 				],
