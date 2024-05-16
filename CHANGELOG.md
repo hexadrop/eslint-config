@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 4.1.6
+
+### Patch Changes
+
+- Disable `style/jsx-one-expression-per-line` rule
+
 ## 4.1.5
 
 ### Patch Changes

@@ -86,6 +86,7 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 						selfClosing: 'tag-aligned',
 					},
 				],
+				[`${stylisticPluginRename}/jsx-one-expression-per-line`]: 'off',
 				[`${stylisticPluginRename}/jsx-quotes`]: ['error', 'prefer-single'],
 				[`${stylisticPluginRename}/jsx-sort-props`]: 'error',
 				[`${stylisticPluginRename}/max-len`]: 'off',
@@ -537,7 +538,6 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 			name: STYLISTIC_CONFIG_NAME_RULES_ASTRO,
 			rules: {
 				[`${stylisticPluginRename}/jsx-indent`]: 'off',
-				[`${stylisticPluginRename}/jsx-one-expression-per-line`]: 'off',
 				'astro/prefer-class-list-directive': 'error',
 				'astro/prefer-object-class-list': 'error',
 				'astro/prefer-split-class-list': 'error',
