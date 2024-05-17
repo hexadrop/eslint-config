@@ -610,6 +610,7 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 				'perfectionist/sort-interfaces': 'off',
 				'perfectionist/sort-named-exports': 'off',
 				'perfectionist/sort-named-imports': 'off',
+				'perfectionist/sort-object-types': 'off',
 			},
 		});
 	}
