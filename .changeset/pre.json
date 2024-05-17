@@ -4,5 +4,7 @@
   "initialVersions": {
     "@hexatool/eslint-config": "4.1.6"
   },
-  "changesets": []
+  "changesets": [
+    "tricky-geckos-argue"
+  ]
 }
