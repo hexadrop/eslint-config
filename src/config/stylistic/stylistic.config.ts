@@ -268,7 +268,7 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 
 								'method',
 							],
-							order: 'alphabetically-case-insensitive',
+							order: 'natural',
 						},
 					},
 				],

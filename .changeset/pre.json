@@ -1,0 +1,8 @@
+{
+  "mode": "pre",
+  "tag": "beta",
+  "initialVersions": {
+    "@hexatool/eslint-config": "4.1.6"
+  },
+  "changesets": []
+}
