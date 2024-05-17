@@ -5,6 +5,7 @@
     "@hexatool/eslint-config": "4.1.6"
   },
   "changesets": [
+    "silent-cups-grow",
     "tricky-geckos-argue"
   ]
 }

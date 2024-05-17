@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 4.1.7-beta.1
+
+### Patch Changes
+
+- a534f20: Fix collision between `typescript/member-ordening` and `perfectionist/sort-object-types`
+
 ## 4.1.7-beta.0
 
 ### Patch Changes
