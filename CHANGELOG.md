@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 4.1.9
+
+### Patch Changes
+
+- 257c97b: Disable `style/jsx-curly-newline`
+
 ## 4.1.8
 
 ### Patch Changes
