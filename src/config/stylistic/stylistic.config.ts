@@ -86,6 +86,7 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 						selfClosing: 'tag-aligned',
 					},
 				],
+				[`${stylisticPluginRename}/jsx-curly-newline`]: 'off',
 				[`${stylisticPluginRename}/jsx-indent`]: 'off',
 				[`${stylisticPluginRename}/jsx-one-expression-per-line`]: 'off',
 				[`${stylisticPluginRename}/jsx-quotes`]: ['error', 'prefer-single'],
