@@ -1,5 +1,11 @@
 # @hexatool/eslint-config
 
+## 4.1.8
+
+### Patch Changes
+
+- c98a69f: Disable `style/jsx-indent`
+
 ## 4.1.7
 
 ### Patch Changes
