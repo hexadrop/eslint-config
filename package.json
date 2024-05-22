@@ -75,7 +75,7 @@
 		"@typescript-eslint/eslint-plugin": "7.8.0",
 		"@typescript-eslint/parser": "7.8.0",
 		"eslint-config-flat-gitignore": "0.1.5",
-		"eslint-flat-config-utils": "0.2.4",
+		"eslint-flat-config-utils": "0.2.5",
 		"eslint-import-resolver-typescript": "3.6.1",
 		"eslint-merge-processors": "0.1.0",
 		"eslint-parser-plain": "0.1.0",
