@@ -19,10 +19,6 @@ npm install --save-dev eslint @hexadrop/eslint-config
 bun add eslint @hexadrop/eslint-config --dev
 ```
 
-> [!IMPORTANT]
-> Since v4.0.0, this config is rewritten to the
-> new [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new).
-
 ## What it does
 
 - Auto fix for formatting (aimed to be used standalone **without** Prettier)
@@ -68,8 +64,6 @@ bun add eslint @hexadrop/eslint-config --dev
 > Note that `.eslintignore` no longer works in Flat config, see [customization](#customization) for more details.
 
 ## Customization
-
-Since v4.0, we migrated to [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new). It provides much better organization and composition.
 
 Normally you only need to import the `hexadrop` preset:
 
@@ -204,7 +198,7 @@ export default hexadrop(
 
 ### Config Composer
 
-Since v2.10.0, the factory function `hexadrop()` returns a [`FlatConfigComposer` object from `eslint-flat-config-utils`](https://github.com/antfu/eslint-flat-config-utils#composer) where you can chain the methods to compose the config even more flexibly.
+The factory function `hexadrop()` returns a [`FlatConfigComposer` object from `eslint-flat-config-utils`](https://github.com/antfu/eslint-flat-config-utils#composer) where you can chain the methods to compose the config even more flexibly.
 
 ```js
 // eslint.config.js
