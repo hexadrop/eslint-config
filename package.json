@@ -88,7 +88,7 @@
 		"eslint-plugin-simple-import-sort": "12.1.0",
 		"eslint-plugin-unicorn": "53.0.0",
 		"eslint-plugin-unused-imports": "3.2.0",
-		"globals": "15.2.0",
+		"globals": "15.3.0",
 		"local-pkg": "0.5.0",
 		"tslib": "2.6.2"
 	},
