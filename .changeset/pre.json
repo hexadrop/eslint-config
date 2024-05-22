@@ -4,5 +4,7 @@
   "initialVersions": {
     "@hexadrop/eslint-config": "0.0.0"
   },
-  "changesets": []
+  "changesets": [
+    "serious-turtles-invent"
+  ]
 }
