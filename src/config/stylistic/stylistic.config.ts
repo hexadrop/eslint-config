@@ -91,12 +91,14 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 				[`${stylisticPluginRename}/jsx-one-expression-per-line`]: 'off',
 				[`${stylisticPluginRename}/jsx-quotes`]: ['error', 'prefer-single'],
 				[`${stylisticPluginRename}/jsx-sort-props`]: 'error',
+				[`${stylisticPluginRename}/line-comment-position`]: ['error', { position: 'above' }],
 				[`${stylisticPluginRename}/max-len`]: 'off',
 				[`${stylisticPluginRename}/no-extra-semi`]: 'error',
 				[`${stylisticPluginRename}/padding-line-between-statements`]: [
 					'error',
 					{ blankLine: 'always', next: 'return', prev: '*' },
 				],
+				[`${stylisticPluginRename}multiline-comment-style`]: ['error', 'starred-block'],
 				curly: ['error', 'all'],
 				...(format && {
 					[`${stylisticPluginRename}/operator-linebreak`]: 'off',
@@ -115,6 +117,8 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 			name: STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_SOURCE,
 			rules: {
 				[`${stylisticPluginRename}/indent`]: ['error', 2],
+				[`${stylisticPluginRename}/line-comment-position`]: 'off',
+				[`${stylisticPluginRename}/multiline-comment-style`]: 'off',
 			},
 		});
 	}
@@ -294,7 +298,8 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 			files: DTS_GLOBS,
 			name: STYLISTIC_CONFIG_NAME_RULES_TYPESCRIPT_DTS,
 			rules: {
-				'style/spaced-comment': 'off',
+				[`${stylisticPluginRename}/multiline-comment-style`]: 'off',
+				[`${stylisticPluginRename}/spaced-comment`]: 'off',
 			},
 		});
 	}

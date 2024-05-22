@@ -78,7 +78,6 @@ export default async function typescript(options: HexadropEslintOptions): Promis
 			name: TYPESCRIPT_CONFIG_NAME_RULES_DTS,
 			rules: {
 				[`${typescriptPluginRename}/triple-slash-reference`]: 'off',
-				'multiline-comment-style': 'off',
 			},
 		}
 	);
