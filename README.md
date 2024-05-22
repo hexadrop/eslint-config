@@ -1,5 +1,5 @@
 <h1 align="center">
-  hexadrop's ESLint configuration
+  Hexadrop's ESLint configuration
 </h1>
 
 <p align="center">
