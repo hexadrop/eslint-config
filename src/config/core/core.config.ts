@@ -1,7 +1,7 @@
 import globals from 'globals';
 
 import { PLUGIN_RENAME } from '../../const';
-import type { HexatoolEslintOptions } from '../../options';
+import type { HexadropEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault } from '../../utils';
 import { GLOB_MARKDOWN_SOURCE } from '../markdown';
@@ -12,7 +12,7 @@ import {
 	CORE_CONFIG_NAME_SETUP,
 } from './core.config-name';
 
-export default async function core(options: HexatoolEslintOptions): Promise<TypedFlatConfigItem[]> {
+export default async function core(options: HexadropEslintOptions): Promise<TypedFlatConfigItem[]> {
 	const {
 		markdown,
 		module: { node: useNodeModules },
@@ -70,10 +70,8 @@ export default async function core(options: HexatoolEslintOptions): Promise<Type
 				'getter-return': 'error',
 				'grouped-accessor-pairs': 'error',
 				'guard-for-in': 'error',
-				'line-comment-position': ['error', { position: 'above' }],
 				'max-depth': ['error', 4],
 				'max-params': 'off',
-				'multiline-comment-style': ['error', 'starred-block'],
 				'new-cap': ['error', { capIsNew: false }],
 				'no-alert': 'error',
 				'no-array-constructor': 'error',
@@ -276,8 +274,6 @@ export default async function core(options: HexatoolEslintOptions): Promise<Type
 			files: GLOB_MARKDOWN_SOURCE,
 			name: CORE_CONFIG_NAME_RULES_MARKDOWN_SOURCE,
 			rules: {
-				'line-comment-position': 'off',
-				'multiline-comment-style': 'off',
 				'no-console': 'off',
 				'no-inline-comments': 'off',
 			},

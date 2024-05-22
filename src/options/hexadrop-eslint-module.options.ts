@@ -1,4 +1,4 @@
-export interface HexatoolEslintModulesOptions {
+export interface HexadropEslintModulesOptions {
 	/*
 	 * Enable AMD support.
 	 *

@@ -1,3 +1,3 @@
-const PLUGIN_PREFIX = 'hexatool';
+const PLUGIN_PREFIX = 'hexadrop';
 
 export default PLUGIN_PREFIX;

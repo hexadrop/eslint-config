@@ -1,8 +1,7 @@
 import { PLUGIN_RENAME } from '../../const';
-import type { HexatoolEslintOptions } from '../../options';
+import type { HexadropEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault } from '../../utils';
-import { ESLINT_CONFIG_GLOBS } from '../core';
 import { GLOB_MARKDOWN_ASTRO, GLOB_MARKDOWN_JSON, GLOB_MARKDOWN_SOURCE } from '../markdown';
 import { TYPESCRIPT_GLOBS } from '../typescript';
 import {
@@ -10,14 +9,12 @@ import {
 	IMPORTS_CONFIG_NAME_RULES_STATIC_MARKDOWN_SOURCE,
 	IMPORTS_CONFIG_NAME_RULES_STYLISTIC,
 	IMPORTS_CONFIG_NAME_RULES_STYLISTIC_MARKDOWN_SOURCE,
-	IMPORTS_CONFIG_NAME_RULES_TYPESCRIPT,
 	IMPORTS_CONFIG_NAME_RULES_WARNINGS,
-	IMPORTS_CONFIG_NAME_RULES_WARNINGS_ESLINT_CONFIG,
 	IMPORTS_CONFIG_NAME_SETUP,
 	IMPORTS_CONFIG_NAME_SETUP_TYPESCRIPT,
 } from './imports.config-name';
 
-export default async function imports(options: HexatoolEslintOptions): Promise<TypedFlatConfigItem[]> {
+export default async function imports(options: HexadropEslintOptions): Promise<TypedFlatConfigItem[]> {
 	const {
 		astro,
 		imports,
@@ -83,6 +80,7 @@ export default async function imports(options: HexatoolEslintOptions): Promise<T
 				[`${importXPluginRename}/export`]: 'error',
 				[`${importXPluginRename}/no-deprecated`]: 'warn',
 				[`${importXPluginRename}/no-empty-named-blocks`]: 'error',
+				[`${importXPluginRename}/no-extraneous-dependencies`]: 'error',
 				[`${importXPluginRename}/no-mutable-exports`]: 'error',
 				[`${importXPluginRename}/no-named-as-default`]: 'warn',
 				[`${importXPluginRename}/no-named-as-default-member`]: 'warn',
@@ -126,17 +124,20 @@ export default async function imports(options: HexatoolEslintOptions): Promise<T
 					[`${importXPluginRename}/no-dynamic-require`]: 'error',
 				}),
 			},
-		},
-		{
-			files: ESLINT_CONFIG_GLOBS,
-			name: IMPORTS_CONFIG_NAME_RULES_WARNINGS_ESLINT_CONFIG,
-			rules: {
-				[`${importXPluginRename}/default`]: 'off',
-				[`${importXPluginRename}/no-deprecated`]: 'off',
-				[`${importXPluginRename}/no-named-as-default`]: 'off',
-				[`${importXPluginRename}/no-named-as-default-member`]: 'off',
-			},
 		}
+		/*
+		 * TODO: Decide if we want to keep these rules
+		 * {
+		 * 	files: ESLINT_CONFIG_GLOBS,
+		 * 	name: IMPORTS_CONFIG_NAME_RULES_WARNINGS_ESLINT_CONFIG,
+		 * 	rules: {
+		 * 		[`${importXPluginRename}/default`]: 'off',
+		 * 		[`${importXPluginRename}/no-deprecated`]: 'off',
+		 * 		[`${importXPluginRename}/no-named-as-default`]: 'off',
+		 * 		[`${importXPluginRename}/no-named-as-default-member`]: 'off',
+		 * 	},
+		 * }
+		 */
 	);
 
 	if (markdown) {
@@ -153,15 +154,18 @@ export default async function imports(options: HexatoolEslintOptions): Promise<T
 		});
 	}
 
-	if (typescript) {
-		configs.push({
-			files: TYPESCRIPT_GLOBS,
-			name: IMPORTS_CONFIG_NAME_RULES_TYPESCRIPT,
-			rules: {
-				[`${importXPluginRename}/named`]: 'off',
-			},
-		});
-	}
+	/*
+	 * TODO: Decide if we want to keep these rules
+	 * if (typescript) {
+	 * 	configs.push({
+	 * 		files: TYPESCRIPT_GLOBS,
+	 * 		name: IMPORTS_CONFIG_NAME_RULES_TYPESCRIPT,
+	 * 		rules: {
+	 * 			[`${importXPluginRename}/named`]: 'off',
+	 * 		},
+	 * 	});
+	 * }
+	 */
 
 	if (stylistic) {
 		configs.push({

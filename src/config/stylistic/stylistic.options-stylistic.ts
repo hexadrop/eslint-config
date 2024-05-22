@@ -1,8 +1,8 @@
 import type { StylisticCustomizeOptions } from '@stylistic/eslint-plugin';
 
-import type { HexatoolEslintStylisticOptions } from '../../options';
+import type { HexadropEslintStylisticOptions } from '../../options';
 
-export default function stylisticOptions(options: HexatoolEslintStylisticOptions): StylisticCustomizeOptions {
+export default function stylisticOptions(options: HexadropEslintStylisticOptions): StylisticCustomizeOptions {
 	const {
 		arrowParens,
 		braceStyle,

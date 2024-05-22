@@ -1,4 +1,4 @@
-export interface HexatoolEslintStylisticOptions {
+export interface HexadropEslintStylisticOptions {
 	/**
 	 * Include parentheses around a sole arrow function parameter.
 	 *

@@ -4,6 +4,6 @@ const importer = Importer(import.meta.url);
 /**
  * @type {import('./src').default}
  */
-const hexatool = importer('./src').default;
+const hexadrop = importer('./src').default;
 
-export default hexatool();
+export default hexadrop();

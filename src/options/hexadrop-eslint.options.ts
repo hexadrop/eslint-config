@@ -4,11 +4,11 @@ import process from 'node:process';
 
 import { isPackageExists } from 'local-pkg';
 
-import type { HexatoolEslintIgnoreOptions } from './hexatool-eslint-ignore.options';
-import type { HexatoolEslintModulesOptions } from './hexatool-eslint-module.options';
-import type { HexatoolEslintStylisticOptions } from './hexatool-eslint-stylistic.options';
+import type { HexadropEslintIgnoreOptions } from './hexadrop-eslint-ignore.options';
+import type { HexadropEslintModulesOptions } from './hexadrop-eslint-module.options';
+import type { HexadropEslintStylisticOptions } from './hexadrop-eslint-stylistic.options';
 
-interface HexatoolEslintOptions {
+interface HexadropEslintOptions {
 	/**
 	 * Enable astro support.
 	 *
@@ -26,7 +26,7 @@ interface HexatoolEslintOptions {
 	 *
 	 * @default true
 	 */
-	ignore: HexatoolEslintIgnoreOptions | boolean;
+	ignore: HexadropEslintIgnoreOptions | boolean;
 
 	/**
 	 * Enable import rules.
@@ -54,7 +54,7 @@ interface HexatoolEslintOptions {
 	 *
 	 * @default { amd: false, commonjs: false, node: true, webpack: false }
 	 */
-	module: HexatoolEslintModulesOptions;
+	module: HexadropEslintModulesOptions;
 
 	/**
 	 * Use node rules.
@@ -93,7 +93,7 @@ interface HexatoolEslintOptions {
 	 * 	unicorn: true,
 	 * }
 	 */
-	stylistic: HexatoolEslintStylisticOptions | false;
+	stylistic: HexadropEslintStylisticOptions | false;
 
 	/**
 	 * Configure typescript support.
@@ -116,9 +116,9 @@ function getCwdTsconfigPath(): string | undefined {
 	return undefined;
 }
 
-export type { HexatoolEslintOptions };
+export type { HexadropEslintOptions };
 
-export default function defaultOptions(options: Partial<HexatoolEslintOptions> = {}): HexatoolEslintOptions {
+export default function defaultOptions(options: Partial<HexadropEslintOptions> = {}): HexadropEslintOptions {
 	let typescript: boolean | string | string[] = false;
 	const installedTypescript = isPackageExists('typescript');
 	const installedReact = isPackageExists('react');

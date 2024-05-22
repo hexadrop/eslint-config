@@ -1,13 +1,13 @@
 import type { ESLint } from 'eslint';
 
 import { PLUGIN_RENAME } from '../../const';
-import type { HexatoolEslintOptions } from '../../options';
+import type { HexadropEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault } from '../../utils';
 import { JSON_CONFIG_NAME_RULES, JSON_CONFIG_NAME_SETUP, JSON_CONFIG_NAME_SETUP_PARSER } from './json.config-name';
 import { GLOB_JSON } from './json.globs';
 
-export default async function json(options: HexatoolEslintOptions): Promise<TypedFlatConfigItem[]> {
+export default async function json(options: HexadropEslintOptions): Promise<TypedFlatConfigItem[]> {
 	const { json } = options;
 	if (!json) {
 		return [];
