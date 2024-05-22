@@ -254,7 +254,7 @@ There is a [visual tool](https://github.com/eslint/config-inspector) to help you
 Go to your project root that contains `eslint.config.js` and run:
 
 ```bash
-bunx @eslint/config-inspector
+npx @eslint/config-inspector
 ```
 
 ## Inspiration and Credits
