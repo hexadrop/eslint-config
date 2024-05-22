@@ -1,13 +1,3 @@
 {
-	"extends": "@hexadrop/tsconfig",
-	"compilerOptions": {
-		"target": "esnext",
-		"lib": ["ESNext"],
-		"moduleDetection": "force",
-		"baseUrl": ".",
-		"module": "esnext",
-		"moduleResolution": "bundler",
-		"esModuleInterop": true
-	},
-	"exclude": ["**/dist/**", "node_modules"]
+	"extends": "@hexadrop/tsconfig"
 }
