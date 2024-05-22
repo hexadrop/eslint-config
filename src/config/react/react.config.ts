@@ -1,8 +1,10 @@
+import { fixupPluginRules } from '@eslint/compat';
+import type { ESLint } from 'eslint';
 import { isPackageExists } from 'local-pkg';
 
-import type { HexatoolEslintOptions } from '../../options';
+import type { HexadropEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
-import { ensurePackages, interopDefault } from '../../utils';
+import { interopDefault } from '../../utils';
 import {
 	REACT_CONFIG_NAME_RULES,
 	REACT_CONFIG_NAME_RULES_HOOKS,
@@ -13,13 +15,11 @@ import { GLOB_REACT_JSX, GLOB_REACT_TSX } from './react.globs';
 
 const REACT_REFRESH_ALLOW_CONSTANT_EXPORT_PACKAGES = ['vite'];
 
-export default async function react(options: HexatoolEslintOptions): Promise<TypedFlatConfigItem[]> {
+export default async function react(options: HexadropEslintOptions): Promise<TypedFlatConfigItem[]> {
 	const { react, typescript } = options;
 	if (!react) {
 		return [];
 	}
-
-	ensurePackages('eslint-plugin-react', 'eslint-plugin-react-hooks', 'eslint-plugin-react-refresh');
 
 	const [pluginReact, pluginReactHooks, pluginReactRefresh] = await Promise.all([
 		interopDefault(import('eslint-plugin-react')),
@@ -34,7 +34,7 @@ export default async function react(options: HexatoolEslintOptions): Promise<Typ
 		{
 			name: REACT_CONFIG_NAME_SETUP,
 			plugins: {
-				react: pluginReact,
+				react: fixupPluginRules(pluginReact) as ESLint.Plugin,
 				'react-hooks': pluginReactHooks,
 				'react-refresh': pluginReactRefresh,
 			},

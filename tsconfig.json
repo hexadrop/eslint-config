@@ -1,5 +1,5 @@
 {
-	"extends": "@hexatool/tsconfig",
+	"extends": "@hexadrop/tsconfig",
 	"compilerOptions": {
 		"target": "esnext",
 		"lib": ["ESNext"],

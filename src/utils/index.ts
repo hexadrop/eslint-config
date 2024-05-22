@@ -1,5 +1,4 @@
 export { default as combine } from './combine';
-export { default as ensurePackages } from './ensure-packages';
 export { default as extractTypedFlatConfigItem } from './extract-typed-flat-config-item';
 export { default as interopDefault } from './interop-default';
 export { default as pluginConfigOverrideRules } from './plugin-config-override-rules';

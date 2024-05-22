@@ -1,7 +1,7 @@
 import globals from 'globals';
 
 import { PLUGIN_RENAME } from '../../const';
-import type { HexatoolEslintOptions } from '../../options';
+import type { HexadropEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault } from '../../utils';
 import { GLOB_MARKDOWN_SOURCE } from '../markdown';
@@ -12,7 +12,7 @@ import {
 	CORE_CONFIG_NAME_SETUP,
 } from './core.config-name';
 
-export default async function core(options: HexatoolEslintOptions): Promise<TypedFlatConfigItem[]> {
+export default async function core(options: HexadropEslintOptions): Promise<TypedFlatConfigItem[]> {
 	const {
 		markdown,
 		module: { node: useNodeModules },

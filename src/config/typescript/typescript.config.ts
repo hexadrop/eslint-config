@@ -1,5 +1,5 @@
 import { PLUGIN_RENAME, PLUGIN_RENAME_TYPESCRIPT } from '../../const';
-import type { HexatoolEslintOptions } from '../../options';
+import type { HexadropEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault, pluginConfigOverrideRules, pluginConfigRules, toArray } from '../../utils';
 import { JAVASCRIPT_GLOBS, SOURCE_GLOBS } from '../core';
@@ -14,7 +14,7 @@ import {
 import { DTS_GLOBS, TEST_GLOBS, TYPESCRIPT_GLOBS } from './typescript.globs';
 import typescriptParser from './typescript.parser';
 
-export default async function typescript(options: HexatoolEslintOptions): Promise<TypedFlatConfigItem[]> {
+export default async function typescript(options: HexadropEslintOptions): Promise<TypedFlatConfigItem[]> {
 	const { typescript } = options;
 	if (typescript === false) {
 		return [];

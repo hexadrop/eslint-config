@@ -1,5 +1,5 @@
 <h1 align="center">
-  Hexatool's ESLint configuration
+  hexadrop's ESLint configuration
 </h1>
 
 <p align="center">
@@ -10,13 +10,13 @@
 ## Installation
 
 ```bash
-npm install --save-dev eslint @hexatool/eslint-config
+npm install --save-dev eslint @hexadrop/eslint-config
 ```
 
 **Using bun**
 
 ```bash
-bun add eslint @hexatool/eslint-config --dev
+bun add eslint @hexadrop/eslint-config --dev
 ```
 
 > [!IMPORTANT]
@@ -43,9 +43,9 @@ bun add eslint @hexatool/eslint-config --dev
 
     ```js
     // eslint.config.js
-    import hexatool from '@hexatool/eslint-config';
+    import hexadrop from '@hexadrop/eslint-config';
 
-    export default hexatool();
+    export default hexadrop();
     ```
 
 2. Run eslint
@@ -71,22 +71,22 @@ bun add eslint @hexatool/eslint-config --dev
 
 Since v4.0, we migrated to [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new). It provides much better organization and composition.
 
-Normally you only need to import the `hexatool` preset:
+Normally you only need to import the `hexadrop` preset:
 
 ```js
 // eslint.config.js
-import hexatool from '@hexatool/eslint-config';
+import hexadrop from '@hexadrop/eslint-config';
 
-export default hexatool();
+export default hexadrop();
 ```
 
 And that's it! Or you can configure each integration individually, for example:
 
 ```js
 // eslint.config.js
-import hexatool from '@hexatool/eslint-config';
+import hexadrop from '@hexadrop/eslint-config';
 
-export default hexatool({
+export default hexadrop({
   // React are auto-detected, you can also explicitly enable them:
   react: true,
 
@@ -104,15 +104,15 @@ export default hexatool({
 });
 ```
 
-The `hexatool` factory function also accepts any number of arbitrary custom config overrides:
+The `hexadrop` factory function also accepts any number of arbitrary custom config overrides:
 
 ```js
 // eslint.config.js
-import hexatool from '@hexatool/eslint-config';
+import hexadrop from '@hexadrop/eslint-config';
 
-export default hexatool(
+export default hexadrop(
   {
-    // Configures for hexatool's config
+    // Configures for hexadrop's config
   },
 
   // From the second arguments they are ESLint Flat Configs
@@ -127,7 +127,7 @@ export default hexatool(
 );
 ```
 
-Check out the [options](https://github.com/hexattol/eslint-config/blob/main/src/options/hexatool-eslint.options.ts) and [factory](https://github.com/hexatool/eslint-config/blob/main/src/factory.ts) for more details.
+Check out the [options](https://github.com/hexattol/eslint-config/blob/main/src/options/hexadrop-eslint.options.ts) and [factory](https://github.com/hexadrop/eslint-config/blob/main/src/factory.ts) for more details.
 
 ### Plugins Renaming
 
@@ -179,9 +179,9 @@ Certain rules would only be enabled in specific files, for example, `ts/*` rules
 
 ```js
 // eslint.config.js
-import hexatool from '@hexatool/eslint-config';
+import hexadrop from '@hexadrop/eslint-config';
 
-export default hexatool(
+export default hexadrop(
   {
     react: true,
     typescript: true,
@@ -204,23 +204,23 @@ export default hexatool(
 
 ### Config Composer
 
-Since v2.10.0, the factory function `hexatool()` returns a [`FlatConfigComposer` object from `eslint-flat-config-utils`](https://github.com/antfu/eslint-flat-config-utils#composer) where you can chain the methods to compose the config even more flexibly.
+Since v2.10.0, the factory function `hexadrop()` returns a [`FlatConfigComposer` object from `eslint-flat-config-utils`](https://github.com/antfu/eslint-flat-config-utils#composer) where you can chain the methods to compose the config even more flexibly.
 
 ```js
 // eslint.config.js
-import hexatool from '@hexatool/eslint-config';
+import hexadrop from '@hexadrop/eslint-config';
 
-export default hexatool()
+export default hexadrop()
   // some configs before the main config
   .prepend()
   // overrides any named configs
-  .override('hexatool/core/rules', {
+  .override('hexadrop/core/rules', {
     rules: {
       'no-console': 'off',
     },
   })
   // directly remove a named config
-  .remove('hexatool/typescript/rules/dts')
+  .remove('hexadrop/typescript/rules/dts')
   // rename plugin prefixes
   .renamePlugins({
     'old-prefix': 'new-prefix',
@@ -270,7 +270,7 @@ Here are some inspiration for this package.
 - [@antfu/eslint-config](https://github.com/antfu/eslint-config)
 - [eslint-config-codely](https://github.com/CodelyTV/eslint-config-codely)
 
-## Hexatool Code Quality Standards
+## hexadrop Code Quality Standards
 
 Publishing this package we are committing ourselves to the following code quality standards:
 
@@ -278,7 +278,7 @@ Publishing this package we are committing ourselves to the following code qualit
 - No surprises in transitive dependencies: Use the **bare minimum dependencies** needed to meet the purpose
 - **One specific purpose** to meet without having to carry a bunch of unnecessary other utilities
 - **Tests** as documentation and usage examples
-- **Well documented ReadMe** showing how to install and use
+- **Well documented README** showing how to install and use
 - **License favoring Open Source** and collaboration
 
   [@stylistic/eslint-plugin]: https://github.com/eslint-stylistic/eslint-stylistic

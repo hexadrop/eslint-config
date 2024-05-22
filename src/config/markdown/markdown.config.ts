@@ -2,7 +2,7 @@ import type { ESLint, Linter } from 'eslint';
 import { mergeProcessors, processorPassThrough } from 'eslint-merge-processors';
 import { parseForESLint } from 'eslint-parser-plain';
 
-import type { HexatoolEslintOptions } from '../../options';
+import type { HexadropEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault } from '../../utils';
 import {
@@ -12,7 +12,7 @@ import {
 } from './markdown.config-name';
 import { GLOB_MARKDOWN, GLOB_MARKDOWN_IN_MARKDOWN } from './markdown.globs';
 
-export default async function markdown(options: HexatoolEslintOptions): Promise<TypedFlatConfigItem[]> {
+export default async function markdown(options: HexadropEslintOptions): Promise<TypedFlatConfigItem[]> {
 	const { markdown } = options;
 	if (!markdown) {
 		return [];

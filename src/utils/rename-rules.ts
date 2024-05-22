@@ -6,7 +6,7 @@ import type { Linter } from 'eslint';
  *
  * @example
  * ```ts
- * import { renameRules } from '@hexatool/eslint-config'
+ * import { renameRules } from '@hexadrop/eslint-config'
  *
  * export default [{
  *   rules: renameRules(

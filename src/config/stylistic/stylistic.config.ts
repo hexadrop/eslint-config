@@ -1,9 +1,9 @@
 import type { ESLint, Linter } from 'eslint';
 
 import { PLUGIN_RENAME, PLUGIN_RENAME_TYPESCRIPT } from '../../const';
-import type { HexatoolEslintOptions } from '../../options';
+import type { HexadropEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
-import { ensurePackages, interopDefault, pluginConfigRules } from '../../utils';
+import { interopDefault, pluginConfigRules } from '../../utils';
 import renameRules from '../../utils/rename-rules';
 import { GLOB_ASTRO } from '../astro';
 import { JAVASCRIPT_GLOBS, SOURCE_GLOBS } from '../core';
@@ -35,7 +35,7 @@ import {
 import prettierOptions from './stylistic.options-prettier';
 import stylisticOptions from './stylistic.options-stylistic';
 
-export default async function stylistic(options: HexatoolEslintOptions): Promise<TypedFlatConfigItem[]> {
+export default async function stylistic(options: HexadropEslintOptions): Promise<TypedFlatConfigItem[]> {
 	const { astro, json, markdown, stylistic, typescript } = options;
 	if (stylistic === false) {
 		return [];
@@ -632,7 +632,6 @@ export default async function stylistic(options: HexatoolEslintOptions): Promise
 		});
 
 		if (astro) {
-			ensurePackages('prettier-plugin-astro');
 			config.push({
 				files: GLOB_ASTRO,
 				name: STYLISTIC_CONFIG_NAME_RULES_PRETTIER_ASTRO,

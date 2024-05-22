@@ -1,5 +1,5 @@
 import { PLUGIN_RENAME } from '../../const';
-import type { HexatoolEslintOptions } from '../../options';
+import type { HexadropEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault } from '../../utils';
 import { ESLINT_CONFIG_GLOBS } from '../core';
@@ -17,7 +17,7 @@ import {
 	IMPORTS_CONFIG_NAME_SETUP_TYPESCRIPT,
 } from './imports.config-name';
 
-export default async function imports(options: HexatoolEslintOptions): Promise<TypedFlatConfigItem[]> {
+export default async function imports(options: HexadropEslintOptions): Promise<TypedFlatConfigItem[]> {
 	const {
 		astro,
 		imports,

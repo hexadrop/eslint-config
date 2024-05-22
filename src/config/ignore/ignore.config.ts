@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 
-import type { HexatoolEslintOptions } from '../../options';
+import type { HexadropEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault } from '../../utils';
 import {
@@ -10,7 +10,7 @@ import {
 } from './ignore.config-name';
 import IGNORE_GLOB from './ignore.globs';
 
-export default async function ignore({ ignore }: HexatoolEslintOptions): Promise<TypedFlatConfigItem[]> {
+export default async function ignore({ ignore }: HexadropEslintOptions): Promise<TypedFlatConfigItem[]> {
 	if (ignore === false) {
 		return [];
 	}
