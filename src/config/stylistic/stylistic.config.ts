@@ -93,12 +93,12 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 				[`${stylisticPluginRename}/jsx-sort-props`]: 'error',
 				[`${stylisticPluginRename}/line-comment-position`]: ['error', { position: 'above' }],
 				[`${stylisticPluginRename}/max-len`]: 'off',
+				[`${stylisticPluginRename}/multiline-comment-style`]: ['error', 'starred-block'],
 				[`${stylisticPluginRename}/no-extra-semi`]: 'error',
 				[`${stylisticPluginRename}/padding-line-between-statements`]: [
 					'error',
 					{ blankLine: 'always', next: 'return', prev: '*' },
 				],
-				[`${stylisticPluginRename}multiline-comment-style`]: ['error', 'starred-block'],
 				curly: ['error', 'all'],
 				...(format && {
 					[`${stylisticPluginRename}/operator-linebreak`]: 'off',
