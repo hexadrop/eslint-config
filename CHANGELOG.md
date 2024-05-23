@@ -1,5 +1,11 @@
 # @hexadrop/eslint-config
 
+## 0.0.1-beta.2
+
+### Patch Changes
+
+- 637ac7c: Disable `style/multiline-ternary`
+
 ## 0.0.1-beta.1
 
 ### Patch Changes

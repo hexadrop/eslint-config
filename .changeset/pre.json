@@ -5,6 +5,7 @@
     "@hexadrop/eslint-config": "0.0.0"
   },
   "changesets": [
+    "angry-lies-develop",
     "famous-files-look",
     "serious-turtles-invent"
   ]
