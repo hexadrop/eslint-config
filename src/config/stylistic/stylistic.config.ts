@@ -94,6 +94,7 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 				[`${stylisticPluginRename}/line-comment-position`]: ['error', { position: 'above' }],
 				[`${stylisticPluginRename}/max-len`]: 'off',
 				[`${stylisticPluginRename}/multiline-comment-style`]: ['error', 'starred-block'],
+				[`${stylisticPluginRename}/multiline-ternary`]: 'off',
 				[`${stylisticPluginRename}/no-extra-semi`]: 'error',
 				[`${stylisticPluginRename}/padding-line-between-statements`]: [
 					'error',
