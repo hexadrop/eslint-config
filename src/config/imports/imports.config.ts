@@ -10,11 +10,11 @@ import {
 	IMPORTS_CONFIG_NAME_RULES_STATIC_MARKDOWN_SOURCE,
 	IMPORTS_CONFIG_NAME_RULES_STYLISTIC,
 	IMPORTS_CONFIG_NAME_RULES_STYLISTIC_MARKDOWN_SOURCE,
+	IMPORTS_CONFIG_NAME_RULES_TYPESCRIPT_DTS,
 	IMPORTS_CONFIG_NAME_RULES_WARNINGS,
 	IMPORTS_CONFIG_NAME_RULES_WARNINGS_ESLINT_CONFIG,
 	IMPORTS_CONFIG_NAME_SETUP,
 	IMPORTS_CONFIG_NAME_SETUP_TYPESCRIPT,
-	IMPORTS_CONFIG_NAME_SETUP_TYPESCRIPT_DTS,
 } from './imports.config-name';
 
 export default async function imports(options: HexadropEslintOptions): Promise<TypedFlatConfigItem[]> {
@@ -56,32 +56,23 @@ export default async function imports(options: HexadropEslintOptions): Promise<T
 	if (typescript) {
 		const typeScriptExtensions = ['.ts', '.tsx'] as const;
 		const allExtensions = [...typeScriptExtensions, '.js', '.jsx'] as const;
-		configs.push(
-			{
-				files: TYPESCRIPT_GLOBS,
-				name: IMPORTS_CONFIG_NAME_SETUP_TYPESCRIPT,
-				settings: {
-					[`${importXPlugin}/extensions`]: typeScriptExtensions,
-					[`${importXPlugin}/external-module-folders`]: ['node_modules', 'node_modules/@types'],
-					[`${importXPlugin}/parsers`]: {
-						'@typescript-eslint/parser': [...typeScriptExtensions, '.cts', '.mts'],
+		configs.push({
+			files: TYPESCRIPT_GLOBS,
+			name: IMPORTS_CONFIG_NAME_SETUP_TYPESCRIPT,
+			settings: {
+				[`${importXPlugin}/extensions`]: typeScriptExtensions,
+				[`${importXPlugin}/external-module-folders`]: ['node_modules', 'node_modules/@types'],
+				[`${importXPlugin}/parsers`]: {
+					'@typescript-eslint/parser': [...typeScriptExtensions, '.cts', '.mts'],
+				},
+				[`${importXPlugin}/resolver`]: {
+					node: {
+						extensions: allExtensions,
 					},
-					[`${importXPlugin}/resolver`]: {
-						node: {
-							extensions: allExtensions,
-						},
-						typescript: true,
-					},
+					typescript: true,
 				},
 			},
-			{
-				files: DTS_GLOBS,
-				name: IMPORTS_CONFIG_NAME_SETUP_TYPESCRIPT_DTS,
-				settings: {
-					[`${importXPlugin}/prefer-default-export`]: 'off',
-				},
-			}
-		);
+		});
 	}
 
 	configs.push(
@@ -163,18 +154,25 @@ export default async function imports(options: HexadropEslintOptions): Promise<T
 		});
 	}
 
-	/*
-	 * TODO: Decide if we want to keep these rules
-	 * if (typescript) {
-	 * 	configs.push({
-	 * 		files: TYPESCRIPT_GLOBS,
-	 * 		name: IMPORTS_CONFIG_NAME_RULES_TYPESCRIPT,
-	 * 		rules: {
-	 * 			[`${importXPluginRename}/named`]: 'off',
-	 * 		},
-	 * 	});
-	 * }
-	 */
+	if (typescript) {
+		/*
+		 * TODO: Decide if we want to keep these rules
+		 * configs.push({
+		 * 	files: TYPESCRIPT_GLOBS,
+		 * 	name: IMPORTS_CONFIG_NAME_RULES_TYPESCRIPT,
+		 * 	rules: {
+		 * 		[`${importXPluginRename}/named`]: 'off',
+		 * 	},
+		 * });
+		 */
+		configs.push({
+			files: DTS_GLOBS,
+			name: IMPORTS_CONFIG_NAME_RULES_TYPESCRIPT_DTS,
+			settings: {
+				[`${importXPlugin}/prefer-default-export`]: 'off',
+			},
+		});
+	}
 
 	if (stylistic) {
 		configs.push({
