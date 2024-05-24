@@ -154,25 +154,18 @@ export default async function imports(options: HexadropEslintOptions): Promise<T
 		});
 	}
 
-	if (typescript) {
-		/*
-		 * TODO: Decide if we want to keep these rules
-		 * configs.push({
-		 * 	files: TYPESCRIPT_GLOBS,
-		 * 	name: IMPORTS_CONFIG_NAME_RULES_TYPESCRIPT,
-		 * 	rules: {
-		 * 		[`${importXPluginRename}/named`]: 'off',
-		 * 	},
-		 * });
-		 */
-		configs.push({
-			files: DTS_GLOBS,
-			name: IMPORTS_CONFIG_NAME_RULES_TYPESCRIPT_DTS,
-			settings: {
-				[`${importXPlugin}/prefer-default-export`]: 'off',
-			},
-		});
-	}
+	/*
+	 * TODO: Decide if we want to keep these rules
+	 * if (typescript) {
+	 * 	configs.push({
+	 * 		files: TYPESCRIPT_GLOBS,
+	 * 		name: IMPORTS_CONFIG_NAME_RULES_TYPESCRIPT,
+	 * 		rules: {
+	 * 			[`${importXPluginRename}/named`]: 'off',
+	 * 		},
+	 * 	});
+	 * }
+	 */
 
 	if (stylistic) {
 		configs.push({
@@ -219,6 +212,16 @@ export default async function imports(options: HexadropEslintOptions): Promise<T
 				],
 			},
 		});
+
+		if (typescript) {
+			configs.push({
+				files: DTS_GLOBS,
+				name: IMPORTS_CONFIG_NAME_RULES_TYPESCRIPT_DTS,
+				settings: {
+					[`${importXPlugin}/prefer-default-export`]: 'off',
+				},
+			});
+		}
 
 		if (markdown) {
 			configs.push({
