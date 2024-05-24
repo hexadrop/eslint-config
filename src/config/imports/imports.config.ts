@@ -4,7 +4,7 @@ import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault } from '../../utils';
 import { ESLINT_CONFIG_GLOBS } from '../core';
 import { GLOB_MARKDOWN_ASTRO, GLOB_MARKDOWN_JSON, GLOB_MARKDOWN_SOURCE } from '../markdown';
-import { TYPESCRIPT_GLOBS } from '../typescript';
+import { DTS_GLOBS, TYPESCRIPT_GLOBS } from '../typescript';
 import {
 	IMPORTS_CONFIG_NAME_RULES_STATIC,
 	IMPORTS_CONFIG_NAME_RULES_STATIC_MARKDOWN_SOURCE,
@@ -14,6 +14,7 @@ import {
 	IMPORTS_CONFIG_NAME_RULES_WARNINGS_ESLINT_CONFIG,
 	IMPORTS_CONFIG_NAME_SETUP,
 	IMPORTS_CONFIG_NAME_SETUP_TYPESCRIPT,
+	IMPORTS_CONFIG_NAME_SETUP_TYPESCRIPT_DTS,
 } from './imports.config-name';
 
 export default async function imports(options: HexadropEslintOptions): Promise<TypedFlatConfigItem[]> {
@@ -55,23 +56,32 @@ export default async function imports(options: HexadropEslintOptions): Promise<T
 	if (typescript) {
 		const typeScriptExtensions = ['.ts', '.tsx'] as const;
 		const allExtensions = [...typeScriptExtensions, '.js', '.jsx'] as const;
-		configs.push({
-			files: TYPESCRIPT_GLOBS,
-			name: IMPORTS_CONFIG_NAME_SETUP_TYPESCRIPT,
-			settings: {
-				[`${importXPlugin}/extensions`]: typeScriptExtensions,
-				[`${importXPlugin}/external-module-folders`]: ['node_modules', 'node_modules/@types'],
-				[`${importXPlugin}/parsers`]: {
-					'@typescript-eslint/parser': [...typeScriptExtensions, '.cts', '.mts'],
-				},
-				[`${importXPlugin}/resolver`]: {
-					node: {
-						extensions: allExtensions,
+		configs.push(
+			{
+				files: TYPESCRIPT_GLOBS,
+				name: IMPORTS_CONFIG_NAME_SETUP_TYPESCRIPT,
+				settings: {
+					[`${importXPlugin}/extensions`]: typeScriptExtensions,
+					[`${importXPlugin}/external-module-folders`]: ['node_modules', 'node_modules/@types'],
+					[`${importXPlugin}/parsers`]: {
+						'@typescript-eslint/parser': [...typeScriptExtensions, '.cts', '.mts'],
 					},
-					typescript: true,
+					[`${importXPlugin}/resolver`]: {
+						node: {
+							extensions: allExtensions,
+						},
+						typescript: true,
+					},
 				},
 			},
-		});
+			{
+				files: DTS_GLOBS,
+				name: IMPORTS_CONFIG_NAME_SETUP_TYPESCRIPT_DTS,
+				settings: {
+					[`${importXPlugin}/prefer-default-export`]: 'off',
+				},
+			}
+		);
 	}
 
 	configs.push(
