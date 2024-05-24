@@ -4,6 +4,7 @@ import process from 'node:process';
 
 import { isPackageExists } from 'local-pkg';
 
+import type { Nullable, RecursivePartial } from '../types';
 import type { HexadropEslintIgnoreOptions } from './hexadrop-eslint-ignore.options';
 import type { HexadropEslintModulesOptions } from './hexadrop-eslint-module.options';
 import type { HexadropEslintStylisticOptions } from './hexadrop-eslint-stylistic.options';
@@ -118,7 +119,7 @@ function getCwdTsconfigPath(): string | undefined {
 
 export type { HexadropEslintOptions };
 
-export default function defaultOptions(options: Partial<HexadropEslintOptions> = {}): HexadropEslintOptions {
+export default function defaultOptions(options: RecursivePartial<HexadropEslintOptions> = {}): HexadropEslintOptions {
 	let typescript: boolean | string | string[] = false;
 	const installedTypescript = isPackageExists('typescript');
 	const installedReact = isPackageExists('react');
@@ -129,14 +130,26 @@ export default function defaultOptions(options: Partial<HexadropEslintOptions> =
 	} else if (installedTypescript) {
 		if (options.typescript === undefined) {
 			typescript = getCwdTsconfigPath() ?? true;
-		} else if (options.typescript === 'string' || Array.isArray(options.typescript)) {
+		} else if (options.typescript === 'string') {
 			typescript = options.typescript.length > 0 ? options.typescript : true;
+		} else if (Array.isArray(options.typescript)) {
+			typescript = options.typescript.length > 0 ? (options.typescript.filter(Boolean) as string[]) : true;
 		}
 	}
 
 	return {
 		astro: options.astro ?? installedAstro,
-		ignore: options.ignore ?? true,
+		ignore:
+			typeof options.ignore === 'object'
+				? {
+						...options.ignore,
+						files:
+							typeof options.ignore.files === 'string'
+								? options.ignore.files
+								: (options.ignore.files?.filter(Boolean) as Nullable<string[]>) ?? [],
+						globs: (options.ignore.globs?.filter(Boolean) as Nullable<string[]>) ?? [],
+					}
+				: options.ignore ?? true,
 		imports: options.imports ?? true,
 		json: options.json ?? true,
 		markdown: options.markdown ?? true,
@@ -146,7 +159,11 @@ export default function defaultOptions(options: Partial<HexadropEslintOptions> =
 			node: true,
 			webpack: false,
 			...options.module,
-			ignore: [String.raw`bun\:.*`, String.raw`astro\:.*`, ...(options.module?.ignore ?? [])],
+			ignore: [
+				String.raw`bun\:.*`,
+				String.raw`astro\:.*`,
+				...((options.module?.ignore?.filter(Boolean) as Nullable<string[]>) ?? []),
+			],
 		},
 		node: options.node ?? true,
 		react: options.react ?? installedReact,

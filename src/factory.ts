@@ -5,12 +5,12 @@ import { astro, core, ignore, imports, json, markdown, react, stylistic, typescr
 import { PLUGIN_RENAME } from './const';
 import type { HexadropEslintOptions } from './options';
 import defaultOptions from './options/hexadrop-eslint.options';
-import type { ConfigNames, TypedFlatConfigItem } from './types';
+import type { ConfigNames, RecursivePartial, TypedFlatConfigItem } from './types';
 import { extractTypedFlatConfigItem } from './utils';
 
 // eslint-disable-next-line typescript/promise-function-async
 export default function hexadrop(
-	optionsOrFlatConfigItem?: Partial<HexadropEslintOptions> & TypedFlatConfigItem,
+	optionsOrFlatConfigItem?: RecursivePartial<HexadropEslintOptions> & TypedFlatConfigItem,
 	...configs: ResolvableFlatConfig<TypedFlatConfigItem>[]
 ): FlatConfigComposer<TypedFlatConfigItem, ConfigNames> {
 	const options = defaultOptions(optionsOrFlatConfigItem);
