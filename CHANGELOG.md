@@ -1,5 +1,11 @@
 # @hexadrop/eslint-config
 
+## 0.0.1-beta.9
+
+### Patch Changes
+
+- 644c9c4: Fix `import/prefer-default-export` rule disable
+
 ## 0.0.1-beta.8
 
 ### Patch Changes
