@@ -1,5 +1,11 @@
 # @hexadrop/eslint-config
 
+## 0.0.1-beta.5
+
+### Patch Changes
+
+- 28fa1f3: Disable `import/prefer-default-export` on `.d.ts` files
+
 ## 0.0.1-beta.4
 
 ### Patch Changes
