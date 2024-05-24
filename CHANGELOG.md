@@ -1,5 +1,11 @@
 # @hexadrop/eslint-config
 
+## 0.0.1-beta.3
+
+### Patch Changes
+
+- c5d7c2f: Make `HexadropEslintOptions` recursive partial
+
 ## 0.0.1-beta.2
 
 ### Patch Changes
