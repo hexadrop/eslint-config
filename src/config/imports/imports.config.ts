@@ -218,7 +218,7 @@ export default async function imports(options: HexadropEslintOptions): Promise<T
 				files: DTS_GLOBS,
 				name: IMPORTS_CONFIG_NAME_RULES_STYLISTIC_TYPESCRIPT_DTS,
 				settings: {
-					[`${importXPlugin}/prefer-default-export`]: 'off',
+					[`${importXPluginRename}/prefer-default-export`]: 'off',
 				},
 			});
 		}
