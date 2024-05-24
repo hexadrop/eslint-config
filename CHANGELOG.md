@@ -1,5 +1,11 @@
 # @hexadrop/eslint-config
 
+## 0.0.1-beta.7
+
+### Patch Changes
+
+- c0349ef: Fix config names
+
 ## 0.0.1-beta.6
 
 ### Patch Changes
