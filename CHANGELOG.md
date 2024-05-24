@@ -1,5 +1,11 @@
 # @hexadrop/eslint-config
 
+## 0.0.1-beta.8
+
+### Patch Changes
+
+- a1c5fad: Fix `import/prefer-default-export` rule name
+
 ## 0.0.1-beta.7
 
 ### Patch Changes
