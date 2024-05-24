@@ -217,7 +217,7 @@ export default async function imports(options: HexadropEslintOptions): Promise<T
 			configs.push({
 				files: DTS_GLOBS,
 				name: IMPORTS_CONFIG_NAME_RULES_STYLISTIC_TYPESCRIPT_DTS,
-				settings: {
+				rules: {
 					[`${importXPluginRename}/prefer-default-export`]: 'off',
 				},
 			});
