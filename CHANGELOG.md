@@ -1,5 +1,11 @@
 # @hexadrop/eslint-config
 
+## 0.0.1-beta.10
+
+### Patch Changes
+
+- 8c8640b: Disable `import/exports-last` and `import/prefer-default-export`
+
 ## 0.0.1-beta.9
 
 ### Patch Changes
