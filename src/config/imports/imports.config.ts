@@ -2,6 +2,7 @@ import { PLUGIN_RENAME } from '../../const';
 import type { HexadropEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
 import { interopDefault } from '../../utils';
+import { GLOB_ASTRO } from '../astro';
 import { ESLINT_CONFIG_GLOBS } from '../core';
 import { GLOB_MARKDOWN_ASTRO, GLOB_MARKDOWN_JSON, GLOB_MARKDOWN_SOURCE } from '../markdown';
 import { DTS_GLOBS, TYPESCRIPT_GLOBS } from '../typescript';
@@ -9,6 +10,7 @@ import {
 	IMPORTS_CONFIG_NAME_RULES_STATIC,
 	IMPORTS_CONFIG_NAME_RULES_STATIC_MARKDOWN_SOURCE,
 	IMPORTS_CONFIG_NAME_RULES_STYLISTIC,
+	IMPORTS_CONFIG_NAME_RULES_STYLISTIC_ASTRO,
 	IMPORTS_CONFIG_NAME_RULES_STYLISTIC_MARKDOWN_SOURCE,
 	IMPORTS_CONFIG_NAME_RULES_STYLISTIC_TYPESCRIPT_DTS,
 	IMPORTS_CONFIG_NAME_RULES_WARNINGS,
@@ -229,6 +231,17 @@ export default async function imports(options: HexadropEslintOptions): Promise<T
 				name: IMPORTS_CONFIG_NAME_RULES_STYLISTIC_MARKDOWN_SOURCE,
 				rules: {
 					[`${unusedImportsPrefix}/no-unused-vars`]: ['off'],
+				},
+			});
+		}
+
+		if (astro) {
+			configs.push({
+				files: GLOB_ASTRO,
+				name: IMPORTS_CONFIG_NAME_RULES_STYLISTIC_ASTRO,
+				rules: {
+					[`${importXPluginRename}/exports-last`]: ['off'],
+					[`${importXPluginRename}/prefer-default-export`]: ['off'],
 				},
 			});
 		}
