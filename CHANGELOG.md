@@ -1,5 +1,11 @@
 # @hexadrop/eslint-config
 
+## 0.0.1-beta.11
+
+### Patch Changes
+
+- 6cedf32: Include prettier as dependency
+
 ## 0.0.1-beta.10
 
 ### Patch Changes
