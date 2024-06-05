@@ -76,6 +76,7 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 			rules: {
 				...renameRules(pluginStylisticRules, PLUGIN_RENAME),
 				[`${stylisticPluginRename}/arrow-parens`]: ['error', 'as-needed'],
+				[`${stylisticPluginRename}/brace-style`]: 'off',
 				[`${stylisticPluginRename}/implicit-arrow-linebreak`]: 'off',
 				[`${stylisticPluginRename}/indent`]: 'off',
 				[`${stylisticPluginRename}/indent-binary-ops`]: 'off',
