@@ -1,5 +1,11 @@
 # @hexadrop/eslint-config
 
+## 0.0.1-beta.12
+
+### Patch Changes
+
+- 80009ed: Disable `style/brace-style` due incompatibilities with `prettier`
+
 ## 0.0.1-beta.11
 
 ### Patch Changes
