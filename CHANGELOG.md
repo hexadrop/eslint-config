@@ -1,5 +1,16 @@
 # @hexadrop/eslint-config
 
+## 0.0.1-beta.15
+
+### Patch Changes
+
+- 07a686a: Update dependency `globals` to `v15.8.0`
+- 07a686a: Update dependency `eslint-plugin-astro` to `v1.2.3`
+- 07a686a: Update dependency `eslint-config-flat-gitignore` to `v0.1.7`
+- 07a686a: Update dependency `eslint-plugin-react-refresh` to `v0.4.8`
+- 07a686a: Update `typescript-eslint` monorepo to `v7.16.0`
+- 07a686a: Update dependency `eslint-plugin-simple-import-sort` to `v12.1.1`
+
 ## 0.0.1-beta.14
 
 ### Patch Changes
