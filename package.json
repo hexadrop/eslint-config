@@ -47,7 +47,7 @@
 		"@typescript-eslint/eslint-plugin": "7.14.1",
 		"@typescript-eslint/parser": "7.14.1",
 		"astro-eslint-parser": "1.0.2",
-		"eslint-config-flat-gitignore": "0.1.5",
+		"eslint-config-flat-gitignore": "0.1.7",
 		"eslint-flat-config-utils": "0.2.5",
 		"eslint-import-resolver-typescript": "3.6.1",
 		"eslint-merge-processors": "0.1.0",
