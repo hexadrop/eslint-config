@@ -79,7 +79,7 @@
 		"@types/bun": "1.1.6",
 		"@types/eslint": "8.56.11",
 		"astro": "4.12.2",
-		"eslint": "9.7.0",
+		"eslint": "9.8.0",
 		"eslint-typegen": "0.2.4",
 		"esno": "4.7.0",
 		"jiti": "1.21.6",
