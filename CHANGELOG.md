@@ -1,5 +1,22 @@
 # @hexadrop/eslint-config
 
+## 0.0.1-beta.16
+
+### Patch Changes
+
+- c2679c5: Update dependency eslint-plugin-react to v7.35.0
+- c2679c5: Update typescript-eslint monorepo to v7.17.0
+- c2679c5: Update dependency prettier-plugin-astro to v0.14.1
+- c2679c5: Update dependency @eslint/compat to v1.1.1
+- c2679c5: Update dependency @types/eslint to v8.56.11
+- c2679c5: Update dependency prettier to v3.3.3
+- e2223c5: Update dependency eslint-plugin-perfectionist to v3
+- c2679c5: Update dependency eslint-plugin-unused-imports to v4.0.1
+- c2679c5: Update dependency eslint-plugin-markdown to v5.1.0
+- c2679c5: Update dependency eslint-plugin-import-x to v3
+- c2679c5: Update dependency eslint-plugin-react-refresh to v0.4.9
+- c2679c5: Update dependency eslint-config-flat-gitignore to v0.1.8
+
 ## 0.0.1-beta.15
 
 ### Patch Changes
