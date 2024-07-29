@@ -53,7 +53,8 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 
 	const pluginUnicorn = (await interopDefault(import('eslint-plugin-unicorn'))) as ESLint.Plugin;
 
-	const pluginPerfectionist = await interopDefault(import('eslint-plugin-perfectionist/configs/recommended-natural'));
+	const pluginPerfectionistRoot = await interopDefault(import('eslint-plugin-perfectionist'));
+	const pluginPerfectionist = pluginPerfectionistRoot.configs['recommended-natural'];
 
 	const config: TypedFlatConfigItem[] = [
 		{
@@ -64,7 +65,7 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 					unicorn: pluginUnicorn,
 				}),
 				...(perfectionist && {
-					perfectionist: pluginPerfectionist.plugins.perfectionist,
+					...pluginPerfectionist.plugins,
 				}),
 				...(format && {
 					format: await interopDefault(import('eslint-plugin-format')),
@@ -574,9 +575,9 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 					{
 						allowList: {
 							Env: true,
+							env: true,
 							ProcessEnv: true,
 							Props: true,
-							env: true,
 						},
 					},
 				],

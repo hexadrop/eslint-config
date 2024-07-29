@@ -27,7 +27,7 @@ interface HexadropEslintOptions {
 	 *
 	 * @default true
 	 */
-	ignore: HexadropEslintIgnoreOptions | boolean;
+	ignore: boolean | HexadropEslintIgnoreOptions;
 
 	/**
 	 * Enable import rules.
@@ -94,7 +94,7 @@ interface HexadropEslintOptions {
 	 * 	unicorn: true,
 	 * }
 	 */
-	stylistic: HexadropEslintStylisticOptions | false;
+	stylistic: false | HexadropEslintStylisticOptions;
 
 	/**
 	 * Configure typescript support.

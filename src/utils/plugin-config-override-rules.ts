@@ -6,7 +6,7 @@ import renameRules from './rename-rules';
 function pluginConfigOverrideRules(
 	plugin: ESLint.Plugin,
 	configName: string,
-	indexOrMap?: Record<string, string> | number
+	indexOrMap?: number | Record<string, string>
 ): Linter.RulesRecord & RuleOptions;
 function pluginConfigOverrideRules(
 	plugin: ESLint.Plugin,
@@ -17,7 +17,7 @@ function pluginConfigOverrideRules(
 function pluginConfigOverrideRules(
 	plugin: ESLint.Plugin,
 	configName: string,
-	indexOrMap?: Record<string, string> | number,
+	indexOrMap?: number | Record<string, string>,
 	map2?: Record<string, string>
 ): Linter.RulesRecord & RuleOptions {
 	let index = 0;
