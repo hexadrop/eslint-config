@@ -1,5 +1,19 @@
 # @hexadrop/eslint-config
 
+## 0.0.1-beta.17
+
+### Patch Changes
+
+- 2b82c7f: Update dependency eslint-plugin-n to v17.10.2
+- 2b82c7f: Update dependency @types/eslint to v9
+- 2b82c7f: Update dependency eslint-typegen to v0.3.0
+- 2b82c7f: Update dependency eslint-plugin-unicorn to v55
+- 2b82c7f: Update dependency eslint-plugin-perfectionist to v3.1.1
+- 2b82c7f: Update dependency @stylistic/eslint-plugin to v2.6.1
+- 2b82c7f: Update typescript-eslint monorepo to v8
+- 2b82c7f: Update dependency globals to v15.9.0
+- 2b82c7f: Update dependency eslint-flat-config-utils to v0.3.0
+
 ## 0.0.1-beta.16
 
 ### Patch Changes
