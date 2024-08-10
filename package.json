@@ -78,7 +78,7 @@
 		"@hexadrop/tsconfig": "0.0.5",
 		"@types/bun": "1.1.6",
 		"@types/eslint": "9.6.0",
-		"astro": "4.13.2",
+		"astro": "4.13.3",
 		"eslint": "9.8.0",
 		"eslint-typegen": "0.3.0",
 		"esno": "4.7.0",
