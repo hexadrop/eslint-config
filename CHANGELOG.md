@@ -1,5 +1,12 @@
 # @hexadrop/eslint-config
 
+## 0.0.1-beta.19
+
+### Patch Changes
+
+- Update dependency @stylistic/eslint-plugin to v2.6.4
+- Update dependency eslint-plugin-perfectionist to v3.2.0
+
 ## 0.0.1-beta.18
 
 ### Patch Changes
