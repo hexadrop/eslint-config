@@ -557,7 +557,7 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 
 	if (unicorn) {
 		const unicornFlatRecommended = pluginUnicorn.configs
-			? (pluginUnicorn.configs['flat/recommended'] as Linter.FlatConfig)
+			? (pluginUnicorn.configs['flat/recommended'] as Linter.Config)
 			: undefined;
 		const unicornRules = unicornFlatRecommended?.rules as Linter.RulesRecord;
 
