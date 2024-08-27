@@ -1,5 +1,18 @@
 # @hexadrop/eslint-config
 
+## 0.0.1-beta.18
+
+### Patch Changes
+
+- 710c43c: Update dependency eslint-plugin-react-refresh to v0.4.11
+- 710c43c: Update dependency eslint-plugin-import-x to v4
+- 710c43c: Update dependency @stylistic/eslint-plugin to v2.6.4
+- 710c43c: Update dependency eslint-plugin-unused-imports to v4.1.3
+- 710c43c: Update dependency eslint-plugin-perfectionist to v3.2.0
+- 710c43c: Update dependency eslint-import-resolver-typescript to v3.6.3
+- 710c43c: Update dependency tslib to v2.7.0
+- 710c43c: Update dependency eslint-flat-config-utils to v0.3.1
+
 ## 0.0.1-beta.17
 
 ### Patch Changes
