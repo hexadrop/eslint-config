@@ -1,5 +1,24 @@
 # @hexadrop/eslint-config
 
+## 0.0.1-beta.20
+
+### Patch Changes
+
+- Update typescript-eslint monorepo to v8.6.0
+- Update dependency eslint-plugin-perfectionist to v3.6.0
+- Update dependency eslint-plugin-react to v7.36.1
+- Update dependency eslint-config-flat-gitignore to v0.3.0
+- Update dependency @stylistic/eslint-plugin to v2.8.0
+- Update dependency eslint-plugin-unused-imports to v4.1.4
+- Update dependency eslint-plugin-react-refresh to v0.4.12
+- Update dependency tslib to v2.7.0
+- Update dependency eslint-plugin-import-x to v4.3.0
+- Update dependency eslint-plugin-astro to v1.2.4
+- Update dependency astro-eslint-parser to v1.0.3
+- Update dependency eslint-flat-config-utils to v0.4.0
+- Update dependency eslint-plugin-n to v17.10.3
+- Update dependency eslint-plugin-react to v7.36.1
+
 ## 0.0.1-beta.19
 
 ### Patch Changes
