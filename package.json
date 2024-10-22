@@ -16,7 +16,7 @@
 		"type": "git",
 		"url": "git+https://github.com/hexadrop/eslint-config.git"
 	},
-	"homepage": "https://github.com/hexadrop/eslint-config",
+	"homepage": "https://hexadrop.github.io/eslint-config/",
 	"bugs": {
 		"url": "https://github.com/hexadrop/eslint-config/issues"
 	},
