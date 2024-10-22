@@ -18,7 +18,7 @@ jobs:
       - name: Update PR
         uses: mscharley/dependency-changesets-action@v1.1.1
         with:
-          github-token: ${{ github.token }}
+          token: ${{ github.token }}
           use-conventional-commits: true
           author-name: Renovate Changesets
           author-email: github+renovate@scharley.me
