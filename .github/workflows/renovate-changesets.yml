@@ -20,5 +20,4 @@ jobs:
         with:
           token: ${{ github.token }}
           use-conventional-commits: true
-          author-name: Renovate Changesets
-          author-email: github+renovate@scharley.me
+          sign-commits: true
