@@ -1,4 +1,4 @@
-name: Add changeset to Renovate updates
+name: Add changeset to renovate updates
 
 on:
   pull_request_target:
@@ -20,5 +20,4 @@ jobs:
         with:
           token: ${{ github.token }}
           use-conventional-commits: true
-          author-name: Renovate Changesets
-          author-email: github+renovate@scharley.me
+          sign-commits: true
