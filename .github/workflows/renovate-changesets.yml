@@ -4,16 +4,14 @@ on:
   pull_request_target:
     types: [opened, synchronize, labeled]
 
-jobs:
-  renovate:
-    name: Update Renovate PR
-    runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.labels.*.name, 'dependencies')
+permissions:
+  contents: write
+  pull-requests: write
 
+jobs:
+  changesets:
+    runs-on: ubuntu-latest
+    if: ${{ github.actor == 'dependabot[bot]' }}
     steps:
-      - name: Update PR
-        uses: mscharley/dependency-changesets-action@v1.1.1
-        with:
-          use-conventional-commits: true
-          author-name: Renovate Changesets
-          author-email: github+renovate@scharley.me
+      - name: Dependabot Changesets
+        uses: feelepxyz/dependabot-changesets@v1
