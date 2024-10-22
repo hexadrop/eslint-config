@@ -1,4 +1,4 @@
-name: Add changeset to Renovate updates
+name: Add changeset to renovate updates
 
 on:
   pull_request_target:
