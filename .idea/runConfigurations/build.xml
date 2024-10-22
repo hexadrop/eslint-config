@@ -1,9 +1,9 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="typecheck" type="js.build_tools.npm" nameIsGenerated="true">
+  <configuration default="false" name="build" type="js.build_tools.npm">
     <package-json value="$PROJECT_DIR$/package.json" />
     <command value="run" />
     <scripts>
-      <script value="typecheck" />
+      <script value="build" />
     </scripts>
     <node-interpreter value="$USER_HOME$/.proto/shims/bun" />
     <package-manager value="$USER_HOME$/.proto/shims/bun" />
