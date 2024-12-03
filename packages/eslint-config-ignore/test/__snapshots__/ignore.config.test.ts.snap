@@ -1,0 +1,285 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`@hexadrop/eslint-config-ignore ignore() should works as expected with false options 1`] = `[]`;
+
+exports[`@hexadrop/eslint-config-ignore ignore() should works as expected with true options 1`] = `
+[
+  {
+    "ignores": [
+      "**/node_modules",
+      "**/dist",
+      "**/package-lock.json",
+      "**/yarn.lock",
+      "**/pnpm-lock.yaml",
+      "**/bun.lockb",
+      "**/output",
+      "**/coverage",
+      "**/temp",
+      "**/.temp",
+      "**/tmp",
+      "**/.tmp",
+      "**/.history",
+      "**/.vitepress/cache",
+      "**/.nuxt",
+      "**/.next",
+      "**/.vercel",
+      "**/.changeset",
+      "**/.idea",
+      "**/.cache",
+      "**/.output",
+      "**/.vite-inspect",
+      "**/.yarn",
+      "**/CHANGELOG*.md",
+      "**/*.min.*",
+      "**/LICENSE*",
+      "**/__snapshots__",
+    ],
+    "name": "hexadrop/ignore",
+  },
+  {
+    "ignores": [
+      "**/dist",
+      "**/node_modules/",
+    ],
+    "name": "hexadrop/ignore/gitignore",
+  },
+]
+`;
+
+exports[`@hexadrop/eslint-config-ignore ignore() should works as expected with true options and \`.gitignore\` not exists 1`] = `[]`;
+
+exports[`@hexadrop/eslint-config-ignore ignore() should works as expected with extra globs 1`] = `
+[
+  {
+    "ignores": [
+      "**/node_modules",
+      "**/dist",
+      "**/package-lock.json",
+      "**/yarn.lock",
+      "**/pnpm-lock.yaml",
+      "**/bun.lockb",
+      "**/output",
+      "**/coverage",
+      "**/temp",
+      "**/.temp",
+      "**/tmp",
+      "**/.tmp",
+      "**/.history",
+      "**/.vitepress/cache",
+      "**/.nuxt",
+      "**/.next",
+      "**/.vercel",
+      "**/.changeset",
+      "**/.idea",
+      "**/.cache",
+      "**/.output",
+      "**/.vite-inspect",
+      "**/.yarn",
+      "**/CHANGELOG*.md",
+      "**/*.min.*",
+      "**/LICENSE*",
+      "**/__snapshots__",
+    ],
+    "name": "hexadrop/ignore",
+  },
+  {
+    "ignores": [
+      "**.js",
+    ],
+    "name": "hexadrop/ignore/additional",
+  },
+  {
+    "ignores": [
+      "**/dist",
+      "**/node_modules/",
+    ],
+    "name": "hexadrop/ignore/gitignore",
+  },
+]
+`;
+
+exports[`@hexadrop/eslint-config-ignore ignore() should works as expected with extra options 1`] = `
+[
+  {
+    "ignores": [
+      "**/node_modules",
+      "**/dist",
+      "**/package-lock.json",
+      "**/yarn.lock",
+      "**/pnpm-lock.yaml",
+      "**/bun.lockb",
+      "**/output",
+      "**/coverage",
+      "**/temp",
+      "**/.temp",
+      "**/tmp",
+      "**/.tmp",
+      "**/.history",
+      "**/.vitepress/cache",
+      "**/.nuxt",
+      "**/.next",
+      "**/.vercel",
+      "**/.changeset",
+      "**/.idea",
+      "**/.cache",
+      "**/.output",
+      "**/.vite-inspect",
+      "**/.yarn",
+      "**/CHANGELOG*.md",
+      "**/*.min.*",
+      "**/LICENSE*",
+      "**/__snapshots__",
+    ],
+    "name": "hexadrop/ignore",
+  },
+  {
+    "ignores": [
+      "**/dist",
+      "**/node_modules/",
+    ],
+    "name": "hexadrop/ignore/gitignore",
+  },
+]
+`;
+
+exports[`@hexadrop/eslint-config-ignore config should works as expected with false options 1`] = `[]`;
+
+exports[`@hexadrop/eslint-config-ignore config should works as expected with true options 1`] = `
+[
+  {
+    "ignores": [
+      "**/node_modules",
+      "**/dist",
+      "**/package-lock.json",
+      "**/yarn.lock",
+      "**/pnpm-lock.yaml",
+      "**/bun.lockb",
+      "**/output",
+      "**/coverage",
+      "**/temp",
+      "**/.temp",
+      "**/tmp",
+      "**/.tmp",
+      "**/.history",
+      "**/.vitepress/cache",
+      "**/.nuxt",
+      "**/.next",
+      "**/.vercel",
+      "**/.changeset",
+      "**/.idea",
+      "**/.cache",
+      "**/.output",
+      "**/.vite-inspect",
+      "**/.yarn",
+      "**/CHANGELOG*.md",
+      "**/*.min.*",
+      "**/LICENSE*",
+      "**/__snapshots__",
+    ],
+    "name": "hexadrop/ignore",
+  },
+  {
+    "ignores": [
+      "**/dist",
+      "**/node_modules/",
+    ],
+    "name": "hexadrop/ignore/gitignore",
+  },
+]
+`;
+
+exports[`@hexadrop/eslint-config-ignore config should works as expected with true options and \`.gitignore\` not exists 1`] = `[]`;
+
+exports[`@hexadrop/eslint-config-ignore config should works as expected with extra globs 1`] = `
+[
+  {
+    "ignores": [
+      "**/node_modules",
+      "**/dist",
+      "**/package-lock.json",
+      "**/yarn.lock",
+      "**/pnpm-lock.yaml",
+      "**/bun.lockb",
+      "**/output",
+      "**/coverage",
+      "**/temp",
+      "**/.temp",
+      "**/tmp",
+      "**/.tmp",
+      "**/.history",
+      "**/.vitepress/cache",
+      "**/.nuxt",
+      "**/.next",
+      "**/.vercel",
+      "**/.changeset",
+      "**/.idea",
+      "**/.cache",
+      "**/.output",
+      "**/.vite-inspect",
+      "**/.yarn",
+      "**/CHANGELOG*.md",
+      "**/*.min.*",
+      "**/LICENSE*",
+      "**/__snapshots__",
+    ],
+    "name": "hexadrop/ignore",
+  },
+  {
+    "ignores": [
+      "**.js",
+    ],
+    "name": "hexadrop/ignore/additional",
+  },
+  {
+    "ignores": [
+      "**/dist",
+      "**/node_modules/",
+    ],
+    "name": "hexadrop/ignore/gitignore",
+  },
+]
+`;
+
+exports[`@hexadrop/eslint-config-ignore config should works as expected with extra options 1`] = `
+[
+  {
+    "ignores": [
+      "**/node_modules",
+      "**/dist",
+      "**/package-lock.json",
+      "**/yarn.lock",
+      "**/pnpm-lock.yaml",
+      "**/bun.lockb",
+      "**/output",
+      "**/coverage",
+      "**/temp",
+      "**/.temp",
+      "**/tmp",
+      "**/.tmp",
+      "**/.history",
+      "**/.vitepress/cache",
+      "**/.nuxt",
+      "**/.next",
+      "**/.vercel",
+      "**/.changeset",
+      "**/.idea",
+      "**/.cache",
+      "**/.output",
+      "**/.vite-inspect",
+      "**/.yarn",
+      "**/CHANGELOG*.md",
+      "**/*.min.*",
+      "**/LICENSE*",
+      "**/__snapshots__",
+    ],
+    "name": "hexadrop/ignore",
+  },
+  {
+    "ignores": [
+      "**/dist",
+      "**/node_modules/",
+    ],
+    "name": "hexadrop/ignore/gitignore",
+  },
+]
+`;

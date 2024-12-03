@@ -1,0 +1,52 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`@hexadrop/eslint-config-ignore options should remove name from options 1`] = `
+{
+  "files": [],
+  "globs": [],
+}
+`;
+
+exports[`@hexadrop/eslint-config-ignore options should works as expected with other options 1`] = `
+{
+  "cwd": "./current",
+  "files": [],
+  "globs": [],
+  "root": true,
+  "strict": true,
+}
+`;
+
+exports[`@hexadrop/eslint-config-ignore options should globs works as expected 1`] = `
+{
+  "files": [],
+  "globs": [
+    "lorem",
+  ],
+}
+`;
+
+exports[`@hexadrop/eslint-config-ignore options should files works as expected with empty string 1`] = `
+{
+  "files": [],
+  "globs": [],
+}
+`;
+
+exports[`@hexadrop/eslint-config-ignore options should files works as expected with string 1`] = `
+{
+  "files": [
+    "./file",
+  ],
+  "globs": [],
+}
+`;
+
+exports[`@hexadrop/eslint-config-ignore options should files works as expected with string array 1`] = `
+{
+  "files": [
+    "./file",
+  ],
+  "globs": [],
+}
+`;

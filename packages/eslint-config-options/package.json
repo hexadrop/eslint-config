@@ -1,5 +1,5 @@
 {
-	"name": "@hexadrop/eslint-config-root",
+	"name": "@hexadrop/eslint-config-options",
 	"version": "0.0.0",
 	"description": "Opinionated ESLint ruleset designed for large teams and projects",
 	"keywords": [
@@ -14,24 +14,20 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/hexadrop/eslint-config.git"
+		"url": "git+https://github.com/hexadrop/eslint-config.git",
+		"directory": "packages/eslint-config-options"
 	},
 	"homepage": "https://github.com/hexadrop/eslint-config",
 	"bugs": {
 		"url": "https://github.com/hexadrop/eslint-config/issues"
 	},
 	"license": "MIT",
-	"private": true,
-	"workspaces": [
-		"packages/*"
-	],
-	"scripts": {
-		"test": "bun test",
-		"typecheck": "tsc --noEmit"
+	"peerDependencies": {
+		"@hexadrop/eslint-config-ignore": "^0.0.0"
 	},
-	"devDependencies": {
-		"@hexadrop/tsconfig": "0.0.5",
-		"@types/bun": "1.1.14",
-		"typescript": "5.7.2"
+	"peerDependenciesMeta": {
+		"@hexadrop/eslint-config-ignore": {
+			"optional": true
+		}
 	}
 }

@@ -1,0 +1,43 @@
+{
+	"name": "@hexadrop/eslint-config-ignore",
+	"version": "0.0.0",
+	"description": "Opinionated ESLint ruleset designed for large teams and projects",
+	"keywords": [
+		"lint",
+		"eslint",
+		"eslint-config",
+		"monorepo",
+		"scalable",
+		"scale",
+		"typescript",
+		"prettier"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/hexadrop/eslint-config.git",
+		"directory": "packages/eslint-config-ignore"
+	},
+	"homepage": "https://github.com/hexadrop/eslint-config",
+	"bugs": {
+		"url": "https://github.com/hexadrop/eslint-config/issues"
+	},
+	"license": "MIT",
+	"dependencies": {
+		"@hexadrop/eslint-config-interop": "^0.0.0"
+	},
+	"peerDependencies": {
+		"eslint": "^9.5.0",
+		"eslint-config-flat-gitignore": "^0.3.0"
+	},
+	"peerDependenciesMeta": {
+		"eslint-config-flat-gitignore": {
+			"optional": true
+		}
+	},
+	"devDependencies": {
+		"@hexadrop/eslint-config-options": "^0.0.0",
+		"@hexadrop/types": "2.0.0-beta.4",
+		"eslint": "9.16.0",
+		"eslint-config-flat-gitignore": "0.3.0"
+	}
+}
