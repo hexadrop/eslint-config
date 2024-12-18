@@ -617,8 +617,15 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 				'perfectionist/sort-exports': 'off',
 				'perfectionist/sort-imports': 'off',
 				'perfectionist/sort-interfaces': 'off',
+				'perfectionist/sort-modules': 'off',
 				'perfectionist/sort-named-exports': 'off',
 				'perfectionist/sort-named-imports': 'off',
+				'perfectionist/sort-object': [
+					'off',
+					{
+						specialCharacters: 'trim',
+					},
+				],
 				'perfectionist/sort-object-types': 'off',
 			},
 		});

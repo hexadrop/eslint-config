@@ -107,7 +107,19 @@ interface HexadropEslintOptions {
 	typescript: boolean | string | string[];
 }
 
-function defaultOptions(options: RecursivePartial<HexadropEslintOptions> = {}): HexadropEslintOptions {
+function getCwdTsconfigPath(): string | undefined {
+	const root = process.cwd();
+	const cwdTsconfigPath = path.resolve(root, 'tsconfig.json');
+	if (existsSync(cwdTsconfigPath)) {
+		return 'tsconfig.json';
+	}
+
+	return undefined;
+}
+
+export type { HexadropEslintOptions };
+
+export default function defaultOptions(options: RecursivePartial<HexadropEslintOptions> = {}): HexadropEslintOptions {
 	let typescript: boolean | string | string[] = false;
 	const installedTypescript = isPackageExists('typescript');
 	const installedReact = isPackageExists('react');
@@ -182,17 +194,3 @@ function defaultOptions(options: RecursivePartial<HexadropEslintOptions> = {}): 
 		typescript,
 	};
 }
-
-function getCwdTsconfigPath(): string | undefined {
-	const root = process.cwd();
-	const cwdTsconfigPath = path.resolve(root, 'tsconfig.json');
-	if (existsSync(cwdTsconfigPath)) {
-		return 'tsconfig.json';
-	}
-
-	return undefined;
-}
-
-export type { HexadropEslintOptions };
-
-export default defaultOptions;
