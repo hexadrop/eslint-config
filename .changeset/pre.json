@@ -1,0 +1,10 @@
+{
+  "mode": "pre",
+  "tag": "beta",
+  "initialVersions": {
+    "@hexadrop/eslint-config": "0.0.1"
+  },
+  "changesets": [
+    "mean-owls-knock"
+  ]
+}
