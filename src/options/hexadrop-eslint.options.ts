@@ -107,19 +107,7 @@ interface HexadropEslintOptions {
 	typescript: boolean | string | string[];
 }
 
-function getCwdTsconfigPath(): string | undefined {
-	const root = process.cwd();
-	const cwdTsconfigPath = path.resolve(root, 'tsconfig.json');
-	if (existsSync(cwdTsconfigPath)) {
-		return 'tsconfig.json';
-	}
-
-	return undefined;
-}
-
-export type { HexadropEslintOptions };
-
-export default function defaultOptions(options: RecursivePartial<HexadropEslintOptions> = {}): HexadropEslintOptions {
+function defaultOptions(options: RecursivePartial<HexadropEslintOptions> = {}): HexadropEslintOptions {
 	let typescript: boolean | string | string[] = false;
 	const installedTypescript = isPackageExists('typescript');
 	const installedReact = isPackageExists('react');
@@ -146,10 +134,10 @@ export default function defaultOptions(options: RecursivePartial<HexadropEslintO
 						files:
 							typeof options.ignore.files === 'string'
 								? options.ignore.files
-								: (options.ignore.files?.filter(Boolean) as Nullable<string[]>) ?? [],
+								: ((options.ignore.files?.filter(Boolean) as Nullable<string[]>) ?? []),
 						globs: (options.ignore.globs?.filter(Boolean) as Nullable<string[]>) ?? [],
 					}
-				: options.ignore ?? true,
+				: (options.ignore ?? true),
 		imports: options.imports ?? true,
 		json: options.json ?? true,
 		markdown: options.markdown ?? true,
@@ -194,3 +182,17 @@ export default function defaultOptions(options: RecursivePartial<HexadropEslintO
 		typescript,
 	};
 }
+
+function getCwdTsconfigPath(): string | undefined {
+	const root = process.cwd();
+	const cwdTsconfigPath = path.resolve(root, 'tsconfig.json');
+	if (existsSync(cwdTsconfigPath)) {
+		return 'tsconfig.json';
+	}
+
+	return undefined;
+}
+
+export type { HexadropEslintOptions };
+
+export default defaultOptions;

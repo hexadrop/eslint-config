@@ -31,11 +31,11 @@ declare module 'eslint-plugin-markdown' {
 declare module 'eslint-plugin-perfectionist/configs/recommended-natural' {
 	import type { ESLint } from 'eslint';
 
-	const config: {
+	const config: ESLint.Plugin & {
 		plugins: {
 			perfectionist: ESLint.Plugin;
 		};
-	} & ESLint.Plugin;
+	};
 
 	export default config;
 }

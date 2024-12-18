@@ -83,12 +83,12 @@ export default async function imports(options: HexadropEslintOptions): Promise<T
 			rules: {
 				// Warnings rules https://github.com/un-ts/eslint-plugin-import-x?tab=readme-ov-file#helpful-warnings
 				[`${importXPluginRename}/export`]: 'error',
-				[`${importXPluginRename}/no-deprecated`]: 'warn',
+				[`${importXPluginRename}/no-deprecated`]: 'off',
 				[`${importXPluginRename}/no-empty-named-blocks`]: 'error',
 				[`${importXPluginRename}/no-extraneous-dependencies`]: 'error',
 				[`${importXPluginRename}/no-mutable-exports`]: 'error',
-				[`${importXPluginRename}/no-named-as-default`]: 'warn',
 				[`${importXPluginRename}/no-named-as-default-member`]: 'warn',
+				[`${importXPluginRename}/no-named-as-default`]: 'warn',
 				// Module system rules
 				...(!amd && {
 					[`${importXPluginRename}/no-amd`]: 'error',
@@ -136,8 +136,8 @@ export default async function imports(options: HexadropEslintOptions): Promise<T
 			rules: {
 				[`${importXPluginRename}/default`]: 'off',
 				[`${importXPluginRename}/no-deprecated`]: 'off',
-				[`${importXPluginRename}/no-named-as-default`]: 'off',
 				[`${importXPluginRename}/no-named-as-default-member`]: 'off',
+				[`${importXPluginRename}/no-named-as-default`]: 'off',
 			},
 		}
 	);

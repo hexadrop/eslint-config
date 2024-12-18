@@ -79,8 +79,8 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 				[`${stylisticPluginRename}/arrow-parens`]: ['error', 'as-needed'],
 				[`${stylisticPluginRename}/brace-style`]: 'off',
 				[`${stylisticPluginRename}/implicit-arrow-linebreak`]: 'off',
-				[`${stylisticPluginRename}/indent`]: 'off',
 				[`${stylisticPluginRename}/indent-binary-ops`]: 'off',
+				[`${stylisticPluginRename}/indent`]: 'off',
 				[`${stylisticPluginRename}/jsx-closing-bracket-location`]: [
 					'error',
 					{

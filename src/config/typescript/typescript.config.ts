@@ -90,6 +90,7 @@ export default async function typescript(options: HexadropEslintOptions): Promis
 			rules: {
 				...pluginConfigRules(plugin, 'strict-type-checked-only', PLUGIN_RENAME_TYPESCRIPT),
 				[`${typescriptPluginRename}/no-confusing-void-expression`]: ['error', { ignoreArrowShorthand: true }],
+				[`${typescriptPluginRename}/no-deprecated`]: 'warn',
 				[`${typescriptPluginRename}/no-unused-vars`]: 'off',
 				[`${typescriptPluginRename}/prefer-readonly`]: ['error'],
 				[`${typescriptPluginRename}/promise-function-async`]: ['error', { checkArrowFunctions: false }],

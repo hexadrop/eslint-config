@@ -1,4 +1,3 @@
-import { fixupPluginRules } from '@eslint/compat';
 import { isPackageExists } from 'local-pkg';
 
 import type { HexadropEslintOptions } from '../../options';
@@ -33,8 +32,8 @@ export default async function react(options: HexadropEslintOptions): Promise<Typ
 		{
 			name: REACT_CONFIG_NAME_SETUP,
 			plugins: {
-				react: fixupPluginRules(pluginReact),
-				'react-hooks': fixupPluginRules(pluginReactHooks),
+				react: pluginReact,
+				'react-hooks': pluginReactHooks,
 				'react-refresh': pluginReactRefresh,
 			},
 			settings: {
