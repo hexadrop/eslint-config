@@ -17,7 +17,7 @@ export default async function markdown(options: HexadropEslintOptions): Promise<
 	if (!markdown) {
 		return [];
 	}
-	const pluginMarkdown = (await interopDefault(import('eslint-plugin-markdown'))) as ESLint.Plugin;
+	const pluginMarkdown = (await interopDefault(import('@eslint/markdown'))) as ESLint.Plugin;
 	const processors = pluginMarkdown.processors;
 	const processor = processors?.['markdown'];
 
