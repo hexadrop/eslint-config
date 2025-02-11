@@ -1,6 +1,6 @@
 import type { ESLint, Linter } from 'eslint';
 import { mergeProcessors, processorPassThrough } from 'eslint-merge-processors';
-import { parseForESLint } from 'eslint-parser-plain';
+import { meta, parseForESLint } from 'eslint-parser-plain';
 
 import type { HexadropEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
@@ -43,6 +43,7 @@ export default async function markdown(options: HexadropEslintOptions): Promise<
 			files: GLOB_MARKDOWN,
 			languageOptions: {
 				parser: {
+					meta,
 					parseForESLint,
 				},
 			},
