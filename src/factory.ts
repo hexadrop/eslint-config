@@ -5,7 +5,8 @@ import { astro, core, ignore, imports, json, markdown, react, stylistic, typescr
 import { PLUGIN_RENAME } from './const';
 import type { HexadropEslintOptions } from './options';
 import defaultOptions from './options/hexadrop-eslint.options';
-import type { ConfigNames, RecursivePartial, TypedFlatConfigItem } from './types';
+import type { ConfigNames } from './typegen';
+import type { RecursivePartial, TypedFlatConfigItem } from './types';
 import { extractTypedFlatConfigItem } from './utils';
 
 // eslint-disable-next-line typescript/promise-function-async
