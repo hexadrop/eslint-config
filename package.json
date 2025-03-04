@@ -79,7 +79,7 @@
 		"@eslint/config-inspector": "1.0.1",
 		"@hexadrop/tsconfig": "0.0.5",
 		"@types/bun": "1.2.4",
-		"astro": "5.4.1",
+		"astro": "5.4.2",
 		"eslint": "9.21.0",
 		"eslint-typegen": "2.0.0",
 		"jiti": "2.4.2",
