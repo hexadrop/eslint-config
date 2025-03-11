@@ -78,7 +78,7 @@
 		"@changesets/cli": "2.28.1",
 		"@eslint/config-inspector": "1.0.2",
 		"@hexadrop/tsconfig": "0.0.5",
-		"@types/bun": "1.2.4",
+		"@types/bun": "1.2.5",
 		"astro": "5.4.2",
 		"eslint": "9.22.0",
 		"eslint-typegen": "2.0.0",
