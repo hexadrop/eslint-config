@@ -2,4 +2,4 @@
 "@hexadrop/eslint-config": patch
 ---
 
-fix(deps): update dependency @stylistic/eslint-plugin to v4.1.0
+fix(deps): update dependency @stylistic/eslint-plugin to v4.2.0
