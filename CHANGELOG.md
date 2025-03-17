@@ -14,15 +14,16 @@
 - 8477c06: fix(deps): update dependency eslint-config-flat-gitignore to v2
 - 93cf81f: fix(deps): update dependency eslint-flat-config-utils to v2
 - f23c619: fix(deps): update dependency prettier to v3.5.2
-- 7a40022: fix(deps): update typescript-eslint monorepo to v8.25.0
-- bd62187: fix(deps): update dependency @stylistic/eslint-plugin to v4.1.0
-- 783dc2e: fix(deps): update dependency local-pkg to v1.1.0
+- 7a40022: fix(deps): update typescript-eslint monorepo to v8.26.1
+- bd62187: fix(deps): update dependency @stylistic/eslint-plugin to v4.2.0
+- 783dc2e: fix(deps): update dependency local-pkg to v1.1.1
 - 8b6fcb2: fix(deps): update dependency eslint-plugin-react-hooks to v5.2.0
-- e810576: fix(deps): update dependency eslint-plugin-n to v17.16.1
+- e810576: fix(deps): update dependency eslint-plugin-n to v17.16.2
 - 66c8426: fix(deps): update dependency @eslint/markdown to v6.3.0
-- abee188: fix(deps): update dependency eslint-plugin-perfectionist to v4.10.0
+- abee188: fix(deps): update dependency eslint-plugin-perfectionist to v4.10.1
 - b7e5895: fix(deps): update dependency eslint-import-resolver-typescript to v3.8.4
-- 990ba56: fix(deps): update dependency eslint-import-resolver-typescript to v3.9.1
+- 8f5bf2d: fix(deps): update dependency eslint-plugin-import-x to v4.8.0
+- 990ba56: fix(deps): update dependency eslint-import-resolver-typescript to v4.1.0
 - 57503a3: fix(deps): update dependency prettier to v3.5.3
 
 ## 0.1.0
