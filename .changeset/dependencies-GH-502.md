@@ -2,4 +2,4 @@
 "@hexadrop/eslint-config": patch
 ---
 
-fix(deps): update dependency eslint-plugin-perfectionist to v4.10.0
+fix(deps): update dependency eslint-plugin-perfectionist to v4.10.1
