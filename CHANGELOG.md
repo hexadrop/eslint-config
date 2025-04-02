@@ -1,5 +1,21 @@
 # @hexadrop/eslint-config
 
+## 0.1.2
+
+### Patch Changes
+
+- b8c6ffd: fix(deps): update dependency eslint-import-resolver-typescript to v4.1.1
+- 38e1304: fix(deps): update dependency eslint-plugin-import-x to v4.8.1
+- d55cfbe: fix(deps): update typescript-eslint monorepo to v8.27.0
+- 9bf6681: fix(deps): update dependency astro-eslint-parser to v1.2.2
+- 37605b4: fix(deps): update dependency eslint-plugin-unicorn to v58
+- 358f07b: fix(deps): update dependency eslint-plugin-jsonc to v2.20.0
+- e87fd75: fix(deps): update dependency eslint-plugin-n to v17.17.0
+- b8a6967: fix(deps): update dependency eslint-import-resolver-typescript to v4.3.1
+- 6ef6328: fix(deps): update dependency eslint-plugin-import-x to v4.10.0
+- 27df68f: fix(deps): update dependency eslint-plugin-perfectionist to v4.11.0
+- fb8e240: fix(deps): update typescript-eslint monorepo to v8.29.0
+
 ## 0.1.1
 
 ### Patch Changes
