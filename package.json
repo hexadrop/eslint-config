@@ -47,8 +47,8 @@
 	"dependencies": {
 		"@eslint/markdown": "6.3.0",
 		"@stylistic/eslint-plugin": "4.2.0",
-		"@typescript-eslint/eslint-plugin": "8.29.1",
-		"@typescript-eslint/parser": "8.29.1",
+		"@typescript-eslint/eslint-plugin": "8.31.0",
+		"@typescript-eslint/parser": "8.31.0",
 		"astro-eslint-parser": "1.2.2",
 		"eslint-config-flat-gitignore": "2.1.0",
 		"eslint-flat-config-utils": "2.0.1",
