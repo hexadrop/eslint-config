@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   renovate:
-    name: Update Renovate PR
+    name: Update renovate
     runs-on: ubuntu-latest
     if: contains(github.event.pull_request.labels.*.name, 'dependencies')
 
