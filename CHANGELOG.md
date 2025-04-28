@@ -1,5 +1,21 @@
 # @hexadrop/eslint-config
 
+## 0.1.3
+
+### Patch Changes
+
+- 32fa8d3: fix(deps): update dependency eslint-plugin-react to v7.37.5
+- 5e56d28: fix(deps): update dependency eslint-plugin-import-x to v4.10.1
+- f0d3e8f: fix(deps): update dependency eslint-import-resolver-typescript to v4.3.2
+- 05e6f53: fix(deps): update typescript-eslint monorepo to v8.29.1
+- 6ceb5e9: fix(deps): update dependency @eslint/markdown to v6.4.0
+- 03362db: fix(deps): update dependency eslint-plugin-react-refresh to v0.4.20
+- 7fe0ed7: fix(deps): update typescript-eslint monorepo to v8.31.0
+- d7076bc: fix(deps): update dependency eslint-plugin-import-x to v4.10.6
+- ac3d954: fix(deps): update dependency eslint-import-resolver-typescript to v4.3.4
+- 5d62c12: fix(deps): update dependency eslint-plugin-import-x to v4.11.0
+- 9462dd5: fix(deps): update dependency eslint-plugin-unicorn to v59
+
 ## 0.1.2
 
 ### Patch Changes
