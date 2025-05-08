@@ -1,5 +1,11 @@
 # @hexadrop/eslint-config
 
+## 0.1.4
+
+### Patch Changes
+
+- 6961a4e: fix(deps): update typescript-eslint monorepo to v8.31.1
+
 ## 0.1.3
 
 ### Patch Changes
