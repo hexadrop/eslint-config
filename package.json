@@ -76,7 +76,7 @@
 	},
 	"devDependencies": {
 		"@changesets/cli": "2.29.4",
-		"@eslint/config-inspector": "1.0.2",
+		"@eslint/config-inspector": "1.1.0",
 		"@hexadrop/tsconfig": "0.0.5",
 		"@types/bun": "1.2.16",
 		"astro": "5.8.1",
