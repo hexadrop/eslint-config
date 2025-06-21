@@ -1,5 +1,15 @@
 # @hexadrop/eslint-config
 
+## 0.1.5
+
+### Patch Changes
+
+- 73a99e8: fix(deps): update dependency eslint-plugin-jsonc to v2.20.1
+- 5b9eee5: fix(deps): update dependency eslint-import-resolver-typescript to v4.3.5
+- b2f7163: fix(deps): update dependency @stylistic/eslint-plugin to v4.4.0
+- 8dbde1f: fix(deps): update dependency globals to v16.2.0
+- 60c20b5: fix(deps): update dependency eslint-plugin-perfectionist to v4.14.0
+
 ## 0.1.4
 
 ### Patch Changes
