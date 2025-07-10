@@ -81,7 +81,7 @@
 		"@types/bun": "1.2.18",
 		"astro": "5.10.0",
 		"eslint": "9.29.0",
-		"eslint-typegen": "2.2.0",
+		"eslint-typegen": "2.2.1",
 		"jiti": "2.4.2",
 		"react": "19.1.0",
 		"tsup": "8.5.0",
