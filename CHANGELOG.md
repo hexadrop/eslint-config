@@ -1,5 +1,37 @@
 # @hexadrop/eslint-config
 
+## 0.1.5
+
+### Patch Changes
+
+- 73a99e8: fix(deps): update dependency eslint-plugin-jsonc to v2.20.1
+- 3e8916c: fix(deps): update dependency eslint-plugin-import-x to v4.12.0
+- 5b9eee5: fix(deps): update dependency eslint-import-resolver-typescript to v4.3.5
+- 7fee665: fix(deps): update dependency eslint-flat-config-utils to v2.1.0
+- b2f7163: fix(deps): update dependency @stylistic/eslint-plugin to v4.4.0
+- 8dbde1f: fix(deps): update dependency globals to v16.2.0
+- 4b11ca9: fix(deps): update typescript-eslint monorepo to v8.33.0
+- 2b5741a: fix(deps): update dependency eslint-plugin-n to v17.19.0
+- 60c20b5: fix(deps): update dependency eslint-plugin-perfectionist to v4.14.0
+- c8ffecd: fix(deps): update dependency @eslint/markdown to v6.5.0
+- 3cc3e32: fix(deps): update dependency eslint-import-resolver-typescript to v4.4.3
+- 0b48c42: fix(deps): update dependency eslint-plugin-perfectionist to v4.15.0
+- cee585f: fix(deps): update dependency @stylistic/eslint-plugin to v5
+- 7069fae: fix(deps): update dependency eslint-import-resolver-typescript to v4.4.4
+- 54b2361: fix(deps): update dependency @eslint/markdown to v6.6.0
+- 7aeacb4: fix(deps): update dependency eslint-plugin-import-x to v4.16.1
+- 4d1315f: fix(deps): update dependency globals to v16.3.0
+- 00a268a: fix(deps): update dependency prettier to v3.6.2
+- 257a8c2: fix(deps): update typescript-eslint monorepo to v8.36.0
+- 69ce01b: fix(deps): update dependency @stylistic/eslint-plugin to v5.1.0
+- 6c2db72: fix(deps): update dependency @eslint/markdown to v7
+- cf6e07e: fix(deps): update dependency @stylistic/eslint-plugin to v5.2.0
+- 9431947: fix(deps): update dependency eslint-plugin-unicorn to v60
+- ad6d4f7: fix(deps): update dependency eslint-plugin-n to v17.21.1
+- ac711ea: fix(deps): update dependency eslint-flat-config-utils to v2.1.1
+- 8f3d159: fix(deps): update dependency @eslint/markdown to v7.1.0
+- 6a07a4a: fix(deps): update dependency eslint-plugin-n to v17.21.3
+
 ## 0.1.4
 
 ### Patch Changes
