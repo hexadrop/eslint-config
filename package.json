@@ -46,7 +46,7 @@
 	},
 	"dependencies": {
 		"@eslint/markdown": "7.1.0",
-		"@stylistic/eslint-plugin": "5.2.2",
+		"@stylistic/eslint-plugin": "5.2.3",
 		"@typescript-eslint/eslint-plugin": "8.39.0",
 		"@typescript-eslint/parser": "8.39.0",
 		"astro-eslint-parser": "1.2.2",
