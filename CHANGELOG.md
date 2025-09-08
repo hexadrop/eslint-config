@@ -1,5 +1,16 @@
 # @hexadrop/eslint-config
 
+## 0.1.6
+
+### Patch Changes
+
+- cb6052a: fix(deps): update dependency @stylistic/eslint-plugin to v5.2.3
+- a94cb98: fix(deps): update typescript-eslint monorepo to v8.39.1
+- 9fc1cf3: fix(deps): update dependency eslint-plugin-unused-imports to v4.2.0
+- 410f6ad: fix(deps): update dependency local-pkg to v1.1.2
+- 95376e2: fix(deps): update dependency @eslint/markdown to v7.2.0
+- 63ba72b: fix(deps): update dependency eslint-plugin-unicorn to v61
+
 ## 0.1.5
 
 ### Patch Changes
