@@ -75,12 +75,12 @@
 		"tslib": "2.8.1"
 	},
 	"devDependencies": {
-		"@changesets/cli": "2.29.5",
-		"@eslint/config-inspector": "1.1.0",
+		"@changesets/cli": "2.29.6",
+		"@eslint/config-inspector": "1.2.0",
 		"@hexadrop/tsconfig": "0.0.5",
-		"@types/bun": "1.2.19",
-		"astro": "5.12.8",
-		"eslint": "9.32.0",
+		"@types/bun": "1.2.21",
+		"astro": "5.13.5",
+		"eslint": "9.35.0",
 		"eslint-typegen": "2.3.0",
 		"jiti": "2.5.1",
 		"react": "19.1.1",
