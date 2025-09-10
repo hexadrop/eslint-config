@@ -1,5 +1,11 @@
 # @hexadrop/eslint-config
 
+## 0.1.8
+
+### Patch Changes
+
+- 394ccce: Add support for JavaScript and Astro file extensions in imports configuration
+
 ## 0.1.7
 
 ### Patch Changes
