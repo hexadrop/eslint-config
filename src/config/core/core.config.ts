@@ -24,7 +24,7 @@ export default async function core(options: HexadropEslintOptions): Promise<Type
 	const configs: TypedFlatConfigItem[] = [
 		{
 			languageOptions: {
-				ecmaVersion: 2020,
+				ecmaVersion: 'latest',
 				globals: {
 					...globals.browser,
 					...globals.es2021,
