@@ -1,5 +1,14 @@
 # @hexadrop/eslint-config
 
+## 0.1.7
+
+### Patch Changes
+
+- b63d7e7: fix(deps): update dependency @stylistic/eslint-plugin to v5.3.1
+- 134746b: fix(deps): update typescript-eslint monorepo to v8.43.0
+- 74b6dd2: fix(deps): update dependency globals to v16.4.0
+- 27a3a29: Update ecmaVersion to 'latest'
+
 ## 0.1.6
 
 ### Patch Changes
