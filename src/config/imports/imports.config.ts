@@ -39,8 +39,6 @@ export default async function imports(options: HexadropEslintOptions): Promise<T
 
 	const configs: TypedFlatConfigItem[] = [];
 
-	const javaScriptExtensions = ['.js', '.jsx'] as const;
-
 	configs.push({
 		name: IMPORTS_CONFIG_NAME_SETUP,
 		plugins: {
@@ -51,10 +49,6 @@ export default async function imports(options: HexadropEslintOptions): Promise<T
 			}),
 		},
 		settings: {
-			[`${importXPlugin}/parsers`]: {
-				'@typescript-eslint/parser': [...javaScriptExtensions],
-				'astro-eslint-parser': ['.astro'],
-			},
 			[`${importXPlugin}/resolver`]: {
 				node: true,
 			},
@@ -63,7 +57,7 @@ export default async function imports(options: HexadropEslintOptions): Promise<T
 
 	if (typescript) {
 		const typeScriptExtensions = ['.ts', '.tsx'] as const;
-		const allExtensions = [...typeScriptExtensions, ...javaScriptExtensions] as const;
+		const allExtensions = [...typeScriptExtensions, '.js', '.jsx'] as const;
 		configs.push({
 			files: TYPESCRIPT_GLOBS,
 			name: IMPORTS_CONFIG_NAME_SETUP_TYPESCRIPT,
@@ -72,7 +66,6 @@ export default async function imports(options: HexadropEslintOptions): Promise<T
 				[`${importXPlugin}/external-module-folders`]: ['node_modules', 'node_modules/@types'],
 				[`${importXPlugin}/parsers`]: {
 					'@typescript-eslint/parser': [...typeScriptExtensions, '.cts', '.mts'],
-					'astro-eslint-parser': ['.astro'],
 				},
 				[`${importXPlugin}/resolver`]: {
 					node: {
