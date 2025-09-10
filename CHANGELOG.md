@@ -1,5 +1,11 @@
 # @hexadrop/eslint-config
 
+## 0.1.9
+
+### Patch Changes
+
+- b8d5e25: Remove redundant JavaScript extensions from imports configuration
+
 ## 0.1.8
 
 ### Patch Changes
