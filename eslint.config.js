@@ -1,6 +1,6 @@
-import Importer from 'jiti';
+import { createJiti } from 'jiti';
 
-const importer = Importer(import.meta.url);
+const importer = createJiti(import.meta.url);
 /**
  * @type {import('./src').default}
  */
