@@ -6,4 +6,9 @@ const importer = createJiti(import.meta.url);
  */
 const hexadrop = importer('./src').default;
 
-export default hexadrop();
+export default hexadrop({
+	ignores: [
+		'test/fixtures',
+		'test/_fixtures',
+	],
+});
