@@ -1,5 +1,13 @@
 # @hexadrop/eslint-config
 
+## 0.1.11
+
+### Patch Changes
+
+- b928401: fix(deps): update dependency @eslint/markdown to v7.4.0
+- 6438e78: fix(deps): update typescript-eslint monorepo to v8.46.0
+- 8cf65fa: fix(deps): update dependency eslint-plugin-react-hooks to v7
+
 ## 0.1.10
 
 ### Patch Changes
