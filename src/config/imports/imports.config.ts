@@ -37,23 +37,23 @@ export default async function imports(options: HexadropEslintOptions): Promise<T
 	const unusedImportsPrefix = PLUGIN_RENAME['unused-imports'];
 	const importSortPrefix = PLUGIN_RENAME['simple-import-sort'];
 
-	const configs: TypedFlatConfigItem[] = [];
-
-	configs.push({
-		name: IMPORTS_CONFIG_NAME_SETUP,
-		plugins: {
-			[importXPluginRename]: await interopDefault(import('eslint-plugin-import-x')),
-			...(stylistic && {
-				[importSortPrefix]: await interopDefault(import('eslint-plugin-simple-import-sort')),
-				[unusedImportsPrefix]: await interopDefault(import('eslint-plugin-unused-imports')),
-			}),
-		},
-		settings: {
-			[`${importXPlugin}/resolver`]: {
-				node: true,
+	const configs: TypedFlatConfigItem[] = [
+		{
+			name: IMPORTS_CONFIG_NAME_SETUP,
+			plugins: {
+				[importXPluginRename]: await interopDefault(import('eslint-plugin-import-x')),
+				...(stylistic && {
+					[importSortPrefix]: await interopDefault(import('eslint-plugin-simple-import-sort')),
+					[unusedImportsPrefix]: await interopDefault(import('eslint-plugin-unused-imports')),
+				}),
+			},
+			settings: {
+				[`${importXPlugin}/resolver`]: {
+					node: true,
+				},
 			},
 		},
-	});
+	];
 
 	if (typescript) {
 		const typeScriptExtensions = ['.ts', '.tsx'] as const;
