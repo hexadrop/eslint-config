@@ -45,7 +45,7 @@
 		"eslint": "^9.17.0"
 	},
 	"dependencies": {
-		"@eslint/markdown": "7.4.0",
+		"@eslint/markdown": "7.4.1",
 		"@stylistic/eslint-plugin": "5.4.0",
 		"@typescript-eslint/eslint-plugin": "8.46.2",
 		"@typescript-eslint/parser": "8.46.2",
