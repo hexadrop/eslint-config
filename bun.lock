@@ -4,7 +4,7 @@
     "": {
       "name": "@hexadrop/eslint-config",
       "dependencies": {
-        "@eslint/markdown": "7.4.1",
+        "@eslint/markdown": "7.5.0",
         "@stylistic/eslint-plugin": "5.4.0",
         "@typescript-eslint/eslint-plugin": "8.46.2",
         "@typescript-eslint/parser": "8.46.2",
@@ -216,7 +216,7 @@
 
     "@eslint/js": ["@eslint/js@9.38.0", "", {}, "sha512-UZ1VpFvXf9J06YG9xQBdnzU+kthors6KjhMAl6f4gH4usHyh31rUf2DLGInT8RFYIReYXNSydgPY0V2LuWgl7A=="],
 
-    "@eslint/markdown": ["@eslint/markdown@7.4.1", "", { "dependencies": { "@eslint/core": "^0.16.0", "@eslint/plugin-kit": "^0.4.0", "github-slugger": "^2.0.0", "mdast-util-from-markdown": "^2.0.2", "mdast-util-frontmatter": "^2.0.1", "mdast-util-gfm": "^3.1.0", "micromark-extension-frontmatter": "^2.0.0", "micromark-extension-gfm": "^3.0.0", "micromark-util-normalize-identifier": "^2.0.1" } }, "sha512-fhcQcylVqgb7GLPr2+6hlDQXK4J3d/fPY6qzk9/i7IYtQkIr15NKI5Zg39Dv2cV/bn5J0Znm69rmu9vJI/7Tlw=="],
+    "@eslint/markdown": ["@eslint/markdown@7.5.0", "", { "dependencies": { "@eslint/core": "^0.16.0", "@eslint/plugin-kit": "^0.4.0", "github-slugger": "^2.0.0", "mdast-util-from-markdown": "^2.0.2", "mdast-util-frontmatter": "^2.0.1", "mdast-util-gfm": "^3.1.0", "micromark-extension-frontmatter": "^2.0.0", "micromark-extension-gfm": "^3.0.0", "micromark-util-normalize-identifier": "^2.0.1" } }, "sha512-reKloVSpytg4ene3yviPJcUO7zglpNn9kWNRiSQ/8gBbBFMKW5Q042LaCi3wv2vVtbPNnLrl6WvhRAHeBd43QA=="],
 
     "@eslint/object-schema": ["@eslint/object-schema@2.1.7", "", {}, "sha512-VtAOaymWVfZcmZbp6E2mympDIHvyjXs/12LqWYjVw6qjrfF+VK+fyG33kChz3nnK+SU5/NeHOqrTEHS8sXO3OA=="],
 
