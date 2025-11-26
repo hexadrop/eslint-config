@@ -110,7 +110,12 @@ export default async function imports(options: HexadropEslintOptions): Promise<T
 				// Static analysis rules https://github.com/un-ts/eslint-plugin-import-x?tab=readme-ov-file#static-analysis
 				[`${importXPluginRename}/named`]: 'error',
 				[`${importXPluginRename}/no-absolute-path`]: 'error',
-				[`${importXPluginRename}/no-cycle`]: 'error',
+				[`${importXPluginRename}/no-cycle`]: [
+					'error',
+					{
+						ignoreExternal: true,
+					},
+				],
 				[`${importXPluginRename}/no-import-module-exports`]: 'error',
 				[`${importXPluginRename}/no-relative-packages`]: 'error',
 				[`${importXPluginRename}/no-restricted-paths`]: 'off',
