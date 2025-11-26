@@ -1,6 +1,6 @@
 {
 	"name": "@hexadrop/eslint-config",
-	"version": "0.1.12",
+	"version": "0.1.13",
 	"description": "Opinionated ESLint ruleset designed for large teams and projects",
 	"keywords": [
 		"lint",
