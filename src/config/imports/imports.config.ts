@@ -7,6 +7,7 @@ import { ESLINT_CONFIG_GLOBS } from '../core';
 import { GLOB_MARKDOWN_ASTRO, GLOB_MARKDOWN_JSON, GLOB_MARKDOWN_SOURCE } from '../markdown';
 import { DTS_GLOBS, TYPESCRIPT_GLOBS } from '../typescript';
 import {
+	IMPORTS_CONFIG_NAME_RULES_ASTRO,
 	IMPORTS_CONFIG_NAME_RULES_STATIC,
 	IMPORTS_CONFIG_NAME_RULES_STATIC_MARKDOWN_SOURCE,
 	IMPORTS_CONFIG_NAME_RULES_STYLISTIC,
@@ -65,6 +66,7 @@ export default async function imports(options: HexadropEslintOptions): Promise<T
 			settings: {
 				[`${importXPlugin}/extensions`]: typeScriptExtensions,
 				[`${importXPlugin}/external-module-folders`]: ['node_modules', 'node_modules/@types'],
+				[`${importXPlugin}/ignore`]: [/\.astro$/],
 				[`${importXPlugin}/parsers`]: {
 					'@typescript-eslint/parser': [...typeScriptExtensions, '.cts', '.mts'],
 				},
@@ -166,6 +168,16 @@ export default async function imports(options: HexadropEslintOptions): Promise<T
 		configs.push({
 			files: TYPESCRIPT_GLOBS,
 			name: IMPORTS_CONFIG_NAME_RULES_TYPESCRIPT,
+			rules: {
+				[`${importXPluginRename}/named`]: 'off',
+			},
+		});
+	}
+
+	if (astro) {
+		configs.push({
+			files: GLOB_ASTRO,
+			name: IMPORTS_CONFIG_NAME_RULES_ASTRO,
 			rules: {
 				[`${importXPluginRename}/named`]: 'off',
 			},
