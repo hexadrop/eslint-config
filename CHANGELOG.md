@@ -1,5 +1,12 @@
 # @hexadrop/eslint-config
 
+## 0.1.12
+
+### Patch Changes
+
+- e3c3fa2: Update `no-cycle` rule to ignore external modules
+- e9e6bd6: Disable `import/named` rule on typescript files
+
 ## 0.1.11
 
 ### Patch Changes
