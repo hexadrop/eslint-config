@@ -13,6 +13,7 @@ import {
 	IMPORTS_CONFIG_NAME_RULES_STYLISTIC_ASTRO,
 	IMPORTS_CONFIG_NAME_RULES_STYLISTIC_MARKDOWN_SOURCE,
 	IMPORTS_CONFIG_NAME_RULES_STYLISTIC_TYPESCRIPT_DTS,
+	IMPORTS_CONFIG_NAME_RULES_TYPESCRIPT,
 	IMPORTS_CONFIG_NAME_RULES_WARNINGS,
 	IMPORTS_CONFIG_NAME_RULES_WARNINGS_ESLINT_CONFIG,
 	IMPORTS_CONFIG_NAME_SETUP,
@@ -156,18 +157,15 @@ export default async function imports(options: HexadropEslintOptions): Promise<T
 		});
 	}
 
-	/*
-	 * TODO: Decide if we want to keep these rules
-	 * if (typescript) {
-	 * 	configs.push({
-	 * 		files: TYPESCRIPT_GLOBS,
-	 * 		name: IMPORTS_CONFIG_NAME_RULES_TYPESCRIPT,
-	 * 		rules: {
-	 * 			[`${importXPluginRename}/named`]: 'off',
-	 * 		},
-	 * 	});
-	 * }
-	 */
+	if (typescript) {
+		configs.push({
+			files: TYPESCRIPT_GLOBS,
+			name: IMPORTS_CONFIG_NAME_RULES_TYPESCRIPT,
+			rules: {
+				[`${importXPluginRename}/named`]: 'off',
+			},
+		});
+	}
 
 	if (stylistic) {
 		configs.push({
