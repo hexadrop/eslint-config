@@ -1,5 +1,11 @@
 # @hexadrop/eslint-config
 
+## 0.1.15
+
+### Patch Changes
+
+- 655882f: Remove .astro files from import resolver ignore list
+
 ## 0.1.14
 
 ### Patch Changes
