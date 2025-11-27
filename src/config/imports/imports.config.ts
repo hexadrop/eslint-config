@@ -69,7 +69,6 @@ export default async function imports(options: HexadropEslintOptions): Promise<T
 			settings: {
 				[`${importXPlugin}/extensions`]: typeScriptExtensions,
 				[`${importXPlugin}/external-module-folders`]: ['node_modules', 'node_modules/@types'],
-				[`${importXPlugin}/ignore`]: [/\.astro$/],
 				[`${importXPlugin}/parsers`]: {
 					'@typescript-eslint/parser': [...typeScriptExtensions, '.cts', '.mts'],
 				},
