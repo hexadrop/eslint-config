@@ -1,5 +1,11 @@
 # @hexadrop/eslint-config
 
+## 0.1.14
+
+### Patch Changes
+
+- c09fd4d: Update ESLint import resolver configuration
+
 ## 0.1.13
 
 ### Patch Changes
