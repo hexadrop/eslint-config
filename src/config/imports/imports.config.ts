@@ -1,3 +1,5 @@
+import type { ESLint } from 'eslint';
+
 import { PLUGIN_RENAME } from '../../const';
 import type { HexadropEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
@@ -39,27 +41,28 @@ export default async function imports(options: HexadropEslintOptions): Promise<T
 	const unusedImportsPrefix = PLUGIN_RENAME['unused-imports'];
 	const importSortPrefix = PLUGIN_RENAME['simple-import-sort'];
 
+	const { createNodeResolver, importX } = await import('eslint-plugin-import-x');
+	const { createTypeScriptImportResolver } = await import('eslint-import-resolver-typescript');
+
 	const configs: TypedFlatConfigItem[] = [
 		{
 			name: IMPORTS_CONFIG_NAME_SETUP,
 			plugins: {
-				[importXPluginRename]: await interopDefault(import('eslint-plugin-import-x')),
+				// @ts-expect-error TS2352: Conversion error
+				[importXPluginRename]: importX as ESLint.Plugin,
 				...(stylistic && {
 					[importSortPrefix]: await interopDefault(import('eslint-plugin-simple-import-sort')),
 					[unusedImportsPrefix]: await interopDefault(import('eslint-plugin-unused-imports')),
 				}),
 			},
 			settings: {
-				[`${importXPlugin}/resolver`]: {
-					node: true,
-				},
+				[`${importXPlugin}/resolver-next`]: [createNodeResolver({})],
 			},
 		},
 	];
 
 	if (typescript) {
 		const typeScriptExtensions = ['.ts', '.tsx'] as const;
-		const allExtensions = [...typeScriptExtensions, '.js', '.jsx'] as const;
 		configs.push({
 			files: TYPESCRIPT_GLOBS,
 			name: IMPORTS_CONFIG_NAME_SETUP_TYPESCRIPT,
@@ -70,12 +73,7 @@ export default async function imports(options: HexadropEslintOptions): Promise<T
 				[`${importXPlugin}/parsers`]: {
 					'@typescript-eslint/parser': [...typeScriptExtensions, '.cts', '.mts'],
 				},
-				[`${importXPlugin}/resolver`]: {
-					node: {
-						extensions: allExtensions,
-					},
-					typescript: true,
-				},
+				[`${importXPlugin}/resolver-next`]: [createNodeResolver(), createTypeScriptImportResolver()],
 			},
 		});
 	}
