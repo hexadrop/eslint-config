@@ -2,4 +2,4 @@
 "@hexadrop/eslint-config": patch
 ---
 
-fix(deps): update dependency eslint-plugin-format to v1.1.0
+fix(deps): update dependency eslint-plugin-format to v1.3.1
