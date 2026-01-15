@@ -1,5 +1,5 @@
 ---
-"@hexadrop/eslint-config": patch
+"@hexadrop/eslint-config": minor
 ---
 
-fix(deps): update dependency globals to v16.5.0
+fix(deps): update dependency globals to v17.0.0
