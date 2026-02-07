@@ -1,5 +1,22 @@
 # @hexadrop/eslint-config
 
+## 0.1.17
+
+### Patch Changes
+
+- ee3fe49: fix(deps): update typescript-eslint monorepo to v8.54.0
+- b349ef7: fix(deps): update dependency eslint-flat-config-utils to v3
+- decbe35: fix(deps): update dependency prettier to v3.8.1
+- c94f3c1: fix(deps): update dependency eslint-plugin-perfectionist to v5.4.0
+- 8a401e6: fix(deps): update dependency globals to v17.1.0
+- 8f072df: fix(deps): update dependency @stylistic/eslint-plugin to v5.7.1
+- 15435d0: fix(deps): update dependency eslint-plugin-react-refresh to v0.5.0
+- 2b97ac2: fix(deps): update dependency eslint-plugin-format to v1.4.0
+- b7f575a: fix(deps): update dependency globals to v17.3.0
+- 79b4d57: fix(deps): update dependency eslint-flat-config-utils to v3.0.1
+- af67bb4: fix(deps): update dependency eslint-plugin-perfectionist to v5.5.0
+- a6fabe1: Use `perfectionist/sort-jsx-props` instead `@stylistic/eslint-plugin/jsx-sort-props`
+
 ## 0.1.16
 
 ### Patch Changes
