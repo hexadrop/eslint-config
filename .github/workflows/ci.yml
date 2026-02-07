@@ -11,9 +11,6 @@ jobs:
     check:
         name: Code check
         runs-on: ubuntu-latest
-        permissions:
-            contents: 'read'
-            id-token: 'write'
         strategy:
             matrix:
                 command: [ lint, typecheck ]
@@ -41,10 +38,10 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         needs: [ check ]
         permissions:
-            contents: 'write'
-            id-token: 'write'
-            issues: 'write'
-            pull-requests: 'write'
+            contents: write
+            issues: write
+            id-token: write
+            pull-requests: write
         steps:
             -   name: Checkout
                 uses: actions/checkout@v6
@@ -69,4 +66,3 @@ jobs:
                     title: 'chore: release'
                 env:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                    NPM_TOKEN: ${{ secrets.HEXADROP_NPM_TOKEN }}
