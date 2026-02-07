@@ -642,7 +642,7 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 			],
 			name: STYLISTIC_CONFIG_NAME_RULES_PRETTIER,
 			rules: {
-				'format/prettier': ['error', prettierConfig],
+				'format/prettier': ['error', { ...prettierConfig, parser: 'typescript' }],
 			},
 		});
 
@@ -668,7 +668,10 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 				files: GLOB_MARKDOWN_SOURCE,
 				name: STYLISTIC_CONFIG_NAME_RULES_PRETTIER_MARKDOWN_SOURCE,
 				rules: {
-					'format/prettier': ['error', { ...prettierConfig, tabWidth: 2, useTabs: false }],
+					'format/prettier': [
+						'error',
+						{ ...prettierConfig, parser: 'typescript', tabWidth: 2, useTabs: false },
+					],
 				},
 			});
 			if (astro) {
