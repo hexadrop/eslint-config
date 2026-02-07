@@ -92,7 +92,6 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 				[`${stylisticPluginRename}/jsx-indent`]: 'off',
 				[`${stylisticPluginRename}/jsx-one-expression-per-line`]: 'off',
 				[`${stylisticPluginRename}/jsx-quotes`]: ['error', 'prefer-single'],
-				[`${stylisticPluginRename}/jsx-sort-props`]: 'error',
 				[`${stylisticPluginRename}/line-comment-position`]: ['error', { position: 'above' }],
 				[`${stylisticPluginRename}/max-len`]: 'off',
 				[`${stylisticPluginRename}/multiline-comment-style`]: ['error', 'starred-block'],
@@ -617,6 +616,7 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 				'perfectionist/sort-exports': 'off',
 				'perfectionist/sort-imports': 'off',
 				'perfectionist/sort-interfaces': 'off',
+				'perfectionist/sort-jsx-props': 'error',
 				'perfectionist/sort-modules': 'off',
 				'perfectionist/sort-named-exports': 'off',
 				'perfectionist/sort-named-imports': 'off',
@@ -642,7 +642,7 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 			],
 			name: STYLISTIC_CONFIG_NAME_RULES_PRETTIER,
 			rules: {
-				'format/prettier': ['error', prettierConfig],
+				'format/prettier': ['error', { ...prettierConfig, parser: 'typescript' }],
 			},
 		});
 
@@ -668,7 +668,10 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 				files: GLOB_MARKDOWN_SOURCE,
 				name: STYLISTIC_CONFIG_NAME_RULES_PRETTIER_MARKDOWN_SOURCE,
 				rules: {
-					'format/prettier': ['error', { ...prettierConfig, tabWidth: 2, useTabs: false }],
+					'format/prettier': [
+						'error',
+						{ ...prettierConfig, parser: 'typescript', tabWidth: 2, useTabs: false },
+					],
 				},
 			});
 			if (astro) {
