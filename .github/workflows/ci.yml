@@ -67,8 +67,8 @@ jobs:
             -   name: Create Release Pull Request or Publish to npm
                 uses: changesets/action@v1
                 with:
-                    publish: bunx npm changeset publish
-                    version: bunx npm changeset version
+                    publish: bunx npm release
+                    version: bun changeset version
                     commit: 'chore: release'
                     title: 'chore: release'
                 env:

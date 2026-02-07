@@ -40,6 +40,7 @@
 		"lint:ci": "eslint --cache --cache-strategy content .",
 		"lint:fix": "eslint --cache --fix .",
 		"prepublish": "bun run scripts/typegen.ts && tsup",
+		"release": "changeset publish",
 		"typecheck": "tsc --noEmit"
 	},
 	"peerDependencies": {
