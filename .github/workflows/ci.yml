@@ -29,15 +29,15 @@ jobs:
             -   name: Build types
                 run: bun build:types
 
-            -   name: ${{ matrix.command }}
-                run: bun ${{ matrix.command }}
-
             -   name: ESLint cache
                 uses: actions/cache@v4
                 if: matrix.command == '--bun lint:ci'
                 with:
                     path: .eslintcache
                     key: ${{ runner.os }}-node
+
+            -   name: ${{ matrix.command }}
+                run: bun ${{ matrix.command }}
 
     release:
         name: Release
