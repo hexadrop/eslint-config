@@ -36,11 +36,9 @@
 	"scripts": {
 		"build": "bun run scripts/typegen.ts && tsup",
 		"build:types": "bun run scripts/typegen.ts",
-		"lint": "eslint --cache .",
-		"lint:ci": "eslint --cache --cache-strategy content .",
-		"lint:fix": "eslint --cache --fix .",
+		"lint": "eslint .",
+		"lint:fix": "eslint --fix .",
 		"prepublish": "bun run scripts/typegen.ts && tsup",
-		"release": "changeset publish",
 		"typecheck": "tsc --noEmit"
 	},
 	"peerDependencies": {
