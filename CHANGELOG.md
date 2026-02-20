@@ -1,5 +1,24 @@
 # @hexadrop/eslint-config
 
+## 0.1.18
+
+### Patch Changes
+
+- 1c78af8: fix(deps): update dependency eslint-plugin-jsonc to v2.21.1
+- df7c9c3: fix(deps): update dependency @stylistic/eslint-plugin to v5.8.0
+- 9869f01: fix(deps): update dependency eslint-plugin-unused-imports to v4.4.1
+- 9b3e584: fix(deps): update typescript-eslint monorepo to v8.55.0
+- e492250: fix(deps): update dependency eslint-plugin-unicorn to v63
+- 924bb1a: fix(deps): update dependency @stylistic/eslint-plugin to v5.9.0
+- 07d49a0: fix(deps): update dependency astro-eslint-parser to v1.3.0
+- a39de77: fix(deps): update typescript-eslint monorepo to v8.56.0
+- 2848832: fix(deps): update dependency eslint-config-flat-gitignore to v2.2.1
+- 74cfd5b: fix(deps): update dependency eslint-plugin-astro to v1.6.0
+- d81029f: fix(deps): update dependency eslint-plugin-n to v17.24.0
+- 9dd98be: fix(deps): update dependency eslint-plugin-perfectionist to v5.6.0
+- 597834e: fix(deps): update dependency eslint-plugin-jsonc to v3
+- 7d8e733: fix(deps): update dependency jsonc-eslint-parser to v3
+
 ## 0.1.17
 
 ### Patch Changes
