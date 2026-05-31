@@ -1,5 +1,22 @@
 # @hexadrop/eslint-config
 
+## 0.1.20
+
+### Patch Changes
+
+- 3acfa82: fix(deps): update dependency eslint-plugin-jsonc to v3.0.1
+- 4363756: fix(deps): update dependency eslint-plugin-react-refresh to v0.5.1
+- 175f856: fix(deps): update typescript-eslint monorepo to v8.56.1
+- 1fad2e4: fix(deps): update dependency eslint-plugin-format to v2
+- 1d52e6b: fix(deps): update dependency eslint-plugin-format to v2.0.1
+- 4fcd4e9: fix(deps): update dependency eslint-plugin-react-refresh to v0.5.2
+- 21bc6ab: fix(deps): update dependency eslint-plugin-jsonc to v3.1.1
+- b0648ed: fix(deps): update dependency globals to v17.4.0
+- 2c3a8b6: fix(deps): update dependency @stylistic/eslint-plugin to v5.10.0
+- 6652eae: fix(deps): update dependency eslint-flat-config-utils to v3.0.2
+- f14ba1a: fix(deps): update dependency eslint-plugin-jsonc to v3.1.2
+- 5047f58: fix(deps): update dependency prettier to v3.8.3
+
 ## 0.1.19
 
 ### Patch Changes
