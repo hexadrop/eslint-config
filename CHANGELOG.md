@@ -1,5 +1,11 @@
 # @hexadrop/eslint-config
 
+## 1.0.0
+
+### Major Changes
+
+- 84bb6ff: Migrate to tsdown and drop CJS
+
 ## 0.1.20
 
 ### Patch Changes
