@@ -11,7 +11,7 @@ const configs = await combine(
 	{
 		plugins: {
 			'': {
-				rules: Object.fromEntries(builtinRules.entries()),
+				rules: Object.fromEntries(builtinRules),
 			},
 		},
 	},

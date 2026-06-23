@@ -31,12 +31,10 @@ export default function typescriptParser({
 			parser,
 			parserOptions: {
 				sourceType: 'module',
-				...(tsconfigPath
-					? {
-							project: tsconfigPath,
-							tsconfigRootDir: cwd(),
-						}
-					: {}),
+				...(tsconfigPath && {
+					project: tsconfigPath,
+					tsconfigRootDir: cwd(),
+				}),
 				...parserOptions,
 			},
 		},
