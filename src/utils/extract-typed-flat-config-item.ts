@@ -18,7 +18,7 @@ export default function extractTypedFlatConfigItem(config?: TypedFlatConfigItem)
 	}
 	const result: TypedFlatConfigItem = {};
 	for (const key of flatConfigProperties) {
-		if (key in config) {
+		if (Object.hasOwn(config, key)) {
 			// eslint-disable-next-line typescript/no-explicit-any,typescript/no-unsafe-assignment
 			result[key] = config[key] as any;
 		}

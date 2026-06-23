@@ -121,13 +121,13 @@ export type { HexadropEslintOptions };
 
 export default function defaultOptions(options: RecursivePartial<HexadropEslintOptions> = {}): HexadropEslintOptions {
 	let typescript: boolean | string | string[] = false;
-	const installedTypescript = isPackageExists('typescript');
-	const installedReact = isPackageExists('react');
-	const installedAstro = isPackageExists('astro');
+	const isInstalledTypescript = isPackageExists('typescript');
+	const isInstalledReact = isPackageExists('react');
+	const isInstalledAstro = isPackageExists('astro');
 
 	if (options.typescript === true) {
 		typescript = true;
-	} else if (installedTypescript) {
+	} else if (isInstalledTypescript) {
 		if (options.typescript === undefined) {
 			typescript = getCwdTsconfigPath() ?? true;
 		} else if (options.typescript === 'string') {
@@ -138,7 +138,7 @@ export default function defaultOptions(options: RecursivePartial<HexadropEslintO
 	}
 
 	return {
-		astro: options.astro ?? installedAstro,
+		astro: options.astro ?? isInstalledAstro,
 		ignore:
 			typeof options.ignore === 'object'
 				? {
@@ -178,7 +178,7 @@ export default function defaultOptions(options: RecursivePartial<HexadropEslintO
 			],
 		},
 		node: options.node ?? true,
-		react: options.react ?? installedReact,
+		react: options.react ?? isInstalledReact,
 		stylistic:
 			options.stylistic === false
 				? false
