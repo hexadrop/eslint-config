@@ -38,7 +38,7 @@ jobs:
     release:
         name: Release
         runs-on: ubuntu-latest
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event_name == 'push' && github.repository == 'hexadrop/eslint-config' }}
         needs: [ check ]
         permissions:
             contents: 'write'
@@ -76,3 +76,4 @@ jobs:
                 env:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                     NPM_TOKEN: ${{ secrets.HEXADROP_NPM_TOKEN }}
+                    NPM_CONFIG_PROVENANCE: true
