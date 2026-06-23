@@ -1,5 +1,3 @@
-import type { ESLint } from 'eslint';
-
 import { PLUGIN_RENAME } from '../../const';
 import type { HexadropEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
@@ -48,8 +46,7 @@ export default async function imports(options: HexadropEslintOptions): Promise<T
 		{
 			name: IMPORTS_CONFIG_NAME_SETUP,
 			plugins: {
-				// @ts-expect-error TS2352: Conversion error
-				[importXPluginRename]: importX as ESLint.Plugin,
+				[importXPluginRename]: importX,
 				...(stylistic && {
 					[importSortPrefix]: await interopDefault(import('eslint-plugin-simple-import-sort')),
 					[unusedImportsPrefix]: await interopDefault(import('eslint-plugin-unused-imports')),
