@@ -1,5 +1,42 @@
 # @hexadrop/eslint-config
 
+## 0.1.20
+
+### Patch Changes
+
+- 3acfa82: fix(deps): update dependency eslint-plugin-jsonc to v3.0.1
+- 4363756: fix(deps): update dependency eslint-plugin-react-refresh to v0.5.1
+- 175f856: fix(deps): update typescript-eslint monorepo to v8.56.1
+- 1fad2e4: fix(deps): update dependency eslint-plugin-format to v2
+- 1d52e6b: fix(deps): update dependency eslint-plugin-format to v2.0.1
+- 4fcd4e9: fix(deps): update dependency eslint-plugin-react-refresh to v0.5.2
+- 21bc6ab: fix(deps): update dependency eslint-plugin-jsonc to v3.1.1
+- b0648ed: fix(deps): update dependency globals to v17.4.0
+- 2c3a8b6: fix(deps): update dependency @stylistic/eslint-plugin to v5.10.0
+- 6652eae: fix(deps): update dependency eslint-flat-config-utils to v3.0.2
+- 4830ec2: fix(deps): update dependency eslint-plugin-import-x to v4.17.0
+- f14ba1a: fix(deps): update dependency eslint-plugin-jsonc to v3.1.2
+- 1d5e7aa: fix(deps): update dependency eslint-plugin-perfectionist to v5.9.1
+- 5047f58: fix(deps): update dependency prettier to v3.8.3
+- 380dceb: fix(deps): update dependency astro-eslint-parser to v1.4.0
+- 1fad3b2: fix(deps): update dependency eslint-config-flat-gitignore to v2.3.0
+- 0acaa96: fix(deps): update dependency eslint-flat-config-utils to v3.2.0
+- 7255c7a: fix(deps): update dependency eslint-plugin-astro to v1.7.0
+- 2c1250b: fix(deps): update dependency eslint-import-resolver-typescript to v4.4.5
+- 33c2837: fix(deps): update dependency eslint-plugin-react-refresh to v0.5.3
+- 65e5459: fix(deps): update dependency prettier to v3.8.4
+- a38f630: fix(deps): update dependency eslint-plugin-jsonc to v3.2.0
+- cdef22d: fix(deps): update dependency globals to v17.7.0
+- 2221a2e: fix(deps): update dependency local-pkg to v1.2.1
+- 99a0eb7: fix(deps): update react monorepo
+- 5e7401a: fix(deps): update typescript-eslint monorepo to v8.62.0
+- f99ab9c: fix(deps): update dependency @eslint/markdown to v8
+- 6edfd22: fix(deps): update dependency astro-eslint-parser to v2
+- 251f51b: fix(deps): update dependency eslint-plugin-astro to v2
+- e8caeb5: fix(deps): update dependency eslint-plugin-n to v18
+- 8044a5e: fix(deps): update dependency eslint-plugin-simple-import-sort to v13
+- 26f1407: fix(deps): update dependency eslint-plugin-unicorn to v68
+
 ## 0.1.19
 
 ### Patch Changes
