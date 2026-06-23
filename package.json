@@ -25,20 +25,19 @@
 	"files": [
 		"dist"
 	],
-	"main": "./dist/index.js",
-	"types": "./dist/index.d.ts",
+	"main": "./dist/index.mjs",
+	"types": "./dist/index.d.mts",
 	"exports": {
 		".": {
-			"import": "./dist/index.js",
-			"require": "./dist/index.cjs"
+			"import": "./dist/index.mjs"
 		}
 	},
 	"scripts": {
-		"build": "bun run scripts/typegen.ts && tsup",
+		"build": "bun run scripts/typegen.ts && tsdown",
 		"build:types": "bun run scripts/typegen.ts",
 		"lint": "eslint .",
 		"lint:fix": "eslint --fix .",
-		"prepublish": "bun run scripts/typegen.ts && tsup",
+		"prepublish": "bun run scripts/typegen.ts && tsdown",
 		"typecheck": "tsc --noEmit"
 	},
 	"peerDependencies": {
@@ -84,7 +83,7 @@
 		"eslint-typegen": "2.3.1",
 		"jiti": "2.7.0",
 		"react": "19.2.7",
-		"tsup": "8.5.1",
+		"tsdown": "0.22.3",
 		"typescript": "6.0.3"
 	}
 }
