@@ -565,21 +565,19 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 			rules: {
 				...unicornRules,
 				'unicorn/consistent-function-scoping': 'off',
-				'unicorn/no-array-reduce': 'off',
-				'unicorn/no-nested-ternary': 'off',
-				'unicorn/no-static-only-class': 'off',
-				'unicorn/prefer-dom-node-dataset': 'off',
-				'unicorn/prevent-abbreviations': [
+				'unicorn/dom-node-dataset': 'off',
+				'unicorn/name-replacements': [
 					'error',
 					{
 						allowList: {
-							Env: true,
 							env: true,
-							ProcessEnv: true,
-							Props: true,
+							props: true,
 						},
 					},
 				],
+				'unicorn/no-array-reduce': 'off',
+				'unicorn/no-nested-ternary': 'off',
+				'unicorn/no-static-only-class': 'off',
 			},
 		});
 
