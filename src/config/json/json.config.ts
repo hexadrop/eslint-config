@@ -1,5 +1,3 @@
-import type { ESLint } from 'eslint';
-
 import { PLUGIN_RENAME } from '../../const';
 import type { HexadropEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
@@ -24,7 +22,7 @@ export default async function json(options: HexadropEslintOptions): Promise<Type
 		{
 			name: JSON_CONFIG_NAME_SETUP,
 			plugins: {
-				[jsonPluginRename]: pluginJsonc as unknown as ESLint.Plugin,
+				[jsonPluginRename]: pluginJsonc,
 			},
 		},
 		{
