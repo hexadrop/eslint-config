@@ -60,7 +60,7 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 		{
 			name: STYLISTIC_CONFIG_NAME_SETUP,
 			plugins: {
-				style: pluginStylistic as ESLint.Plugin,
+				style: pluginStylistic,
 				...(unicorn && {
 					unicorn: pluginUnicorn,
 				}),

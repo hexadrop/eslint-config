@@ -39,7 +39,7 @@ function pluginConfigOverrideRules(
 
 			const indexOverride = overrides ? overrides[index] : undefined;
 			if (indexOverride?.rules) {
-				rules = indexOverride.rules as Linter.RulesRecord & RuleOptions;
+				rules = indexOverride.rules;
 			}
 		}
 	}

@@ -12,7 +12,7 @@ export default function pluginConfigRules(
 	if (plugin.configs && configName in plugin.configs) {
 		const config = plugin.configs[configName];
 		if (config && 'rules' in config && config.rules) {
-			rules = config.rules as Linter.RulesRecord & RuleOptions;
+			rules = config.rules;
 		}
 	}
 
