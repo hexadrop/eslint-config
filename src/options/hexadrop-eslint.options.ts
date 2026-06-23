@@ -152,6 +152,14 @@ export default function defaultOptions(options: RecursivePartial<HexadropEslintO
 								? options.ignore.filesGitModules
 								: ((options.ignore.filesGitModules?.filter(Boolean) as Nullable<string[]>) ?? []),
 						globs: (options.ignore.globs?.filter(Boolean) as Nullable<string[]>) ?? [],
+						recursive:
+							typeof options.ignore.recursive === 'boolean'
+								? options.ignore.recursive
+								: typeof options.ignore.recursive === 'object' && options.ignore.recursive.skipDirs
+									? {
+											skipDirs: options.ignore.recursive.skipDirs.filter(Boolean) as string[],
+										}
+									: false,
 					}
 				: (options.ignore ?? true),
 		imports: options.imports ?? true,
