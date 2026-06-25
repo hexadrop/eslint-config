@@ -564,6 +564,12 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 			name: STYLISTIC_CONFIG_NAME_RULES_UNICORN,
 			rules: {
 				...unicornRules,
+				'unicorn/consistent-boolean-name': [
+					'error',
+					{
+						ignore: ['value', '^completed$'],
+					},
+				],
 				'unicorn/consistent-function-scoping': 'off',
 				'unicorn/dom-node-dataset': 'off',
 				'unicorn/name-replacements': [
