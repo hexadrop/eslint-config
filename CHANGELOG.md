@@ -1,5 +1,16 @@
 # @hexadrop/eslint-config
 
+## 1.0.1
+
+### Patch Changes
+
+- 96980a5: fix(deps): update dependency eslint-plugin-astro to v2.1.0
+- 1d81e88: fix(deps): update dependency astro-eslint-parser to v2.1.0
+- dd35dda: fix(deps): update dependency eslint-plugin-unicorn to v69
+- ee260b7: fix(deps): update dependency eslint-plugin-astro to v2.1.1
+- bd4c8a7: Disable `unicorn/no-nonstandard-builtin-properties`
+- 0066953: Disable `unicorn/prefer-includes-over-repeated-comparisons`
+
 ## 1.0.0
 
 ### Major Changes
