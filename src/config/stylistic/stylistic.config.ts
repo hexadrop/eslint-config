@@ -587,6 +587,7 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 				'unicorn/no-nonstandard-builtin-properties': 'off',
 				'unicorn/no-static-only-class': 'off',
 				'unicorn/prefer-includes-over-repeated-comparisons': 'off',
+				'unicorn/prefer-number-coercion': 'off',
 			},
 		});
 
