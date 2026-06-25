@@ -1,5 +1,11 @@
 # @hexadrop/eslint-config
 
+## 1.0.3
+
+### Patch Changes
+
+- 57ea9a2: Disable `unicorn/consistent-class-member-order`
+
 ## 1.0.2
 
 ### Patch Changes
