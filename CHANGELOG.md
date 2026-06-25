@@ -1,5 +1,11 @@
 # @hexadrop/eslint-config
 
+## 1.0.2
+
+### Patch Changes
+
+- cbc131e: Ignore `consistent-boolean-name` value and completed values
+
 ## 1.0.1
 
 ### Patch Changes
