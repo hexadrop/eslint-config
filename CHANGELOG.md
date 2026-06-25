@@ -1,5 +1,11 @@
 # @hexadrop/eslint-config
 
+## 1.0.4
+
+### Patch Changes
+
+- 25648e2: Disable `unicorn/prefer-number-coercion`
+
 ## 1.0.3
 
 ### Patch Changes
