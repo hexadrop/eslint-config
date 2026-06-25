@@ -570,6 +570,7 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 						ignore: ['value', '^completed$'],
 					},
 				],
+				'unicorn/consistent-class-member-order': 'off',
 				'unicorn/consistent-function-scoping': 'off',
 				'unicorn/dom-node-dataset': 'off',
 				'unicorn/name-replacements': [
