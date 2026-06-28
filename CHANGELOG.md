@@ -1,5 +1,14 @@
 # @hexadrop/eslint-config
 
+## 1.0.5
+
+### Patch Changes
+
+- 7318a0b: fix(deps): update dependency prettier to v3.8.5
+- f081040: fix(deps): update dependency eslint-plugin-import-x to v4.17.1
+- d731300: fix(deps): update dependency prettier to v3.9.1
+- 99c6e89: Include Props as allow name-replacements
+
 ## 1.0.4
 
 ### Patch Changes
