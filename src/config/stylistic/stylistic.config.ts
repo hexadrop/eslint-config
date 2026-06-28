@@ -579,6 +579,7 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 						allowList: {
 							env: true,
 							props: true,
+							Props: true,
 						},
 					},
 				],
