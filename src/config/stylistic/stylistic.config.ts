@@ -578,8 +578,11 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 					{
 						allowList: {
 							env: true,
+							Environment: true,
 							props: true,
 							Props: true,
+							repository: true,
+							Repository: true,
 						},
 					},
 				],
