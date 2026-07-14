@@ -6,9 +6,7 @@ const JSON_CONFIG_NAME_SETUP_PARSER = `${JSON_CONFIG_NAME_SETUP}/parser` as cons
 const JSON_CONFIG_NAME_RULES = `${JSON_CONFIG_NAME}/rules` as const;
 
 type JsonConfigNames =
-	| typeof JSON_CONFIG_NAME_RULES
-	| typeof JSON_CONFIG_NAME_SETUP
-	| typeof JSON_CONFIG_NAME_SETUP_PARSER;
+	typeof JSON_CONFIG_NAME_RULES | typeof JSON_CONFIG_NAME_SETUP | typeof JSON_CONFIG_NAME_SETUP_PARSER;
 
 export type { JsonConfigNames };
 
