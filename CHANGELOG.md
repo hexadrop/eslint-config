@@ -1,5 +1,21 @@
 # @hexadrop/eslint-config
 
+## 1.0.6
+
+### Patch Changes
+
+- b1a9418: fix(deps): update dependency eslint-plugin-n to v18.2.2
+- acdf7fa: fix(deps): update dependency prettier to v3.9.3
+- d919323: fix(deps): update typescript-eslint monorepo to v8.64.0
+- 258f1df: fix(deps): update dependency @eslint/markdown to v8.0.3
+- 22f2727: fix(deps): update dependency eslint-plugin-unicorn to v71
+- 2d4f33d: fix(deps): update dependency eslint-plugin-jsonc to v3.3.0
+- 9fe097e: fix(deps): update dependency eslint-plugin-perfectionist to v5.10.0
+- 60e1f90: fix(deps): update dependency astro-eslint-parser to v3
+- d53467b: fix(deps): update dependency prettier to v3.9.5
+- cc857a4: fix(deps): update dependency eslint-plugin-astro to v3
+- 7d7f3bc: Include `Repository` as available `unicorn/name-replacements`
+
 ## 1.0.5
 
 ### Patch Changes
