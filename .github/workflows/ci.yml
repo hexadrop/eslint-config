@@ -36,6 +36,9 @@ jobs:
                   path: .eslintcache
                   key: ${{ runner.os }}-node
 
+            -   name: Build types
+                run: bun build:types
+
             -   name: ${{ matrix.command }}
                 run: bun run ${{ matrix.command }}
 
@@ -88,47 +91,6 @@ jobs:
                     title: 'chore: release v${{env.NEW_VERSION}}'
                 env:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    deploy-demo:
-        name: Deploy demo to GitHub Pages
-        runs-on: ubuntu-latest
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.release.outputs.published == 'true' }}
-        needs: [ check, release ]
-        concurrency:
-            group: github-pages
-            cancel-in-progress: false
-        permissions:
-            contents: 'read'
-            id-token: 'write'
-            pages: 'write'
-        environment:
-            name: github-pages
-            url: ${{ steps.deployment.outputs.page_url }}
-        steps:
-            -   name: Checkout
-                uses: actions/checkout@v7
-
-            -   name: Setup bun
-                uses: oven-sh/setup-bun@v2
-                with:
-                    bun-version: latest
-
-            -   name: Install dependencies
-                run: bun install --frozen-lockfile
-
-            -   name: Build demo
-                env:
-                    VITE_BASE_PATH: /${{ github.event.repository.name }}/
-                run: bun run demo:build
-
-            -   name: Upload Pages artifact
-                uses: actions/upload-pages-artifact@v5
-                with:
-                    path: demo/dist
-
-            -   name: Deploy Pages artifact
-                id: deployment
-                uses: actions/deploy-pages@v5
 
     sync-main-to-develop:
         name: Sync main to develop
@@ -293,6 +255,10 @@ jobs:
                     done
 
                     echo "has-release=false" >> "$GITHUB_OUTPUT"
+
+            -   name: Build types
+                run: bun build:types
+                if: steps.release-version.outputs.has-release == 'true'
 
             -   name: Create or update release pull request
                 if: steps.release-version.outputs.has-release == 'true'
