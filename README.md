@@ -264,7 +264,24 @@ Here are some inspiration for this package.
 - [@antfu/eslint-config](https://github.com/antfu/eslint-config)
 - [eslint-config-codely](https://github.com/CodelyTV/eslint-config-codely)
 
-## hexadrop Code Quality Standards
+## Contributing
+
+This project uses [Bun](https://bun.sh) as its runtime, test runner, and bundler.
+
+```bash
+git clone git@github.com:hexadrop/eslint-config.git
+cd eslint-config
+bun install
+bun run build
+```
+
+Read the full [contribution guidelines](./CONTRIBUTING.md) before opening an issue or pull request.
+
+## MIT License
+
+[Copyright 2021-2026 Hexadrop](./LICENSE)
+
+## Hexadrop Code Quality Standards
 
 Publishing this package we are committing ourselves to the following code quality standards:
 

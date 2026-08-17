@@ -1,0 +1,23 @@
+name: "Pull Request: Validate"
+
+on:
+  pull_request:
+    types: [ opened, edited, synchronize, labeled, unlabeled ]
+
+jobs:
+  validate:
+    name: Validate pull request
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: read
+      pull-requests: read
+    steps:
+      -   name: Checkout
+          uses: actions/checkout@v7
+
+      -   name: Validate
+          uses: hexadrop/validate-pr-action@v2
+          with:
+            github-token: ${{ secrets.GITHUB_TOKEN }}
+            skip-validation-labels: release,internal:sync
