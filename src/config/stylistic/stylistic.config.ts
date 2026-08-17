@@ -436,14 +436,14 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 						},
 						{
 							order: [
-								/* Projects */
+								// Projects
 								'incremental',
 								'composite',
 								'tsBuildInfoFile',
 								'disableSourceOfProjectReferenceRedirect',
 								'disableSolutionSearching',
 								'disableReferencedProjectLoad',
-								/* Language and Environment */
+								// Language and Environment
 								'target',
 								'jsx',
 								'jsxFactory',
@@ -456,7 +456,7 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 								'useDefineForClassFields',
 								'emitDecoratorMetadata',
 								'experimentalDecorators',
-								/* Modules */
+								// Modules
 								'baseUrl',
 								'rootDir',
 								'rootDirs',
@@ -474,11 +474,11 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 								'allowArbitraryExtensions',
 								'allowImportingTsExtensions',
 								'allowUmdGlobalAccess',
-								/* JavaScript Support */
+								// JavaScript Support
 								'allowJs',
 								'checkJs',
 								'maxNodeModuleJsDepth',
-								/* Type Checking */
+								// Type Checking
 								'strict',
 								'strictBindCallApply',
 								'strictFunctionTypes',
@@ -498,7 +498,7 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 								'noUnusedLocals',
 								'noUnusedParameters',
 								'useUnknownInCatchVariables',
-								/* Emit */
+								// Emit
 								'declaration',
 								'declarationDir',
 								'declarationMap',
@@ -522,14 +522,14 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 								'sourceMap',
 								'sourceRoot',
 								'stripInternal',
-								/* Interop Constraints */
+								// Interop Constraints
 								'allowSyntheticDefaultImports',
 								'esModuleInterop',
 								'forceConsistentCasingInFileNames',
 								'isolatedModules',
 								'preserveSymlinks',
 								'verbatimModuleSyntax',
-								/* Completeness */
+								// Completeness
 								'skipDefaultLibCheck',
 								'skipLibCheck',
 							],
