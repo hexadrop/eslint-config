@@ -36,6 +36,9 @@ jobs:
                   path: .eslintcache
                   key: ${{ runner.os }}-node
 
+            -   name: Build types
+                run: bun build:types
+
             -   name: ${{ matrix.command }}
                 run: bun run ${{ matrix.command }}
 
