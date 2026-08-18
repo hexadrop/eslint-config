@@ -50,9 +50,9 @@ jobs:
         id: changesets
         uses: changesets/action@v2.1.0
         with:
-          publish: bun changeset publish
-          version: bun changeset version
-          commit: 'chore: release v${{env.NEW_VERSION}}'
-          title: 'chore: release v${{env.NEW_VERSION}}'
+          publish-script: bun changeset publish
+          version-script: bun changeset version
+          commit-message: 'chore: release v${{env.NEW_VERSION}}'
+          pr-title: 'chore: release v${{env.NEW_VERSION}}'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
