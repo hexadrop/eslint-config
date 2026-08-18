@@ -70,10 +70,10 @@ jobs:
         if: steps.release-version.outputs.has-release == 'true'
         uses: changesets/action@v2.1.0
         with:
-          version: bun changeset version
-          branch: main
-          prDraft: always
-          commit: 'chore: release v${{ steps.release-version.outputs.version }}'
-          title: 'chore: release v${{ steps.release-version.outputs.version }}'
+          version-script: bun changeset version
+          pr-base-branch: main
+          pr-draft: true
+          commit-message: 'chore: release v${{ steps.release-version.outputs.version }}'
+          pr-title: 'chore: release v${{ steps.release-version.outputs.version }}'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
