@@ -203,6 +203,17 @@ This project uses GitFlow with Changesets for versioning and npm publication.
 | `main`      | Stable, production-ready releases                            | Stable release tagged `latest` |
 | `hotfix/*`  | Urgent fix created from `main`                               | None                           |
 
+### Automated Workflows
+
+| Workflow                                  | Trigger                                            | Responsibility                                              |
+|-------------------------------------------|----------------------------------------------------|-------------------------------------------------------------|
+| `.github/workflows/ci.yml`                | Push/PR to `main` or `develop`                     | Runs lint and typecheck via the reusable `check.yml`        |
+| `.github/workflows/check.yml`             | Reused by other workflows                          | Installs dependencies and runs `lint:ci` and `typecheck`    |
+| `.github/workflows/release-prepare.yml`   | Push to `develop`                                  | Creates or updates the draft release PR to `main`           |
+| `.github/workflows/release.yml`           | Push to `main`                                     | Publishes the stable package to npm under the `latest` tag  |
+| `.github/workflows/release-beta.yml`      | Push to `develop` with changeset changes           | Publishes a beta snapshot to npm under the `beta` tag       |
+| `.github/workflows/sync-to-develop.yml`   | Merge of any PR into `main`                        | Opens/updates the sync PR `internal/sync-from-main-to-develop` |
+
 ### Daily Development
 
 1. Create a `feature/*` branch from `develop`.
@@ -220,10 +231,10 @@ Snapshot releases do not modify or commit version files. They use the pending ch
 
 ### Stable Release
 
-1. When `develop` contains non-empty changesets, CI creates or updates the draft `changeset-release/main` pull request targeting `main`.
+1. When `develop` contains non-empty changesets, `release-prepare.yml` creates or updates the draft `changeset-release/main` pull request targeting `main`.
 2. Validate the current beta. When it is ready, mark the generated release pull request ready for review and merge it into `main`.
-3. The release job on `main` publishes the stable package to npm under the `latest` dist-tag.
-4. CI opens an `internal:sync` pull request from `main` to `develop` after publication. Merge it to synchronize the generated changelog, package version, and consumed changesets.
+3. `release.yml` on `main` publishes the stable package to npm under the `latest` dist-tag.
+4. `sync-to-develop.yml` opens or rebases the automated pull request `internal/sync-from-main-to-develop → develop`. Merge it to synchronize the generated changelog, package version, and consumed changesets.
 
 The generated release pull request contains the pending changes, calculated stable version, changelog entry, and consumed changesets. Changesets release pull requests and their version commits use `chore: release v<version>`. They do not publish packages; publication remains exclusive to `main`.
 
@@ -234,14 +245,14 @@ Use a `release/*` branch only when a release needs a stabilization period. It fr
 1. Create `release/<version>` from `develop`.
 2. Allow only release-critical fixes, documentation updates, and QA changes on the release branch.
 3. Merge the release branch into `main` when it is approved.
-4. Changesets opens a version pull request on `main`; merge it to publish the stable package.
-5. Merge the `internal:sync` pull request from `main` to `develop` so the stabilization fixes and generated release files return to the integration branch.
+4. `release-prepare.yml` opens the version pull request on `main`; merge it to publish the stable package.
+5. Merge the `internal/sync-from-main-to-develop` pull request from `main` to `develop` so the stabilization fixes and generated release files return to the integration branch.
 
-GitHub Actions must be allowed to create pull requests for the automated release pull request to work.
+GitHub Actions must be allowed to create pull requests for the automated release and sync workflows to work.
 
 The `internal:sync` label exempts automated branch synchronization pull requests from issue and type validation. They must not include changeset files.
 
-For an urgent production fix, create `hotfix/*` from `main`, include a changeset, merge it into `main`, then merge `main` back into `develop`.
+For an urgent production fix, create `hotfix/*` from `main`, include a changeset, merge it into `main`, then merge the resulting `internal/sync-from-main-to-develop` pull request into `develop`.
 
 ---
 
