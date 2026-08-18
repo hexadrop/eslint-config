@@ -1,0 +1,117 @@
+name: Sync to develop
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+
+jobs:
+  sync-to-develop:
+    name: Sync to develop
+    if: github.event.pull_request.merged == true && github.head_ref != 'develop' && !startsWith(github.head_ref, 'develop-')
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.job }}
+      cancel-in-progress: true
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+    steps:
+      - name: Calculate branches
+        id: sync-branch
+        run: |
+          BASELINE_BRANCH=${{ github.base_ref }}
+          DEVELOP_BRANCH=${BASELINE_BRANCH/main/develop}
+          {
+            echo "DEVELOP_BRANCH=$DEVELOP_BRANCH"
+            echo "SYNC_BRANCH=internal/sync-from-$BASELINE_BRANCH-to-$DEVELOP_BRANCH"
+            echo "MAIN_BRANCH=$BASELINE_BRANCH"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          ref: ${{ github.base_ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get existent branches and pull requests from repository
+        id: get-info
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          sync_branch="${{ steps.sync-branch.outputs.SYNC_BRANCH }}"
+          if [[ -n $(git ls-remote --heads origin "$sync_branch") ]]; then
+            pull_request=$(gh api "/repos/${{ github.repository }}/pulls" --jq ".[] | select(.head.ref==\"$sync_branch\") | .number")
+            echo "PULL_REQUEST=$pull_request" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit changes
+        id: commit
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          develop="${{ steps.sync-branch.outputs.DEVELOP_BRANCH }}"
+          if [[ -z $(git ls-remote --heads origin "$develop") ]]; then
+            echo "The $develop branch does not exist in remote. Skipping the creation of the sync PR"
+          else
+            sync_branch="${{ steps.sync-branch.outputs.SYNC_BRANCH }}"
+            main_branch="${{ steps.sync-branch.outputs.MAIN_BRANCH }}"
+
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+
+            if [[ -n $(git ls-remote --heads origin "$sync_branch") ]]; then
+              git checkout "$sync_branch"
+              git rebase "$main_branch" --no-verify
+              git push --no-verify -u origin HEAD
+              echo "EXIST_BRANCH=True" >> "$GITHUB_OUTPUT"
+            else
+              git checkout -b "$sync_branch"
+              git push --no-verify -u origin HEAD
+              echo "EXIST_BRANCH=False" >> "$GITHUB_OUTPUT"
+            fi
+          fi
+
+      - name: Create PR body
+        id: pr-body
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pr_body="**Automated Pull Request** related to:"
+          pr_body="$pr_body"$'\n'"- #${{ github.event.pull_request.number }}"
+
+          delimiter="$(openssl rand -hex 8)"
+          echo "PR_BODY<<${delimiter}" >> "$GITHUB_OUTPUT"
+          echo "$pr_body" >> "$GITHUB_OUTPUT"
+          echo "${delimiter}" >> "${GITHUB_OUTPUT}"
+
+      - name: Create Automated PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          develop="${{ steps.sync-branch.outputs.DEVELOP_BRANCH }}"
+          pull_request="${{ steps.get-info.outputs.PULL_REQUEST }}"
+          main_branch="${{ steps.sync-branch.outputs.MAIN_BRANCH }}"
+          pr_body="${{ steps.pr-body.outputs.PR_BODY }}"
+
+          if [[ $pull_request != "" ]]; then
+            gh pr edit "$pull_request" -b "$pr_body"
+          else
+            gh pr create --base "$develop" \
+              --title "chore: sync from $main_branch to $develop" \
+              --label 'internal:sync' \
+              --body "$pr_body"
+          fi
+
+      - name: Add PR comment - On Failure
+        if: ${{ failure() && !cancelled() }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr comment ${{ github.event.number }} --body "
+          ### Sync to develop failure
+          - See the [workflow log](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}).
+          "
