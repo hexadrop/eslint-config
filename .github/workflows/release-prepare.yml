@@ -72,7 +72,7 @@ jobs:
         with:
           version-script: bun changeset version
           pr-base-branch: main
-          pr-draft: true
+          pr-draft: always
           commit-message: 'chore: release v${{ steps.release-version.outputs.version }}'
           pr-title: 'chore: release v${{ steps.release-version.outputs.version }}'
         env:
