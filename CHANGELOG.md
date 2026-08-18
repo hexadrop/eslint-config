@@ -1,5 +1,23 @@
 # @hexadrop/eslint-config
 
+## 1.0.7
+
+### Patch Changes
+
+- 0741cac: fix(deps): update dependency eslint-plugin-astro to v3.1.0
+- cb840b8: fix(deps): update dependency eslint-plugin-simple-import-sort to v14
+- 82baecc: fix(deps): update typescript-eslint monorepo to v8.66.0
+- 21f1933: fix(deps): update dependency prettier to v3.9.6
+- 742f1b1: fix(deps): update dependency globals to v17.11.0
+- 6684396: fix(deps): update dependency eslint-plugin-jsonc to v3.4.1
+- e43eb0b: fix(deps): update dependency eslint-plugin-unicorn to v73
+- 7dad61e: fix(deps): update dependency eslint-plugin-perfectionist to v5.10.1
+- c50ae7a: fix(deps): update dependency jsonc-eslint-parser to v3.3.0
+- 0f640f6: fix(deps): update dependency eslint-plugin-n to v18.3.0
+- fe03c16: fix(deps): update dependency eslint-plugin-react-refresh to v0.5.4
+- 49f06ee: fix(deps): update typescript-eslint monorepo to v8.67.0
+- d0397f3: fix(deps): update dependency astro-eslint-parser to v3.1.0
+
 ## 1.0.6
 
 ### Patch Changes

@@ -2,9 +2,9 @@ name: Continuous integration
 
 on:
     push:
-        branches: [ main ]
+        branches: [ main, develop ]
     pull_request:
-        branches: [ main ]
+        branches: [ main, develop ]
         types: [ opened, synchronize ]
 
 jobs:
@@ -16,7 +16,7 @@ jobs:
             id-token: 'write'
         strategy:
             matrix:
-                command: [ lint, typecheck ]
+                command: [ 'lint:ci', typecheck ]
         steps:
             -   name: Checkout
                 uses: actions/checkout@v7
@@ -29,17 +29,29 @@ jobs:
             -   name: Install dependencies
                 run: bun install
 
+            - name: ESLint cache
+              uses: actions/cache@v6
+              if: matrix.command == 'lint:ci'
+              with:
+                  path: .eslintcache
+                  key: ${{ runner.os }}-node
+
             -   name: Build types
                 run: bun build:types
 
             -   name: ${{ matrix.command }}
-                run: bun ${{ matrix.command }}
+                run: bun run ${{ matrix.command }}
 
     release:
         name: Release
         runs-on: ubuntu-latest
-        if: ${{ github.event_name == 'push' && github.repository == 'hexadrop/eslint-config' }}
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         needs: [ check ]
+        outputs:
+            published: ${{ steps.changesets.outputs.published }}
+        concurrency:
+            group: release
+            cancel-in-progress: false
         permissions:
             contents: 'write'
             id-token: 'write'
@@ -61,10 +73,7 @@ jobs:
                     registry-url: 'https://registry.npmjs.org'
 
             -   name: Install dependencies
-                run: bun install
-
-            -   name: Build
-                run: bun run build
+                run: bun install --frozen-lockfile
 
             -   name: Capture release version
                 run: |
@@ -73,11 +82,192 @@ jobs:
                     rm release.json
 
             -   name: Create Release Pull Request or Publish to npm
+                id: changesets
                 uses: changesets/action@v1
                 with:
                     publish: bun changeset publish
                     version: bun changeset version
                     commit: 'chore: release v${{env.NEW_VERSION}}'
                     title: 'chore: release v${{env.NEW_VERSION}}'
+                env:
+                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    sync-main-to-develop:
+        name: Sync main to develop
+        runs-on: ubuntu-latest
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        needs: [ release ]
+        concurrency:
+            group: sync-main-to-develop
+            cancel-in-progress: false
+        permissions:
+            contents: 'read'
+            issues: 'write'
+            pull-requests: 'write'
+        steps:
+            -   name: Create sync pull request when needed
+                env:
+                    GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                run: |
+                    pending_release_prs="$(gh pr list --repo "$GITHUB_REPOSITORY" --base main --head changeset-release/main --state open --json number --jq 'length')"
+                    if [[ "$pending_release_prs" -gt 0 ]]; then
+                        echo "A release version pull request is still open."
+                        exit 0
+                    fi
+
+                    ahead_by="$(gh api "repos/$GITHUB_REPOSITORY/compare/develop...main" --jq '.ahead_by')"
+                    if [[ "$ahead_by" -eq 0 ]]; then
+                        echo "develop already contains main."
+                        exit 0
+                    fi
+
+                    existing_sync_prs="$(gh pr list --repo "$GITHUB_REPOSITORY" --base develop --head main --state open --json number --jq 'length')"
+                    if [[ "$existing_sync_prs" -gt 0 ]]; then
+                        echo "A main to develop synchronization pull request is already open."
+                        exit 0
+                    fi
+
+                    gh pr create \
+                        --repo "$GITHUB_REPOSITORY" \
+                        --base develop \
+                        --head main \
+                        --title 'chore: sync main to develop' \
+                        --body 'Automated synchronization of the released main branch into develop.' \
+                        --label 'internal:sync'
+
+    detect-changeset-change:
+        name: Detect changeset change
+        runs-on: ubuntu-latest
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop' }}
+        outputs:
+            should_publish_beta: ${{ steps.detect.outputs.should_publish_beta }}
+        permissions:
+            contents: 'read'
+        steps:
+            -   name: Checkout
+                uses: actions/checkout@v7
+                with:
+                    fetch-depth: 0
+
+            -   name: Detect semantic changeset changes
+                id: detect
+                env:
+                    AFTER: ${{ github.sha }}
+                    BEFORE: ${{ github.event.before }}
+                run: |
+                    if [[ "$BEFORE" == "0000000000000000000000000000000000000000" ]]; then
+                        echo "should_publish_beta=true" >> "$GITHUB_OUTPUT"
+                        exit 0
+                    fi
+
+                    if git diff --quiet --diff-filter=AM "$BEFORE" "$AFTER" -- .changeset ':(exclude).changeset/README.md'; then
+                        echo "should_publish_beta=false" >> "$GITHUB_OUTPUT"
+                    else
+                        echo "should_publish_beta=true" >> "$GITHUB_OUTPUT"
+                    fi
+
+    release-beta:
+        name: Release beta
+        runs-on: ubuntu-latest
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop' && needs.detect-changeset-change.outputs.should_publish_beta == 'true' }}
+        needs: [ check, detect-changeset-change ]
+        concurrency:
+            group: release-beta
+            cancel-in-progress: false
+        permissions:
+            contents: 'read'
+            id-token: 'write'
+        steps:
+            -   name: Checkout
+                uses: actions/checkout@v7
+
+            -   name: Setup bun
+                uses: oven-sh/setup-bun@v2
+                with:
+                    bun-version: latest
+
+            -   name: Setup Node.js
+                uses: actions/setup-node@v7
+                with:
+                    node-version: '24'
+                    registry-url: 'https://registry.npmjs.org'
+
+            -   name: Install dependencies
+                run: bun install --frozen-lockfile
+
+            -   name: Generate beta snapshot
+                run: bun changeset version --snapshot beta
+
+            -   name: Publish beta to npm
+                run: bun changeset publish --tag beta --no-git-tag
+
+    prepare-release:
+        name: Prepare release
+        runs-on: ubuntu-latest
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/develop' }}
+        needs: [ check ]
+        concurrency:
+            group: prepare-release
+            cancel-in-progress: false
+        permissions:
+            contents: 'write'
+            pull-requests: 'write'
+        steps:
+            -   name: Checkout
+                uses: actions/checkout@v7
+                with:
+                    fetch-depth: 0
+
+            -   name: Fetch main branch
+                run: git fetch origin main:main
+
+            -   name: Setup bun
+                uses: oven-sh/setup-bun@v2
+                with:
+                    bun-version: latest
+
+            -   name: Install dependencies
+                run: bun install --frozen-lockfile
+
+            -   name: Capture release version
+                id: release-version
+                shell: bash
+                run: |
+                    shopt -s nullglob
+
+                    for changeset in .changeset/*.md; do
+                        if [[ "$changeset" == ".changeset/README.md" ]]; then
+                            continue
+                        fi
+
+                        bun changeset status --output=release.json
+                        version="$(jq -r '.releases[0].newVersion // empty' release.json)"
+                        rm release.json
+
+                        if [[ -n "$version" ]]; then
+                            echo "has-release=true" >> "$GITHUB_OUTPUT"
+                            echo "version=$version" >> "$GITHUB_OUTPUT"
+                        else
+                            echo "has-release=false" >> "$GITHUB_OUTPUT"
+                        fi
+
+                        exit 0
+                    done
+
+                    echo "has-release=false" >> "$GITHUB_OUTPUT"
+
+            -   name: Build types
+                run: bun build:types
+                if: steps.release-version.outputs.has-release == 'true'
+
+            -   name: Create or update release pull request
+                if: steps.release-version.outputs.has-release == 'true'
+                uses: changesets/action@v1
+                with:
+                    version: bun changeset version
+                    branch: main
+                    prDraft: always
+                    commit: 'chore: release v${{ steps.release-version.outputs.version }}'
+                    title: 'chore: release v${{ steps.release-version.outputs.version }}'
                 env:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
