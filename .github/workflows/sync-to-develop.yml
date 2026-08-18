@@ -105,7 +105,7 @@ jobs:
             gh pr edit "$pull_request" -b "$pr_body"
           else
             gh pr create --base "$develop" \
-              --title 'chore: sync to develop' \
+              --title "chore: sync from $main_branch to $develop" \
               --label 'internal:sync' \
               --body "$pr_body"
           fi
