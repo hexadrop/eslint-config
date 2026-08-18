@@ -1,4 +1,4 @@
-name: Prepare release
+name: "Release: prepare"
 
 on:
   push:
@@ -46,13 +46,16 @@ jobs:
               continue
             fi
 
-            bun changeset status --output=release.json
-            version="$(jq -r '.releases[0].newVersion // empty' release.json)"
-            rm release.json
+            if bun changeset status --output=release.json; then
+              version="$(jq -r '.releases[0].newVersion // empty' release.json)"
+              rm release.json
 
-            if [[ -n "$version" ]]; then
-              echo "has-release=true" >> "$GITHUB_OUTPUT"
-              echo "version=$version" >> "$GITHUB_OUTPUT"
+              if [[ -n "$version" ]]; then
+                echo "has-release=true" >> "$GITHUB_OUTPUT"
+                echo "version=$version" >> "$GITHUB_OUTPUT"
+              else
+                echo "has-release=false" >> "$GITHUB_OUTPUT"
+              fi
             else
               echo "has-release=false" >> "$GITHUB_OUTPUT"
             fi

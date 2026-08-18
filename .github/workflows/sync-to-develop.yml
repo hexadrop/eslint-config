@@ -82,6 +82,10 @@ jobs:
         run: |
           pr_body="**Automated Pull Request** related to:"
           pr_body="$pr_body"$'\n'"- #${{ github.event.pull_request.number }}"
+          pr_body="$pr_body"$'\n\n'
+          pr_body="$pr_body"$'\n'"> [!IMPORTANT]"
+          pr_body="$pr_body"$'\n'"> Merge this pull request using **Create a merge commit** so \`develop\` keeps the full history from \`${{ steps.sync-branch.outputs.MAIN_BRANCH }}\`."
+          pr_body="$pr_body"$'\n'"> Do **not** use squash merge."
 
           delimiter="$(openssl rand -hex 8)"
           echo "PR_BODY<<${delimiter}" >> "$GITHUB_OUTPUT"
