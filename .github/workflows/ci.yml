@@ -83,7 +83,7 @@ jobs:
 
             -   name: Create Release Pull Request or Publish to npm
                 id: changesets
-                uses: changesets/action@v1
+                uses: changesets/action@v2.1.0
                 with:
                     publish: bun changeset publish
                     version: bun changeset version
@@ -262,7 +262,7 @@ jobs:
 
             -   name: Create or update release pull request
                 if: steps.release-version.outputs.has-release == 'true'
-                uses: changesets/action@v1
+                uses: changesets/action@v2.1.0
                 with:
                     version: bun changeset version
                     branch: main
