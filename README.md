@@ -7,6 +7,15 @@
   providing consistency to your code.
 </p>
 
+<p align="center">
+    <a href="https://www.npmjs.com/package/@hexadrop/eslint-config" rel="nofollow">
+        <img src="https://img.shields.io/npm/v/@hexadrop/eslint-config?style=flat-square" alt="npm" style="max-width: 100%;">
+    </a>
+    <a href="https://github.com/hexadrop/eslint-config">
+        <img src="https://img.shields.io/github/issues/hexadrop/eslint-config?style=flat-square" alt="GitHub issues" style="max-width: 100%;">
+    </a>
+</p>
+
 ## Installation
 
 ```bash

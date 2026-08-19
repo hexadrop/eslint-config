@@ -6,6 +6,7 @@ on:
 
 jobs:
   check:
+    name: Check
     uses: ./.github/workflows/check.yml
 
   detect-changeset-change:
@@ -40,7 +41,7 @@ jobs:
           fi
 
   release-beta:
-    name: Release beta
+    name: "Release: beta"
     runs-on: ubuntu-latest
     needs: [ detect-changeset-change ]
     if: needs.detect-changeset-change.outputs.should_publish_beta == 'true'

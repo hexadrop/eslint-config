@@ -5,8 +5,8 @@ on:
     types: [ opened, edited, synchronize, labeled, unlabeled ]
 
 jobs:
-  validate:
-    name: Validate pull request
+  pr-validate:
+    name: "Pull Request: Validate"
     runs-on: ubuntu-latest
     permissions:
       contents: read
