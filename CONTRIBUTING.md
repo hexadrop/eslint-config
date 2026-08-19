@@ -205,14 +205,14 @@ This project uses GitFlow with Changesets for versioning and npm publication.
 
 ### Automated Workflows
 
-| Workflow                                  | Trigger                                            | Responsibility                                              |
-|-------------------------------------------|----------------------------------------------------|-------------------------------------------------------------|
-| `.github/workflows/ci.yml`                | Push/PR to `main` or `develop`                     | Runs lint and typecheck via the reusable `check.yml`        |
-| `.github/workflows/check.yml`             | Reused by other workflows                          | Installs dependencies and runs `lint:ci` and `typecheck`    |
-| `.github/workflows/release-prepare.yml`   | Push to `develop`                                  | Creates or updates the draft release PR to `main`           |
-| `.github/workflows/release.yml`           | Push to `main`                                     | Publishes the stable package to npm under the `latest` tag  |
-| `.github/workflows/release-beta.yml`      | Push to `develop` with changeset changes           | Publishes a beta snapshot to npm under the `beta` tag       |
-| `.github/workflows/sync-to-develop.yml`   | Merge of any PR into `main`                        | Opens/updates the sync PR `internal/sync-from-main-to-develop` |
+| Workflow                                | Trigger                                  | Responsibility                                                 |
+|-----------------------------------------|------------------------------------------|----------------------------------------------------------------|
+| `.github/workflows/ci.yml`              | Push/PR to `main` or `develop`           | Runs lint and typecheck via the reusable `check.yml`           |
+| `.github/workflows/check.yml`           | Reused by other workflows                | Installs dependencies and runs `lint:ci` and `typecheck`       |
+| `.github/workflows/release-prepare.yml` | Push to `develop`                        | Creates or updates the draft release PR to `main`              |
+| `.github/workflows/release.yml`         | Push to `main`                           | Publishes the stable package to npm under the `latest` tag     |
+| `.github/workflows/release-beta.yml`    | Push to `develop` with changeset changes | Publishes a beta snapshot to npm under the `beta` tag          |
+| `.github/workflows/sync-to-develop.yml` | Merge of any PR into `main`              | Opens/updates the sync PR `internal/sync-from-main-to-develop` |
 
 ### Daily Development
 
