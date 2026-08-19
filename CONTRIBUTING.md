@@ -218,12 +218,12 @@ This project uses GitFlow with Changesets for versioning and npm publication.
 
 Use the merge method that keeps the history of `main` and `develop` aligned:
 
-| Pull request                            | Branches                                             | Merge method     | Rationale                                                                                                       |
-|-----------------------------------------|------------------------------------------------------|------------------|-----------------------------------------------------------------------------------------------------------------|
-| Feature, fix, chore, docs, renovate     | `feature/*`, `fix/*`, `renovate/*` → `develop`       | **Squash merge** | Individual work branches produce one clean commit; `develop` keeps a linear history.                            |
-| Hotfix                                  | `hotfix/*` → `main`                                  | **Squash merge** | The branch comes from `main`; one commit is enough and keeps `main` linear.                                        |
-| Release                                 | `changeset-release/main` → `main`                    | **Merge commit** | Lets `main` absorb the full commit history from `develop`, keeping both branches aligned and preventing divergence. |
-| Sync                                    | `internal/sync-from-main-to-develop` → `develop`     | **Merge commit** | Pulls the released `main` history back into `develop` without losing ancestry.                                     |
+| Pull request                        | Branches                                         | Merge method     | Rationale                                                                                                           |
+|-------------------------------------|--------------------------------------------------|------------------|---------------------------------------------------------------------------------------------------------------------|
+| Feature, fix, chore, docs, renovate | `feature/*`, `fix/*`, `renovate/*` → `develop`   | **Squash merge** | Individual work branches produce one clean commit; `develop` keeps a linear history.                                |
+| Hotfix                              | `hotfix/*` → `main`                              | **Squash merge** | The branch comes from `main`; one commit is enough and keeps `main` linear.                                         |
+| Release                             | `changeset-release/main` → `main`                | **Merge commit** | Lets `main` absorb the full commit history from `develop`, keeping both branches aligned and preventing divergence. |
+| Sync                                | `internal/sync-from-main-to-develop` → `develop` | **Merge commit** | Pulls the released `main` history back into `develop` without losing ancestry.                                      |
 
 Rule of thumb:
 
