@@ -81,3 +81,15 @@ jobs:
           pr-title: 'chore: release v${{ steps.release-version.outputs.version }}'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Add release label to release pull request
+        if: steps.release-version.outputs.has-release == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pr_number="$(gh pr list --repo "$GITHUB_REPOSITORY" --base main --head changeset-release/main --state open --json number --jq '.[0].number // empty')"
+          if [[ -n "$pr_number" ]]; then
+            gh pr edit "$pr_number" --add-label release
+          else
+            echo "Release pull request not found. Skipping label."
+          fi
