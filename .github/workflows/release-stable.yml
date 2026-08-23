@@ -1,0 +1,18 @@
+name: "Release: stable"
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  check:
+    name: Check
+    uses: ./.github/workflows/check.yml
+
+  release-stable:
+    name: "Release: stable"
+    needs: [ check ]
+    uses: ./.github/workflows/release.yml
+    with:
+      snapshot: false
+      concurrency-group: release
