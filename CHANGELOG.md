@@ -1,5 +1,12 @@
 # @hexadrop/eslint-config
 
+## 1.0.9
+
+### Patch Changes
+
+- f3da8fc: fix(deps): update dependency eslint-plugin-jsonc to v3.4.2
+- 447e3b1: fix(deps): update typescript-eslint monorepo to v8.68.0
+
 ## 1.0.8
 
 ### Patch Changes
