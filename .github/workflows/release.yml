@@ -1,59 +1,29 @@
-name: "Release: stable"
+name: "Release: publish"
 
 on:
-  push:
-    branches: [ main ]
+  workflow_call:
+    inputs:
+      snapshot:
+        required: false
+        type: boolean
+        default: false
+      concurrency-group:
+        required: true
+        type: string
+    outputs:
+      published:
+        description: 'Whether packages were published'
+        value: ${{ jobs.publish.outputs.published }}
 
 jobs:
-  check:
-    name: Check
-    uses: ./.github/workflows/check.yml
-
-  release-stable:
-    name: "Release: stable"
-    runs-on: ubuntu-latest
-    needs: [ check ]
-    outputs:
-      published: ${{ steps.changesets.outputs.published }}
-    concurrency:
-      group: release
-      cancel-in-progress: false
+  publish:
+    name: "Publish ${{ inputs.snapshot && 'beta' || 'stable' }}"
     permissions:
       contents: 'write'
       id-token: 'write'
       issues: 'write'
       pull-requests: 'write'
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v7
-
-      - name: Setup bun
-        uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v7
-        with:
-          node-version: '24'
-          registry-url: 'https://registry.npmjs.org'
-
-      - name: Install dependencies
-        run: bun install --frozen-lockfile
-
-      - name: Capture release version
-        run: |
-          bun changeset status --output=release.json
-          echo "NEW_VERSION=$(jq -r '.releases[0].newVersion' release.json)" >> "$GITHUB_ENV"
-          rm release.json
-
-      - name: Create Release Pull Request or Publish to npm
-        id: changesets
-        uses: changesets/action@v2.1.1
-        with:
-          publish-script: bun changeset publish
-          version-script: bun changeset version
-          commit-message: 'chore: release v${{env.NEW_VERSION}}'
-          pr-title: 'chore: release v${{env.NEW_VERSION}}'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    uses: hexadrop/github-workflows/.github/workflows/release.yml@v1
+    with:
+      snapshot: ${{ inputs.snapshot }}
+      concurrency-group: ${{ inputs.concurrency-group }}

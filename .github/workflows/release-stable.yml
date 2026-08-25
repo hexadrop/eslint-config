@@ -1,8 +1,8 @@
-name: "Release: prepare"
+name: "Release: stable"
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ main ]
 
 jobs:
   check:
@@ -12,9 +12,10 @@ jobs:
       commands: '["lint:ci", "typecheck"]'
       cache-commands: '["lint:ci"]'
 
-  release-prepare:
+  release-stable:
     name: Release
     needs: [ check ]
-    uses: hexadrop/github-workflows/.github/workflows/release-prepare.yml@v1
+    uses: ./.github/workflows/release.yml
     with:
-      base-branch: main
+      snapshot: false
+      concurrency-group: release
