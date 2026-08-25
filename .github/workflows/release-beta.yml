@@ -7,41 +7,18 @@ on:
 jobs:
   check:
     name: Check
-    uses: ./.github/workflows/check.yml
+    uses: hexadrop/github-workflows/.github/workflows/check.yml@v1
+    with:
+      commands: '["lint:ci", "typecheck"]'
+      cache-commands: '["lint:ci"]'
 
   detect-changeset-change:
-    name: Detect changeset change
-    runs-on: ubuntu-latest
+    name: Changeset
     needs: [ check ]
-    outputs:
-      should_publish_beta: ${{ steps.detect.outputs.should_publish_beta }}
-    permissions:
-      contents: 'read'
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v7
-        with:
-          fetch-depth: 0
-
-      - name: Detect semantic changeset changes
-        id: detect
-        env:
-          AFTER: ${{ github.sha }}
-          BEFORE: ${{ github.event.before }}
-        run: |
-          if [[ "$BEFORE" == "0000000000000000000000000000000000000000" ]]; then
-            echo "should_publish_beta=true" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-
-          if git diff --quiet --diff-filter=AM "$BEFORE" "$AFTER" -- .changeset ':(exclude).changeset/README.md'; then
-            echo "should_publish_beta=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "should_publish_beta=true" >> "$GITHUB_OUTPUT"
-          fi
+    uses: hexadrop/github-workflows/.github/workflows/detect-changeset-change.yml@v1
 
   release-beta:
-    name: "Release: beta"
+    name: Release
     needs: [ detect-changeset-change ]
     if: needs.detect-changeset-change.outputs.should_publish_beta == 'true'
     uses: ./.github/workflows/release.yml

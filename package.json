@@ -39,7 +39,7 @@
 		"lint": "eslint --cache .",
 		"lint:ci": "eslint --cache --cache-strategy content .",
 		"lint:fix": "eslint --cache --fix .",
-		"prepare": "husky",
+		"prepare": "husky && bun run build:types",
 		"prepublishOnly": "bun run scripts/typegen.ts && tsdown",
 		"typecheck": "tsc --noEmit"
 	},
