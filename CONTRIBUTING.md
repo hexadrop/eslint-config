@@ -72,40 +72,19 @@ PRs that are not linked to an approved issue will be **automatically rejected** 
 
 ### Prerequisites
 
-- Node/Bun
+- [Bun](https://bun.sh/)
 - Git
 
 ### Clone and Build
 
-```
+```bash
 git clone https://github.com/hexadrop/eslint-config.git
-cd proxystudio.app
+cd eslint-config
+bun install
 bun run build
 ```
 
-### Run Locally
-
-```bash
-bun run dev
-```
-
 ---
-
-## Testing
-
-### Unit Tests
-
-Run the full unit test suite:
-
-```bash
-bun test
-```
-
-Run tests for a specific package:
-
-```bash
-bun test ./test/specific-file.test.ts
-```
 
 ## Commit Convention
 
@@ -290,7 +269,6 @@ Review feedback should be warm, direct, and useful quickly. Start with the actio
 
 - [ ] There is a linked approved issue (`Closes #<N>`)
 - [ ] Commits are organized by deliverable work unit
-- [ ] All unit tests pass (`bun test`)
 - [ ] Commits follow Conventional Commits format
 - [ ] A changeset is included for any package behavior change (`bun changeset add`)
 - [ ] Code is self-reviewed
@@ -323,7 +301,6 @@ All PRs go through automated checks:
 | **Check Issue Reference**           | PR body contains `Closes/Fixes/Resolves #N`        |
 | **Check Issue Has status:approved** | The linked issue has been approved by a maintainer |
 | **Check PR Has type:* Label**       | Exactly one `type:*` label is applied              |
-| **Unit Tests**                      | `bun test` passes                                  |
 | **ESLint**                          | `bun run lint:fix` passes                          |
 | **Typecheck**                       | `bun run typecheck` passes                         |
 
