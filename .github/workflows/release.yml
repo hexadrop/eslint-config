@@ -20,6 +20,11 @@ jobs:
     name: Publish
     needs: [ check, detect-changeset-change ]
     if: github.ref == 'refs/heads/main' || needs.detect-changeset-change.outputs.should_publish_beta == 'true'
+    permissions:
+      contents: 'write'
+      id-token: 'write'
+      issues: 'write'
+      pull-requests: 'write'
     uses: hexadrop/github-workflows/.github/workflows/release.yml@v1
     with:
       snapshot: ${{ github.ref == 'refs/heads/develop' }}
