@@ -20,17 +20,17 @@ Each directory under `src/config` is responsible for one concern and exports a d
 
 The config renames plugin prefixes so users see consistent short prefixes. The rename map lives in `src/const/plugin-rename.ts`:
 
-| New prefix | Original |
-|------------|----------|
-| `style/*` | `@stylistic/*` |
-| `typescript/*` | `@typescript-eslint/*` |
-| `import/*` | `import-x/*` |
-| `json/*` | `jsonc/*` |
-| `node/*` | `n/*` |
-| `import-sort/*` | `simple-import-sort/*` |
-| `import-unused/*` | `unused-imports/*` |
-| `test/*` | `vitest/*` |
-| `yaml/*` | `yml/*` |
+| New prefix        | Original               |
+|-------------------|------------------------|
+| `style/*`         | `@stylistic/*`         |
+| `typescript/*`    | `@typescript-eslint/*` |
+| `import/*`        | `import-x/*`           |
+| `json/*`          | `jsonc/*`              |
+| `node/*`          | `n/*`                  |
+| `import-sort/*`   | `simple-import-sort/*` |
+| `import-unused/*` | `unused-imports/*`     |
+| `test/*`          | `vitest/*`             |
+| `yaml/*`          | `yml/*`                |
 
 When disabling rules inline or overriding them in user configs, use the **renamed prefix** (e.g. `typescript/consistent-type-definitions`, not `@typescript-eslint/consistent-type-definitions`).
 
