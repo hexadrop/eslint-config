@@ -7,14 +7,14 @@ on:
 jobs:
   check:
     name: Check
-    uses: hexadrop/github-workflows/.github/workflows/check.yml@v2
+    uses: hexadrop/github-workflows/.github/workflows/check.yml@v3
     with:
       commands: '["lint:ci", "typecheck"]'
       cache-commands: '["lint:ci"]'
 
   detect-changeset-change:
     name: Changeset
-    uses: hexadrop/github-workflows/.github/workflows/detect-changeset-change.yml@v2
+    uses: hexadrop/github-workflows/.github/workflows/detect-changeset-change.yml@v3
 
   publish:
     name: Publish
@@ -25,7 +25,7 @@ jobs:
       id-token: 'write'
       issues: 'write'
       pull-requests: 'write'
-    uses: hexadrop/github-workflows/.github/workflows/release.yml@v2
+    uses: hexadrop/github-workflows/.github/workflows/release.yml@v3
     with:
       snapshot: ${{ github.ref == 'refs/heads/develop' }}
       concurrency-group: release-${{ github.ref_name }}
