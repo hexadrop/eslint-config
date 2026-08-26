@@ -1,69 +1,37 @@
 # Architecture
 
-## Config pipeline
+`hexadrop()` composes the package's ESLint v9 flat configuration in a fixed, named pipeline so consumers can enable features and target overrides predictably.
 
-`src/factory.ts` exports the default `hexadrop()` factory. It builds a `FlatConfigComposer` from `eslint-flat-config-utils` in this fixed order:
+## Entry points
 
-1. `ignore` — `.gitignore` integration (`eslint-config-flat-gitignore`)
-2. `core` — base ESLint recommended-ish rules plus `eslint-plugin-n` rules
-3. `astro` — Astro support (only if detected/requested)
-4. `typescript` — TypeScript parser and rules
-5. `react` — React / hooks / refresh rules
-6. `json` — JSON/C support
-7. `markdown` — Markdown code-block linting
-8. `imports` — import validation, sorting, and unused-import cleanup
-9. `stylistic` — `@stylistic/eslint-plugin`, unicorn, perfectionist, and Prettier-via-`eslint-plugin-format`
+| Area | Responsibility |
+| --- | --- |
+| `src/factory.ts` | Exports the default `hexadrop()` factory and creates the `FlatConfigComposer`. |
+| `src/config/` | Defines one independent configuration concern per directory. |
+| `src/options/` | Defines public options and resolves feature defaults. |
+| `src/const/` | Stores shared constants, including plugin-prefix mappings. |
+| `src/utils/` | Provides small composition and interop helpers. |
+| `scripts/typegen.ts` | Generates typed rules and configuration names. |
 
-Each directory under `src/config` is responsible for one concern and exports a default async function that returns `Promise<TypedFlatConfigItem[]>`.
+## Configuration pipeline
 
-## Plugin prefix renaming
+The factory composes concerns in this order:
 
-The config renames plugin prefixes so users see consistent short prefixes. The rename map lives in `src/const/plugin-rename.ts`:
+1. `ignore` — integrates `.gitignore` through `eslint-config-flat-gitignore`.
+2. `core` — supplies base ESLint and `eslint-plugin-n` rules.
+3. `astro` — adds Astro support when requested or detected.
+4. `typescript` — configures the TypeScript parser and rules.
+5. `react` — configures React, hooks, and refresh rules.
+6. `json` — supports JSON and JSONC.
+7. `markdown` — lints Markdown code blocks.
+8. `imports` — validates, sorts, and removes unused imports.
+9. `stylistic` — applies stylistic, Unicorn, Perfectionist, and Prettier-via-format rules.
 
-| New prefix        | Original               |
-|-------------------|------------------------|
-| `style/*`         | `@stylistic/*`         |
-| `typescript/*`    | `@typescript-eslint/*` |
-| `import/*`        | `import-x/*`           |
-| `json/*`          | `jsonc/*`              |
-| `node/*`          | `n/*`                  |
-| `import-sort/*`   | `simple-import-sort/*` |
-| `import-unused/*` | `unused-imports/*`     |
-| `test/*`          | `vitest/*`             |
-| `yaml/*`          | `yml/*`                |
+Each `src/config/<concern>/` module exports an async default function returning `Promise<TypedFlatConfigItem[]>`.
 
-When disabling rules inline or overriding them in user configs, use the **renamed prefix** (e.g. `typescript/consistent-type-definitions`, not `@typescript-eslint/consistent-type-definitions`).
+## Public API
 
-## Options and detection
-
-`src/options/hexadrop-eslint.options.ts` contains `defaultOptions()`. Features are auto-enabled based on installed packages:
-
-- `typescript`: enabled if `typescript` is installed and `tsconfig.json` exists; otherwise `false`
-- `react`: enabled if `react` is installed
-- `astro`: enabled if `astro` is installed
-- `ignore`, `imports`, `json`, `markdown`, `node`: enabled by default
-- `stylistic`: enabled by default; can be disabled with `stylistic: false`
-
-Pass `typescript: true` to force TypeScript without type-aware rules, or pass a string / array of strings to a `tsconfig.json` path to enable type-aware rules.
-
-## Type generation
-
-`scripts/typegen.ts` resolves the full config pipeline and uses `eslint-typegen` to generate `src/typegen.d.ts`. This file exports:
-
-- Typed `RuleOptions` for all enabled rules
-- `ConfigNames` union of every named config item
-
-Always regenerate it after adding new plugins or renaming rules:
-
-```bash
-bun run build:types
-```
-
-## User-facing API
-
-`hexadrop()` accepts an options object (or flat config item) plus any number of additional flat config overrides. It returns a `FlatConfigComposer`, so callers can chain `.override()`, `.prepend()`, `.append()`, `.remove()`, `.renamePlugins()`.
-
-Example:
+`hexadrop()` accepts an options object or a flat config item followed by additional overrides. It returns a `FlatConfigComposer`; consumers may use `.override()`, `.prepend()`, `.append()`, `.remove()`, and `.renamePlugins()`.
 
 ```js
 import hexadrop from '@hexadrop/eslint-config';
@@ -76,3 +44,13 @@ export default hexadrop(
   }
 );
 ```
+
+## Feature resolution
+
+`defaultOptions()` in `src/options/hexadrop-eslint.options.ts` enables `ignore`, `imports`, `json`, `markdown`, `node`, and `stylistic` by default. It enables `react`, `astro`, and `typescript` when their packages are installed; a root `tsconfig.json` automatically enables TypeScript's type-aware configuration.
+
+Set `typescript: true` to enable TypeScript without type-aware rules. Pass one or more `tsconfig.json` paths to enable type-aware rules.
+
+## Generated types
+
+`scripts/typegen.ts` resolves the full pipeline with `eslint-typegen` and writes `src/typegen.d.ts`. The generated file provides typed `RuleOptions` and the `ConfigNames` union. See [Development](development.md) for when to regenerate it.

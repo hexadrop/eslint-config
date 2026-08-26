@@ -1,17 +1,17 @@
 # Copilot instructions for @hexadrop/eslint-config
 
-Opinionated ESLint v9 flat config package published as `@hexadrop/eslint-config`. Source code lives in `src`; the package is built with `tsdown` to `dist/` and consumed from `./dist/index.mjs`.
+This project provides a shared foundation for consistent, reliable software development.
 
 - **Package manager:** Bun (`bun`)
 - **Build:** `bun run build`
 - **Type-check:** `bun run typecheck`
 - **Lint:** `bun run lint:fix`
 
-For everything else, see the guides below.
+## Task guides
 
 - [Architecture](docs/agents/architecture.md)
 - [Conventions](docs/agents/conventions.md)
-- [Branches and commits](docs/agents/branches-and-commits.md)
-- [Pull requests](docs/agents/pull-requests.md)
+- [Development](docs/agents/development.md)
 - [Release process](docs/agents/release-process.md)
-- [Common tasks](docs/agents/tasks.md)
+- [Pull requests](docs/agents/pull-requests.md)
+- [Branches and commits](docs/agents/branches-and-commits.md)
