@@ -7,7 +7,10 @@ on:
 jobs:
   check:
     name: Check
-    uses: ./.github/workflows/check.yml
+    uses: hexadrop/github-workflows/.github/workflows/check.yml@v1
+    with:
+      commands: '["lint:ci", "typecheck"]'
+      cache-commands: '["lint:ci"]'
 
   detect-changeset-change:
     name: Changeset
