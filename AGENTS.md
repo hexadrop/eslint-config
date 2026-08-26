@@ -11,5 +11,7 @@ For everything else, see the guides below.
 
 - [Architecture](docs/agents/architecture.md)
 - [Conventions](docs/agents/conventions.md)
-- [Git & release workflow](docs/agents/git-workflow.md)
+- [Branches and commits](docs/agents/branches-and-commits.md)
+- [Pull requests](docs/agents/pull-requests.md)
+- [Release process](docs/agents/release-process.md)
 - [Common tasks](docs/agents/tasks.md)
