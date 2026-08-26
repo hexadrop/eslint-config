@@ -1,5 +1,11 @@
 # @hexadrop/eslint-config
 
+## 1.0.11
+
+### Patch Changes
+
+- 8e807b8: fix(deps): update dependency eslint-plugin-react-refresh to v0.5.5
+
 ## 1.0.10
 
 ### Patch Changes
