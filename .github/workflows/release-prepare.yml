@@ -7,7 +7,7 @@ on:
 jobs:
   check:
     name: Check
-    uses: hexadrop/github-workflows/.github/workflows/check.yml@v1
+    uses: hexadrop/github-workflows/.github/workflows/check.yml@v1.0.0
     with:
       commands: '["lint:ci", "typecheck"]'
       cache-commands: '["lint:ci"]'
@@ -15,6 +15,6 @@ jobs:
   release-prepare:
     name: Release
     needs: [ check ]
-    uses: hexadrop/github-workflows/.github/workflows/release-prepare.yml@v1
+    uses: hexadrop/github-workflows/.github/workflows/release-prepare.yml@v1.0.0
     with:
       base-branch: main
