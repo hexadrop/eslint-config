@@ -5,7 +5,7 @@ Opinionated ESLint v9 flat config package published as `@hexadrop/eslint-config`
 - **Package manager:** Bun (`bun`)
 - **Build:** `bun run build`
 - **Type-check:** `bun run typecheck`
-- **Lint:** `bun run lint`
+- **Lint:** `bun run lint:fix`
 
 For everything else, see the guides below.
 
