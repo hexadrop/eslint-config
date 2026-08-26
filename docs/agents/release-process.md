@@ -20,7 +20,7 @@ Snapshot releases do not modify or commit version files. They use the pending ch
 1. When `develop` contains non-empty changesets, `release-prepare.yml` creates or updates the draft `changeset-release/main` pull request targeting `main`.
 2. Validate the current beta. When it is ready, mark the generated release pull request ready for review and merge it into `main`.
 3. `release.yml` on `main` publishes the stable package to npm under the `latest` dist-tag.
-4. `sync-to-develop.yml` opens or rebases the automated pull request `internal/sync-from-main-to-develop → develop`. **Merge it with a merge commit** to synchronize the generated changelog, package version, and consumed changesets while keeping the full history of `main`.
+4. `sync-to-develop.yml` opens or rebases the automated pull request `internal/sync-from-main-to-develop` → `develop`. **Merge it with a merge commit** to synchronize the generated changelog, package version, and consumed changesets while keeping the full history of `main`.
 
 The generated release pull request contains the pending changes, calculated stable version, changelog entry, and consumed changesets. Changesets release pull requests and their version commits use `chore: release v<version>`. They do not publish packages; publication remains exclusive to `main`.
 
