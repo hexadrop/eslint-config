@@ -3,7 +3,7 @@ import path from 'node:path';
 import { describe, expect, test } from 'bun:test';
 import { ESLint } from 'eslint';
 
-import hexadrop from '../../src';
+import hexadrop from '../src';
 import type { EndToEndCase } from './cases';
 import { END_TO_END_CASES } from './cases';
 
