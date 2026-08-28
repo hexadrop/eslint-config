@@ -1,1 +1,0 @@
-{"version":"1.0.0","scripts":{"test":"bun test","build":"tsdown"},"name":"fixture","dependencies":{"zeta":"1.0.0","alpha":"1.0.0"},"files":["src","dist"]}
