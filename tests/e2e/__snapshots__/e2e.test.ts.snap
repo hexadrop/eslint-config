@@ -1,0 +1,28 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`e2e lint results case-clean: lints fixtures/case-clean through the real eslint engine: case-clean 1`] = `
+[
+  {
+    "filePath": "input.ts",
+    "messages": [],
+  },
+]
+`;
+
+exports[`e2e lint results case-rule-override: lints fixtures/case-rule-override through the real eslint engine: case-rule-override 1`] = `
+[
+  {
+    "filePath": "input.ts",
+    "messages": [],
+  },
+]
+`;
+
+exports[`e2e lint results case-dirty-no-console: lints fixtures/case-dirty-no-console through the real eslint engine: case-dirty-no-console 1`] = `
+[
+  {
+    "filePath": "input.ts",
+    "messages": [],
+  },
+]
+`;
