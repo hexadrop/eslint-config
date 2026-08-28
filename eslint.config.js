@@ -1,12 +1,12 @@
-import Importer from 'jiti';
+import { createJiti } from 'jiti';
 
-const importer = Importer(import.meta.url);
+const importer = createJiti(import.meta.url);
 /**
  *@type {import('./src').default}
  */
 const hexadrop = importer('./src').default;
 
 export default hexadrop(
-	{ ignores: ['.impeccable', 'bun.lock', 'tests/e2e/fixtures'] },
+	{ ignores: ['.impeccable', 'bun.lock', 'e2e/fixtures'] },
 	{ name: 'e2e/react-version', settings: { react: { version: 'detect' } } }
 );

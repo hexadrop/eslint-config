@@ -1,10 +1,10 @@
-import type { HexadropEslintOptions } from '../../src/options';
-import type { RecursivePartial, TypedFlatConfigItem } from '../../src/types';
+import type { HexadropEslintOptions } from '../src/options';
+import type { RecursivePartial, TypedFlatConfigItem } from '../src/types';
 
 interface EndToEndCase {
 	extraConfigs?: TypedFlatConfigItem[];
 	/**
-	 * Dirty fixture file at tests/e2e/fixtures/<file>. The file name is part of
+	 * Dirty fixture file at e2e/fixtures/<file>. The file name is part of
 	 * the behavior under test: `package.json` and `tsconfig.json` activate
 	 * filename-scoped rules such as the canonical key ordering.
 	 */
