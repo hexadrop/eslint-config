@@ -11,7 +11,8 @@
 		"lint:ci": "eslint --cache --cache-strategy content .",
 		"lint:fix": "eslint --cache --fix .",
 		"prepare": "husky",
-		"test": "bun test packages"
+		"test": "bun test packages",
+		"typecheck": "bun run --filter @hexadrop/eslint-config typecheck"
 	},
 	"devDependencies": {
 		"@changesets/cli": "3.0.1",
