@@ -3,5 +3,5 @@
 	"compilerOptions": {
 		"types": ["bun"]
 	},
-	"exclude": ["dist", "node_modules", "e2e/fixtures"]
+	"exclude": ["dist", "node_modules", "packages/eslint-config/e2e/fixtures"]
 }
