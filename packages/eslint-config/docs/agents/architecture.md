@@ -53,4 +53,4 @@ Set `typescript: true` to enable TypeScript without type-aware rules. Pass one o
 
 ## Generated types
 
-`scripts/typegen.ts` resolves the full pipeline with `eslint-typegen` and writes `src/typegen.d.ts`. The generated file provides typed `RuleOptions` and the `ConfigNames` union. See [Development](development.md) for when to regenerate it.
+`scripts/typegen.ts` resolves the full pipeline and writes `src/generated.d.ts` (git-ignored). See [Development](development.md) for when to regenerate it.

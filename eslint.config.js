@@ -2,8 +2,8 @@ import { createJiti } from 'jiti';
 
 const importer = createJiti(import.meta.url);
 /**
- *@type {import('./src').default}
+ *@type {import('./packages/eslint-config/src').default}
  */
-const hexadrop = importer('./src').default;
+const hexadrop = importer('./packages/eslint-config/src').default;
 
 export default hexadrop({ ignores: ['e2e/fixtures'] });
