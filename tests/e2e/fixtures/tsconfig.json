@@ -1,1 +1,0 @@
-{"include":["src"],"compilerOptions":{"strict":true,"target":"ES2022"},"extends":"@hexadrop/tsconfig"}
