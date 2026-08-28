@@ -2,5 +2,6 @@
 	"extends": "@hexadrop/tsconfig",
 	"compilerOptions": {
 		"types": ["bun"]
-	}
+	},
+	"exclude": ["dist", "node_modules", "tests/e2e/fixtures"]
 }
