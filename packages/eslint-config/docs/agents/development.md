@@ -16,11 +16,11 @@ Use the smallest command that validates the changed behavior.
 
 ## Working on `packages/eslint-config`
 
-When rules, plugins, or config names change, follow the same rule/plugin guidelines as before but from inside `packages/eslint-config/`:
+When rules, plugins, or config names change, follow the same rule/plugin guidelines as before:
 
-1. Update `src/config/<concern>/<concern>.config.ts`.
-2. Regenerate with the package's own `bun run build:types` (called from its package dir).
-3. Run `bun run lint` and `bun run typecheck`.
+1. Update `packages/eslint-config/src/config/<concern>/<concern>.config.ts`.
+2. Regenerate types with `bun run --filter @hexadrop/eslint-config build:types`.
+3. Run `bun run lint` and `bun run typecheck` from the root.
 4. Golden tests under `packages/eslint-config/test/golden/` and e2e snapshots under `packages/eslint-config/e2e/__snapshots__` guard the resolved config byte-for-byte.
 
 ## Typegen
