@@ -9,6 +9,8 @@ Use the smallest command that validates the changed behavior.
 | Install dependencies       | `bun install`                                              |
 | Run all unit tests         | `bun run test`                                             |
 | Run tests for this package | `bun test packages/eslint-config-json`                     |
+| Run the unit tests         | `bun test packages/eslint-config-json/test`                |
+| Run the e2e tests          | `bun test packages/eslint-config-json/e2e`                 |
 | Run tests for one file     | `bun test packages/eslint-config-json/test/<file>.test.ts` |
 | Lint and fix               | `bun run lint:fix`                                         |
 | Type-check                 | `bun run typecheck`                                        |
@@ -25,7 +27,10 @@ When rules, plugins, or config names change:
 
 ## Tests
 
-`test/json.test.ts` covers the package through two seams: the `jsonConfig()` factory (config names, plugin registration, globs, rule states) and a real ESLint `Linter` resolving the composed configs against source strings.
+The suite is split by scope:
+
+- `test/` — **unit tests**: the `jsonConfig()` factory contract (config names, plugin registration, globs, rule states) and the exported constants, asserted against the composed config objects without executing a linter.
+- `e2e/` — **end-to-end tests**: a real ESLint `Linter` resolving the composed configs against source strings, pinning what a user actually sees (rule activations per file, `sort-keys` detections).
 
 ## Typegen
 

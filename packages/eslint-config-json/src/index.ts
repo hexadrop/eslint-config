@@ -2,8 +2,8 @@ import type { ResolvableFlatConfig } from 'eslint-flat-config-utils';
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 
 import json from './json.config';
+import type { TypedFlatConfigItem } from './json.typed-config';
 import type { ConfigNames } from './typegen';
-import type { TypedFlatConfigItem } from './types';
 
 interface HexadropEslintJsonOptions {
 	/**
