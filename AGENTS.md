@@ -3,9 +3,9 @@
 A Bun workspaces monorepo. The published package lives at `packages/eslint-config` and other feature packages may be added under `packages/*` as the issue series progresses.
 
 - **Package manager:** Bun (`bun`)
-- **Build:** `bun run build` (delegates to `bun run --filter @hexadrop/eslint-config build`)
+- **Build:** no root script; run `bun run --filter @hexadrop/eslint-config build`
 - **Test:** `bun run test`
-- **Type-check:** `bun --filter @hexadrop/eslint-config run typecheck`
+- **Type-check:** `bun run typecheck`
 - **Lint:** `bun run lint:fix`
 
 For editing the published config, go to `packages/eslint-config/` and operate from there. Shared root tasks (PRs, branches, changesets, commits) are at the repo root.

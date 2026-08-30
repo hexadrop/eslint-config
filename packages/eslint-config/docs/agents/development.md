@@ -11,8 +11,8 @@ Use the smallest command that validates the changed behavior.
 | Run tests for one package | `bun test packages/<name>` |
 | Run tests for one file | `bun test packages/<name>/src/<file>.test.ts` |
 | Lint and fix | `bun run lint:fix` |
-| Type-check | `cd packages/eslint-config && bun run typecheck` |
-| Build one package | `bun run build` (delegates to `bun run --filter @hexadrop/eslint-config build`) |
+| Type-check | `bun run typecheck` |
+| Build one package | `bun run --filter @hexadrop/eslint-config build` |
 
 ## Working on `packages/eslint-config`
 

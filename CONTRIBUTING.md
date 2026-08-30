@@ -81,7 +81,7 @@ PRs that are not linked to an approved issue will be **automatically rejected** 
 git clone https://github.com/hexadrop/eslint-config.git
 cd eslint-config
 bun install
-bun run build
+bun run --filter @hexadrop/eslint-config build
 ```
 
 ---
