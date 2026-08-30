@@ -14,7 +14,7 @@ The monorepo splits the config into granular feature packages under `packages/`.
 
 - Import from the package name (`@hexadrop/eslint-config-shared`), never via relative paths across packages.
 - **Do not declare it in `dependencies` or `devDependencies`.** It is resolved through the root `tsconfig.json` `paths` during development and type-checking, and the root `eslint.config.js` whitelists it for `import/no-extraneous-dependencies`.
-- Add `noExternal: ['@hexadrop/eslint-config-shared']` to the package's `tsdown.config.ts` so the code is inlined into the published bundle. It must never appear as a runtime dependency of any published package.
+- Add `deps: { alwaysBundle: ['@hexadrop/eslint-config-shared'] }` to the package's `tsdown.config.ts` so the code is inlined into the published bundle. It must never appear as a runtime dependency of any published package.
 - Each package keeps a local `TypedFlatConfigItem` alias binding the shared generic to its own generated `RuleOptions`:
 
   ```ts
