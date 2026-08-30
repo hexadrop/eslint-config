@@ -1,9 +1,9 @@
 import { GLOB_JSON_PACKAGE, GLOB_JSON_TSCONFIG } from './json.globs';
+import type { TypedFlatConfigItem } from './json.typed-config';
 import {
 	STYLISTIC_CONFIG_NAME_RULES_JSON_PACKAGE,
 	STYLISTIC_CONFIG_NAME_RULES_JSON_TSCONFIG,
 } from './stylistic.config-name';
-import type { TypedFlatConfigItem } from './types';
 
 /**
  * Canonical key ordering for package.json and tsconfig.json files, applied on

@@ -2,7 +2,7 @@ import { interopDefault } from '@hexadrop/eslint-config-shared';
 
 import { JSON_CONFIG_NAME_RULES, JSON_CONFIG_NAME_SETUP, JSON_CONFIG_NAME_SETUP_PARSER } from './json.config-name';
 import { GLOB_JSON } from './json.globs';
-import type { TypedFlatConfigItem } from './types';
+import type { TypedFlatConfigItem } from './json.typed-config';
 
 export default async function json(options: { json: boolean }): Promise<TypedFlatConfigItem[]> {
 	const { json: enabled } = options;

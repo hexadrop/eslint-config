@@ -12,7 +12,7 @@
 | `src/json.globs.ts`            | Stores the file globs the slice targets.                                                                                                          |
 | `src/json.config-name.ts`      | Stores the config names of the json slice.                                                                                                        |
 | `src/stylistic.config-name.ts` | Stores the config names of the sort-keys items (kept under the `hexadrop/stylistic/` namespace for pipeline compatibility with the meta-package). |
-| `src/types/`                   | Binds the shared generic `TypedFlatConfigItem` to this package's generated `RuleOptions`.                                                          |
+| `src/json.typed-config.ts`     | Provides the local `TypedFlatConfigItem` alias binding the shared generic to this package's generated `RuleOptions`.                              |
 | `scripts/typegen.ts`           | Generates typed rules and configuration names.                                                                                                    |
 
 ## Independence
