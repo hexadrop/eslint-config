@@ -14,7 +14,8 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/hexadrop/eslint-config.git"
+		"url": "git+https://github.com/hexadrop/eslint-config.git",
+		"directory": "packages/eslint-config"
 	},
 	"homepage": "https://github.com/hexadrop/eslint-config",
 	"bugs": {

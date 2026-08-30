@@ -1,9 +1,29 @@
 {
 	"name": "eslint-config",
+	"description": "Opinionated linting configuration using best practices and providing consistency to your code.",
+	"keywords": [
+		"lint",
+		"eslint",
+		"eslint-config",
+		"monorepo",
+		"scalable",
+		"scale",
+		"typescript",
+		"prettier"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/hexadrop/eslint-config.git"
+	},
+	"homepage": "https://github.com/hexadrop/eslint-config",
+	"bugs": {
+		"url": "https://github.com/hexadrop/eslint-config/issues"
+	},
 	"private": true,
 	"workspaces": [
 		"packages/*"
 	],
+	"type": "module",
 	"scripts": {
 		"commitlint": "commitlint --edit",
 		"lint": "eslint --cache .",
