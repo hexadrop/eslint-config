@@ -42,6 +42,27 @@ The root `tsconfig.json` `paths` maps **every** package name to its `src/` entry
 - When adding a new feature package, add its `paths` entry following the existing pattern (`name` → `src/index.ts`, `name/*` → `src/*`).
 - Publishing is unaffected: consumers resolve the semver range against the published `dist/`, and tsdown builds each package from its own source.
 
+## The `development` export condition
+
+Each feature package's `exports` map carries a `development` condition pointing at `src/index.ts`, above `types` and `default`:
+
+```json filename="exports.json"
+{
+  "exports": {
+    ".": {
+      "development": "./src/index.ts",
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    }
+  }
+}
+```
+
+- Bun activates the `development` condition by default; Node (and ESLint running on Node) activates it when the root scripts pass `NODE_OPTIONS='--conditions=development'` — the root `lint` / `lint:ci` / `lint:fix` scripts do exactly that, so linting the repo works without building any `dist/`.
+- The repo's `eslint.config.js` imports the meta-package source via jiti, and jiti uses `require.resolve` under the hood — the `development` condition is what lets that resolution reach `src/` instead of a missing `dist/index.mjs`.
+- Published consumers never activate the condition, so they keep resolving `types` + `default` against `dist/`. The condition line ships in the published manifest harmlessly.
+- When adding a new feature package, copy this `exports` shape verbatim.
+
 ## Generated types
 
 Each package generates its own `src/typegen.d.ts` (git-ignored via `packages/*/src/typegen.d.ts`) from its own pipeline with `eslint-typegen`. Never commit it; the `prepare` script regenerates it on `bun install`.
