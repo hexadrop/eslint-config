@@ -12,18 +12,16 @@ Internal shared types, constants and utilities for the `@hexadrop/eslint-config`
 
 | Area | Contents |
 | --- | --- |
-| `src/types/` | Pure types: `Awaitable`, `Nullable`, `RecursivePartial`. |
+| `src/types/` | Pure types: `Awaitable`, `Nullable`, `RecursivePartial`, and the generic `TypedFlatConfigItem<RuleOptionsType>`. |
 | `src/const/` | `PLUGIN_PREFIX` (`'hexadrop'`). |
 | `src/utils/` | `interopDefault`, `toArray`, `renameRules`, `pluginConfigRules`, `pluginConfigOverrideRules`. |
 
 ## What does NOT live here
 
-- **`TypedFlatConfigItem`** — each package types it against its own generated `RuleOptions`; keep it local per package.
+- **Per-package rule typings** — each package keeps a local `TypedFlatConfigItem` alias binding the shared generic to its own generated `RuleOptions`.
 - **Globs and config names** — owned by each feature package's public interface.
 - **Generated typegen files** — per package by design.
 
 ## Consumption rules
 
-- Import from the package name (`@hexadrop/eslint-config-shared`), never via relative paths across packages.
-- Consumers declare it in `devDependencies` with the pinned version `0.0.0` (never `workspace:*` — changesets does not rewrite the bare protocol in published tarballs) and resolve the source through the root `tsconfig.json` `paths`.
-- Consumers add `noExternal: ['@hexadrop/eslint-config-shared']` to their `tsdown.config.ts` so the code is inlined into their bundle.
+See [Feature packages](../../../docs/agents/feature-packages.md): import by package name, resolve via the root `tsconfig.json` `paths`, never declare it in a manifest (the root `eslint.config.js` whitelists it for `import/no-extraneous-dependencies`), and bundle it via tsdown `noExternal`.
