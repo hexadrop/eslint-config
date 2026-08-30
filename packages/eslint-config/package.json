@@ -33,9 +33,10 @@
 		}
 	},
 	"scripts": {
-		"build": "bun run scripts/typegen.ts && tsdown",
+		"build": "bun run build:types && tsdown",
 		"build:types": "bun run scripts/typegen.ts",
-		"prepublishOnly": "bun run scripts/typegen.ts && tsdown"
+		"prepare": "bun run build:types",
+		"prepublishOnly": "bun run build"
 	},
 	"peerDependencies": {
 		"eslint": "^9.17.0 || ^10.0.0"
