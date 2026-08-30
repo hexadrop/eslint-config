@@ -31,7 +31,16 @@ Each feature package must stay publishable standalone: it owns its plugin/parser
 
 ## Dependency versions
 
-Cross-package dependencies between **publishable** packages use pinned semver (e.g. `"@hexadrop/eslint-config-json": "1.0.11"` in the meta-package), never the `workspace:` protocol — changesets does not replace bare `workspace:*` ranges in published tarballs (only `workspace:^`/`~`/explicit ranges). Bun resolves the semver range against the local workspace automatically during development.
+Cross-package dependencies between **publishable** packages use pinned semver (e.g. `"@hexadrop/eslint-config-json": "1.0.11"` in the meta-package), never the `workspace:` protocol — changesets does not replace bare `workspace:*` ranges in published tarballs (only `workspace:^`/`~`/explicit ranges).
+
+## Local development resolution
+
+The root `tsconfig.json` `paths` maps **every** package name to its `src/` entry — every package except the `@hexadrop/eslint-config` meta-package itself, which must always be imported via relative paths inside this repo (its own `prepare` typegen cannot resolve itself through `paths` on a clean install).
+
+- Bun reads `tsconfig.json` `paths` at runtime, and `tsc` reads it at type-check time, so the local sources are always used during development regardless of build state.
+- This is what makes a clean `bun install` work: the meta-package's `prepare` typegen imports `@hexadrop/eslint-config-json` before any `dist/` exists, and `paths` resolves it to the source.
+- When adding a new feature package, add its `paths` entry following the existing pattern (`name` → `src/index.ts`, `name/*` → `src/*`).
+- Publishing is unaffected: consumers resolve the semver range against the published `dist/`, and tsdown builds each package from its own source.
 
 ## Generated types
 
