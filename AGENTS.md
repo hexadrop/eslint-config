@@ -14,6 +14,7 @@ For editing the published config, go to `packages/eslint-config/` and operate fr
 
 - [Architecture](packages/eslint-config/docs/agents/architecture.md) — composition pipeline.
 - [Development](packages/eslint-config/docs/agents/development.md) — targeted validation.
+- [Feature packages](docs/agents/feature-packages.md) — shared package, independence and dependency-version rules every `packages/*` feature package follows.
 - [Release process](docs/agents/release-process.md) — changesets, beta snapshots, stable releases, and hotfixes.
 - [Pull requests](docs/agents/pull-requests.md) — approved-issue, labeling, checklist, and merge requirements.
 - [Branches and commits](docs/agents/branches-and-commits.md) — GitFlow branches, naming, conventions, and hooks.
