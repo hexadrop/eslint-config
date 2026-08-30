@@ -5,14 +5,13 @@
 		"packages/*"
 	],
 	"scripts": {
-		"build": "bun run --filter @hexadrop/eslint-config build",
 		"commitlint": "commitlint --edit",
 		"lint": "eslint --cache .",
 		"lint:ci": "eslint --cache --cache-strategy content .",
 		"lint:fix": "eslint --cache --fix .",
 		"prepare": "husky",
 		"test": "bun test packages",
-		"typecheck": "bun run --filter @hexadrop/eslint-config typecheck"
+		"typecheck": "tsc --noEmit"
 	},
 	"devDependencies": {
 		"@changesets/cli": "3.0.1",
