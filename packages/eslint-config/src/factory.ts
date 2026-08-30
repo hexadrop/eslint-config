@@ -1,7 +1,8 @@
+import { json } from '@hexadrop/eslint-config-json';
 import type { ResolvableFlatConfig } from 'eslint-flat-config-utils';
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 
-import { astro, core, ignore, imports, json, markdown, react, stylistic, typescript } from './config';
+import { astro, core, ignore, imports, markdown, react, stylistic, typescript } from './config';
 import { PLUGIN_RENAME } from './const';
 import type { HexadropEslintOptions } from './options';
 import defaultOptions from './options/hexadrop-eslint.options';

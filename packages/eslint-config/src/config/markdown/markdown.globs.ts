@@ -1,6 +1,7 @@
+import { GLOB_JSON } from '@hexadrop/eslint-config-json';
+
 import { GLOB_ASTRO } from '../astro';
 import { SOURCE_GLOBS } from '../core/core.globs';
-import { GLOB_JSON } from '../json';
 
 const GLOB_MARKDOWN = ['**/*.md'];
 const GLOB_MARKDOWN_IN_MARKDOWN = ['**/*.md/*.md'];
