@@ -1,0 +1,14 @@
+{
+	"name": "@hexadrop/eslint-config-shared",
+	"version": "0.0.0",
+	"description": "Internal shared types, constants and utilities for the @hexadrop/eslint-config feature packages. Bundled into each package at build time; never published.",
+	"private": true,
+	"type": "module",
+	"exports": {
+		".": "./src/index.ts",
+		"./*": "./src/*"
+	},
+	"devDependencies": {
+		"eslint": "^9.17.0 || ^10.0.0"
+	}
+}
