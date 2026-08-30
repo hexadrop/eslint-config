@@ -34,14 +34,7 @@
 	"scripts": {
 		"build": "bun run scripts/typegen.ts && tsdown",
 		"build:types": "bun run scripts/typegen.ts",
-		"commitlint": "commitlint --edit",
-		"lint": "eslint --cache .",
-		"lint:ci": "eslint --cache --cache-strategy content .",
-		"lint:fix": "eslint --cache --fix .",
-		"prepare": "husky && bun run build:types",
-		"prepublishOnly": "bun run scripts/typegen.ts && tsdown",
-		"test": "bun test",
-		"typecheck": "tsc --noEmit"
+		"prepublishOnly": "bun run scripts/typegen.ts && tsdown"
 	},
 	"peerDependencies": {
 		"eslint": "^9.17.0 || ^10.0.0"
