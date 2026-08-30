@@ -13,7 +13,7 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
-**/src/typegen.d.ts
+packages/*/src/typegen.d.ts
 
 .eslintcache
 
