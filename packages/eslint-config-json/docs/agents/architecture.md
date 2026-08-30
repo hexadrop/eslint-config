@@ -12,14 +12,16 @@
 | `src/json.globs.ts`            | Stores the file globs the slice targets.                                                                                                          |
 | `src/json.config-name.ts`      | Stores the config names of the json slice.                                                                                                        |
 | `src/stylistic.config-name.ts` | Stores the config names of the sort-keys items (kept under the `hexadrop/stylistic/` namespace for pipeline compatibility with the meta-package). |
-| `src/const/`                   | Stores shared constants, including the plugin prefix.                                                                                             |
-| `src/types/`                   | Provides the package's own `Awaitable` and `TypedFlatConfigItem` types.                                                                           |
-| `src/utils/`                   | Provides the interop helper for CJS/ESM default imports.                                                                                          |
+| `src/types/`                   | Binds the shared generic `TypedFlatConfigItem` to this package's generated `RuleOptions`.                                                          |
 | `scripts/typegen.ts`           | Generates typed rules and configuration names.                                                                                                    |
 
 ## Independence
 
-The package must stay publishable standalone: it owns its dependencies (`eslint-plugin-jsonc`, `jsonc-eslint-parser`, `eslint-flat-config-utils`) and keeps its own copies of the small shared helpers (types, constants, `interopDefault`). Never import from `@hexadrop/eslint-config` source files.
+The package must stay publishable standalone: it owns its dependencies (`eslint-plugin-jsonc`, `jsonc-eslint-parser`, `eslint-flat-config-utils`) and never imports from `@hexadrop/eslint-config` source files. Shared types, constants and utilities come from the private `@hexadrop/eslint-config-shared` package — see [Feature packages](../../../docs/agents/feature-packages.md) for the consumption rules (tsconfig `paths` + tsdown `deps.alwaysBundle`, no manifest declaration). The local `TypedFlatConfigItem` is a one-line alias binding the shared generic to this package's generated `RuleOptions`.
+
+## Dependency versions
+
+See [Feature packages](../../../docs/agents/feature-packages.md#dependency-versions): cross-package dependencies between publishable packages use pinned semver, never the `workspace:` protocol.
 
 ## Public API
 
