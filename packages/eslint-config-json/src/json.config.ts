@@ -4,7 +4,16 @@ import { JSON_CONFIG_NAME_RULES, JSON_CONFIG_NAME_SETUP, JSON_CONFIG_NAME_SETUP_
 import { GLOB_JSON } from './json.globs';
 import type { TypedFlatConfigItem } from './json.typed-config';
 
-export default async function json(options: { json: boolean }): Promise<TypedFlatConfigItem[]> {
+interface HexadropEslintJsonOptions {
+	/**
+	 * Enable json support.
+	 *
+	 * @default true
+	 */
+	json: boolean;
+}
+
+async function jsonConfig(options: HexadropEslintJsonOptions): Promise<TypedFlatConfigItem[]> {
 	const { json: enabled } = options;
 	if (!enabled) {
 		return [];
@@ -65,3 +74,7 @@ export default async function json(options: { json: boolean }): Promise<TypedFla
 		},
 	];
 }
+
+export type { HexadropEslintJsonOptions };
+
+export default jsonConfig;
