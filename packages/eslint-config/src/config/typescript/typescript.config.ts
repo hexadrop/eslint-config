@@ -1,3 +1,4 @@
+import { GLOB_MARKDOWN_SOURCE } from '@hexadrop/eslint-config-markdown';
 import {
 	interopDefault,
 	PLUGIN_RENAME,
@@ -10,7 +11,6 @@ import {
 import type { HexadropEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../typed-config';
 import { JAVASCRIPT_GLOBS, SOURCE_GLOBS } from '../core';
-import { GLOB_MARKDOWN_SOURCE } from '../markdown';
 import {
 	TYPESCRIPT_CONFIG_NAME_RULES,
 	TYPESCRIPT_CONFIG_NAME_RULES_DTS,

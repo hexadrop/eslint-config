@@ -1,9 +1,10 @@
+import { markdown } from '@hexadrop/eslint-config-markdown';
 import type { RecursivePartial } from '@hexadrop/eslint-config-shared';
 import { extractTypedFlatConfigItem, PLUGIN_RENAME } from '@hexadrop/eslint-config-shared';
 import type { ResolvableFlatConfig } from 'eslint-flat-config-utils';
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 
-import { astro, core, ignore, imports, markdown, react, stylistic, typescript } from './config';
+import { astro, core, ignore, imports, react, stylistic, typescript } from './config';
 import type { HexadropEslintOptions } from './options';
 import defaultOptions from './options/hexadrop-eslint.options';
 import type { TypedFlatConfigItem } from './typed-config';
