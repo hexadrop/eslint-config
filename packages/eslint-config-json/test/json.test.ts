@@ -67,6 +67,13 @@ describe('json factory', () => {
 		expect(configs).toEqual([]);
 	});
 
+	test('accepts a flat config item mixed into the first argument', async () => {
+		const configs = await json({ json: true, name: 'consumer/inline', rules: { 'json/no-nan': 'off' } });
+		const inline = configs.find(config => config.name === 'consumer/inline');
+
+		expect(inline?.rules?.['json/no-nan']).toBe('off');
+	});
+
 	test('appends consumer configs after the json slice', async () => {
 		const configs = await json({ json: true }, { name: 'consumer/override', rules: { 'json/no-nan': 'off' } });
 
