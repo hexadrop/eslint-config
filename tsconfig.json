@@ -13,5 +13,5 @@
 		},
 		"types": ["bun"]
 	},
-	"exclude": ["dist", "node_modules", "packages/eslint-config/e2e/fixtures", "packages/eslint-config-react/e2e/fixtures"]
+	"exclude": ["dist", "node_modules", "packages/*/e2e/fixtures"]
 }
