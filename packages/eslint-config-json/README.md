@@ -42,15 +42,15 @@ export default json({ json: true }, { name: 'my/override', rules: { 'json/no-nan
 
 ### Named exports
 
-| Export                                                                                   | Description                                                                                     |
-|------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|
-| `json`                                                                                   | The raw json config items (the function the factory composes).                                  |
-| `GLOB_JSON`                                                                              | Files the json rules apply to (`**/*.json`, `**/*.json5`, `**/*.jsonc`).                        |
-| `GLOB_JSON_PACKAGE`                                                                      | `**/package.json` files.                                                                        |
-| `GLOB_JSON_TSCONFIG`                                                                     | `**/tsconfig.json` and `**/tsconfig.*.json` files.                                              |
-| `JSON_CONFIG_NAME_SETUP` / `JSON_CONFIG_NAME_SETUP_PARSER` / `JSON_CONFIG_NAME_RULES`    | Config names of the base json slice.                                                            |
-| `JSON_SORT_KEYS_CONFIG`                                                                  | Canonical key ordering for `package.json` and `tsconfig.json`, ready to append to any pipeline. |
-| `STYLISTIC_CONFIG_NAME_RULES_JSON_PACKAGE` / `STYLISTIC_CONFIG_NAME_RULES_JSON_TSCONFIG` | Config names of the sort-keys items.                                                            |
+| Export                                                                                             | Description                                                                                     |
+|----------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|
+| `json`                                                                                             | The raw json config items (the function the factory composes).                                  |
+| `GLOB_JSON`                                                                                        | Files the json rules apply to (`**/*.json`, `**/*.json5`, `**/*.jsonc`).                        |
+| `GLOB_JSON_PACKAGE`                                                                                | `**/package.json` files.                                                                        |
+| `GLOB_JSON_TSCONFIG`                                                                               | `**/tsconfig.json` and `**/tsconfig.*.json` files.                                              |
+| `JSON_CONFIG_NAME_SETUP` / `JSON_CONFIG_NAME_SETUP_PARSER` / `JSON_CONFIG_NAME_RULES`              | Config names of the base json slice.                                                            |
+| `JSON_SORT_KEYS_CONFIG`                                                                            | Canonical key ordering for `package.json` and `tsconfig.json`, ready to append to any pipeline. |
+| `JSON_CONFIG_NAME_STYLISTIC_RULES_JSON_PACKAGE` / `JSON_CONFIG_NAME_STYLISTIC_RULES_JSON_TSCONFIG` | Config names of the sort-keys items.                                                            |
 
 ## License
 
