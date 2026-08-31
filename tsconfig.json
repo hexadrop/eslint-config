@@ -4,6 +4,8 @@
 		"paths": {
 			"@hexadrop/eslint-config-json": ["./packages/eslint-config-json/src/index.ts"],
 			"@hexadrop/eslint-config-json/*": ["./packages/eslint-config-json/src/*"],
+			"@hexadrop/eslint-config-markdown": ["./packages/eslint-config-markdown/src/index.ts"],
+			"@hexadrop/eslint-config-markdown/*": ["./packages/eslint-config-markdown/src/*"],
 			"@hexadrop/eslint-config-shared": ["./packages/eslint-config-shared/src/index.ts"],
 			"@hexadrop/eslint-config-shared/*": ["./packages/eslint-config-shared/src/*"]
 		},
