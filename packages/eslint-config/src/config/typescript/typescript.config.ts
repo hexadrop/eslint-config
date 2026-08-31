@@ -1,7 +1,14 @@
-import { PLUGIN_RENAME, PLUGIN_RENAME_TYPESCRIPT } from '../../const';
+import {
+	interopDefault,
+	PLUGIN_RENAME,
+	PLUGIN_RENAME_TYPESCRIPT,
+	pluginConfigOverrideRules,
+	pluginConfigRules,
+	toArray,
+} from '@hexadrop/eslint-config-shared';
+
 import type { HexadropEslintOptions } from '../../options';
-import type { TypedFlatConfigItem } from '../../types';
-import { interopDefault, pluginConfigOverrideRules, pluginConfigRules, toArray } from '../../utils';
+import type { TypedFlatConfigItem } from '../../typed-config';
 import { JAVASCRIPT_GLOBS, SOURCE_GLOBS } from '../core';
 import { GLOB_MARKDOWN_SOURCE } from '../markdown';
 import {

@@ -1,8 +1,9 @@
 import fs from 'node:fs';
 
+import { interopDefault } from '@hexadrop/eslint-config-shared';
+
 import type { HexadropEslintOptions } from '../../options';
-import type { TypedFlatConfigItem } from '../../types';
-import { interopDefault } from '../../utils';
+import type { TypedFlatConfigItem } from '../../typed-config';
 import {
 	IGNORE_CONFIG_NAME_ADDITIONAL,
 	IGNORE_CONFIG_NAME_DEFAULT,

@@ -1,2 +1,2 @@
 export { default } from './factory';
-export { default as combine } from './utils/combine';
+export { combine } from '@hexadrop/eslint-config-shared';

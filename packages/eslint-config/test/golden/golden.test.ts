@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'bun:test';
 
 import hexadrop from '../../src';
-import type { TypedFlatConfigItem } from '../../src/types';
+import type { TypedFlatConfigItem } from '../../src/typed-config';
 import type { MatrixCell } from './matrix';
 import { MATRIX } from './matrix';
 import normalizeConfigItem from './normalize';

@@ -1,4 +1,4 @@
-import { PLUGIN_PREFIX } from '../../const';
+import { PLUGIN_PREFIX } from '@hexadrop/eslint-config-shared';
 
 const REACT_CONFIG_NAME = `${PLUGIN_PREFIX}/react` as const;
 const REACT_CONFIG_NAME_SETUP = `${REACT_CONFIG_NAME}/setup` as const;

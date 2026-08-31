@@ -1,11 +1,15 @@
 import { GLOB_JSON, JSON_SORT_KEYS_CONFIG } from '@hexadrop/eslint-config-json';
+import {
+	interopDefault,
+	PLUGIN_RENAME,
+	PLUGIN_RENAME_TYPESCRIPT,
+	pluginConfigRules,
+	renameRules,
+} from '@hexadrop/eslint-config-shared';
 import type { ESLint, Linter } from 'eslint';
 
-import { PLUGIN_RENAME, PLUGIN_RENAME_TYPESCRIPT } from '../../const';
 import type { HexadropEslintOptions } from '../../options';
-import type { TypedFlatConfigItem } from '../../types';
-import { interopDefault, pluginConfigRules } from '../../utils';
-import renameRules from '../../utils/rename-rules';
+import type { TypedFlatConfigItem } from '../../typed-config';
 import { GLOB_ASTRO } from '../astro';
 import { JAVASCRIPT_GLOBS, SOURCE_GLOBS } from '../core';
 import { GLOB_MARKDOWN, GLOB_MARKDOWN_ASTRO, GLOB_MARKDOWN_JSON, GLOB_MARKDOWN_SOURCE } from '../markdown';

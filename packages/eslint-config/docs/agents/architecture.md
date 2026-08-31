@@ -9,9 +9,10 @@
 | `src/factory.ts`     | Exports the default `hexadrop()` factory and creates the `FlatConfigComposer`. |
 | `src/config/`        | Defines one independent configuration concern per directory.                   |
 | `src/options/`       | Defines public options and resolves feature defaults.                          |
-| `src/const/`         | Stores shared constants, including plugin-prefix mappings.                     |
-| `src/utils/`         | Provides small composition and interop helpers.                                |
+| `src/typed-config.ts` | Binds the shared generic `TypedFlatConfigItem` to this package's typegen.     |
 | `scripts/typegen.ts` | Generates typed rules and configuration names.                                 |
+
+Shared types, constants and helpers (`PLUGIN_PREFIX`, `PLUGIN_RENAME`, `interopDefault`, `toArray`, `renameRules`, `combine`, `extractTypedFlatConfigItem`, `pluginConfigRules`, `pluginConfigOverrideRules`, `Awaitable`, `Nullable`, `RecursivePartial`) live in the private `@hexadrop/eslint-config-shared` package and are bundled into `dist/` at build time.
 
 ## Configuration pipeline
 

@@ -1,6 +1,6 @@
-import type { TypedFlatConfigItem } from '../types';
+import type { TypedFlatConfigItem } from '../types/typed-flat-config-item';
 
-const flatConfigProperties: (keyof TypedFlatConfigItem)[] = [
+const flatConfigProperties: (keyof TypedFlatConfigItem<never>)[] = [
 	'name',
 	'files',
 	'ignores',
@@ -12,11 +12,13 @@ const flatConfigProperties: (keyof TypedFlatConfigItem)[] = [
 	'settings',
 ] as const;
 
-export default function extractTypedFlatConfigItem(config?: TypedFlatConfigItem): TypedFlatConfigItem | undefined {
+export default function extractTypedFlatConfigItem<RuleOptionsType>(
+	config?: TypedFlatConfigItem<RuleOptionsType>
+): TypedFlatConfigItem<RuleOptionsType> | undefined {
 	if (!config) {
 		return undefined;
 	}
-	const result: TypedFlatConfigItem = {};
+	const result: TypedFlatConfigItem<RuleOptionsType> = {};
 	for (const key of flatConfigProperties) {
 		if (Object.hasOwn(config, key)) {
 			// eslint-disable-next-line typescript/no-explicit-any,typescript/no-unsafe-assignment
