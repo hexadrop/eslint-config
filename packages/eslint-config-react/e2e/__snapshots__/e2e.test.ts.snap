@@ -1,0 +1,35 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`e2e fixtures jsx: fixtures/react.jsx through eslint --fix: jsx-diagnostics 1`] = `
+[
+  {
+    "column": 34,
+    "line": 1,
+    "message": "'count' is missing in props validation",
+    "ruleId": "react/prop-types",
+    "severity": 2,
+  },
+]
+`;
+
+exports[`e2e fixtures jsx: fixtures/react.jsx through eslint --fix: jsx-content 1`] = `
+"export default function Counter({count}){return <button  className="a b">{ count }</button>}
+"
+`;
+
+exports[`e2e fixtures disabled: fixtures/disabled.jsx through eslint --fix: disabled-diagnostics 1`] = `
+[
+  {
+    "column": undefined,
+    "line": undefined,
+    "message": "File ignored because no matching configuration was supplied.",
+    "ruleId": undefined,
+    "severity": 1,
+  },
+]
+`;
+
+exports[`e2e fixtures disabled: fixtures/disabled.jsx through eslint --fix: disabled-content 1`] = `
+"export default function Counter({count}){return <button  className="a b">{ count }</button>}
+"
+`;
