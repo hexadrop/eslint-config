@@ -2,14 +2,10 @@ import { describe, expect, test } from 'bun:test';
 
 import json, {
 	GLOB_JSON,
-	GLOB_JSON_PACKAGE,
-	GLOB_JSON_TSCONFIG,
 	JSON_CONFIG_NAME_RULES,
 	JSON_CONFIG_NAME_SETUP,
 	JSON_CONFIG_NAME_SETUP_PARSER,
 	JSON_SORT_KEYS_CONFIG,
-	STYLISTIC_CONFIG_NAME_RULES_JSON_PACKAGE,
-	STYLISTIC_CONFIG_NAME_RULES_JSON_TSCONFIG,
 } from '../src';
 
 describe('json factory', () => {
@@ -79,47 +75,7 @@ describe('json factory', () => {
 });
 
 describe('json sort-keys configs', () => {
-	test('exposes the package.json and tsconfig.json ordering configs', () => {
-		const names = JSON_SORT_KEYS_CONFIG.map(config => config.name);
-
-		expect(names).toEqual([STYLISTIC_CONFIG_NAME_RULES_JSON_PACKAGE, STYLISTIC_CONFIG_NAME_RULES_JSON_TSCONFIG]);
-	});
-
-	test('targets the package.json and tsconfig globs', () => {
-		const [packageConfig, tsconfigConfig] = JSON_SORT_KEYS_CONFIG;
-
-		expect(packageConfig?.files).toEqual(GLOB_JSON_PACKAGE);
-		expect(tsconfigConfig?.files).toEqual(GLOB_JSON_TSCONFIG);
-	});
-
-	test('orders package.json keys canonically', () => {
-		const sortKeys = JSON_SORT_KEYS_CONFIG[0]?.rules?.['json/sort-keys'];
-
-		expect(Array.isArray(sortKeys)).toBe(true);
-		const [, root] = sortKeys as [string, { order: string[]; pathPattern: string }, ...unknown[]];
-
-		expect(root.pathPattern).toBe('^$');
-		expect(root.order[0]).toBe('name');
-		expect(root.order).toContain('dependencies');
-	});
-
-	test('orders tsconfig compilerOptions canonically', () => {
-		const sortKeys = JSON_SORT_KEYS_CONFIG[1]?.rules?.['json/sort-keys'];
-
-		expect(Array.isArray(sortKeys)).toBe(true);
-		const entries = (sortKeys as [string, ...{ order?: string[]; pathPattern?: string }[]]).slice(1);
-		const [first] = entries;
-
-		expect(first && typeof first === 'object' ? first.order : undefined).toEqual([
-			'extends',
-			'compilerOptions',
-			'references',
-			'files',
-			'include',
-			'exclude',
-		]);
-		expect(entries.some(entry => typeof entry === 'object' && entry.pathPattern === '^compilerOptions$')).toBe(
-			true
-		);
+	test('to match snapshot', () => {
+		expect(JSON_SORT_KEYS_CONFIG).toMatchSnapshot();
 	});
 });
