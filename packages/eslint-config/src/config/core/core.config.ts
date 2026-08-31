@@ -1,9 +1,8 @@
-import { interopDefault } from '@hexadrop/eslint-config-shared';
+import { interopDefault, PLUGIN_RENAME } from '@hexadrop/eslint-config-shared';
 import globals from 'globals';
 
-import { PLUGIN_RENAME } from '../../const';
 import type { HexadropEslintOptions } from '../../options';
-import type { TypedFlatConfigItem } from '../../types';
+import type { TypedFlatConfigItem } from '../../typed-config';
 import { GLOB_MARKDOWN_SOURCE } from '../markdown';
 import {
 	CORE_CONFIG_NAME_RULES,

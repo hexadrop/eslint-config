@@ -2,7 +2,7 @@ import { interopDefault } from '@hexadrop/eslint-config-shared';
 import { isPackageExists } from 'local-pkg';
 
 import type { HexadropEslintOptions } from '../../options';
-import type { TypedFlatConfigItem } from '../../types';
+import type { TypedFlatConfigItem } from '../../typed-config';
 import {
 	REACT_CONFIG_NAME_RULES,
 	REACT_CONFIG_NAME_RULES_HOOKS,
