@@ -2,6 +2,24 @@
 	"name": "@hexadrop/eslint-config-shared",
 	"version": "0.0.0",
 	"description": "Internal shared types, constants and utilities for the @hexadrop/eslint-config feature packages. Bundled into each package at build time; never published.",
+	"keywords": [
+		"lint",
+		"eslint",
+		"eslint-config",
+		"monorepo",
+		"shared",
+		"internal"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/hexadrop/eslint-config.git",
+		"directory": "packages/eslint-config-shared"
+	},
+	"homepage": "https://github.com/hexadrop/eslint-config",
+	"bugs": {
+		"url": "https://github.com/hexadrop/eslint-config/issues"
+	},
+	"license": "MIT",
 	"private": true,
 	"type": "module",
 	"exports": {
