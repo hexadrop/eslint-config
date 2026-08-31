@@ -1,9 +1,9 @@
+import {
+	JSON_CONFIG_NAME_STYLISTIC_RULES_JSON_PACKAGE,
+	JSON_CONFIG_NAME_STYLISTIC_RULES_JSON_TSCONFIG,
+} from './json.config-name';
 import { GLOB_JSON_PACKAGE, GLOB_JSON_TSCONFIG } from './json.globs';
 import type { TypedFlatConfigItem } from './json.typed-config';
-import {
-	STYLISTIC_CONFIG_NAME_RULES_JSON_PACKAGE,
-	STYLISTIC_CONFIG_NAME_RULES_JSON_TSCONFIG,
-} from './stylistic.config-name';
 
 /**
  * Canonical key ordering for package.json and tsconfig.json files, applied on
@@ -13,7 +13,7 @@ import {
 const JSON_SORT_KEYS_CONFIG: TypedFlatConfigItem[] = [
 	{
 		files: GLOB_JSON_PACKAGE,
-		name: STYLISTIC_CONFIG_NAME_RULES_JSON_PACKAGE,
+		name: JSON_CONFIG_NAME_STYLISTIC_RULES_JSON_PACKAGE,
 		rules: {
 			'json/sort-array-values': [
 				'error',
@@ -110,7 +110,7 @@ const JSON_SORT_KEYS_CONFIG: TypedFlatConfigItem[] = [
 	},
 	{
 		files: GLOB_JSON_TSCONFIG,
-		name: STYLISTIC_CONFIG_NAME_RULES_JSON_TSCONFIG,
+		name: JSON_CONFIG_NAME_STYLISTIC_RULES_JSON_TSCONFIG,
 		rules: {
 			'json/sort-keys': [
 				'error',

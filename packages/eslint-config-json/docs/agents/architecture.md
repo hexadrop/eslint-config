@@ -11,7 +11,6 @@
 | `src/json.sort-keys.ts`        | Defines the canonical key ordering for `package.json` and `tsconfig.json`.                                                                        |
 | `src/json.globs.ts`            | Stores the file globs the slice targets.                                                                                                          |
 | `src/json.config-name.ts`      | Stores the config names of the json slice.                                                                                                        |
-| `src/stylistic.config-name.ts` | Stores the config names of the sort-keys items (kept under the `hexadrop/stylistic/` namespace for pipeline compatibility with the meta-package). |
 | `src/json.typed-config.ts`     | Provides the local `TypedFlatConfigItem` alias binding the shared generic to this package's generated `RuleOptions`.                              |
 | `scripts/typegen.ts`           | Generates typed rules and configuration names.                                                                                                    |
 
@@ -35,13 +34,13 @@ export default json();
 
 Named exports:
 
-| Export                                                                                   | Description                                                                                     |
-|------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|
-| `json`                                                                                   | The raw json config function the factory composes.                                              |
-| `GLOB_JSON` / `GLOB_JSON_PACKAGE` / `GLOB_JSON_TSCONFIG`                                 | File globs the slice targets.                                                                   |
-| `JSON_CONFIG_NAME_SETUP` / `JSON_CONFIG_NAME_SETUP_PARSER` / `JSON_CONFIG_NAME_RULES`    | Config names of the base json slice.                                                            |
-| `JSON_SORT_KEYS_CONFIG`                                                                  | Canonical key ordering for `package.json` and `tsconfig.json`, ready to append to any pipeline. |
-| `STYLISTIC_CONFIG_NAME_RULES_JSON_PACKAGE` / `STYLISTIC_CONFIG_NAME_RULES_JSON_TSCONFIG` | Config names of the sort-keys items.                                                            |
+| Export                                                                                             | Description                                                                                     |
+|----------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|
+| `json`                                                                                             | The raw json config function the factory composes.                                              |
+| `GLOB_JSON` / `GLOB_JSON_PACKAGE` / `GLOB_JSON_TSCONFIG`                                           | File globs the slice targets.                                                                   |
+| `JSON_CONFIG_NAME_SETUP` / `JSON_CONFIG_NAME_SETUP_PARSER` / `JSON_CONFIG_NAME_RULES`              | Config names of the base json slice.                                                            |
+| `JSON_SORT_KEYS_CONFIG`                                                                            | Canonical key ordering for `package.json` and `tsconfig.json`, ready to append to any pipeline. |
+| `JSON_CONFIG_NAME_STYLISTIC_RULES_JSON_PACKAGE` / `JSON_CONFIG_NAME_STYLISTIC_RULES_JSON_TSCONFIG` | Config names of the sort-keys items.                                                            |
 
 ## Plugin prefix
 
