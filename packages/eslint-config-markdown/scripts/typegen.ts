@@ -2,7 +2,7 @@ import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 
 import markdown from '../src/markdown.config';
 
-const configs = await markdown({ markdown: true });
+const configs = await markdown();
 
 const configNames = configs.map(index => index.name).filter(Boolean) as string[];
 

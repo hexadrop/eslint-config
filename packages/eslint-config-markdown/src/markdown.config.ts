@@ -11,21 +11,7 @@ import {
 import { GLOB_MARKDOWN, GLOB_MARKDOWN_IN_MARKDOWN } from './markdown.globs';
 import type { TypedFlatConfigItem } from './markdown.typed-config';
 
-interface HexadropEslintMarkdownOptions {
-	/**
-	 * Enable markdown support.
-	 *
-	 * @default true
-	 */
-	markdown?: boolean;
-}
-
-async function markdownConfig(options: HexadropEslintMarkdownOptions): Promise<TypedFlatConfigItem[]> {
-	const { markdown: enabled } = options;
-	if (!enabled) {
-		return [];
-	}
-
+async function markdownConfig(): Promise<TypedFlatConfigItem[]> {
 	const pluginMarkdown = (await interopDefault(import('@eslint/markdown'))) as ESLint.Plugin;
 	const processors = pluginMarkdown.processors;
 	const processor = processors?.['markdown'];
@@ -60,7 +46,5 @@ async function markdownConfig(options: HexadropEslintMarkdownOptions): Promise<T
 		},
 	];
 }
-
-export type { HexadropEslintMarkdownOptions };
 
 export default markdownConfig;

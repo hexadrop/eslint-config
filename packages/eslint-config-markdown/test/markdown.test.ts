@@ -74,15 +74,8 @@ describe('markdown factory', () => {
 		expect(result).toEqual([]);
 	});
 
-	test('disabling the markdown option resolves to an empty pipeline', async () => {
-		const configs = await markdown({ markdown: false });
-
-		expect(configs).toEqual([]);
-	});
-
 	test('accepts a flat config item mixed into the first argument', async () => {
 		const configs = await markdown({
-			markdown: true,
 			name: 'consumer/inline',
 			rules: { 'markdown/no-html': 'off' },
 		});
@@ -92,10 +85,7 @@ describe('markdown factory', () => {
 	});
 
 	test('appends consumer configs after the markdown slice', async () => {
-		const configs = await markdown(
-			{ markdown: true },
-			{ name: 'consumer/override', rules: { 'markdown/no-html': 'off' } }
-		);
+		const configs = await markdown({}, { name: 'consumer/override', rules: { 'markdown/no-html': 'off' } });
 
 		expect(configs.at(-1)?.name).toBe('consumer/override');
 	});
