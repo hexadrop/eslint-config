@@ -1,5 +1,3 @@
-import type { HexadropEslintMarkdownOptions } from '../src';
-
 interface EndToEndCase {
 	/**
 	 * Markdown fixture file at e2e/fixtures/<file>. The markdown slice ships no
@@ -7,7 +5,6 @@ interface EndToEndCase {
 	 * files reach the linter and what diagnostics survive.
 	 */
 	file: string;
-	options?: HexadropEslintMarkdownOptions;
 	slug: string;
 }
 
@@ -23,11 +20,6 @@ export const END_TO_END_CASES: EndToEndCase[] = [
 	{
 		file: 'markdown.md',
 		slug: 'markdown',
-	},
-	{
-		file: 'disabled.md',
-		options: { markdown: false },
-		slug: 'disabled',
 	},
 ];
 

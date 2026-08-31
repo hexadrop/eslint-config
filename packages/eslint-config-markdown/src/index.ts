@@ -1,4 +1,4 @@
-export { type HexadropEslintMarkdownOptions, default as markdown } from './markdown.config';
+export { default as markdown } from './markdown.config';
 export type { MarkdownConfigNames } from './markdown.config-name';
 export {
 	MARKDOWN_CONFIG_NAME_SETUP,

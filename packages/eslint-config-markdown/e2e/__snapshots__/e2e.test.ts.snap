@@ -12,24 +12,3 @@ const a=1
 \`\`\`
 "
 `;
-
-exports[`e2e fixtures disabled: fixtures/disabled.md through eslint --fix: disabled-diagnostics 1`] = `
-[
-  {
-    "column": undefined,
-    "line": undefined,
-    "message": "File ignored because no matching configuration was supplied.",
-    "ruleId": undefined,
-    "severity": 1,
-  },
-]
-`;
-
-exports[`e2e fixtures disabled: fixtures/disabled.md through eslint --fix: disabled-content 1`] = `
-"# Disabled
-
-\`\`\`ts
-const a=1
-\`\`\`
-"
-`;

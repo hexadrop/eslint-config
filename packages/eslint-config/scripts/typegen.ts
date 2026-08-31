@@ -23,7 +23,7 @@ const configs = await combine(
 	react(options),
 	astro(options),
 	json(),
-	markdown(options),
+	markdown(),
 	imports(options),
 	stylistic(options)
 );

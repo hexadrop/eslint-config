@@ -1,4 +1,3 @@
-import { markdown } from '@hexadrop/eslint-config-markdown';
 import type { RecursivePartial } from '@hexadrop/eslint-config-shared';
 import { extractTypedFlatConfigItem, PLUGIN_RENAME } from '@hexadrop/eslint-config-shared';
 import type { ResolvableFlatConfig } from 'eslint-flat-config-utils';
@@ -32,7 +31,15 @@ export default function hexadrop(
 					})(),
 				]
 			: []),
-		markdown(options),
+		...(options.markdown
+			? [
+					(async () => {
+						const imported = await import('@hexadrop/eslint-config-markdown');
+
+						return imported.markdown();
+					})(),
+				]
+			: []),
 		imports(options),
 		stylistic(options)
 	).renamePlugins(PLUGIN_RENAME);
