@@ -25,6 +25,7 @@
       "dependencies": {
         "@hexadrop/eslint-config-json": "1.0.11",
         "@hexadrop/eslint-config-markdown": "1.0.11",
+        "@hexadrop/eslint-config-react": "1.0.11",
         "@stylistic/eslint-plugin": "5.10.0",
         "@typescript-eslint/eslint-plugin": "8.68.0",
         "@typescript-eslint/parser": "8.68.0",
@@ -37,9 +38,6 @@
         "eslint-plugin-import-x": "4.17.1",
         "eslint-plugin-n": "18.3.0",
         "eslint-plugin-perfectionist": "5.10.1",
-        "eslint-plugin-react": "7.37.5",
-        "eslint-plugin-react-hooks": "7.1.1",
-        "eslint-plugin-react-refresh": "0.5.5",
         "eslint-plugin-simple-import-sort": "14.0.0",
         "eslint-plugin-unicorn": "73.0.0",
         "eslint-plugin-unused-imports": "4.4.1",
@@ -91,6 +89,28 @@
       "peerDependencies": {
         "eslint": "^9.17.0 || ^10.0.0",
       },
+    },
+    "packages/eslint-config-react": {
+      "name": "@hexadrop/eslint-config-react",
+      "version": "1.0.11",
+      "dependencies": {
+        "eslint-flat-config-utils": "3.2.0",
+        "eslint-plugin-react": "7.37.5",
+        "eslint-plugin-react-hooks": "7.1.1",
+        "eslint-plugin-react-refresh": "0.5.5",
+        "local-pkg": "1.2.1",
+      },
+      "devDependencies": {
+        "eslint-typegen": "2.3.1",
+        "tsdown": "0.22.14",
+      },
+      "peerDependencies": {
+        "@hexadrop/eslint-config-typescript": "1.0.11",
+        "eslint": "^9.17.0 || ^10.0.0",
+      },
+      "optionalPeers": [
+        "@hexadrop/eslint-config-typescript",
+      ],
     },
     "packages/eslint-config-shared": {
       "name": "@hexadrop/eslint-config-shared",
@@ -350,6 +370,8 @@
     "@hexadrop/eslint-config-json": ["@hexadrop/eslint-config-json@workspace:packages/eslint-config-json"],
 
     "@hexadrop/eslint-config-markdown": ["@hexadrop/eslint-config-markdown@workspace:packages/eslint-config-markdown"],
+
+    "@hexadrop/eslint-config-react": ["@hexadrop/eslint-config-react@workspace:packages/eslint-config-react"],
 
     "@hexadrop/eslint-config-shared": ["@hexadrop/eslint-config-shared@workspace:packages/eslint-config-shared"],
 
