@@ -1,3 +1,4 @@
+import { extractTypedFlatConfigItem } from '@hexadrop/eslint-config-shared';
 import type { ResolvableFlatConfig } from 'eslint-flat-config-utils';
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 
@@ -8,12 +9,17 @@ import type { ConfigNames } from './typegen';
 
 // eslint-disable-next-line typescript/promise-function-async
 export default function jsonFactory(
-	options?: HexadropEslintJsonOptions,
+	optionsOrFlatConfigItem?: HexadropEslintJsonOptions & TypedFlatConfigItem,
 	...configs: ResolvableFlatConfig<TypedFlatConfigItem>[]
 ): FlatConfigComposer<TypedFlatConfigItem, ConfigNames> {
 	let pipeline = new FlatConfigComposer<TypedFlatConfigItem, ConfigNames>(
-		jsonConfig({ json: options?.json ?? true })
+		jsonConfig({ json: optionsOrFlatConfigItem?.json ?? true })
 	);
+
+	const flatConfig = extractTypedFlatConfigItem(optionsOrFlatConfigItem);
+	if (flatConfig) {
+		pipeline = pipeline.append(flatConfig);
+	}
 
 	pipeline = pipeline.append(...configs);
 
