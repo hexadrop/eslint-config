@@ -1,5 +1,11 @@
 import { GLOB_JSON, JSON_SORT_KEYS_CONFIG } from '@hexadrop/eslint-config-json';
 import {
+	GLOB_MARKDOWN,
+	GLOB_MARKDOWN_ASTRO,
+	GLOB_MARKDOWN_JSON,
+	GLOB_MARKDOWN_SOURCE,
+} from '@hexadrop/eslint-config-markdown';
+import {
 	interopDefault,
 	PLUGIN_RENAME,
 	PLUGIN_RENAME_TYPESCRIPT,
@@ -12,7 +18,6 @@ import type { HexadropEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../typed-config';
 import { GLOB_ASTRO } from '../astro';
 import { JAVASCRIPT_GLOBS, SOURCE_GLOBS } from '../core';
-import { GLOB_MARKDOWN, GLOB_MARKDOWN_ASTRO, GLOB_MARKDOWN_JSON, GLOB_MARKDOWN_SOURCE } from '../markdown';
 import { DTS_GLOBS, TYPESCRIPT_GLOBS } from '../typescript';
 import {
 	STYLISTIC_CONFIG_NAME_RULES,
