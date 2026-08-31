@@ -1,0 +1,55 @@
+{
+	"name": "@hexadrop/eslint-config-markdown",
+	"version": "1.0.11",
+	"description": "Markdown slice of the hexadrop ESLint config: markdown plugin processors merged with a pass-through processor and the plain parser for markdown files.",
+	"keywords": [
+		"lint",
+		"eslint",
+		"eslint-config",
+		"markdown"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/hexadrop/eslint-config.git",
+		"directory": "packages/eslint-config-markdown"
+	},
+	"homepage": "https://github.com/hexadrop/eslint-config",
+	"bugs": {
+		"url": "https://github.com/hexadrop/eslint-config/issues"
+	},
+	"license": "MIT",
+	"publishConfig": {
+		"access": "public"
+	},
+	"type": "module",
+	"sideEffects": false,
+	"files": [
+		"dist"
+	],
+	"exports": {
+		".": {
+			"development": "./src/index.ts",
+			"types": "./dist/index.d.mts",
+			"default": "./dist/index.mjs"
+		}
+	},
+	"scripts": {
+		"build": "bun run build:types && tsdown",
+		"build:types": "bun run scripts/typegen.ts",
+		"prepare": "bun run build:types",
+		"prepublishOnly": "bun run build"
+	},
+	"peerDependencies": {
+		"eslint": "^9.17.0 || ^10.0.0"
+	},
+	"dependencies": {
+		"@eslint/markdown": "8.0.3",
+		"eslint-flat-config-utils": "3.2.0",
+		"eslint-merge-processors": "2.0.0",
+		"eslint-parser-plain": "0.1.1"
+	},
+	"devDependencies": {
+		"eslint-typegen": "2.3.1",
+		"tsdown": "0.22.14"
+	}
+}
