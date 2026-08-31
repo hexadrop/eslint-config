@@ -1,0 +1,35 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`e2e fixtures markdown: fixtures/markdown.md through eslint --fix: markdown-diagnostics 1`] = `[]`;
+
+exports[`e2e fixtures markdown: fixtures/markdown.md through eslint --fix: markdown-content 1`] = `
+"# Fixture
+
+Some text with bad   spacing.
+
+\`\`\`ts
+const a=1
+\`\`\`
+"
+`;
+
+exports[`e2e fixtures disabled: fixtures/disabled.md through eslint --fix: disabled-diagnostics 1`] = `
+[
+  {
+    "column": undefined,
+    "line": undefined,
+    "message": "File ignored because no matching configuration was supplied.",
+    "ruleId": undefined,
+    "severity": 1,
+  },
+]
+`;
+
+exports[`e2e fixtures disabled: fixtures/disabled.md through eslint --fix: disabled-content 1`] = `
+"# Disabled
+
+\`\`\`ts
+const a=1
+\`\`\`
+"
+`;
