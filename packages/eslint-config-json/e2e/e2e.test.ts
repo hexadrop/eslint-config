@@ -1,29 +1,65 @@
+import path from 'node:path';
+
 import { describe, expect, test } from 'bun:test';
-import { Linter } from 'eslint';
+import { ESLint } from 'eslint';
 
 import json, { JSON_SORT_KEYS_CONFIG } from '../src';
+import type { EndToEndCase } from './cases';
+import { END_TO_END_CASES } from './cases';
 
-describe('json through real ESLint config resolution', () => {
-	test('json rules are active for json files and inactive for source files', async () => {
-		const configs = await json();
-		const linter = new Linter({ configType: 'flat' });
+const FIXTURES_DIR = path.join(import.meta.dir, 'fixtures');
 
-		const jsonMessages = linter.verify('{"a": 1n}', configs, 'file.json');
+async function createESLint(e2eCase: EndToEndCase): Promise<{ eslint: ESLint; inputPath: string }> {
+	const inputPath = path.join(FIXTURES_DIR, e2eCase.file);
+	const overrideConfig = await json(e2eCase.options, ...JSON_SORT_KEYS_CONFIG, ...(e2eCase.extraConfigs ?? []));
 
-		expect(jsonMessages.some(message => message.ruleId === 'json/no-bigint-literals')).toBe(true);
+	if (!(await Bun.file(inputPath).exists())) {
+		throw new Error(`Missing fixture file: ${e2eCase.file}`);
+	}
+
+	const eslint = new ESLint({
+		cwd: FIXTURES_DIR,
+		fix: true,
+		overrideConfig,
+		overrideConfigFile: true,
 	});
 
-	test('sort-keys flags a misordered package.json', async () => {
-		const configs = [...(await json()), ...JSON_SORT_KEYS_CONFIG];
-		const linter = new Linter({ configType: 'flat' });
-		// Misordered literal built at runtime so the repo's own sort-keys lint rule cannot fix it.
-		const source = JSON.stringify({ name: 'fixture', version: '1.0.0' })
-			.replace('"name"', '"version":"1.0.0","name"')
-			.replace(',"version":"1.0.0"}', '}');
-		expect(source.indexOf('version')).toBeLessThan(source.indexOf('name'));
+	return { eslint, inputPath };
+}
 
-		const messages = linter.verify(source, configs, 'package.json');
+/**
+ * Run the fixture through the real eslint engine in fix mode and freeze both
+ * halves of its behavior, mirroring packages/eslint-config:
+ *
+ * - `result.output ?? source`: the file content after `eslint --fix`, pinned
+ *   so formatting regressions (key sorting, array sorting, quoting) surface
+ *   as snapshot diffs.
+ * - `result.messages`: the diagnostics that survive autofix (unfixable rules
+ *   such as json/no-bigint-literals or json/no-dupe-keys), pinned so
+ *   severity flips and new detections surface as snapshot diffs.
+ */
+async function fixFixture(e2eCase: EndToEndCase): Promise<{ content: string; diagnostics: unknown[] }> {
+	const { eslint, inputPath } = await createESLint(e2eCase);
+	const [result] = await eslint.lintFiles([inputPath]);
+	const source = await Bun.file(inputPath).text();
 
-		expect(messages.some(message => message.ruleId === 'json/sort-keys')).toBe(true);
+	return {
+		content: result?.output ?? source,
+		diagnostics: (result?.messages ?? []).map(message => ({
+			column: message.column,
+			line: message.line,
+			message: message.message,
+			ruleId: message.ruleId ?? undefined,
+			severity: message.severity,
+		})),
+	};
+}
+
+describe('e2e fixtures', () => {
+	test.each(END_TO_END_CASES)('$slug: fixtures/$file through eslint --fix', async e2eCase => {
+		const { content, diagnostics } = await fixFixture(e2eCase);
+
+		expect(diagnostics).toMatchSnapshot(`${e2eCase.slug}-diagnostics`);
+		expect(content).toMatchSnapshot(`${e2eCase.slug}-content`);
 	});
 });
