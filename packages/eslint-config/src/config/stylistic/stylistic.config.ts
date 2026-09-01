@@ -1,3 +1,4 @@
+import { GLOB_ASTRO } from '@hexadrop/eslint-config-astro';
 import { GLOB_JSON, JSON_SORT_KEYS_CONFIG } from '@hexadrop/eslint-config-json';
 import {
 	GLOB_MARKDOWN,
@@ -16,7 +17,6 @@ import type { ESLint, Linter } from 'eslint';
 
 import type { HexadropEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../typed-config';
-import { GLOB_ASTRO } from '../astro';
 import { JAVASCRIPT_GLOBS, SOURCE_GLOBS } from '../core';
 import { DTS_GLOBS, TYPESCRIPT_GLOBS } from '../typescript';
 import {

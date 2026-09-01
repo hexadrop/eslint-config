@@ -42,6 +42,7 @@
 		"eslint": "^9.17.0 || ^10.0.0"
 	},
 	"dependencies": {
+		"@hexadrop/eslint-config-astro": "1.0.11",
 		"@hexadrop/eslint-config-json": "1.0.11",
 		"@hexadrop/eslint-config-markdown": "1.0.11",
 		"@hexadrop/eslint-config-react": "1.0.11",

@@ -32255,12 +32255,9 @@ exports[`golden resolved config astro-ts: astro with typescript: astro-ts 1`] = 
       "parser": {
         "$module": "typescript-eslint/parser@8.68.0",
       },
-      "parserOptions": {
-        "project": undefined,
-      },
       "sourceType": "module",
     },
-    "name": "hexadrop/astro/setup/parser/javascript",
+    "name": "hexadrop/astro/setup/parser/typescript",
   },
   {
     "files": [
@@ -39266,12 +39263,9 @@ exports[`golden resolved config astro-react-ts: full stack: astro, react and typ
       "parser": {
         "$module": "typescript-eslint/parser@8.68.0",
       },
-      "parserOptions": {
-        "project": undefined,
-      },
       "sourceType": "module",
     },
-    "name": "hexadrop/astro/setup/parser/javascript",
+    "name": "hexadrop/astro/setup/parser/typescript",
   },
   {
     "files": [

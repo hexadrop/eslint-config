@@ -2,6 +2,8 @@
 	"extends": "@hexadrop/tsconfig",
 	"compilerOptions": {
 		"paths": {
+			"@hexadrop/eslint-config-astro": ["./packages/eslint-config-astro/src/index.ts"],
+			"@hexadrop/eslint-config-astro/*": ["./packages/eslint-config-astro/src/*"],
 			"@hexadrop/eslint-config-json": ["./packages/eslint-config-json/src/index.ts"],
 			"@hexadrop/eslint-config-json/*": ["./packages/eslint-config-json/src/*"],
 			"@hexadrop/eslint-config-markdown": ["./packages/eslint-config-markdown/src/index.ts"],

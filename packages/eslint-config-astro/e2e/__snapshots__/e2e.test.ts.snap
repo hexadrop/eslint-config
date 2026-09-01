@@ -1,0 +1,31 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`e2e fixtures astro: fixtures/astro.astro through eslint --fix: astro-diagnostics 1`] = `[]`;
+
+exports[`e2e fixtures astro: fixtures/astro.astro through eslint --fix: astro-content 1`] = `
+"---
+const name = "World"
+---
+
+<h1  class="a  b">Hello { name }</h1>"
+`;
+
+exports[`e2e fixtures disabled: fixtures/disabled.astro through eslint --fix: disabled-diagnostics 1`] = `
+[
+  {
+    "column": undefined,
+    "line": undefined,
+    "message": "File ignored because no matching configuration was supplied.",
+    "ruleId": undefined,
+    "severity": 1,
+  },
+]
+`;
+
+exports[`e2e fixtures disabled: fixtures/disabled.astro through eslint --fix: disabled-content 1`] = `
+"---
+const name = "World"
+---
+
+<h1  class="a  b">Hello { name }</h1>"
+`;

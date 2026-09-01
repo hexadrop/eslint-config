@@ -1,3 +1,4 @@
+import { astro } from '@hexadrop/eslint-config-astro';
 import { json } from '@hexadrop/eslint-config-json';
 import { markdown } from '@hexadrop/eslint-config-markdown';
 import { react } from '@hexadrop/eslint-config-react';
@@ -6,7 +7,7 @@ import { extractTypedFlatConfigItem, PLUGIN_RENAME } from '@hexadrop/eslint-conf
 import type { ResolvableFlatConfig } from 'eslint-flat-config-utils';
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 
-import { astro, core, ignore, imports, stylistic, typescript } from './config';
+import { core, ignore, imports, stylistic, typescript } from './config';
 import type { HexadropEslintOptions } from './options';
 import defaultOptions from './options/hexadrop-eslint.options';
 import type { TypedFlatConfigItem } from './typed-config';
@@ -22,7 +23,7 @@ export default function hexadrop(
 	let pipeline = new FlatConfigComposer<TypedFlatConfigItem, ConfigNames>(
 		ignore(options),
 		core(options),
-		astro(options),
+		astro({ astro: options.astro, peerCheck: false, typescript: Boolean(options.typescript) }),
 		typescript(options),
 		react({ peerCheck: false, react: options.react, typescript: Boolean(options.typescript) }),
 		json(options),
