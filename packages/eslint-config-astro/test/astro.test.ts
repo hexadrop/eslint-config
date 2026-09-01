@@ -65,7 +65,7 @@ describe('astro factory', () => {
 
 		expect(parser?.processor).toBe('astro/client-side-ts');
 		expect(parser?.languageOptions?.['parserOptions']).toBeTruthy();
-		expect((parser?.languageOptions?.['parserOptions'] as Record<string, unknown>).parser).toBeDefined();
+		expect((parser?.languageOptions?.['parserOptions'] as Record<string, unknown>)['parser']).toBeDefined();
 	});
 
 	test('with the typescript flavor enabled, the typescript config item targets ts globs', async () => {
