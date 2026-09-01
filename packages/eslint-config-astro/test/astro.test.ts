@@ -1,4 +1,4 @@
-import { describe, expect, test } from 'bun:test';
+import { describe, expect, mock, test } from 'bun:test';
 
 import astro, {
 	ASTRO_CONFIG_NAME_RULES,
@@ -12,12 +12,18 @@ import astro, {
 } from '../src';
 
 /**
- * `@hexadrop/eslint-config-typescript` is not installed in this repository, so
- * the optional peer is always absent here. The typescript-flavor tests opt out
- * of the peer check with `peerCheck: false` (the same escape hatch the
- * meta-package uses); the presence-detection matrix is exercised through the
- * default options.
+ * `@hexadrop/eslint-config-typescript` is a workspace package, so the optional
+ * peer is always resolvable. The typescript-flavor tests opt out of the peer
+ * check with `peerCheck: false` (the same escape hatch the meta-package uses).
+ * The error path is exercised by mocking `local-pkg` to simulate peer absence.
  */
+let isTypescriptPeerMocked = true;
+
+// eslint-disable-next-line typescript/no-floating-promises
+mock.module('local-pkg', () => ({
+	isPackageExists: (package_: string) =>
+		package_ === '@hexadrop/eslint-config-typescript' ? isTypescriptPeerMocked : false,
+}));
 describe('astro factory', () => {
 	test('returns a thenable composer resolving to the astro config slice', async () => {
 		const configs = await astro({ typescript: false });
@@ -92,11 +98,16 @@ describe('astro factory', () => {
 	});
 
 	test('fails with an actionable error when typescript is enabled without the peer', async () => {
+		// eslint-disable-next-line unicorn/no-top-level-assignment-in-function
+		isTypescriptPeerMocked = false;
 		let error: Error | undefined;
 		try {
 			await astro({ typescript: true });
 		} catch (error_) {
 			error = error_ as Error;
+		} finally {
+			// eslint-disable-next-line unicorn/no-top-level-assignment-in-function
+			isTypescriptPeerMocked = true;
 		}
 
 		expect(error?.message).toContain(
@@ -116,8 +127,8 @@ describe('astro factory', () => {
 		const configs = await astro();
 		const parser = configs.find(config => config.name === ASTRO_CONFIG_NAME_SETUP_PARSER);
 
-		// The peer is absent in this repository, so detection resolves to js-only mode.
-		expect(parser?.processor).toBe('astro/astro');
+		// The peer is a workspace package, so presence detection activates the ts path.
+		expect(parser?.processor).toBe('astro/client-side-ts');
 	});
 
 	test('disabling the astro option resolves to an empty pipeline', async () => {

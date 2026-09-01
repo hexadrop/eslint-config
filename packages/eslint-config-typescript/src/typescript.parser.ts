@@ -2,11 +2,11 @@ import { cwd } from 'node:process';
 
 import type { Linter } from 'eslint';
 
-import type { TypedFlatConfigItem } from '../../typed-config';
 import {
 	TYPESCRIPT_CONFIG_NAME_SETUP_PARSER,
 	TYPESCRIPT_CONFIG_NAME_SETUP_PARSER_TYPEAWARE,
 } from './typescript.config-name';
+import type { TypedFlatConfigItem } from './typescript.typed-config';
 
 type TypescriptParser = typeof import('@typescript-eslint/parser');
 
@@ -16,6 +16,7 @@ interface TypescriptParserOptions {
 	parser: TypescriptParser;
 	parserOptions?: Partial<Linter.ParserOptions>;
 	tsconfigPath?: string[];
+	tsconfigRootDir?: string;
 }
 
 export default function typescriptParser({
@@ -24,6 +25,7 @@ export default function typescriptParser({
 	parser,
 	parserOptions,
 	tsconfigPath,
+	tsconfigRootDir,
 }: TypescriptParserOptions): TypedFlatConfigItem {
 	const config: TypedFlatConfigItem = {
 		files,
@@ -33,7 +35,7 @@ export default function typescriptParser({
 				sourceType: 'module',
 				...(tsconfigPath && {
 					project: tsconfigPath,
-					tsconfigRootDir: cwd(),
+					tsconfigRootDir: tsconfigRootDir ?? cwd(),
 				}),
 				...parserOptions,
 			},

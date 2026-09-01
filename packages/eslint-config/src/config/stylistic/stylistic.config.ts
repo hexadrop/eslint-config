@@ -13,12 +13,12 @@ import {
 	pluginConfigRules,
 	renameRules,
 } from '@hexadrop/eslint-config-shared';
+import { DTS_GLOBS, TYPESCRIPT_GLOBS } from '@hexadrop/eslint-config-typescript';
 import type { ESLint, Linter } from 'eslint';
 
 import type { HexadropEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../typed-config';
 import { JAVASCRIPT_GLOBS, SOURCE_GLOBS } from '../core';
-import { DTS_GLOBS, TYPESCRIPT_GLOBS } from '../typescript';
 import {
 	STYLISTIC_CONFIG_NAME_RULES,
 	STYLISTIC_CONFIG_NAME_RULES_ASTRO,

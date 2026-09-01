@@ -1,4 +1,4 @@
-import { describe, expect, test } from 'bun:test';
+import { describe, expect, mock, test } from 'bun:test';
 
 import react, {
 	GLOB_REACT_JSX,
@@ -10,12 +10,18 @@ import react, {
 } from '../src';
 
 /**
- * `@hexadrop/eslint-config-typescript` is not installed in this repository, so
- * the optional peer is always absent here. The typescript-flavor tests opt out
- * of the peer check with `peerCheck: false` (the same escape hatch the
- * meta-package uses); the presence-detection matrix is exercised through the
- * default options.
+ * `@hexadrop/eslint-config-typescript` is a workspace package, so the optional
+ * peer is always resolvable. The typescript-flavor tests opt out of the peer
+ * check with `peerCheck: false` (the same escape hatch the meta-package uses).
+ * The error path is exercised by mocking `local-pkg` to simulate peer absence.
  */
+let isTypescriptPeerMocked = true;
+
+// eslint-disable-next-line typescript/no-floating-promises
+mock.module('local-pkg', () => ({
+	isPackageExists: (package_: string) =>
+		package_ === '@hexadrop/eslint-config-typescript' ? isTypescriptPeerMocked : false,
+}));
 describe('react factory', () => {
 	test('returns a thenable composer resolving to the react config slice', async () => {
 		const configs = await react({ typescript: false });
@@ -88,11 +94,16 @@ describe('react factory', () => {
 	});
 
 	test('fails with an actionable error when typescript is enabled without the peer', async () => {
+		// eslint-disable-next-line unicorn/no-top-level-assignment-in-function
+		isTypescriptPeerMocked = false;
 		let error: Error | undefined;
 		try {
 			await react({ typescript: true });
 		} catch (error_) {
 			error = error_ as Error;
+		} finally {
+			// eslint-disable-next-line unicorn/no-top-level-assignment-in-function
+			isTypescriptPeerMocked = true;
 		}
 
 		expect(error?.message).toContain(
@@ -112,9 +123,9 @@ describe('react factory', () => {
 		const configs = await react();
 		const rules = configs.find(config => config.name === REACT_CONFIG_NAME_RULES);
 
-		// The peer is absent in this repository, so detection resolves to js-only mode.
-		expect(rules?.files).toEqual(GLOB_REACT_JSX);
-		expect(rules?.rules?.['react/prop-types']).toBe('error');
+		// The peer is a workspace package, so presence detection activates tsx mode.
+		expect(rules?.files).toEqual([...GLOB_REACT_JSX, ...GLOB_REACT_TSX]);
+		expect(rules?.rules?.['react/prop-types']).toBeUndefined();
 	});
 
 	test('disabling the react option resolves to an empty pipeline', async () => {

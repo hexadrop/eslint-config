@@ -2,11 +2,12 @@ import { astro } from '@hexadrop/eslint-config-astro';
 import { json } from '@hexadrop/eslint-config-json';
 import { markdown } from '@hexadrop/eslint-config-markdown';
 import { react } from '@hexadrop/eslint-config-react';
+import { typescript } from '@hexadrop/eslint-config-typescript';
 import { builtinRules } from 'eslint/use-at-your-own-risk';
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 
 import { combine } from '../src';
-import { core, ignore, imports, stylistic, typescript } from '../src/config';
+import { core, ignore, imports, stylistic } from '../src/config';
 import { defaultOptions } from '../src/options';
 
 const options = defaultOptions();

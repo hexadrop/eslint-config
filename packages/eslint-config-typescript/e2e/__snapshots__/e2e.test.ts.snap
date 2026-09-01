@@ -1,0 +1,56 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`e2e fixtures clean: fixtures/clean.ts through eslint --fix: clean-diagnostics 1`] = `[]`;
+
+exports[`e2e fixtures clean: fixtures/clean.ts through eslint --fix: clean-content 1`] = `
+"export default function add(a: number, b: number): number {
+	return a + b;
+}"
+`;
+
+exports[`e2e fixtures typescript: fixtures/typescript.ts through eslint --fix: typescript-diagnostics 1`] = `[]`;
+
+exports[`e2e fixtures typescript: fixtures/typescript.ts through eslint --fix: typescript-content 1`] = `
+"export const ORPHANED_CONSTANT = 1;
+
+interface person { name: string, age: number }
+
+function greet( name: string ){
+if(name){
+console.error( "Hello, " + name + "!" ) }
+return 'hi' }
+
+export const exported = greet('world');
+export default exported"
+`;
+
+exports[`e2e fixtures no-console: fixtures/no-console.ts through eslint --fix: no-console-diagnostics 1`] = `[]`;
+
+exports[`e2e fixtures no-console: fixtures/no-console.ts through eslint --fix: no-console-content 1`] = `
+"export default function debugValue(value: unknown): void {
+	 
+	console.log(value);
+}"
+`;
+
+exports[`e2e fixtures disabled: fixtures/disabled.ts through eslint --fix: disabled-diagnostics 1`] = `
+[
+  {
+    "column": undefined,
+    "line": undefined,
+    "message": "File ignored because no matching configuration was supplied.",
+    "ruleId": undefined,
+    "severity": 1,
+  },
+]
+`;
+
+exports[`e2e fixtures disabled: fixtures/disabled.ts through eslint --fix: disabled-content 1`] = `
+"export const ORPHANED_CONSTANT = 1;
+
+function greet( name ){
+console.log( "Hello, " + name + "!" )
+return 'hi' }
+
+export const exported = greet('world');"
+`;
