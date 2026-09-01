@@ -17,10 +17,7 @@ export default hexadrop(
 		files: ['packages/*/src/**'],
 		name: 'hexadrop/shared-imports',
 		rules: {
-			'import/no-extraneous-dependencies': [
-				'error',
-				{ whitelist: ['@hexadrop/eslint-config-shared', 'globals', '@typescript-eslint/parser'] },
-			],
+			'import/no-extraneous-dependencies': ['error', { whitelist: ['@hexadrop/eslint-config-shared'] }],
 		},
 	}
 );
