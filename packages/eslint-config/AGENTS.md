@@ -3,8 +3,8 @@
 Shared ESLint configuration exposed through the monorepo workspace.
 
 - **Package manager:** Bun (`bun`)
-- **Build:** `bun run --filter @hexadrop/eslint-config build` (from the repo root)
-- **Test:** `bun test packages/eslint-config` (or `bun run test` at root)
+- **Build:** `bun run build` (at package folder)
+- **Test:** `bun test packages/eslint-config` (at root)
 - **Type-check:** `bun run typecheck` (at root)
 - **Lint:** `bun run lint:fix` (at root)
 
