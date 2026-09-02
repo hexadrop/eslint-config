@@ -1,4 +1,4 @@
-import { PLUGIN_PREFIX } from '../../const';
+import { PLUGIN_PREFIX } from '@hexadrop/eslint-config-shared';
 
 const STYLISTIC_CONFIG_NAME = `${PLUGIN_PREFIX}/stylistic` as const;
 const STYLISTIC_CONFIG_NAME_SETUP = `${STYLISTIC_CONFIG_NAME}/setup` as const;

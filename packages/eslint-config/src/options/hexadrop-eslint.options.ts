@@ -2,9 +2,9 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 
+import type { Nullable, RecursivePartial } from '@hexadrop/eslint-config-shared';
 import { isPackageExists } from 'local-pkg';
 
-import type { Nullable, RecursivePartial } from '../types';
 import type { HexadropEslintIgnoreOptions } from './hexadrop-eslint-ignore.options';
 import type { HexadropEslintModulesOptions } from './hexadrop-eslint-module.options';
 import type { HexadropEslintStylisticOptions } from './hexadrop-eslint-stylistic.options';

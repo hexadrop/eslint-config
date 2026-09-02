@@ -1,3 +1,5 @@
+import type { RecursivePartial } from '@hexadrop/eslint-config-shared';
+import { extractTypedFlatConfigItem } from '@hexadrop/eslint-config-shared';
 import type { ResolvableFlatConfig } from 'eslint-flat-config-utils';
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 
@@ -6,8 +8,7 @@ import { PLUGIN_RENAME } from './const';
 import type { HexadropEslintOptions } from './options';
 import defaultOptions from './options/hexadrop-eslint.options';
 import type { ConfigNames } from './typegen';
-import type { RecursivePartial, TypedFlatConfigItem } from './types';
-import { extractTypedFlatConfigItem } from './utils';
+import type { TypedFlatConfigItem } from './types';
 
 // eslint-disable-next-line typescript/promise-function-async
 export default function hexadrop(

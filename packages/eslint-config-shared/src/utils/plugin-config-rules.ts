@@ -1,13 +1,12 @@
-import { ESLint, Linter } from 'eslint';
+import type { ESLint, Linter } from 'eslint';
 
-import type { RuleOptions } from '../typegen';
 import renameRules from './rename-rules';
 
 export default function pluginConfigRules(
 	plugin: ESLint.Plugin,
 	configName: string,
 	map: Record<string, string> = {}
-): Linter.RulesRecord & RuleOptions {
+): Linter.RulesRecord {
 	let rules = {};
 	if (plugin.configs && Object.hasOwn(plugin.configs, configName)) {
 		const config = plugin.configs[configName];

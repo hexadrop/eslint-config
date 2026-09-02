@@ -1,8 +1,8 @@
+import { interopDefault, toArray } from '@hexadrop/eslint-config-shared';
 import globals from 'globals';
 
 import type { HexadropEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
-import { interopDefault, toArray } from '../../utils';
 import {
 	ASTRO_CONFIG_NAME_RULES,
 	ASTRO_CONFIG_NAME_SETUP,

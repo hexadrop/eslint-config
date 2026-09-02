@@ -1,25 +1,24 @@
-import { ESLint, Linter } from 'eslint';
+import type { ESLint, Linter } from 'eslint';
 
-import type { RuleOptions } from '../typegen';
 import renameRules from './rename-rules';
 
 function pluginConfigOverrideRules(
 	plugin: ESLint.Plugin,
 	configName: string,
 	indexOrMap?: number | Record<string, string>
-): Linter.RulesRecord & RuleOptions;
+): Linter.RulesRecord;
 function pluginConfigOverrideRules(
 	plugin: ESLint.Plugin,
 	configName: string,
 	indexOrMap: number,
 	map: Record<string, string>
-): Linter.RulesRecord & RuleOptions;
+): Linter.RulesRecord;
 function pluginConfigOverrideRules(
 	plugin: ESLint.Plugin,
 	configName: string,
 	indexOrMap?: number | Record<string, string>,
 	map2?: Record<string, string>
-): Linter.RulesRecord & RuleOptions {
+): Linter.RulesRecord {
 	let index = 0;
 	let map: Record<string, string> = {};
 	if (typeof indexOrMap === 'number') {

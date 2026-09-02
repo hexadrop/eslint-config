@@ -27,9 +27,9 @@
 	"scripts": {
 		"build": "bun run --filter '*' build",
 		"commitlint": "commitlint --edit",
-		"lint": "eslint --cache .",
-		"lint:ci": "eslint --cache --cache-strategy content .",
-		"lint:fix": "eslint --cache --fix .",
+		"lint": "NODE_OPTIONS='--conditions=development' eslint --cache .",
+		"lint:ci": "NODE_OPTIONS='--conditions=development' eslint --cache --cache-strategy content .",
+		"lint:fix": "NODE_OPTIONS='--conditions=development' eslint --cache --fix .",
 		"prepare": "husky && bun run --filter '*' prepare",
 		"test": "bun test packages",
 		"typecheck": "tsc --noEmit"
