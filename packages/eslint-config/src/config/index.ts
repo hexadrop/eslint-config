@@ -1,7 +1,7 @@
-export * from './astro';
-export * from './core';
-export * from './ignore';
-export * from './imports';
-export * from './react';
-export * from './stylistic';
-export * from './typescript';
+export { default as astro } from './astro';
+export { default as core } from './core';
+export { default as ignore } from './ignore';
+export { default as imports } from './imports';
+export { default as react } from './react';
+export { default as stylistic } from './stylistic';
+export { default as typescript } from './typescript';

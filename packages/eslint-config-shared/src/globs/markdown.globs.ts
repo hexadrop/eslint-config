@@ -1,6 +1,6 @@
-const GLOB_ASTRO = ['*.astro', '**/*.astro'];
-const GLOB_JSON = ['**/*.json', '**/*.json5', '**/*.jsonc'];
-const SOURCE_GLOBS = ['**/*.?([cm])[jt]s?(x)'];
+import { GLOB_ASTRO } from './astro.globs';
+import { SOURCE_GLOBS } from './core.globs';
+import { GLOB_JSON } from './json.globs';
 
 const GLOB_MARKDOWN = ['**/*.md'];
 const GLOB_MARKDOWN_IN_MARKDOWN = ['**/*.md/*.md'];

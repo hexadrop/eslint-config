@@ -1,4 +1,4 @@
-import { PLUGIN_PREFIX } from '@hexadrop/eslint-config-shared';
+import { PLUGIN_PREFIX } from '../const';
 
 const MARKDOWN_CONFIG_NAME = `${PLUGIN_PREFIX}/markdown` as const;
 const MARKDOWN_CONFIG_NAME_SETUP = `${MARKDOWN_CONFIG_NAME}/setup` as const;

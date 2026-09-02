@@ -1,4 +1,4 @@
-import { PLUGIN_PREFIX } from '@hexadrop/eslint-config-shared';
+import { PLUGIN_PREFIX } from '../const';
 
 const JSON_CONFIG_NAME = `${PLUGIN_PREFIX}/json` as const;
 const JSON_CONFIG_NAME_SETUP = `${JSON_CONFIG_NAME}/setup` as const;

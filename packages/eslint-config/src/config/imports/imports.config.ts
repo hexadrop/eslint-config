@@ -1,12 +1,10 @@
-import { GLOB_MARKDOWN_ASTRO, GLOB_MARKDOWN_JSON, GLOB_MARKDOWN_SOURCE } from '@hexadrop/eslint-config-markdown';
-import { interopDefault, PLUGIN_RENAME } from '@hexadrop/eslint-config-shared';
-
-import type { HexadropEslintOptions } from '../../options';
-import type { TypedFlatConfigItem } from '../../typed-config';
-import { GLOB_ASTRO } from '../astro';
-import { ESLINT_CONFIG_GLOBS } from '../core';
-import { DTS_GLOBS, TYPESCRIPT_GLOBS } from '../typescript';
 import {
+	DTS_GLOBS,
+	ESLINT_CONFIG_GLOBS,
+	GLOB_ASTRO,
+	GLOB_MARKDOWN_ASTRO,
+	GLOB_MARKDOWN_JSON,
+	GLOB_MARKDOWN_SOURCE,
 	IMPORTS_CONFIG_NAME_RULES_ASTRO,
 	IMPORTS_CONFIG_NAME_RULES_STATIC,
 	IMPORTS_CONFIG_NAME_RULES_STATIC_MARKDOWN_SOURCE,
@@ -19,7 +17,13 @@ import {
 	IMPORTS_CONFIG_NAME_RULES_WARNINGS_ESLINT_CONFIG,
 	IMPORTS_CONFIG_NAME_SETUP,
 	IMPORTS_CONFIG_NAME_SETUP_TYPESCRIPT,
-} from './imports.config-name';
+	interopDefault,
+	PLUGIN_RENAME,
+	TYPESCRIPT_GLOBS,
+} from '@hexadrop/eslint-config-shared';
+
+import type { HexadropEslintOptions } from '../../options';
+import type { TypedFlatConfigItem } from '../../typed-config';
 
 export default async function imports(options: HexadropEslintOptions): Promise<TypedFlatConfigItem[]> {
 	const {

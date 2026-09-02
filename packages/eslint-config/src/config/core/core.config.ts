@@ -1,15 +1,16 @@
-import { GLOB_MARKDOWN_SOURCE } from '@hexadrop/eslint-config-markdown';
-import { interopDefault, PLUGIN_RENAME } from '@hexadrop/eslint-config-shared';
-import globals from 'globals';
-
-import type { HexadropEslintOptions } from '../../options';
-import type { TypedFlatConfigItem } from '../../typed-config';
 import {
 	CORE_CONFIG_NAME_RULES,
 	CORE_CONFIG_NAME_RULES_MARKDOWN_SOURCE,
 	CORE_CONFIG_NAME_RULES_NODE,
 	CORE_CONFIG_NAME_SETUP,
-} from './core.config-name';
+	GLOB_MARKDOWN_SOURCE,
+	interopDefault,
+	PLUGIN_RENAME,
+} from '@hexadrop/eslint-config-shared';
+import globals from 'globals';
+
+import type { HexadropEslintOptions } from '../../options';
+import type { TypedFlatConfigItem } from '../../typed-config';
 
 export default async function core(options: HexadropEslintOptions): Promise<TypedFlatConfigItem[]> {
 	const {

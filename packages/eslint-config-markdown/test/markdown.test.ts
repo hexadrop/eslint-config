@@ -1,12 +1,13 @@
-import { describe, expect, test } from 'bun:test';
-
-import markdown, {
+import {
 	GLOB_MARKDOWN,
 	GLOB_MARKDOWN_IN_MARKDOWN,
 	MARKDOWN_CONFIG_NAME_SETUP,
 	MARKDOWN_CONFIG_NAME_SETUP_PARSER,
 	MARKDOWN_CONFIG_NAME_SETUP_PROCESSOR,
-} from '../src';
+} from '@hexadrop/eslint-config-shared';
+import { describe, expect, test } from 'bun:test';
+
+import markdown from '../src';
 
 describe('markdown factory', () => {
 	test('returns a thenable composer resolving to the markdown config slice', async () => {

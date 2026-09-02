@@ -1,12 +1,12 @@
-import { describe, expect, test } from 'bun:test';
-
-import json, {
+import {
 	GLOB_JSON,
 	JSON_CONFIG_NAME_RULES,
 	JSON_CONFIG_NAME_SETUP,
 	JSON_CONFIG_NAME_SETUP_PARSER,
-	JSON_SORT_KEYS_CONFIG,
-} from '../src';
+} from '@hexadrop/eslint-config-shared';
+import { describe, expect, test } from 'bun:test';
+
+import json, { JSON_SORT_KEYS_CONFIG } from '../src';
 
 describe('json factory', () => {
 	test('returns a thenable composer resolving to the json config slice', async () => {

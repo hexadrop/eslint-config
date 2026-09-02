@@ -1,24 +1,25 @@
-import { GLOB_MARKDOWN_SOURCE } from '@hexadrop/eslint-config-markdown';
 import {
+	DTS_GLOBS,
+	GLOB_MARKDOWN_SOURCE,
 	interopDefault,
+	JAVASCRIPT_GLOBS,
 	PLUGIN_RENAME,
 	PLUGIN_RENAME_TYPESCRIPT,
 	pluginConfigOverrideRules,
 	pluginConfigRules,
+	SOURCE_GLOBS,
+	TEST_GLOBS,
 	toArray,
-} from '@hexadrop/eslint-config-shared';
-
-import type { HexadropEslintOptions } from '../../options';
-import type { TypedFlatConfigItem } from '../../typed-config';
-import { JAVASCRIPT_GLOBS, SOURCE_GLOBS } from '../core';
-import {
 	TYPESCRIPT_CONFIG_NAME_RULES,
 	TYPESCRIPT_CONFIG_NAME_RULES_DTS,
 	TYPESCRIPT_CONFIG_NAME_RULES_TEST,
 	TYPESCRIPT_CONFIG_NAME_RULES_TYPEAWARE,
 	TYPESCRIPT_CONFIG_NAME_SETUP,
-} from './typescript.config-name';
-import { DTS_GLOBS, TEST_GLOBS, TYPESCRIPT_GLOBS } from './typescript.globs';
+	TYPESCRIPT_GLOBS,
+} from '@hexadrop/eslint-config-shared';
+
+import type { HexadropEslintOptions } from '../../options';
+import type { TypedFlatConfigItem } from '../../typed-config';
 import typescriptParser from './typescript.parser';
 
 export default async function typescript(options: HexadropEslintOptions): Promise<TypedFlatConfigItem[]> {

@@ -1,15 +1,15 @@
 import fs from 'node:fs';
 
-import { interopDefault } from '@hexadrop/eslint-config-shared';
-
-import type { HexadropEslintOptions } from '../../options';
-import type { TypedFlatConfigItem } from '../../typed-config';
 import {
 	IGNORE_CONFIG_NAME_ADDITIONAL,
 	IGNORE_CONFIG_NAME_DEFAULT,
 	IGNORE_CONFIG_NAME_GITIGNORE,
-} from './ignore.config-name';
-import IGNORE_GLOB from './ignore.globs';
+	IGNORE_GLOB,
+	interopDefault,
+} from '@hexadrop/eslint-config-shared';
+
+import type { HexadropEslintOptions } from '../../options';
+import type { TypedFlatConfigItem } from '../../typed-config';
 
 export default async function ignore({ ignore }: HexadropEslintOptions): Promise<TypedFlatConfigItem[]> {
 	if (ignore === false) {

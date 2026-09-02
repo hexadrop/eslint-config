@@ -1,15 +1,18 @@
-import { interopDefault, toArray } from '@hexadrop/eslint-config-shared';
-import globals from 'globals';
-
-import type { HexadropEslintOptions } from '../../options';
-import type { TypedFlatConfigItem } from '../../typed-config';
 import {
 	ASTRO_CONFIG_NAME_RULES,
 	ASTRO_CONFIG_NAME_SETUP,
 	ASTRO_CONFIG_NAME_SETUP_PARSER,
 	ASTRO_CONFIG_NAME_SETUP_PARSER_JAVASCRIPT,
-} from './astro.config-name';
-import { GLOB_ASTRO, GLOB_ASTRO_JAVASCRIPT, GLOB_ASTRO_TYPESCRIPT } from './astro.globs';
+	GLOB_ASTRO,
+	GLOB_ASTRO_JAVASCRIPT,
+	GLOB_ASTRO_TYPESCRIPT,
+	interopDefault,
+	toArray,
+} from '@hexadrop/eslint-config-shared';
+import globals from 'globals';
+
+import type { HexadropEslintOptions } from '../../options';
+import type { TypedFlatConfigItem } from '../../typed-config';
 
 export default async function astro(options: HexadropEslintOptions): Promise<TypedFlatConfigItem[]> {
 	const { astro, typescript } = options;
