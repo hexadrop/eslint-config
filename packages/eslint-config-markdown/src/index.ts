@@ -1,5 +1,4 @@
 export { default as markdown } from './markdown.config';
-export type { MarkdownConfigNames } from './markdown.config-name';
 export {
 	MARKDOWN_CONFIG_NAME_SETUP,
 	MARKDOWN_CONFIG_NAME_SETUP_PARSER,
@@ -13,3 +12,4 @@ export {
 	GLOB_MARKDOWN_JSON,
 	GLOB_MARKDOWN_SOURCE,
 } from './markdown.globs';
+export type { ConfigNames as MarkdownConfigNames } from './typegen';
