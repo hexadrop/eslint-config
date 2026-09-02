@@ -1,7 +1,3 @@
-# Development and testing
-
-Use the smallest command that validates the changed behavior.
-
 ## Working on `packages/eslint-config`
 
 When rules, plugins, or config names change, follow the same rule/plugin guidelines as before:
