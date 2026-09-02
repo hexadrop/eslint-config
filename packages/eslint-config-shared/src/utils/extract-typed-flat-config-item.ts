@@ -1,4 +1,4 @@
-import type { TypedFlatConfigItem } from '../types/typed-flat-config-item';
+import type { TypedFlatConfigItem } from '../types';
 
 const flatConfigProperties: (keyof TypedFlatConfigItem<never>)[] = [
 	'name',
