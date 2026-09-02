@@ -6,7 +6,4 @@ const importer = createJiti(import.meta.url);
  */
 const hexadrop = importer('./src').default;
 
-export default hexadrop(
-	{ ignores: ['.impeccable', 'bun.lock', 'e2e/fixtures'] },
-	{ name: 'e2e/react-version', settings: { react: { version: 'detect' } } }
-);
+export default hexadrop({ ignores: ['e2e/fixtures'] });
