@@ -1,5 +1,5 @@
-import { json } from '@hexadrop/eslint-config-json';
-import { markdown } from '@hexadrop/eslint-config-markdown';
+import { config as json } from '@hexadrop/eslint-config-json';
+import { config as markdown } from '@hexadrop/eslint-config-markdown';
 import { builtinRules } from 'eslint/use-at-your-own-risk';
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 

@@ -1,4 +1,4 @@
-export { default as json } from './json.config';
+export { default as config } from './json.config';
 export {
 	JSON_CONFIG_NAME_RULES,
 	JSON_CONFIG_NAME_SETUP,

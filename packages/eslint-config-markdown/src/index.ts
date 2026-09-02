@@ -1,4 +1,4 @@
-export { default as markdown } from './markdown.config';
+export { default as config } from './markdown.config';
 export {
 	MARKDOWN_CONFIG_NAME_SETUP,
 	MARKDOWN_CONFIG_NAME_SETUP_PARSER,
