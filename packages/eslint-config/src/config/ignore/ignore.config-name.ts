@@ -1,4 +1,4 @@
-import { PLUGIN_PREFIX } from '../../const';
+import { PLUGIN_PREFIX } from '@hexadrop/eslint-config-shared';
 
 const IGNORE_CONFIG_NAME = `${PLUGIN_PREFIX}/ignore` as const;
 const IGNORE_CONFIG_NAME_DEFAULT = IGNORE_CONFIG_NAME;

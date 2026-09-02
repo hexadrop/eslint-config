@@ -1,10 +1,10 @@
-import type { ESLint, Linter } from 'eslint';
+import { interopDefault } from '@hexadrop/eslint-config-shared';
+import type { Linter } from 'eslint';
 import { mergeProcessors, processorPassThrough } from 'eslint-merge-processors';
 import { meta, parseForESLint } from 'eslint-parser-plain';
 
 import type { HexadropEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
-import { interopDefault } from '../../utils';
 import {
 	MARKDOWN_CONFIG_NAME_SETUP,
 	MARKDOWN_CONFIG_NAME_SETUP_PARSER,
@@ -17,9 +17,9 @@ export default async function markdown(options: HexadropEslintOptions): Promise<
 	if (!markdown) {
 		return [];
 	}
-	const pluginMarkdown = (await interopDefault(import('@eslint/markdown'))) as ESLint.Plugin;
+	const pluginMarkdown = await interopDefault(import('@eslint/markdown'));
 	const processors = pluginMarkdown.processors;
-	const processor = processors?.['markdown'];
+	const processor = processors.markdown;
 
 	return [
 		{
@@ -33,7 +33,7 @@ export default async function markdown(options: HexadropEslintOptions): Promise<
 			ignores: GLOB_MARKDOWN_IN_MARKDOWN,
 			name: MARKDOWN_CONFIG_NAME_SETUP_PROCESSOR,
 			/*
-			 * `eslint-plugin-markdown` only creates virtual files for code blocks,
+			 * `@eslint/markdown` only creates virtual files for code blocks,
 			 * but not the markdown file itself. We use `eslint-merge-processors` to
 			 * add a pass-through processor for the markdown file itself.
 			 */

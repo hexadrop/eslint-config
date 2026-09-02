@@ -1,7 +1,8 @@
+import { interopDefault } from '@hexadrop/eslint-config-shared';
+
 import { PLUGIN_RENAME } from '../../const';
 import type { HexadropEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../types';
-import { interopDefault } from '../../utils';
 import { GLOB_ASTRO } from '../astro';
 import { ESLINT_CONFIG_GLOBS } from '../core';
 import { GLOB_MARKDOWN_ASTRO, GLOB_MARKDOWN_JSON, GLOB_MARKDOWN_SOURCE } from '../markdown';
