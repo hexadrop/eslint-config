@@ -1,5 +1,5 @@
 import { interopDefault } from '@hexadrop/eslint-config-shared';
-import type { ESLint, Linter } from 'eslint';
+import type { Linter } from 'eslint';
 import { mergeProcessors, processorPassThrough } from 'eslint-merge-processors';
 import { meta, parseForESLint } from 'eslint-parser-plain';
 
@@ -12,9 +12,9 @@ import { GLOB_MARKDOWN, GLOB_MARKDOWN_IN_MARKDOWN } from './markdown.globs';
 import type { TypedFlatConfigItem } from './markdown.typed-config';
 
 async function markdownConfig(): Promise<TypedFlatConfigItem[]> {
-	const pluginMarkdown = (await interopDefault(import('@eslint/markdown'))) as ESLint.Plugin;
+	const pluginMarkdown = await interopDefault(import('@eslint/markdown'));
 	const processors = pluginMarkdown.processors;
-	const processor = processors?.['markdown'];
+	const processor = processors.markdown;
 
 	return [
 		{
