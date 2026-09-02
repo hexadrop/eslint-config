@@ -68,7 +68,6 @@
         "jsonc-eslint-parser": "3.3.0",
       },
       "devDependencies": {
-        "eslint-typegen": "2.3.1",
         "tsdown": "0.22.14",
       },
       "peerDependencies": {
@@ -85,7 +84,6 @@
         "eslint-parser-plain": "0.1.1",
       },
       "devDependencies": {
-        "eslint-typegen": "2.3.1",
         "tsdown": "0.22.14",
       },
       "peerDependencies": {
@@ -96,7 +94,8 @@
       "name": "@hexadrop/eslint-config-shared",
       "version": "0.0.0",
       "devDependencies": {
-        "eslint": "^9.17.0 || ^10.0.0",
+        "eslint": "10.9.1",
+        "eslint-typegen": "2.3.1",
       },
     },
   },

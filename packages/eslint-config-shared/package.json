@@ -27,6 +27,7 @@
 		"./*": "./src/*"
 	},
 	"devDependencies": {
-		"eslint": "^9.17.0 || ^10.0.0"
+		"eslint": "10.9.1",
+		"eslint-typegen": "2.3.1"
 	}
 }
