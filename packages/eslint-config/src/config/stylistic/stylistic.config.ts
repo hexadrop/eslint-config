@@ -6,7 +6,7 @@ import {
 	pluginConfigRules,
 	renameRules,
 } from '@hexadrop/eslint-config-shared';
-import type { ESLint, Linter } from 'eslint';
+import type { Linter } from 'eslint';
 
 import type { HexadropEslintOptions } from '../../options';
 import type { TypedFlatConfigItem } from '../../typed-config';
@@ -53,7 +53,7 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 	const pluginStylisticConfig = pluginStylistic.configs.customize(pluginStylisticOptions);
 	const pluginStylisticRules = pluginStylisticConfig.rules as Linter.RulesRecord;
 
-	const pluginUnicorn = (await interopDefault(import('eslint-plugin-unicorn'))) as ESLint.Plugin;
+	const pluginUnicorn = await interopDefault(import('eslint-plugin-unicorn'));
 
 	const pluginPerfectionistRoot = await interopDefault(import('eslint-plugin-perfectionist'));
 	const pluginPerfectionist = pluginPerfectionistRoot.configs['recommended-natural'];
@@ -347,10 +347,8 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 	}
 
 	if (unicorn) {
-		const unicornFlatRecommended = pluginUnicorn.configs
-			? (pluginUnicorn.configs['flat/recommended'] as Linter.Config)
-			: undefined;
-		const unicornRules = unicornFlatRecommended?.rules as Linter.RulesRecord;
+		const unicornFlatRecommended = pluginUnicorn.configs.recommended;
+		const unicornRules = unicornFlatRecommended.rules;
 
 		config.push({
 			name: STYLISTIC_CONFIG_NAME_RULES_UNICORN,
