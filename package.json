@@ -32,14 +32,15 @@
 		}
 	},
 	"scripts": {
-		"build": "bun run scripts/typegen.ts && tsdown",
+		"build": "bun run build:types && tsdown",
 		"build:types": "bun run scripts/typegen.ts",
 		"commitlint": "commitlint --edit",
 		"lint": "eslint --cache .",
 		"lint:ci": "eslint --cache --cache-strategy content .",
 		"lint:fix": "eslint --cache --fix .",
 		"prepare": "husky && bun run build:types",
-		"prepublishOnly": "bun run scripts/typegen.ts && tsdown",
+		"prepublishOnly": "bun run build:types && tsdown",
+		"test": "bun test",
 		"typecheck": "tsc --noEmit"
 	},
 	"peerDependencies": {

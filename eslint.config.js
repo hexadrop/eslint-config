@@ -1,9 +1,9 @@
-import Importer from 'jiti';
+import { createJiti } from 'jiti';
 
-const importer = Importer(import.meta.url);
+const importer = createJiti(import.meta.url);
 /**
- * @type {import('./src').default}
+ *@type {import('./src').default}
  */
 const hexadrop = importer('./src').default;
 
-export default hexadrop();
+export default hexadrop({ ignores: ['e2e/fixtures'] });
