@@ -1,5 +1,4 @@
-import type { Awaitable } from '../types';
-import type { TypedFlatConfigItem } from '../types/typed-flat-config-item';
+import type { Awaitable, TypedFlatConfigItem } from '../types';
 
 /**
  * Combine array and non-array configs into a single array.
