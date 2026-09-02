@@ -281,7 +281,7 @@ This project uses [Bun](https://bun.sh) as its runtime, test runner, and bundler
 git clone git@github.com:hexadrop/eslint-config.git
 cd eslint-config
 bun install
-bun run build
+bun run --filter @hexadrop/eslint-config build
 ```
 
 Read the full [contribution guidelines](./CONTRIBUTING.md) before opening an issue or pull request.
