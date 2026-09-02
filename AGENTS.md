@@ -3,7 +3,7 @@
 A Bun workspaces monorepo. The published package lives at `packages/eslint-config` and other feature packages may be added under `packages/*` as the issue series progresses.
 
 - **Package manager:** Bun (`bun`)
-- **Build:** `bun run --filter @hexadrop/eslint-config build`
+- **Build:** `bun run build`
 - **Test:** `bun run test`
 - **Type-check:** `bun run typecheck`
 - **Lint:** `bun run lint:fix`

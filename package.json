@@ -25,6 +25,7 @@
 	],
 	"type": "module",
 	"scripts": {
+		"build": "bun run --filter '*' build",
 		"commitlint": "commitlint --edit",
 		"lint": "eslint --cache .",
 		"lint:ci": "eslint --cache --cache-strategy content .",

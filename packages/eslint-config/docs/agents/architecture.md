@@ -4,14 +4,14 @@
 
 ## Entry points
 
-| Area | Responsibility |
-| --- | --- |
-| `src/factory.ts` | Exports the default `hexadrop()` factory and creates the `FlatConfigComposer`. |
-| `src/config/` | Defines one independent configuration concern per directory. |
-| `src/options/` | Defines public options and resolves feature defaults. |
-| `src/const/` | Stores shared constants, including plugin-prefix mappings. |
-| `src/utils/` | Provides small composition and interop helpers. |
-| `scripts/typegen.ts` | Generates typed rules and configuration names. |
+| Area                 | Responsibility                                                                 |
+|----------------------|--------------------------------------------------------------------------------|
+| `src/factory.ts`     | Exports the default `hexadrop()` factory and creates the `FlatConfigComposer`. |
+| `src/config/`        | Defines one independent configuration concern per directory.                   |
+| `src/options/`       | Defines public options and resolves feature defaults.                          |
+| `src/const/`         | Stores shared constants, including plugin-prefix mappings.                     |
+| `src/utils/`         | Provides small composition and interop helpers.                                |
+| `scripts/typegen.ts` | Generates typed rules and configuration names.                                 |
 
 ## Configuration pipeline
 
