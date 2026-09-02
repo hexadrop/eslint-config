@@ -4,7 +4,7 @@ import { mergeProcessors, processorPassThrough } from 'eslint-merge-processors';
 import { meta, parseForESLint } from 'eslint-parser-plain';
 
 import type { HexadropEslintOptions } from '../../options';
-import type { TypedFlatConfigItem } from '../../types';
+import type { TypedFlatConfigItem } from '../../typed-config';
 import {
 	MARKDOWN_CONFIG_NAME_SETUP,
 	MARKDOWN_CONFIG_NAME_SETUP_PARSER,

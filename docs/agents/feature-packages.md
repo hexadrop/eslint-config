@@ -14,13 +14,13 @@ The monorepo splits the config into granular feature packages under `packages/`.
 
 - Import from the package name (`@hexadrop/eslint-config-shared`), never via relative paths across packages.
 - **Do not declare it in `dependencies` or `devDependencies`.** It is resolved through the root `tsconfig.json` `paths` during development and type-checking, and the root `eslint.config.js` whitelists it for `import/no-extraneous-dependencies`.
-- Add `noExternal: ['@hexadrop/eslint-config-shared']` to the package's `tsdown.config.ts` so the code is inlined into the published bundle. It must never appear as a runtime dependency of any published package.
-- Each package keeps a local `TypedFlatConfigItem` alias binding the shared generic to its own generated `RuleOptions`:
+- Add `deps: { alwaysBundle: ['@hexadrop/eslint-config-shared'] }` to the package's `tsdown.config.ts` so the code is inlined into the published bundle. It must never appear as a runtime dependency of any published package.
+- Each package keeps a local `TypedFlatConfigItem` alias, colocated with its config files as `src/<feature>.typed-config.ts`, binding the shared generic to its own generated `RuleOptions`:
 
   ```ts
   import type { TypedFlatConfigItem as TypedFlatConfigItemShared } from '@hexadrop/eslint-config-shared';
 
-  import type { RuleOptions } from '../typegen';
+  import type { RuleOptions } from './typegen';
 
   export type TypedFlatConfigItem = TypedFlatConfigItemShared<RuleOptions>;
   ```
@@ -41,6 +41,10 @@ The root `tsconfig.json` `paths` maps **every** package name to its `src/` entry
 - This is what makes a clean `bun install` work: the meta-package's `prepare` typegen imports `@hexadrop/eslint-config-json` before any `dist/` exists, and `paths` resolves it to the source.
 - When adding a new feature package, add its `paths` entry following the existing pattern (`name` → `src/index.ts`, `name/*` → `src/*`).
 - Publishing is unaffected: consumers resolve the semver range against the published `dist/`, and tsdown builds each package from its own source.
+
+## Local imports
+
+Inside a feature package, always import own sources with plain relative paths (`./` within `src/`, `../src/` from `test/`, `e2e/` and `scripts/`) — no path aliases. This keeps the packages free of per-package `tsconfig.json` files: the root `tsconfig.json` only maps package **names** (for cross-package imports), and everything inside a package resolves without extra configuration. Cross-package imports still use the package name (`@hexadrop/eslint-config-shared`), never relative paths across packages.
 
 ## The `development` export condition
 

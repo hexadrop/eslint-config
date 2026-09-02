@@ -1,20 +1,23 @@
-import { interopDefault, pluginConfigRules, renameRules } from '@hexadrop/eslint-config-shared';
+import { GLOB_JSON, JSON_SORT_KEYS_CONFIG } from '@hexadrop/eslint-config-json';
+import {
+	interopDefault,
+	PLUGIN_RENAME,
+	PLUGIN_RENAME_TYPESCRIPT,
+	pluginConfigRules,
+	renameRules,
+} from '@hexadrop/eslint-config-shared';
 import type { Linter } from 'eslint';
 
-import { PLUGIN_RENAME, PLUGIN_RENAME_TYPESCRIPT } from '../../const';
 import type { HexadropEslintOptions } from '../../options';
-import type { TypedFlatConfigItem } from '../../types';
+import type { TypedFlatConfigItem } from '../../typed-config';
 import { GLOB_ASTRO } from '../astro';
 import { JAVASCRIPT_GLOBS, SOURCE_GLOBS } from '../core';
-import { GLOB_JSON, GLOB_JSON_PACKAGE, GLOB_JSON_TSCONFIG } from '../json';
 import { GLOB_MARKDOWN, GLOB_MARKDOWN_ASTRO, GLOB_MARKDOWN_JSON, GLOB_MARKDOWN_SOURCE } from '../markdown';
 import { DTS_GLOBS, TYPESCRIPT_GLOBS } from '../typescript';
 import {
 	STYLISTIC_CONFIG_NAME_RULES,
 	STYLISTIC_CONFIG_NAME_RULES_ASTRO,
 	STYLISTIC_CONFIG_NAME_RULES_JSON,
-	STYLISTIC_CONFIG_NAME_RULES_JSON_PACKAGE,
-	STYLISTIC_CONFIG_NAME_RULES_JSON_TSCONFIG,
 	STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_ASRTO,
 	STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_JSON,
 	STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_SOURCE,
@@ -326,217 +329,7 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 					[`${jsonPluginRename}/quotes`]: 'error',
 				},
 			},
-			{
-				files: GLOB_JSON_PACKAGE,
-				name: STYLISTIC_CONFIG_NAME_RULES_JSON_PACKAGE,
-				rules: {
-					'jsonc/sort-array-values': [
-						'error',
-						{
-							order: { type: 'asc' },
-							pathPattern: '^files$',
-						},
-					],
-					'jsonc/sort-keys': [
-						'error',
-						{
-							order: [
-								'name',
-								'displayName',
-								'version',
-								'author',
-								'publisher',
-								'description',
-								'keywords',
-								'categories',
-								'repository',
-								'homepage',
-								'bugs',
-								'funding',
-								'license',
-								'private',
-								'publishConfig',
-								'type',
-								'sideEffects',
-								'bin',
-								'icon',
-								'files',
-								'main',
-								'module',
-								'unpkg',
-								'jsdelivr',
-								'types',
-								'exports',
-								'typesVersions',
-								'scripts',
-								'peerDependencies',
-								'peerDependenciesMeta',
-								'dependencies',
-								'optionalDependencies',
-								'devDependencies',
-								'overrides',
-								'resolutions',
-								'engines',
-								'packageManager',
-								'pnpm',
-								'activationEvents',
-								'contributes',
-								'husky',
-								'simple-git-hooks',
-								'lint-staged',
-								'eslintConfig',
-							],
-							pathPattern: '^$',
-						},
-						{
-							order: { type: 'asc' },
-							pathPattern: '^(?:dev|peer|optional|bundled)?[Dd]ependencies(Meta)?$',
-						},
-						{
-							order: { type: 'asc' },
-							pathPattern: '^(?:resolutions|overrides|pnpm.overrides)$',
-						},
-						{
-							order: { type: 'asc' },
-							pathPattern: '^(?:scripts)$',
-						},
-						{
-							order: ['types', 'import', 'require', 'default'],
-							pathPattern: '^exports.*$',
-						},
-						{
-							order: [
-								// Client hooks only
-								'pre-commit',
-								'prepare-commit-msg',
-								'commit-msg',
-								'post-commit',
-								'pre-rebase',
-								'post-rewrite',
-								'post-checkout',
-								'post-merge',
-								'pre-push',
-								'pre-auto-gc',
-							],
-							pathPattern: '^(?:gitHooks|husky|simple-git-hooks)$',
-						},
-					],
-				},
-			},
-			{
-				files: GLOB_JSON_TSCONFIG,
-				name: STYLISTIC_CONFIG_NAME_RULES_JSON_TSCONFIG,
-				rules: {
-					'jsonc/sort-keys': [
-						'error',
-						{
-							order: ['extends', 'compilerOptions', 'references', 'files', 'include', 'exclude'],
-							pathPattern: '^$',
-						},
-						{
-							order: [
-								// Projects
-								'incremental',
-								'composite',
-								'tsBuildInfoFile',
-								'disableSourceOfProjectReferenceRedirect',
-								'disableSolutionSearching',
-								'disableReferencedProjectLoad',
-								// Language and Environment
-								'target',
-								'jsx',
-								'jsxFactory',
-								'jsxFragmentFactory',
-								'jsxImportSource',
-								'lib',
-								'moduleDetection',
-								'noLib',
-								'reactNamespace',
-								'useDefineForClassFields',
-								'emitDecoratorMetadata',
-								'experimentalDecorators',
-								// Modules
-								'baseUrl',
-								'rootDir',
-								'rootDirs',
-								'customConditions',
-								'module',
-								'moduleResolution',
-								'moduleSuffixes',
-								'noResolve',
-								'paths',
-								'resolveJsonModule',
-								'resolvePackageJsonExports',
-								'resolvePackageJsonImports',
-								'typeRoots',
-								'types',
-								'allowArbitraryExtensions',
-								'allowImportingTsExtensions',
-								'allowUmdGlobalAccess',
-								// JavaScript Support
-								'allowJs',
-								'checkJs',
-								'maxNodeModuleJsDepth',
-								// Type Checking
-								'strict',
-								'strictBindCallApply',
-								'strictFunctionTypes',
-								'strictNullChecks',
-								'strictPropertyInitialization',
-								'allowUnreachableCode',
-								'allowUnusedLabels',
-								'alwaysStrict',
-								'exactOptionalPropertyTypes',
-								'noFallthroughCasesInSwitch',
-								'noImplicitAny',
-								'noImplicitOverride',
-								'noImplicitReturns',
-								'noImplicitThis',
-								'noPropertyAccessFromIndexSignature',
-								'noUncheckedIndexedAccess',
-								'noUnusedLocals',
-								'noUnusedParameters',
-								'useUnknownInCatchVariables',
-								// Emit
-								'declaration',
-								'declarationDir',
-								'declarationMap',
-								'downlevelIteration',
-								'emitBOM',
-								'emitDeclarationOnly',
-								'importHelpers',
-								'importsNotUsedAsValues',
-								'inlineSourceMap',
-								'inlineSources',
-								'mapRoot',
-								'newLine',
-								'noEmit',
-								'noEmitHelpers',
-								'noEmitOnError',
-								'outDir',
-								'outFile',
-								'preserveConstEnums',
-								'preserveValueImports',
-								'removeComments',
-								'sourceMap',
-								'sourceRoot',
-								'stripInternal',
-								// Interop Constraints
-								'allowSyntheticDefaultImports',
-								'esModuleInterop',
-								'forceConsistentCasingInFileNames',
-								'isolatedModules',
-								'preserveSymlinks',
-								'verbatimModuleSyntax',
-								// Completeness
-								'skipDefaultLibCheck',
-								'skipLibCheck',
-							],
-							pathPattern: '^compilerOptions$',
-						},
-					],
-				},
-			}
+			...JSON_SORT_KEYS_CONFIG
 		);
 	}
 

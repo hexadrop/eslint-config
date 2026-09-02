@@ -2,7 +2,7 @@ import { cwd } from 'node:process';
 
 import type { Linter } from 'eslint';
 
-import type { TypedFlatConfigItem } from '../../types';
+import type { TypedFlatConfigItem } from '../../typed-config';
 import {
 	TYPESCRIPT_CONFIG_NAME_SETUP_PARSER,
 	TYPESCRIPT_CONFIG_NAME_SETUP_PARSER_TYPEAWARE,

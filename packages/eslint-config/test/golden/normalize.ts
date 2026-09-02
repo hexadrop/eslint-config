@@ -1,4 +1,4 @@
-import type { TypedFlatConfigItem } from '../../src/types';
+import type { TypedFlatConfigItem } from '../../src/typed-config';
 
 /*
  * eslint-plugin-unicorn suggests `localeCompare`, but its ordering varies by

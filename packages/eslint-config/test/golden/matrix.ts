@@ -1,7 +1,7 @@
 import type { RecursivePartial } from '@hexadrop/eslint-config-shared';
 
 import type { HexadropEslintOptions } from '../../src/options';
-import type { TypedFlatConfigItem } from '../../src/types';
+import type { TypedFlatConfigItem } from '../../src/typed-config';
 
 interface MatrixCell {
 	description: string;
