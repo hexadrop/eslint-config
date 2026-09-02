@@ -1,21 +1,5 @@
 # Development and testing
 
-Use the smallest command that validates the changed behavior.
-
-## Commands
-
-| Task                       | Command                                                    |
-|----------------------------|------------------------------------------------------------|
-| Install dependencies       | `bun install`                                              |
-| Run all unit tests         | `bun run test`                                             |
-| Run tests for this package | `bun test packages/eslint-config-json`                     |
-| Run the unit tests         | `bun test packages/eslint-config-json/test`                |
-| Run the e2e tests          | `bun test packages/eslint-config-json/e2e`                 |
-| Run tests for one file     | `bun test packages/eslint-config-json/test/<file>.test.ts` |
-| Lint and fix               | `bun run lint:fix`                                         |
-| Type-check                 | `bun run typecheck`                                        |
-| Build this package         | `bun run --filter @hexadrop/eslint-config-json build`      |
-
 ## Working on `packages/eslint-config-json`
 
 When rules, plugins, or config names change:
