@@ -1,4 +1,3 @@
-import type { HexadropEslintJsonOptions } from '../src';
 import type { TypedFlatConfigItem } from '../src/json.typed-config';
 
 interface EndToEndCase {
@@ -9,7 +8,6 @@ interface EndToEndCase {
 	 * the filename-scoped canonical key ordering rules.
 	 */
 	file: string;
-	options?: HexadropEslintJsonOptions;
 	slug: string;
 }
 
@@ -55,11 +53,6 @@ export const END_TO_END_CASES: EndToEndCase[] = [
 		extraConfigs: [{ name: 'consumer/rule-override', rules: { 'json/no-dupe-keys': 'off' } }],
 		file: 'rule-override.json',
 		slug: 'rule-override',
-	},
-	{
-		file: 'disabled.json',
-		options: { json: false },
-		slug: 'disabled',
 	},
 ];
 

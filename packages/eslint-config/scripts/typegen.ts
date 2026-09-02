@@ -21,7 +21,7 @@ const configs = await combine(
 	typescript(options),
 	react(options),
 	astro(options),
-	json(options),
+	json(),
 	markdown(options),
 	imports(options),
 	stylistic(options)

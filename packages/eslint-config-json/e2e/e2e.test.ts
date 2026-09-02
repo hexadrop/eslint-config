@@ -11,7 +11,7 @@ const FIXTURES_DIR = path.join(import.meta.dir, 'fixtures');
 
 async function createESLint(e2eCase: EndToEndCase): Promise<{ eslint: ESLint; inputPath: string }> {
 	const inputPath = path.join(FIXTURES_DIR, e2eCase.file);
-	const overrideConfig = await json(e2eCase.options, ...JSON_SORT_KEYS_CONFIG, ...(e2eCase.extraConfigs ?? []));
+	const overrideConfig = await json(...JSON_SORT_KEYS_CONFIG, ...(e2eCase.extraConfigs ?? []));
 
 	if (!(await Bun.file(inputPath).exists())) {
 		throw new Error(`Missing fixture file: ${e2eCase.file}`);

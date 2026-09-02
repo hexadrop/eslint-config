@@ -4,21 +4,7 @@ import { JSON_CONFIG_NAME_RULES, JSON_CONFIG_NAME_SETUP, JSON_CONFIG_NAME_SETUP_
 import { GLOB_JSON } from './json.globs';
 import type { TypedFlatConfigItem } from './json.typed-config';
 
-interface HexadropEslintJsonOptions {
-	/**
-	 * Enable json support.
-	 *
-	 * @default true
-	 */
-	json: boolean;
-}
-
-async function jsonConfig(options: HexadropEslintJsonOptions): Promise<TypedFlatConfigItem[]> {
-	const { json: enabled } = options;
-	if (!enabled) {
-		return [];
-	}
-
+async function jsonConfig(): Promise<TypedFlatConfigItem[]> {
 	const [pluginJsonc, parserJsonc] = await Promise.all([
 		interopDefault(import('eslint-plugin-jsonc')),
 		interopDefault(import('jsonc-eslint-parser')),
@@ -74,7 +60,5 @@ async function jsonConfig(options: HexadropEslintJsonOptions): Promise<TypedFlat
 		},
 	];
 }
-
-export type { HexadropEslintJsonOptions };
 
 export default jsonConfig;

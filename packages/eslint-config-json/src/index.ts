@@ -1,4 +1,4 @@
-export { type HexadropEslintJsonOptions, default as json } from './json.config';
+export { default as json } from './json.config';
 export type { JsonConfigNames } from './json.config-name';
 export {
 	JSON_CONFIG_NAME_RULES,

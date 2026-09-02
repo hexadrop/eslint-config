@@ -1,4 +1,3 @@
-import { json } from '@hexadrop/eslint-config-json';
 import type { RecursivePartial } from '@hexadrop/eslint-config-shared';
 import { extractTypedFlatConfigItem, PLUGIN_RENAME } from '@hexadrop/eslint-config-shared';
 import type { ResolvableFlatConfig } from 'eslint-flat-config-utils';
@@ -23,7 +22,15 @@ export default function hexadrop(
 		astro(options),
 		typescript(options),
 		react(options),
-		json(options),
+		...(options.json
+			? [
+					(async () => {
+						const imported = await import('@hexadrop/eslint-config-json');
+
+						return imported.json();
+					})(),
+				]
+			: []),
 		markdown(options),
 		imports(options),
 		stylistic(options)

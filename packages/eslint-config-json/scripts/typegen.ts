@@ -3,7 +3,7 @@ import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 import json from '../src/json.config';
 import JSON_SORT_KEYS_CONFIG from '../src/json.sort-keys';
 
-const configs = [...(await json({ json: true })), ...JSON_SORT_KEYS_CONFIG];
+const configs = [...(await json()), ...JSON_SORT_KEYS_CONFIG];
 
 const configNames = configs.map(index => index.name).filter(Boolean) as string[];
 
