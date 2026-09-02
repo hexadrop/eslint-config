@@ -11,7 +11,7 @@ import {
 import { GLOB_MARKDOWN, GLOB_MARKDOWN_IN_MARKDOWN } from './markdown.globs';
 import type { TypedFlatConfigItem } from './markdown.typed-config';
 
-async function markdownConfig(): Promise<TypedFlatConfigItem[]> {
+export default async function markdownConfig(): Promise<TypedFlatConfigItem[]> {
 	const pluginMarkdown = await interopDefault(import('@eslint/markdown'));
 	const processors = pluginMarkdown.processors;
 	const processor = processors.markdown;
@@ -46,5 +46,3 @@ async function markdownConfig(): Promise<TypedFlatConfigItem[]> {
 		},
 	];
 }
-
-export default markdownConfig;
