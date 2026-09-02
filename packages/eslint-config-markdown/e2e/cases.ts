@@ -1,12 +1,4 @@
-interface EndToEndCase {
-	/**
-	 * Markdown fixture file at e2e/fixtures/<file>. The markdown slice ships no
-	 * rules of its own: the processor and the plain parser decide which virtual
-	 * files reach the linter and what diagnostics survive.
-	 */
-	file: string;
-	slug: string;
-}
+import type { EndToEndCase } from '@hexadrop/eslint-config-shared';
 
 /**
  * End-to-end scenarios over real fixture files, mirroring the strategy of
@@ -23,4 +15,4 @@ export const END_TO_END_CASES: EndToEndCase[] = [
 	},
 ];
 
-export type { EndToEndCase };
+export { type EndToEndCase } from '@hexadrop/eslint-config-shared';

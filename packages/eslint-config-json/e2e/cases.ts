@@ -1,14 +1,9 @@
+import type { EndToEndCase as BaseEndToEndCase } from '@hexadrop/eslint-config-shared';
+
 import type { TypedFlatConfigItem } from '../src/json.typed-config';
 
-interface EndToEndCase {
+interface EndToEndCase extends BaseEndToEndCase {
 	extraConfigs?: TypedFlatConfigItem[];
-	/**
-	 * Dirty fixture file at e2e/fixtures/<file>. The file name is part of
-	 * the behavior under test: `package.json` and `tsconfig.json` activate
-	 * the filename-scoped canonical key ordering rules.
-	 */
-	file: string;
-	slug: string;
 }
 
 /**

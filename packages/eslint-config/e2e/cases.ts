@@ -1,18 +1,11 @@
-import type { RecursivePartial } from '@hexadrop/eslint-config-shared';
+import type { EndToEndCase as BaseEndToEndCase, RecursivePartial } from '@hexadrop/eslint-config-shared';
 
 import type { HexadropEslintOptions } from '../src/options';
 import type { TypedFlatConfigItem } from '../src/typed-config';
 
-interface EndToEndCase {
+interface EndToEndCase extends BaseEndToEndCase {
 	extraConfigs?: TypedFlatConfigItem[];
-	/**
-	 * Dirty fixture file at e2e/fixtures/<file>. The file name is part of
-	 * the behavior under test: `package.json` and `tsconfig.json` activate
-	 * filename-scoped rules such as the canonical key ordering.
-	 */
-	file: string;
 	options?: RecursivePartial<HexadropEslintOptions>;
-	slug: string;
 }
 
 const DEFAULTS: RecursivePartial<HexadropEslintOptions> = { astro: false, react: false, typescript: true };
