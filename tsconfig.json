@@ -1,13 +1,7 @@
 {
 	"extends": "@hexadrop/tsconfig",
 	"compilerOptions": {
-		"paths": {
-			"@hexadrop/eslint-config-json": ["./packages/eslint-config-json/src/index.ts"],
-			"@hexadrop/eslint-config-json/*": ["./packages/eslint-config-json/src/*"],
-			"@hexadrop/eslint-config-shared": ["./packages/eslint-config-shared/src/index.ts"],
-			"@hexadrop/eslint-config-shared/*": ["./packages/eslint-config-shared/src/*"]
-		},
 		"types": ["bun"]
 	},
-	"exclude": ["dist", "node_modules", "packages/eslint-config/e2e/fixtures"]
+	"exclude": ["dist", "node_modules", "packages/*/e2e/fixtures"]
 }
