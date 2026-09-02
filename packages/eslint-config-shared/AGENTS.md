@@ -10,11 +10,11 @@ Internal shared types, constants and utilities for the `@hexadrop/eslint-config`
 
 ## What lives here
 
-| Area | Contents |
-| --- | --- |
+`| Area         | Contents                                                                                                         |
+|--------------|------------------------------------------------------------------------------------------------------------------|
 | `src/types/` | Pure types: `Awaitable`, `Nullable`, `RecursivePartial`, and the generic `TypedFlatConfigItem<RuleOptionsType>`. |
-| `src/const/` | `PLUGIN_PREFIX` (`'hexadrop'`). |
-| `src/utils/` | `interopDefault`, `toArray`, `renameRules`, `pluginConfigRules`, `pluginConfigOverrideRules`. |
+| `src/const/` | `PLUGIN_PREFIX` (`'hexadrop'`).                                                                                  |
+| `src/utils/` | `interopDefault`, `toArray`, `renameRules`, `pluginConfigRules`, `pluginConfigOverrideRules`.                    |
 
 ## What does NOT live here
 
@@ -24,4 +24,4 @@ Internal shared types, constants and utilities for the `@hexadrop/eslint-config`
 
 ## Consumption rules
 
-See [Feature packages](../../../docs/agents/feature-packages.md): import by package name, resolve via the root `tsconfig.json` `paths`, never declare it in a manifest (the root `eslint.config.js` whitelists it for `import/no-extraneous-dependencies`), and bundle it via tsdown `noExternal`.
+See [Feature packages](../../docs/agents/feature-packages.md): import by package name, resolve via the root `tsconfig.json` `paths`, never declare it in a manifest (the root `eslint.config.js` whitelists it for `import/no-extraneous-dependencies`), and bundle it via tsdown `noExternal`.
