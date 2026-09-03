@@ -7,7 +7,9 @@
 			"@hexadrop/eslint-config-markdown": ["./packages/eslint-config-markdown/src/index.ts"],
 			"@hexadrop/eslint-config-markdown/*": ["./packages/eslint-config-markdown/src/*"],
 			"@hexadrop/eslint-config-shared": ["./packages/eslint-config-shared/src/index.ts"],
-			"@hexadrop/eslint-config-shared/*": ["./packages/eslint-config-shared/src/*"]
+			"@hexadrop/eslint-config-shared/*": ["./packages/eslint-config-shared/src/*"],
+			"@hexadrop/eslint-config-typescript": ["./packages/eslint-config-typescript/src/index.ts"],
+			"@hexadrop/eslint-config-typescript/*": ["./packages/eslint-config-typescript/src/*"]
 		},
 		"types": ["bun"]
 	},

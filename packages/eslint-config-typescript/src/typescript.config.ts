@@ -3,7 +3,6 @@ import {
 	GLOB_MARKDOWN_SOURCE,
 	interopDefault,
 	JAVASCRIPT_GLOBS,
-	PLUGIN_RENAME,
 	PLUGIN_RENAME_TYPESCRIPT,
 	pluginConfigOverrideRules,
 	pluginConfigRules,
@@ -18,13 +17,25 @@ import {
 	TYPESCRIPT_GLOBS,
 } from '@hexadrop/eslint-config-shared';
 
-import type { HexadropEslintOptions } from '../../options';
-import type { TypedFlatConfigItem } from '../../typed-config';
 import typescriptParser from './typescript.parser';
+import type { TypedFlatConfigItem } from './typescript.typed-config';
 
-export default async function typescript(options: HexadropEslintOptions): Promise<TypedFlatConfigItem[]> {
-	const { typescript } = options;
-	if (typescript === false) {
+export interface TypescriptFactoryOptions {
+	/**
+	 * If true, enables TS support without type-aware linting.
+	 *  If a string or array, enables type-aware linting with those tsconfig paths.
+	 *  If false/undefined, returns an empty config.
+	 */
+	project?: boolean | string | string[];
+	/**
+	 *Root directory for tsconfig resolution. Defaults to cwd().
+	 */
+	tsconfigRootDir?: string;
+}
+
+export default async function typescriptConfig(options: TypescriptFactoryOptions = {}): Promise<TypedFlatConfigItem[]> {
+	const { project, tsconfigRootDir } = options;
+	if (!project) {
 		return [];
 	}
 
@@ -33,12 +44,11 @@ export default async function typescript(options: HexadropEslintOptions): Promis
 		interopDefault(import('@typescript-eslint/parser')),
 	] as const);
 
-	const typescriptPluginRename = PLUGIN_RENAME['@typescript-eslint'];
+	const typescriptPluginRename = PLUGIN_RENAME_TYPESCRIPT['@typescript-eslint'];
 
 	const config: TypedFlatConfigItem[] = [];
-	const isTypeAware = typeof typescript !== 'boolean';
+	const isTypeAware = typeof project !== 'boolean';
 
-	// Install the plugins without globs, so they can be configured separately.
 	config.push({
 		name: TYPESCRIPT_CONFIG_NAME_SETUP,
 		plugins: {
@@ -46,7 +56,7 @@ export default async function typescript(options: HexadropEslintOptions): Promis
 		},
 	});
 
-	if (typescript === true) {
+	if (project === true) {
 		config.push(
 			typescriptParser({
 				files: SOURCE_GLOBS,
@@ -63,7 +73,8 @@ export default async function typescript(options: HexadropEslintOptions): Promis
 				files: TYPESCRIPT_GLOBS,
 				ignores: GLOB_MARKDOWN_SOURCE,
 				parser,
-				tsconfigPath: toArray(typescript),
+				tsconfigPath: toArray(project),
+				...(tsconfigRootDir && { tsconfigRootDir }),
 			})
 		);
 	}
@@ -77,7 +88,6 @@ export default async function typescript(options: HexadropEslintOptions): Promis
 				...pluginConfigRules(plugin, 'strict', PLUGIN_RENAME_TYPESCRIPT),
 				[`${typescriptPluginRename}/explicit-module-boundary-types`]: ['error'],
 				[`${typescriptPluginRename}/no-extraneous-class`]: 'off',
-				// Disable the following rules, as they are covered by the eslint-plugin-unused-imports
 				[`${typescriptPluginRename}/no-unused-vars`]: 'off',
 			},
 		},

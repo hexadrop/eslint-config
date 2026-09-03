@@ -44,6 +44,7 @@
 	"dependencies": {
 		"@hexadrop/eslint-config-json": "1.0.11",
 		"@hexadrop/eslint-config-markdown": "1.0.11",
+		"@hexadrop/eslint-config-typescript": "1.0.11",
 		"@stylistic/eslint-plugin": "5.10.0",
 		"@typescript-eslint/eslint-plugin": "8.68.0",
 		"@typescript-eslint/parser": "8.68.0",

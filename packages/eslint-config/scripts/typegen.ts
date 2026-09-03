@@ -1,10 +1,11 @@
 import { config as json } from '@hexadrop/eslint-config-json';
 import { config as markdown } from '@hexadrop/eslint-config-markdown';
+import { config as typescript } from '@hexadrop/eslint-config-typescript';
 import { builtinRules } from 'eslint/use-at-your-own-risk';
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 
 import { combine } from '../src';
-import { astro, core, ignore, imports, react, stylistic, typescript } from '../src/config';
+import { astro, core, ignore, imports, react, stylistic } from '../src/config';
 import { defaultOptions } from '../src/options';
 
 const options = defaultOptions();
@@ -19,7 +20,7 @@ const configs = await combine(
 	},
 	ignore(options),
 	core(options),
-	typescript(options),
+	typescript({ project: options.typescript }),
 	react(options),
 	astro(options),
 	json(),
