@@ -3,7 +3,7 @@ import { extractTypedFlatConfigItem, PLUGIN_RENAME } from '@hexadrop/eslint-conf
 import type { ResolvableFlatConfig } from 'eslint-flat-config-utils';
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 
-import { astro, core, ignore, imports, react, stylistic, typescript } from './config';
+import { astro, core, ignore, imports, stylistic, typescript } from './config';
 import type { HexadropEslintOptions } from './options';
 import defaultOptions from './options/hexadrop-eslint.options';
 import type { TypedFlatConfigItem } from './typed-config';
@@ -11,7 +11,9 @@ import type { ConfigNames } from './typegen';
 
 function optionalPlugin(
 	condition: unknown,
-	importFunction: () => Promise<{ config: () => Promise<TypedFlatConfigItem[]> }>
+	importFunction: () => Promise<{
+		config: (options?: Record<string, unknown>) => Promise<TypedFlatConfigItem[]>;
+	}>
 ): ResolvableFlatConfig<TypedFlatConfigItem>[] {
 	if (!condition) {
 		return [];
@@ -38,7 +40,14 @@ export default function hexadrop(
 		core(options),
 		astro(options),
 		typescript(options),
-		react(options),
+		...optionalPlugin(options.react, async () => {
+			const m = await import('@hexadrop/eslint-config-react');
+
+			return {
+				config: (options_?: Record<string, unknown>) =>
+					m.config({ typescript: Boolean(options.typescript), ...options_ }),
+			};
+		}),
 		...optionalPlugin(options.json, () => import('@hexadrop/eslint-config-json')),
 		...optionalPlugin(options.markdown, () => import('@hexadrop/eslint-config-markdown')),
 		imports(options),
