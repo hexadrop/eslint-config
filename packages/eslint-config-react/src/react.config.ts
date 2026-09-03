@@ -9,16 +9,20 @@ import {
 } from '@hexadrop/eslint-config-shared';
 import { isPackageExists } from 'local-pkg';
 
-import type { HexadropEslintOptions } from '../../options';
-import type { TypedFlatConfigItem } from '../../typed-config';
+import type { TypedFlatConfigItem } from './react.typed-config';
 
 const REACT_REFRESH_ALLOW_CONSTANT_EXPORT_PACKAGES = ['vite'];
 
-export default async function react(options: HexadropEslintOptions): Promise<TypedFlatConfigItem[]> {
-	const { react, typescript } = options;
-	if (!react) {
-		return [];
+function isTypescriptAvailable(options: ReactConfigOptions): boolean {
+	if (options.typescript !== undefined) {
+		return options.typescript;
 	}
+
+	return isPackageExists('@hexadrop/eslint-config-typescript');
+}
+
+export default async function reactConfig(options: ReactConfigOptions = {}): Promise<TypedFlatConfigItem[]> {
+	const isTypescript = isTypescriptAvailable(options);
 
 	const [pluginReact, pluginReactHooks, pluginReactRefresh] = await Promise.all([
 		interopDefault(import('eslint-plugin-react')),
@@ -27,7 +31,7 @@ export default async function react(options: HexadropEslintOptions): Promise<Typ
 	] as const);
 	const isAllowConstantExport = REACT_REFRESH_ALLOW_CONSTANT_EXPORT_PACKAGES.some(index => isPackageExists(index));
 
-	const files = [...GLOB_REACT_JSX, ...(typescript ? GLOB_REACT_TSX : [])];
+	const files = [...GLOB_REACT_JSX, ...(isTypescript ? GLOB_REACT_TSX : [])];
 
 	return [
 		{
@@ -70,7 +74,7 @@ export default async function react(options: HexadropEslintOptions): Promise<Typ
 				'react/react-in-jsx-scope': 'off',
 				'react/require-render-return': 'error',
 
-				...(!typescript && {
+				...(!isTypescript && {
 					'react/jsx-no-undef': 'error',
 					'react/prop-types': 'error',
 				}),
@@ -92,4 +96,17 @@ export default async function react(options: HexadropEslintOptions): Promise<Typ
 			},
 		},
 	];
+}
+
+export interface ReactConfigOptions {
+	/**
+	 * Whether typescript is available (for TSX files and TS-specific rules).
+	 *
+	 * Auto-detected via `@hexadrop/eslint-config-typescript` presence when omitted.
+	 * Set to `false` to force JS-only mode.
+	 * Set to `true` to force TS mode (throws if peer is missing).
+	 *
+	 * @default undefined (auto-detect)
+	 */
+	typescript?: boolean;
 }
