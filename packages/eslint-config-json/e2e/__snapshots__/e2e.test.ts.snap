@@ -133,20 +133,3 @@ exports[`e2e fixtures rule-override: fixtures/rule-override.json through eslint 
 "{"dupe": 1,"dupe": 2,"nan": NaN}
 "
 `;
-
-exports[`e2e fixtures disabled: fixtures/disabled.json through eslint --fix: disabled-diagnostics 1`] = `
-[
-  {
-    "column": undefined,
-    "line": undefined,
-    "message": "File ignored because no matching configuration was supplied.",
-    "ruleId": undefined,
-    "severity": 1,
-  },
-]
-`;
-
-exports[`e2e fixtures disabled: fixtures/disabled.json through eslint --fix: disabled-content 1`] = `
-"{"bigint": 1n,"nan": NaN}
-"
-`;

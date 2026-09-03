@@ -1,20 +1,19 @@
-import { GLOB_JSON, JSON_SORT_KEYS_CONFIG } from '@hexadrop/eslint-config-json';
+import { JSON_SORT_KEYS_CONFIG } from '@hexadrop/eslint-config-json';
 import {
+	DTS_GLOBS,
+	GLOB_ASTRO,
+	GLOB_JSON,
+	GLOB_MARKDOWN,
+	GLOB_MARKDOWN_ASTRO,
+	GLOB_MARKDOWN_JSON,
+	GLOB_MARKDOWN_SOURCE,
 	interopDefault,
+	JAVASCRIPT_GLOBS,
 	PLUGIN_RENAME,
 	PLUGIN_RENAME_TYPESCRIPT,
 	pluginConfigRules,
 	renameRules,
-} from '@hexadrop/eslint-config-shared';
-import type { Linter } from 'eslint';
-
-import type { HexadropEslintOptions } from '../../options';
-import type { TypedFlatConfigItem } from '../../typed-config';
-import { GLOB_ASTRO } from '../astro';
-import { JAVASCRIPT_GLOBS, SOURCE_GLOBS } from '../core';
-import { GLOB_MARKDOWN, GLOB_MARKDOWN_ASTRO, GLOB_MARKDOWN_JSON, GLOB_MARKDOWN_SOURCE } from '../markdown';
-import { DTS_GLOBS, TYPESCRIPT_GLOBS } from '../typescript';
-import {
+	SOURCE_GLOBS,
 	STYLISTIC_CONFIG_NAME_RULES,
 	STYLISTIC_CONFIG_NAME_RULES_ASTRO,
 	STYLISTIC_CONFIG_NAME_RULES_JSON,
@@ -33,7 +32,12 @@ import {
 	STYLISTIC_CONFIG_NAME_RULES_UNICORN_MARKDOWN,
 	STYLISTIC_CONFIG_NAME_RULES_UNICORN_MARKDOWN_SOURCE,
 	STYLISTIC_CONFIG_NAME_SETUP,
-} from './stylistic.config-name';
+	TYPESCRIPT_GLOBS,
+} from '@hexadrop/eslint-config-shared';
+import type { Linter } from 'eslint';
+
+import type { HexadropEslintOptions } from '../../options';
+import type { TypedFlatConfigItem } from '../../typed-config';
 import prettierOptions from './stylistic.options-prettier';
 import stylisticOptions from './stylistic.options-stylistic';
 

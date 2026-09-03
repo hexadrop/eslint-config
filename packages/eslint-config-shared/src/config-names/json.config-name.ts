@@ -1,4 +1,4 @@
-import { PLUGIN_PREFIX } from '@hexadrop/eslint-config-shared';
+import { PLUGIN_PREFIX } from '../const';
 
 const JSON_CONFIG_NAME = `${PLUGIN_PREFIX}/json` as const;
 const JSON_CONFIG_NAME_SETUP = `${JSON_CONFIG_NAME}/setup` as const;
@@ -10,11 +10,6 @@ const STYLISTIC_CONFIG_NAME_RULES = `${STYLISTIC_CONFIG_NAME}/rules` as const;
 const STYLISTIC_CONFIG_NAME_RULES_JSON = `${STYLISTIC_CONFIG_NAME_RULES}/json` as const;
 const JSON_CONFIG_NAME_STYLISTIC_RULES_JSON_PACKAGE = `${STYLISTIC_CONFIG_NAME_RULES_JSON}/package.json` as const;
 const JSON_CONFIG_NAME_STYLISTIC_RULES_JSON_TSCONFIG = `${STYLISTIC_CONFIG_NAME_RULES_JSON}/tsconfig.json` as const;
-
-type JsonConfigNames =
-	typeof JSON_CONFIG_NAME_RULES | typeof JSON_CONFIG_NAME_SETUP | typeof JSON_CONFIG_NAME_SETUP_PARSER;
-
-export type { JsonConfigNames };
 
 export {
 	JSON_CONFIG_NAME_RULES,

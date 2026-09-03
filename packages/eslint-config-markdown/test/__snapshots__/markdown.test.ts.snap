@@ -1,0 +1,37 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`markdown config snapshot: full config structure: markdown-full-config 1`] = `
+[
+  {
+    "languageOptions": undefined,
+    "name": "hexadrop/markdown/setup",
+    "plugins": [
+      "markdown",
+    ],
+    "processor": undefined,
+  },
+  {
+    "files": [
+      "**/*.md",
+    ],
+    "ignores": [
+      "**/*.md/*.md",
+    ],
+    "languageOptions": undefined,
+    "name": "hexadrop/markdown/setup/processor",
+    "plugins": undefined,
+    "processor": "<processor>",
+  },
+  {
+    "files": [
+      "**/*.md",
+    ],
+    "languageOptions": {
+      "parser": "<parser>",
+    },
+    "name": "hexadrop/markdown/setup/parser",
+    "plugins": undefined,
+    "processor": undefined,
+  },
+]
+`;

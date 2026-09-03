@@ -1,4 +1,4 @@
-import { PLUGIN_PREFIX } from '@hexadrop/eslint-config-shared';
+import { PLUGIN_PREFIX } from '../const';
 
 const TYPESCRIPT_CONFIG_NAME = `${PLUGIN_PREFIX}/typescript` as const;
 const TYPESCRIPT_CONFIG_NAME_SETUP = `${TYPESCRIPT_CONFIG_NAME}/setup` as const;

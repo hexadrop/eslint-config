@@ -1,4 +1,4 @@
-import { PLUGIN_PREFIX } from '@hexadrop/eslint-config-shared';
+import { PLUGIN_PREFIX } from '../const';
 
 const CORE_CONFIG_NAME = `${PLUGIN_PREFIX}/core` as const;
 const CORE_CONFIG_NAME_SETUP = `${CORE_CONFIG_NAME}/setup` as const;

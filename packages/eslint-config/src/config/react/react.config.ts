@@ -1,15 +1,16 @@
-import { interopDefault } from '@hexadrop/eslint-config-shared';
-import { isPackageExists } from 'local-pkg';
-
-import type { HexadropEslintOptions } from '../../options';
-import type { TypedFlatConfigItem } from '../../typed-config';
 import {
+	GLOB_REACT_JSX,
+	GLOB_REACT_TSX,
+	interopDefault,
 	REACT_CONFIG_NAME_RULES,
 	REACT_CONFIG_NAME_RULES_HOOKS,
 	REACT_CONFIG_NAME_RULES_REFRESH,
 	REACT_CONFIG_NAME_SETUP,
-} from './react.config-name';
-import { GLOB_REACT_JSX, GLOB_REACT_TSX } from './react.globs';
+} from '@hexadrop/eslint-config-shared';
+import { isPackageExists } from 'local-pkg';
+
+import type { HexadropEslintOptions } from '../../options';
+import type { TypedFlatConfigItem } from '../../typed-config';
 
 const REACT_REFRESH_ALLOW_CONSTANT_EXPORT_PACKAGES = ['vite'];
 

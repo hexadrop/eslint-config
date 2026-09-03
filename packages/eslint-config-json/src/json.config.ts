@@ -1,10 +1,15 @@
-import { interopDefault, PLUGIN_RENAME } from '@hexadrop/eslint-config-shared';
+import {
+	GLOB_JSON,
+	interopDefault,
+	JSON_CONFIG_NAME_RULES,
+	JSON_CONFIG_NAME_SETUP,
+	JSON_CONFIG_NAME_SETUP_PARSER,
+	PLUGIN_RENAME,
+} from '@hexadrop/eslint-config-shared';
 
-import { JSON_CONFIG_NAME_RULES, JSON_CONFIG_NAME_SETUP, JSON_CONFIG_NAME_SETUP_PARSER } from './json.config-name';
-import { GLOB_JSON } from './json.globs';
 import type { TypedFlatConfigItem } from './json.typed-config';
 
-async function jsonConfig(): Promise<TypedFlatConfigItem[]> {
+export default async function jsonConfig(): Promise<TypedFlatConfigItem[]> {
 	const [pluginJsonc, parserJsonc] = await Promise.all([
 		interopDefault(import('eslint-plugin-jsonc')),
 		interopDefault(import('jsonc-eslint-parser')),
@@ -60,5 +65,3 @@ async function jsonConfig(): Promise<TypedFlatConfigItem[]> {
 		},
 	];
 }
-
-export default jsonConfig;

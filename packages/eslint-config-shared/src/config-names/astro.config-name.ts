@@ -1,4 +1,4 @@
-import { PLUGIN_PREFIX } from '@hexadrop/eslint-config-shared';
+import { PLUGIN_PREFIX } from '../const';
 
 const ASTRO_CONFIG_NAME = `${PLUGIN_PREFIX}/astro` as const;
 const ASTRO_CONFIG_NAME_SETUP = `${ASTRO_CONFIG_NAME}/setup` as const;

@@ -1,22 +1,18 @@
-import { interopDefault } from '@hexadrop/eslint-config-shared';
+import {
+	GLOB_MARKDOWN,
+	GLOB_MARKDOWN_IN_MARKDOWN,
+	interopDefault,
+	MARKDOWN_CONFIG_NAME_SETUP,
+	MARKDOWN_CONFIG_NAME_SETUP_PARSER,
+	MARKDOWN_CONFIG_NAME_SETUP_PROCESSOR,
+} from '@hexadrop/eslint-config-shared';
 import type { Linter } from 'eslint';
 import { mergeProcessors, processorPassThrough } from 'eslint-merge-processors';
 import { meta, parseForESLint } from 'eslint-parser-plain';
 
-import type { HexadropEslintOptions } from '../../options';
-import type { TypedFlatConfigItem } from '../../typed-config';
-import {
-	MARKDOWN_CONFIG_NAME_SETUP,
-	MARKDOWN_CONFIG_NAME_SETUP_PARSER,
-	MARKDOWN_CONFIG_NAME_SETUP_PROCESSOR,
-} from './markdown.config-name';
-import { GLOB_MARKDOWN, GLOB_MARKDOWN_IN_MARKDOWN } from './markdown.globs';
+import type { TypedFlatConfigItem } from './markdown.typed-config';
 
-export default async function markdown(options: HexadropEslintOptions): Promise<TypedFlatConfigItem[]> {
-	const { markdown } = options;
-	if (!markdown) {
-		return [];
-	}
+export default async function markdownConfig(): Promise<TypedFlatConfigItem[]> {
 	const pluginMarkdown = await interopDefault(import('@eslint/markdown'));
 	const processors = pluginMarkdown.processors;
 	const processor = processors.markdown;

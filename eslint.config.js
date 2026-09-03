@@ -11,7 +11,6 @@ const hexadrop = jiti('./packages/eslint-config/src').default;
 export default hexadrop(
 	{ ignores: ['packages/**/e2e/fixtures'] },
 	{
-		files: ['packages/*/src/**'],
 		name: 'hexadrop/shared-imports',
 		rules: {
 			'import/no-extraneous-dependencies': ['error', { whitelist: ['@hexadrop/eslint-config-shared'] }],

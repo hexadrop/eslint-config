@@ -1,6 +1,6 @@
 // Bun Snapshot v1, https://bun.sh/docs/test/snapshots
 
-exports[`json sort-keys configs to match snapshot 1`] = `
+exports[`json config exports sort-keys configs matching snapshot: json-sort-keys 1`] = `
 [
   {
     "files": [
@@ -227,6 +227,68 @@ exports[`json sort-keys configs to match snapshot 1`] = `
           "pathPattern": "^compilerOptions$",
         },
       ],
+    },
+  },
+]
+`;
+
+exports[`json config snapshot: full config structure: json-full-config 1`] = `
+[
+  {
+    "languageOptions": undefined,
+    "name": "hexadrop/json/setup",
+    "plugins": [
+      "json",
+    ],
+  },
+  {
+    "files": [
+      "**/*.json",
+      "**/*.json5",
+      "**/*.jsonc",
+    ],
+    "languageOptions": {
+      "parser": "<parser>",
+    },
+    "name": "hexadrop/json/setup/parser",
+    "plugins": undefined,
+  },
+  {
+    "files": [
+      "**/*.json",
+      "**/*.json5",
+      "**/*.jsonc",
+    ],
+    "languageOptions": undefined,
+    "name": "hexadrop/json/rules",
+    "plugins": undefined,
+    "rules": {
+      "json/no-bigint-literals": "error",
+      "json/no-binary-expression": "error",
+      "json/no-binary-numeric-literals": "error",
+      "json/no-dupe-keys": "error",
+      "json/no-escape-sequence-in-identifier": "error",
+      "json/no-floating-decimal": "error",
+      "json/no-hexadecimal-numeric-literals": "error",
+      "json/no-infinity": "error",
+      "json/no-multi-str": "error",
+      "json/no-nan": "error",
+      "json/no-number-props": "error",
+      "json/no-numeric-separators": "error",
+      "json/no-octal": "error",
+      "json/no-octal-escape": "error",
+      "json/no-octal-numeric-literals": "error",
+      "json/no-parenthesized": "error",
+      "json/no-plus-sign": "error",
+      "json/no-regexp-literals": "error",
+      "json/no-sparse-arrays": "error",
+      "json/no-template-literals": "error",
+      "json/no-undefined-value": "error",
+      "json/no-unicode-codepoint-escapes": "error",
+      "json/no-useless-escape": "error",
+      "json/space-unary-ops": "error",
+      "json/valid-json-number": "error",
+      "json/vue-custom-block/no-parsing-error": "error",
     },
   },
 ]

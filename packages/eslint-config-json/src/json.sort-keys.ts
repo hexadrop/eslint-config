@@ -1,8 +1,10 @@
 import {
+	GLOB_JSON_PACKAGE,
+	GLOB_JSON_TSCONFIG,
 	JSON_CONFIG_NAME_STYLISTIC_RULES_JSON_PACKAGE,
 	JSON_CONFIG_NAME_STYLISTIC_RULES_JSON_TSCONFIG,
-} from './json.config-name';
-import { GLOB_JSON_PACKAGE, GLOB_JSON_TSCONFIG } from './json.globs';
+} from '@hexadrop/eslint-config-shared';
+
 import type { TypedFlatConfigItem } from './json.typed-config';
 
 /**
