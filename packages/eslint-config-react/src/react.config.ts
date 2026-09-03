@@ -13,8 +13,15 @@ import type { TypedFlatConfigItem } from './react.typed-config';
 
 const REACT_REFRESH_ALLOW_CONSTANT_EXPORT_PACKAGES = ['vite'];
 
-function isTypescriptAvailable(options: ReactConfigOptions): boolean {
+function isTypescriptEnabled(options: ReactConfigOptions): boolean {
 	if (options.typescript !== undefined) {
+		if (options.typescript && !isPackageExists('@hexadrop/eslint-config-typescript')) {
+			throw new Error(
+				'React typescript integration is enabled but @hexadrop/eslint-config-typescript is not installed. ' +
+					'Install it with your package manager or set typescript: false to disable TS support.'
+			);
+		}
+
 		return options.typescript;
 	}
 
@@ -22,7 +29,7 @@ function isTypescriptAvailable(options: ReactConfigOptions): boolean {
 }
 
 export default async function reactConfig(options: ReactConfigOptions = {}): Promise<TypedFlatConfigItem[]> {
-	const isTypescript = isTypescriptAvailable(options);
+	const isTypescript = isTypescriptEnabled(options);
 
 	const [pluginReact, pluginReactHooks, pluginReactRefresh] = await Promise.all([
 		interopDefault(import('eslint-plugin-react')),
@@ -104,7 +111,7 @@ export interface ReactConfigOptions {
 	 *
 	 * When omitted, auto-detected via `@hexadrop/eslint-config-typescript` presence.
 	 * Set explicitly to override auto-detection: `false` forces JS-only mode,
-	 * `true` forces TS mode regardless of whether the peer is installed.
+	 * `true` forces TS mode — throws an actionable error if the peer is not installed.
 	 *
 	 * @default undefined (auto-detect)
 	 */
