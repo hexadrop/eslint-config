@@ -1,82 +1,73 @@
-import {
-	GLOB_JSON,
-	JSON_CONFIG_NAME_RULES,
-	JSON_CONFIG_NAME_SETUP,
-	JSON_CONFIG_NAME_SETUP_PARSER,
-} from '@hexadrop/eslint-config-shared';
 import { describe, expect, test } from 'bun:test';
 
 import json, { JSON_SORT_KEYS_CONFIG } from '../src';
 
-describe('json factory', () => {
-	test('returns a thenable composer resolving to the json config slice', async () => {
+const SETUP = 'hexadrop/json/setup';
+const SETUP_PARSER = 'hexadrop/json/setup/parser';
+const RULES = 'hexadrop/json/rules';
+const JSON_GLOBS = ['**/*.json', '**/*.json5', '**/*.jsonc'];
+
+describe('json config', () => {
+	test('returns an array with at least the internal slice entries', async () => {
 		const configs = await json();
 
 		expect(Array.isArray(configs)).toBe(true);
 		expect(configs.length).toBeGreaterThanOrEqual(3);
 	});
 
-	test('emits the setup, parser and rules config names', async () => {
+	test('emits the json config names', async () => {
 		const configs = await json();
 		const names = configs.map(config => config.name);
 
-		expect(names).toContain(JSON_CONFIG_NAME_SETUP);
-		expect(names).toContain(JSON_CONFIG_NAME_SETUP_PARSER);
-		expect(names).toContain(JSON_CONFIG_NAME_RULES);
+		expect(names).toContain(SETUP);
+		expect(names).toContain(SETUP_PARSER);
+		expect(names).toContain(RULES);
 	});
 
-	test('registers the jsonc plugin under the renamed `json` prefix', async () => {
+	test('registers the jsonc plugin under the `json` prefix', async () => {
 		const configs = await json();
-		const setup = configs.find(config => config.name === JSON_CONFIG_NAME_SETUP);
+		const setup = configs.find(config => config.name === SETUP);
 
 		expect(setup?.plugins?.['json']).toBeDefined();
 	});
 
-	test('applies the jsonc parser and rules to the json globs', async () => {
+	test('wires the jsonc parser and rules to the json globs', async () => {
 		const configs = await json();
-		const parser = configs.find(config => config.name === JSON_CONFIG_NAME_SETUP_PARSER);
-		const rules = configs.find(config => config.name === JSON_CONFIG_NAME_RULES);
+		const parser = configs.find(config => config.name === SETUP_PARSER);
+		const rules = configs.find(config => config.name === RULES);
 
-		expect(parser?.files).toEqual(GLOB_JSON);
+		expect(parser?.files).toEqual(JSON_GLOBS);
 		expect(parser?.languageOptions?.['parser']).toBeDefined();
-		expect(rules?.files).toEqual(GLOB_JSON);
+		expect(rules?.files).toEqual(JSON_GLOBS);
 	});
 
-	test('pins the json rule states the meta-package ships today', async () => {
+	test('exports sort-keys configs matching snapshot', () => {
+		expect(JSON_SORT_KEYS_CONFIG).toMatchSnapshot('json-sort-keys');
+	});
+
+	test('snapshot: full config structure', async () => {
 		const configs = await json();
-		const rules = configs.find(config => config.name === JSON_CONFIG_NAME_RULES)?.rules ?? {};
+		const sanitised = configs.map(({ languageOptions, plugins, ...rest }) => ({
+			...rest,
+			languageOptions: languageOptions
+				? { parser: languageOptions['parser'] ? '<parser>' : undefined }
+				: undefined,
+			plugins: plugins ? Object.keys(plugins) : undefined,
+		}));
 
-		for (const rule of [
-			'json/no-bigint-literals',
-			'json/no-dupe-keys',
-			'json/no-nan',
-			'json/no-octal',
-			'json/no-sparse-arrays',
-			'json/no-template-literals',
-			'json/no-undefined-value',
-			'json/valid-json-number',
-			'json/vue-custom-block/no-parsing-error',
-		]) {
-			expect(rules[rule]).toBe('error');
-		}
+		expect(sanitised).toMatchSnapshot('json-full-config');
 	});
 
-	test('accepts a flat config item mixed into the first argument', async () => {
+	test('mixes an inline config item into the first argument', async () => {
 		const configs = await json({ name: 'consumer/inline', rules: { 'json/no-nan': 'off' } });
 		const inline = configs.find(config => config.name === 'consumer/inline');
 
 		expect(inline?.rules?.['json/no-nan']).toBe('off');
 	});
 
-	test('appends consumer configs after the json slice', async () => {
+	test('appends consumer configs after the internal slice', async () => {
 		const configs = await json({}, { name: 'consumer/override', rules: { 'json/no-nan': 'off' } });
 
 		expect(configs.at(-1)?.name).toBe('consumer/override');
-	});
-});
-
-describe('json sort-keys configs', () => {
-	test('to match snapshot', () => {
-		expect(JSON_SORT_KEYS_CONFIG).toMatchSnapshot();
 	});
 });
