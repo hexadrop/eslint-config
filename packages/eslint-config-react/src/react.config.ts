@@ -100,11 +100,11 @@ export default async function reactConfig(options: ReactConfigOptions = {}): Pro
 
 export interface ReactConfigOptions {
 	/**
-	 * Whether typescript is available (for TSX files and TS-specific rules).
+	 * Whether typescript support should be enabled (TSX globs, TS-specific rules).
 	 *
-	 * Auto-detected via `@hexadrop/eslint-config-typescript` presence when omitted.
-	 * Set to `false` to force JS-only mode.
-	 * Set to `true` to force TS mode (throws if peer is missing).
+	 * When omitted, auto-detected via `@hexadrop/eslint-config-typescript` presence.
+	 * Set explicitly to override auto-detection: `false` forces JS-only mode,
+	 * `true` forces TS mode regardless of whether the peer is installed.
 	 *
 	 * @default undefined (auto-detect)
 	 */
