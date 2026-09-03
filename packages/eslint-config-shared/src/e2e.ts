@@ -3,12 +3,6 @@ import path from 'node:path';
 import type { Linter } from 'eslint';
 import { ESLint } from 'eslint';
 
-/*
- * ---------------------------------------------------------------------------
- * Shared types
- * ---------------------------------------------------------------------------
- */
-
 /**
  * Minimal case every e2e suite extends in its own `cases.ts`. Packages that
  * need extra fields (e.g. `options`, `extraConfigs`) add them through
@@ -44,12 +38,6 @@ interface E2EResult {
 	content: string;
 	diagnostics: DiagnosticSnapshot[];
 }
-
-/*
- * ---------------------------------------------------------------------------
- * Shared helpers
- * ---------------------------------------------------------------------------
- */
 
 /**
  * Resolve the absolute path of a fixture file and assert it exists.
