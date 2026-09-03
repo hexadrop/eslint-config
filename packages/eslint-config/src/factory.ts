@@ -45,7 +45,7 @@ export default function hexadrop(
 
 			return {
 				config: (options_?: Record<string, unknown>) =>
-					m.config({ typescript: Boolean(options.typescript), ...options_ }),
+					m.config({ ...(options.typescript === false && { typescript: false as const }), ...options_ }),
 			};
 		}),
 		...optionalPlugin(options.json, () => import('@hexadrop/eslint-config-json')),

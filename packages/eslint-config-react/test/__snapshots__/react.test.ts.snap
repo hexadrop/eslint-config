@@ -18,6 +18,7 @@ exports[`react config snapshot: full config structure (TS available): react-full
   {
     "files": [
       "**/*.?([cm])jsx",
+      "**/*.?([cm])tsx",
     ],
     "name": "hexadrop/react/rules",
     "plugins": undefined,
@@ -27,7 +28,6 @@ exports[`react config snapshot: full config structure (TS available): react-full
       "react/jsx-no-comment-textnodes": "error",
       "react/jsx-no-duplicate-props": "error",
       "react/jsx-no-target-blank": "error",
-      "react/jsx-no-undef": "error",
       "react/jsx-uses-react": "error",
       "react/jsx-uses-vars": "error",
       "react/no-children-prop": "error",
@@ -41,7 +41,6 @@ exports[`react config snapshot: full config structure (TS available): react-full
       "react/no-unescaped-entities": "error",
       "react/no-unknown-property": "error",
       "react/no-unsafe": "off",
-      "react/prop-types": "error",
       "react/react-in-jsx-scope": "off",
       "react/require-render-return": "error",
     },
@@ -49,6 +48,7 @@ exports[`react config snapshot: full config structure (TS available): react-full
   {
     "files": [
       "**/*.?([cm])jsx",
+      "**/*.?([cm])tsx",
     ],
     "name": "hexadrop/react/rules/hooks",
     "plugins": undefined,
@@ -60,6 +60,7 @@ exports[`react config snapshot: full config structure (TS available): react-full
   {
     "files": [
       "**/*.?([cm])jsx",
+      "**/*.?([cm])tsx",
     ],
     "name": "hexadrop/react/rules/refresh",
     "plugins": undefined,

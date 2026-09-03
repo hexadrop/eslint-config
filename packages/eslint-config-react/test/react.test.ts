@@ -1,4 +1,4 @@
-import { describe, expect, test } from 'bun:test';
+import { afterEach, describe, expect, mock, test } from 'bun:test';
 
 import react, { config } from '../src';
 
@@ -8,6 +8,24 @@ const RULES_HOOKS = 'hexadrop/react/rules/hooks';
 const RULES_REFRESH = 'hexadrop/react/rules/refresh';
 const JSX_GLOBS = ['**/*.?([cm])jsx', '**/*.?([cm])tsx'];
 const JS_GLOBS = ['**/*.?([cm])jsx'];
+
+const TYPESCRIPT_PKG = '@hexadrop/eslint-config-typescript';
+
+function mockPackageAbsent() {
+	void mock.module('local-pkg', () => ({
+		isPackageExists: (name: string) => name === 'vite',
+	}));
+}
+
+function mockPackagePresent() {
+	void mock.module('local-pkg', () => ({
+		isPackageExists: (name: string) => name === 'vite' || name === TYPESCRIPT_PKG,
+	}));
+}
+
+afterEach(() => {
+	mock.restore();
+});
 
 describe('react config', () => {
 	test('returns an array with at least the internal slice entries', async () => {
@@ -59,11 +77,22 @@ describe('react config', () => {
 		expect(rules?.files).toEqual(JS_GLOBS);
 	});
 
-	test('includes TSX globs when typescript is true', async () => {
+	test('includes TSX globs when typescript is true and peer is installed', async () => {
+		mockPackagePresent();
 		const configs = await config({ typescript: true });
 		const rules = configs.find(c => c.name === RULES);
 
 		expect(rules?.files).toEqual(JSX_GLOBS);
+	});
+
+	test('throws actionable error when typescript is true but peer is missing', async () => {
+		mockPackageAbsent();
+
+		// eslint-disable-next-line typescript/await-thenable
+		await expect(config({ typescript: true })).rejects.toThrow(
+			'React typescript integration is enabled but @hexadrop/eslint-config-typescript is not installed. ' +
+				'Install it with your package manager or set typescript: false to disable TS support.'
+		);
 	});
 
 	test('includes TS-specific rules when typescript is disabled', async () => {
@@ -75,6 +104,7 @@ describe('react config', () => {
 	});
 
 	test('excludes TS-specific rules when typescript is enabled', async () => {
+		mockPackagePresent();
 		const configs = await config({ typescript: true });
 		const rules = configs.find(c => c.name === RULES);
 
@@ -119,7 +149,8 @@ describe('react config', () => {
 	});
 
 	test('snapshot: full config structure (TS available)', async () => {
-		const configs = await config();
+		mockPackagePresent();
+		const configs = await config({ typescript: true });
 		const sanitised = configs.map(({ languageOptions, plugins, ...rest }) => ({
 			...rest,
 			plugins: plugins ? Object.keys(plugins).toSorted((a, b) => a.localeCompare(b)) : undefined,
