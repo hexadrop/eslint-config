@@ -25,6 +25,7 @@
       "dependencies": {
         "@hexadrop/eslint-config-json": "1.0.11",
         "@hexadrop/eslint-config-markdown": "1.0.11",
+        "@hexadrop/eslint-config-typescript": "1.0.11",
         "@stylistic/eslint-plugin": "5.10.0",
         "@typescript-eslint/eslint-plugin": "8.68.0",
         "@typescript-eslint/parser": "8.68.0",
@@ -96,6 +97,21 @@
       "devDependencies": {
         "eslint": "10.9.1",
         "eslint-typegen": "2.3.1",
+      },
+    },
+    "packages/eslint-config-typescript": {
+      "name": "@hexadrop/eslint-config-typescript",
+      "version": "1.0.11",
+      "dependencies": {
+        "@typescript-eslint/eslint-plugin": "8.68.0",
+        "@typescript-eslint/parser": "8.68.0",
+        "eslint-flat-config-utils": "3.2.0",
+      },
+      "devDependencies": {
+        "tsdown": "0.22.14",
+      },
+      "peerDependencies": {
+        "eslint": "^9.17.0 || ^10.0.0",
       },
     },
   },
@@ -351,6 +367,8 @@
     "@hexadrop/eslint-config-markdown": ["@hexadrop/eslint-config-markdown@workspace:packages/eslint-config-markdown"],
 
     "@hexadrop/eslint-config-shared": ["@hexadrop/eslint-config-shared@workspace:packages/eslint-config-shared"],
+
+    "@hexadrop/eslint-config-typescript": ["@hexadrop/eslint-config-typescript@workspace:packages/eslint-config-typescript"],
 
     "@hexadrop/tsconfig": ["@hexadrop/tsconfig@0.0.5", "", {}, "sha512-sbm1lpigRiBFt8KHffORW/4sst2BP3ZP+3MzA/MbnE9QtvLPgv9NoPB8SlJRxywJUy7zuXXzAE9DNJrOBDGgOg=="],
 
