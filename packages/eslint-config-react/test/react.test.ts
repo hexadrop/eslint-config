@@ -64,6 +64,7 @@ describe('react config', () => {
 	});
 
 	test('includes TSX globs when typescript is auto-detected (default)', async () => {
+		mockPackagePresent();
 		const configs = await config();
 		const rules = configs.find(c => c.name === RULES);
 
