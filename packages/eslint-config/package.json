@@ -1,6 +1,6 @@
 {
 	"name": "@hexadrop/eslint-config",
-	"version": "1.0.11",
+	"version": "1.0.12",
 	"description": "Opinionated linting configuration using best practices and providing consistency to your code.",
 	"keywords": [
 		"lint",
@@ -42,9 +42,9 @@
 		"eslint": "^9.17.0 || ^10.0.0"
 	},
 	"dependencies": {
-		"@hexadrop/eslint-config-json": "1.0.11",
-		"@hexadrop/eslint-config-markdown": "1.0.11",
-		"@hexadrop/eslint-config-typescript": "1.0.11",
+		"@hexadrop/eslint-config-json": "1.0.12",
+		"@hexadrop/eslint-config-markdown": "1.0.12",
+		"@hexadrop/eslint-config-typescript": "1.0.12",
 		"@stylistic/eslint-plugin": "5.10.0",
 		"@typescript-eslint/eslint-plugin": "8.68.0",
 		"@typescript-eslint/parser": "8.68.0",

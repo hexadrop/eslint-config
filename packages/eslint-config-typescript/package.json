@@ -1,6 +1,6 @@
 {
 	"name": "@hexadrop/eslint-config-typescript",
-	"version": "1.0.11",
+	"version": "1.0.12",
 	"description": "TypeScript slice of the hexadrop ESLint config: typescript-eslint plugin, parser, project-service wiring and type-aware rules.",
 	"keywords": [
 		"lint",

@@ -1,5 +1,20 @@
 # @hexadrop/eslint-config
 
+## 1.0.12
+
+### Patch Changes
+
+- 78050b6: Simplify `package.json` entry points for ESM-only consumption: remove the legacy root `main` and `types` fields and declare `types` explicitly inside the `exports` map, using `default` as the runtime condition. No behavior change for consumers on modern tooling (Node.js ≥12.7, bundlers, TypeScript with `node16`/`nodenext`/`bundler` module resolution).
+- 2c9c1e8: Extract the json concern into the new `@hexadrop/eslint-config-json` package, publishable and usable standalone via its `json()` factory. The meta-package composes it as a regular dependency with no behavior change.
+- 5310aed: Extract the markdown concern into the new `@hexadrop/eslint-config-markdown` package, publishable and usable standalone via its `markdown()` factory. The meta-package composes it as a regular dependency with no behavior change.
+- e5004c2: Extract the TypeScript concern into the new `@hexadrop/eslint-config-typescript` package, publishable and usable standalone via its `typescript()` factory. The meta-package composes it as a regular dependency with no behavior change.
+- Updated dependencies [2c9c1e8]
+- Updated dependencies [5310aed]
+- Updated dependencies [e5004c2]
+  - @hexadrop/eslint-config-json@1.0.12
+  - @hexadrop/eslint-config-markdown@1.0.12
+  - @hexadrop/eslint-config-typescript@1.0.12
+
 ## 1.0.11
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
 	"name": "@hexadrop/eslint-config-json",
-	"version": "1.0.11",
+	"version": "1.0.12",
 	"description": "JSON slice of the hexadrop ESLint config: jsonc plugin, jsonc parser and canonical sort-keys for package.json and tsconfig.json.",
 	"keywords": [
 		"lint",
