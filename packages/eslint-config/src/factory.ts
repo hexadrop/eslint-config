@@ -1,5 +1,6 @@
 import type { RecursivePartial } from '@hexadrop/eslint-config-shared';
 import { extractTypedFlatConfigItem, PLUGIN_RENAME } from '@hexadrop/eslint-config-shared';
+import type { TypescriptFactoryOptions } from '@hexadrop/eslint-config-typescript';
 import type { ResolvableFlatConfig } from 'eslint-flat-config-utils';
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 
@@ -38,9 +39,11 @@ export default function hexadrop(
 		ignore(options),
 		core(options),
 		astro(options),
-		...optionalPlugin(options.typescript, () => import('@hexadrop/eslint-config-typescript'), {
-			project: options.typescript,
-		}),
+		...optionalPlugin(
+			options.typescript,
+			() => import('@hexadrop/eslint-config-typescript'),
+			(options.typescript === true ? { project: true } : options.typescript) as TypescriptFactoryOptions
+		),
 		react(options),
 		...optionalPlugin(options.json, () => import('@hexadrop/eslint-config-json')),
 		...optionalPlugin(options.markdown, () => import('@hexadrop/eslint-config-markdown')),

@@ -7,6 +7,7 @@ import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 import { combine } from '../src';
 import { astro, core, ignore, imports, react, stylistic } from '../src/config';
 import { defaultOptions } from '../src/options';
+import type { TypescriptOptions } from '../src/options/hexadrop-eslint.options';
 
 const options = defaultOptions();
 
@@ -20,7 +21,7 @@ const configs = await combine(
 	},
 	ignore(options),
 	core(options),
-	typescript({ project: options.typescript }),
+	typescript(options.typescript === true ? { project: true } : (options.typescript as TypescriptOptions)),
 	react(options),
 	astro(options),
 	json(),

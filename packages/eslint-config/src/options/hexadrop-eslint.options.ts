@@ -101,10 +101,25 @@ interface HexadropEslintOptions {
 	 *
 	 * If `false`, typescript support will be disabled.
 	 * If `true`, typescript support will be enabled with default options.
+	 * If a string or string[], enables type-aware linting with those tsconfig paths.
+	 * If an object, allows passing {@link TypescriptOptions.project} and {@link TypescriptOptions.tsconfigRootDir}.
 	 * If you leave empty, automatic detection will be used.
 	 *
 	 */
-	typescript: boolean | string | string[];
+	typescript: boolean | string | string[] | TypescriptOptions;
+}
+
+interface TypescriptOptions {
+	/**
+	 * If true, enables TS support without type-aware linting.
+	 * If a string or array, enables type-aware linting with those tsconfig paths.
+	 * If false/undefined, returns an empty config.
+	 */
+	project?: boolean | string | string[];
+	/**
+	 * Root directory for tsconfig resolution. Defaults to cwd().
+	 */
+	tsconfigRootDir?: string;
 }
 
 function getCwdTsconfigPath(): string | undefined {
@@ -117,23 +132,37 @@ function getCwdTsconfigPath(): string | undefined {
 	return undefined;
 }
 
-export type { HexadropEslintOptions };
+export type { HexadropEslintOptions, TypescriptOptions };
 
 export default function defaultOptions(options: RecursivePartial<HexadropEslintOptions> = {}): HexadropEslintOptions {
-	let typescript: boolean | string | string[] = false;
+	let typescript: HexadropEslintOptions['typescript'] = false;
 	const isInstalledTypescript = isPackageExists('typescript');
 	const isInstalledReact = isPackageExists('react');
 	const isInstalledAstro = isPackageExists('astro');
 
+	/* eslint-disable typescript/no-unnecessary-condition -- RecursivePartial narrows types but runtime checks are needed */
 	if (options.typescript === true) {
 		typescript = true;
+	} else if (
+		typeof options.typescript === 'object' &&
+		!Array.isArray(options.typescript) &&
+		options.typescript !== null
+	) {
+		const tsOptions = options.typescript as TypescriptOptions;
+		typescript = {
+			project: tsOptions.project ?? undefined,
+			...(tsOptions.tsconfigRootDir && { tsconfigRootDir: tsOptions.tsconfigRootDir }),
+		} as TypescriptOptions;
 	} else if (isInstalledTypescript) {
+		/* eslint-enable typescript/no-unnecessary-condition */
 		if (options.typescript === undefined) {
-			typescript = getCwdTsconfigPath() ?? true;
-		} else if (options.typescript === 'string') {
-			typescript = options.typescript.length > 0 ? options.typescript : true;
+			typescript = { project: getCwdTsconfigPath() ?? true };
+		} else if (typeof options.typescript === 'string') {
+			typescript = { project: options.typescript.length > 0 ? options.typescript : true };
 		} else if (Array.isArray(options.typescript)) {
-			typescript = options.typescript.length > 0 ? (options.typescript.filter(Boolean) as string[]) : true;
+			typescript = {
+				project: options.typescript.length > 0 ? (options.typescript.filter(Boolean) as string[]) : true,
+			};
 		}
 	}
 
