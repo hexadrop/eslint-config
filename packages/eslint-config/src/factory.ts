@@ -5,7 +5,7 @@ import type { ResolvableFlatConfig } from 'eslint-flat-config-utils';
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 
 import { astro, core, ignore, imports, react, stylistic } from './config';
-import type { HexadropEslintOptions } from './options';
+import type { HexadropEslintOptions, TypescriptOptions } from './options';
 import defaultOptions from './options/hexadrop-eslint.options';
 import type { TypedFlatConfigItem } from './typed-config';
 import type { ConfigNames } from './typegen';
@@ -28,6 +28,32 @@ function optionalPlugin<TOptions extends unknown[] = []>(
 	];
 }
 
+/**
+ * Convert resolved options.typescript to the shape the typescript config expects.
+ * `defaultOptions()` has already normalised bare strings/arrays into `{ project: … }`,
+ * so at this point the value is always `boolean | TypescriptOptions`.
+ */
+function toTypescriptFactoryOptions(
+	typescript: HexadropEslintOptions['typescript']
+): TypescriptFactoryOptions | undefined {
+	/*
+	 * `defaultOptions()` has already normalised string | string[] into
+	 * `{ project: … }` at runtime, but the type system still sees the
+	 * public input type.  The cast is safe because the runtime shape is
+	 * always `boolean | TypescriptOptions` by this point.
+	 */
+	const resolved = typescript as boolean | TypescriptOptions;
+
+	if (resolved === false) {
+		return undefined;
+	}
+	if (resolved === true) {
+		return { project: true };
+	}
+
+	return resolved;
+}
+
 // eslint-disable-next-line typescript/promise-function-async
 export default function hexadrop(
 	optionsOrFlatConfigItem?: RecursivePartial<HexadropEslintOptions> & TypedFlatConfigItem,
@@ -42,7 +68,7 @@ export default function hexadrop(
 		...optionalPlugin(
 			options.typescript,
 			() => import('@hexadrop/eslint-config-typescript'),
-			(options.typescript === true ? { project: true } : options.typescript) as TypescriptFactoryOptions
+			toTypescriptFactoryOptions(options.typescript)
 		),
 		react(options),
 		...optionalPlugin(options.json, () => import('@hexadrop/eslint-config-json')),
