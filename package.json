@@ -1,6 +1,5 @@
 {
-	"name": "@hexadrop/eslint-config",
-	"version": "1.0.11",
+	"name": "eslint-config",
 	"description": "Opinionated linting configuration using best practices and providing consistency to your code.",
 	"keywords": [
 		"lint",
@@ -20,61 +19,20 @@
 	"bugs": {
 		"url": "https://github.com/hexadrop/eslint-config/issues"
 	},
-	"license": "MIT",
-	"type": "module",
-	"files": [
-		"dist"
+	"private": true,
+	"workspaces": [
+		"packages/*"
 	],
-	"main": "./dist/index.mjs",
-	"types": "./dist/index.d.mts",
-	"exports": {
-		".": {
-			"import": "./dist/index.mjs"
-		}
-	},
+	"type": "module",
 	"scripts": {
-		"build": "bun run scripts/typegen.ts && tsdown",
-		"build:types": "bun run scripts/typegen.ts",
+		"build": "bun run --filter '*' build",
 		"commitlint": "commitlint --edit",
-		"lint": "eslint --cache .",
-		"lint:ci": "eslint --cache --cache-strategy content .",
-		"lint:fix": "eslint --cache --fix .",
-		"prepare": "husky && bun run build:types",
-		"prepublishOnly": "bun run scripts/typegen.ts && tsdown",
+		"lint": "NODE_OPTIONS='--conditions=development' eslint --cache .",
+		"lint:ci": "NODE_OPTIONS='--conditions=development' eslint --cache --cache-strategy content .",
+		"lint:fix": "NODE_OPTIONS='--conditions=development' eslint --cache --fix .",
+		"prepare": "husky && bun run --filter '*' prepare",
+		"test": "bun test packages",
 		"typecheck": "tsc --noEmit"
-	},
-	"peerDependencies": {
-		"eslint": "^9.17.0 || ^10.0.0"
-	},
-	"dependencies": {
-		"@eslint/markdown": "8.0.3",
-		"@stylistic/eslint-plugin": "5.10.0",
-		"@typescript-eslint/eslint-plugin": "8.68.0",
-		"@typescript-eslint/parser": "8.68.0",
-		"astro-eslint-parser": "3.1.0",
-		"eslint-config-flat-gitignore": "2.3.0",
-		"eslint-flat-config-utils": "3.2.0",
-		"eslint-import-resolver-typescript": "4.4.5",
-		"eslint-merge-processors": "2.0.0",
-		"eslint-parser-plain": "0.1.1",
-		"eslint-plugin-astro": "3.1.0",
-		"eslint-plugin-format": "2.0.1",
-		"eslint-plugin-import-x": "4.17.1",
-		"eslint-plugin-jsonc": "3.4.2",
-		"eslint-plugin-n": "18.3.0",
-		"eslint-plugin-perfectionist": "5.10.1",
-		"eslint-plugin-react": "7.37.5",
-		"eslint-plugin-react-hooks": "7.1.1",
-		"eslint-plugin-react-refresh": "0.5.5",
-		"eslint-plugin-simple-import-sort": "14.0.0",
-		"eslint-plugin-unicorn": "73.0.0",
-		"eslint-plugin-unused-imports": "4.4.1",
-		"globals": "17.11.0",
-		"jsonc-eslint-parser": "3.3.0",
-		"local-pkg": "1.2.1",
-		"prettier": "3.9.6",
-		"prettier-plugin-astro": "0.14.1",
-		"tslib": "2.8.1"
 	},
 	"devDependencies": {
 		"@changesets/cli": "3.0.1",
@@ -83,13 +41,10 @@
 		"@eslint/config-inspector": "3.3.0",
 		"@hexadrop/tsconfig": "0.0.5",
 		"@types/bun": "1.4.0",
-		"astro": "7.2.8",
 		"eslint": "10.9.1",
-		"eslint-typegen": "2.3.1",
 		"husky": "9.1.7",
 		"jiti": "2.7.0",
 		"lint-staged": "17.3.0",
-		"react": "19.2.8",
 		"tsdown": "0.22.14",
 		"typescript": "6.0.3"
 	}

@@ -4,8 +4,28 @@
   "workspaces": {
     "": {
       "name": "@hexadrop/eslint-config",
+      "devDependencies": {
+        "@changesets/cli": "3.0.1",
+        "@commitlint/cli": "21.2.2",
+        "@commitlint/config-conventional": "21.2.2",
+        "@eslint/config-inspector": "3.3.0",
+        "@hexadrop/tsconfig": "0.0.5",
+        "@types/bun": "1.4.0",
+        "eslint": "10.9.1",
+        "husky": "9.1.7",
+        "jiti": "2.7.0",
+        "lint-staged": "17.3.0",
+        "tsdown": "0.22.14",
+        "typescript": "6.0.3",
+      },
+    },
+    "packages/eslint-config": {
+      "name": "@hexadrop/eslint-config",
+      "version": "1.0.11",
       "dependencies": {
-        "@eslint/markdown": "8.0.3",
+        "@hexadrop/eslint-config-json": "1.0.11",
+        "@hexadrop/eslint-config-markdown": "1.0.11",
+        "@hexadrop/eslint-config-typescript": "1.0.11",
         "@stylistic/eslint-plugin": "5.10.0",
         "@typescript-eslint/eslint-plugin": "8.68.0",
         "@typescript-eslint/parser": "8.68.0",
@@ -13,12 +33,9 @@
         "eslint-config-flat-gitignore": "2.3.0",
         "eslint-flat-config-utils": "3.2.0",
         "eslint-import-resolver-typescript": "4.4.5",
-        "eslint-merge-processors": "2.0.0",
-        "eslint-parser-plain": "0.1.1",
         "eslint-plugin-astro": "3.1.0",
         "eslint-plugin-format": "2.0.1",
         "eslint-plugin-import-x": "4.17.1",
-        "eslint-plugin-jsonc": "3.4.2",
         "eslint-plugin-n": "18.3.0",
         "eslint-plugin-perfectionist": "5.10.1",
         "eslint-plugin-react": "7.37.5",
@@ -28,28 +45,70 @@
         "eslint-plugin-unicorn": "73.0.0",
         "eslint-plugin-unused-imports": "4.4.1",
         "globals": "17.11.0",
-        "jsonc-eslint-parser": "3.3.0",
         "local-pkg": "1.2.1",
         "prettier": "3.9.6",
         "prettier-plugin-astro": "0.14.1",
         "tslib": "2.8.1",
       },
       "devDependencies": {
-        "@changesets/cli": "3.0.1",
-        "@commitlint/cli": "21.2.2",
-        "@commitlint/config-conventional": "21.2.2",
-        "@eslint/config-inspector": "3.3.0",
-        "@hexadrop/tsconfig": "0.0.5",
-        "@types/bun": "1.4.0",
         "astro": "7.2.8",
-        "eslint": "10.9.1",
         "eslint-typegen": "2.3.1",
-        "husky": "9.1.7",
-        "jiti": "2.7.0",
-        "lint-staged": "17.3.0",
         "react": "19.2.8",
         "tsdown": "0.22.14",
-        "typescript": "6.0.3",
+      },
+      "peerDependencies": {
+        "eslint": "^9.17.0 || ^10.0.0",
+      },
+    },
+    "packages/eslint-config-json": {
+      "name": "@hexadrop/eslint-config-json",
+      "version": "1.0.11",
+      "dependencies": {
+        "eslint-flat-config-utils": "3.2.0",
+        "eslint-plugin-jsonc": "3.4.2",
+        "jsonc-eslint-parser": "3.3.0",
+      },
+      "devDependencies": {
+        "tsdown": "0.22.14",
+      },
+      "peerDependencies": {
+        "eslint": "^9.17.0 || ^10.0.0",
+      },
+    },
+    "packages/eslint-config-markdown": {
+      "name": "@hexadrop/eslint-config-markdown",
+      "version": "1.0.11",
+      "dependencies": {
+        "@eslint/markdown": "8.0.3",
+        "eslint-flat-config-utils": "3.2.0",
+        "eslint-merge-processors": "2.0.0",
+        "eslint-parser-plain": "0.1.1",
+      },
+      "devDependencies": {
+        "tsdown": "0.22.14",
+      },
+      "peerDependencies": {
+        "eslint": "^9.17.0 || ^10.0.0",
+      },
+    },
+    "packages/eslint-config-shared": {
+      "name": "@hexadrop/eslint-config-shared",
+      "version": "0.0.0",
+      "devDependencies": {
+        "eslint": "10.9.1",
+        "eslint-typegen": "2.3.1",
+      },
+    },
+    "packages/eslint-config-typescript": {
+      "name": "@hexadrop/eslint-config-typescript",
+      "version": "1.0.11",
+      "dependencies": {
+        "@typescript-eslint/eslint-plugin": "8.68.0",
+        "@typescript-eslint/parser": "8.68.0",
+        "eslint-flat-config-utils": "3.2.0",
+      },
+      "devDependencies": {
+        "tsdown": "0.22.14",
       },
       "peerDependencies": {
         "eslint": "^9.17.0 || ^10.0.0",
@@ -300,6 +359,16 @@
     "@eslint/object-schema": ["@eslint/object-schema@3.0.5", "", {}, "sha512-vqTaUEgxzm+YDSdElad6PiRoX4t8VGDjCtt05zn4nU810UIx/uNEV7/lZJ6KwFThKZOzOxzXy48da+No7HZaMw=="],
 
     "@eslint/plugin-kit": ["@eslint/plugin-kit@0.7.2", "", { "dependencies": { "@eslint/core": "^1.2.1", "levn": "^0.4.1" } }, "sha512-+CNAzxglkrpNf/kKywqQfk74QjtceuOE7Qm+AF8miRvPF/wmmK5+OJOgVh3AVTT3RP2mH3+FOaxlE5v72owk0A=="],
+
+    "@hexadrop/eslint-config": ["@hexadrop/eslint-config@workspace:packages/eslint-config"],
+
+    "@hexadrop/eslint-config-json": ["@hexadrop/eslint-config-json@workspace:packages/eslint-config-json"],
+
+    "@hexadrop/eslint-config-markdown": ["@hexadrop/eslint-config-markdown@workspace:packages/eslint-config-markdown"],
+
+    "@hexadrop/eslint-config-shared": ["@hexadrop/eslint-config-shared@workspace:packages/eslint-config-shared"],
+
+    "@hexadrop/eslint-config-typescript": ["@hexadrop/eslint-config-typescript@workspace:packages/eslint-config-typescript"],
 
     "@hexadrop/tsconfig": ["@hexadrop/tsconfig@0.0.5", "", {}, "sha512-sbm1lpigRiBFt8KHffORW/4sst2BP3ZP+3MzA/MbnE9QtvLPgv9NoPB8SlJRxywJUy7zuXXzAE9DNJrOBDGgOg=="],
 
