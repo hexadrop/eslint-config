@@ -109,6 +109,17 @@ interface HexadropEslintOptions {
 	typescript: boolean | string | string[] | TypescriptOptions;
 }
 
+/**
+ * The resolved options after {@link defaultOptions} has normalised user input.
+ *
+ * Differs from {@link HexadropEslintOptions} in that `typescript` is always
+ * `boolean | TypescriptOptions` — bare strings and arrays have already been
+ * folded into `{ project: … }`.
+ */
+type ResolvedHexadropEslintOptions = Omit<HexadropEslintOptions, 'typescript'> & {
+	typescript: boolean | TypescriptOptions;
+};
+
 interface TypescriptOptions {
 	/**
 	 * If true, enables TS support without type-aware linting.
@@ -132,10 +143,12 @@ function getCwdTsconfigPath(): string | undefined {
 	return undefined;
 }
 
-export type { HexadropEslintOptions, TypescriptOptions };
+export type { HexadropEslintOptions, ResolvedHexadropEslintOptions, TypescriptOptions };
 
-export default function defaultOptions(options: RecursivePartial<HexadropEslintOptions> = {}): HexadropEslintOptions {
-	let typescript: HexadropEslintOptions['typescript'] = false;
+export default function defaultOptions(
+	options: RecursivePartial<HexadropEslintOptions> = {}
+): ResolvedHexadropEslintOptions {
+	let typescript: ResolvedHexadropEslintOptions['typescript'] = false;
 	const isInstalledTypescript = isPackageExists('typescript');
 	const isInstalledReact = isPackageExists('react');
 	const isInstalledAstro = isPackageExists('astro');

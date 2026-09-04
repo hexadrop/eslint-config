@@ -5,7 +5,7 @@ import type { ResolvableFlatConfig } from 'eslint-flat-config-utils';
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 
 import { astro, core, ignore, imports, react, stylistic } from './config';
-import type { HexadropEslintOptions, TypescriptOptions } from './options';
+import type { HexadropEslintOptions, ResolvedHexadropEslintOptions } from './options';
 import defaultOptions from './options/hexadrop-eslint.options';
 import type { TypedFlatConfigItem } from './typed-config';
 import type { ConfigNames } from './typegen';
@@ -30,28 +30,19 @@ function optionalPlugin<TOptions extends unknown[] = []>(
 
 /**
  * Convert resolved options.typescript to the shape the typescript config expects.
- * `defaultOptions()` has already normalised bare strings/arrays into `{ project: … }`,
- * so at this point the value is always `boolean | TypescriptOptions`.
+ * The resolved value is already `boolean | TypescriptOptions` — no raw strings/arrays.
  */
 function toTypescriptFactoryOptions(
-	typescript: HexadropEslintOptions['typescript']
+	typescript: ResolvedHexadropEslintOptions['typescript']
 ): TypescriptFactoryOptions | undefined {
-	/*
-	 * `defaultOptions()` has already normalised string | string[] into
-	 * `{ project: … }` at runtime, but the type system still sees the
-	 * public input type.  The cast is safe because the runtime shape is
-	 * always `boolean | TypescriptOptions` by this point.
-	 */
-	const resolved = typescript as boolean | TypescriptOptions;
-
-	if (resolved === false) {
+	if (typescript === false) {
 		return undefined;
 	}
-	if (resolved === true) {
+	if (typescript === true) {
 		return { project: true };
 	}
 
-	return resolved;
+	return typescript;
 }
 
 // eslint-disable-next-line typescript/promise-function-async
