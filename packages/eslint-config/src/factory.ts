@@ -9,9 +9,10 @@ import defaultOptions from './options/hexadrop-eslint.options';
 import type { TypedFlatConfigItem } from './typed-config';
 import type { ConfigNames } from './typegen';
 
-function optionalPlugin(
+function optionalPlugin<TOptions extends unknown[] = []>(
 	condition: unknown,
-	importFunction: () => Promise<{ config: () => Promise<TypedFlatConfigItem[]> }>
+	importFunction: () => Promise<{ config: (...arguments_: TOptions) => Promise<TypedFlatConfigItem[]> }>,
+	...arguments_: TOptions
 ): ResolvableFlatConfig<TypedFlatConfigItem>[] {
 	if (!condition) {
 		return [];
@@ -21,7 +22,7 @@ function optionalPlugin(
 		(async () => {
 			const imported = await importFunction();
 
-			return imported.config();
+			return imported.config(...arguments_);
 		})(),
 	];
 }
@@ -37,11 +38,9 @@ export default function hexadrop(
 		ignore(options),
 		core(options),
 		astro(options),
-		(async () => {
-			const { config } = await import('@hexadrop/eslint-config-typescript');
-
-			return config({ project: options.typescript });
-		})(),
+		...optionalPlugin(options.typescript, () => import('@hexadrop/eslint-config-typescript'), {
+			project: options.typescript,
+		}),
 		react(options),
 		...optionalPlugin(options.json, () => import('@hexadrop/eslint-config-json')),
 		...optionalPlugin(options.markdown, () => import('@hexadrop/eslint-config-markdown')),
