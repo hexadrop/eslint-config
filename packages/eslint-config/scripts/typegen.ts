@@ -6,8 +6,8 @@ import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 
 import { combine } from '../src';
 import { astro, core, ignore, imports, react, stylistic } from '../src/config';
+import type { TypescriptOptions } from '../src/options';
 import { defaultOptions } from '../src/options';
-import type { TypescriptOptions } from '../src/options/hexadrop-eslint.options';
 
 const options = defaultOptions();
 
