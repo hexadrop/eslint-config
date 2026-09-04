@@ -61,14 +61,11 @@ export default function hexadrop(
 			() => import('@hexadrop/eslint-config-typescript'),
 			toTypescriptFactoryOptions(options.typescript)
 		),
-		...optionalPlugin(options.react, async () => {
-			const m = await import('@hexadrop/eslint-config-react');
-
-			return {
-				config: (options_?: Record<string, unknown>) =>
-					m.config({ ...(options.typescript === false && { typescript: false as const }), ...options_ }),
-			};
-		}),
+		...optionalPlugin(
+			options.react,
+			() => import('@hexadrop/eslint-config-react'),
+			options.typescript === false ? { typescript: false as const } : {}
+		),
 		...optionalPlugin(options.json, () => import('@hexadrop/eslint-config-json')),
 		...optionalPlugin(options.markdown, () => import('@hexadrop/eslint-config-markdown')),
 		imports(options),
