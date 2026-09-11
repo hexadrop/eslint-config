@@ -1,4 +1,4 @@
-import { describe, expect, test } from 'bun:test';
+import { beforeAll, describe, expect, mock, test } from 'bun:test';
 
 import hexadrop from '../../src';
 import type { TypedFlatConfigItem } from '../../src/typed-config';
@@ -13,6 +13,12 @@ async function resolveGolden(cell: MatrixCell): Promise<unknown> {
 }
 
 describe('golden resolved config', () => {
+	beforeAll(() => {
+		void mock.module('local-pkg', () => ({
+			isPackageExists: (name: string) => name === 'vite' || name === '@hexadrop/eslint-config-typescript',
+		}));
+	});
+
 	test.each(MATRIX)('$slug: $description', async cell => {
 		const golden = await resolveGolden(cell);
 
