@@ -1,3 +1,4 @@
+import { config as astro } from '@hexadrop/eslint-config-astro';
 import { config as json } from '@hexadrop/eslint-config-json';
 import { config as markdown } from '@hexadrop/eslint-config-markdown';
 import { config as react } from '@hexadrop/eslint-config-react';
@@ -23,6 +24,7 @@ const configs = await combine(
 	core(options),
 	typescript(options.typescript ? (typeof options.typescript === 'boolean' ? {} : options.typescript) : undefined),
 	react(options.typescript ? {} : { typescript: false }),
+	astro(options.typescript === false ? { typescript: false as const } : {}),
 	json(),
 	markdown(),
 	imports(options),
