@@ -1,4 +1,3 @@
-import { JSON_SORT_KEYS_CONFIG } from '@hexadrop/eslint-config-json';
 import {
 	DTS_GLOBS,
 	GLOB_ASTRO,
@@ -34,20 +33,26 @@ import {
 	STYLISTIC_CONFIG_NAME_SETUP,
 	TYPESCRIPT_GLOBS,
 } from '@hexadrop/eslint-config-shared';
+import { JSON_SORT_KEYS_CONFIG } from '@hexadrop/eslint-config-json';
 import type { Linter } from 'eslint';
 
-import type { HexadropEslintOptions } from '../../options';
-import type { TypedFlatConfigItem } from '../../typed-config';
+import type { HexadropEslintStylisticOptions } from './stylistic.options';
 import prettierOptions from './stylistic.options-prettier';
 import stylisticOptions from './stylistic.options-stylistic';
+import type { TypedFlatConfigItem } from './stylistic.typed-config';
 
-export default async function stylistic(options: HexadropEslintOptions): Promise<TypedFlatConfigItem[]> {
-	const { astro, json, markdown, stylistic, typescript } = options;
-	if (stylistic === false) {
-		return [];
-	}
+export interface StylisticConfigOptions {
+	astro: boolean;
+	json: boolean;
+	markdown: boolean;
+	stylistic: HexadropEslintStylisticOptions;
+	typescript: boolean;
+	isTypeAware?: boolean;
+}
+
+export default async function stylisticConfig(options: StylisticConfigOptions): Promise<TypedFlatConfigItem[]> {
+	const { astro, json, markdown, stylistic, typescript, isTypeAware = false } = options;
 	const { format, indent, indentSize, perfectionist, unicorn } = stylistic;
-	const isTypeAware = typeof typescript !== 'boolean';
 	const typescriptPluginRename = PLUGIN_RENAME['@typescript-eslint'];
 	const stylisticPluginRename = PLUGIN_RENAME['@stylistic'];
 	const jsonPluginRename = PLUGIN_RENAME.jsonc;
@@ -318,19 +323,19 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 				files: GLOB_JSON,
 				name: STYLISTIC_CONFIG_NAME_RULES_JSON,
 				rules: {
-					[`${jsonPluginRename}/array-bracket-spacing`]: ['error', 'never'],
-					[`${jsonPluginRename}/comma-dangle`]: ['error', 'never'],
-					[`${jsonPluginRename}/comma-style`]: ['error', 'last'],
-					[`${jsonPluginRename}/indent`]: ['error', indent === 'space' ? indentSize : indent],
-					[`${jsonPluginRename}/key-spacing`]: ['error', { afterColon: true, beforeColon: false }],
-					[`${jsonPluginRename}/object-curly-newline`]: ['error', { consistent: true, multiline: true }],
-					[`${jsonPluginRename}/object-curly-spacing`]: ['error', 'always'],
+					[`${jsonPluginRename}/array-bracket-spacing`]: ["error", "never"],
+					[`${jsonPluginRename}/comma-dangle`]: ["error", "never"],
+					[`${jsonPluginRename}/comma-style`]: ["error", "last"],
+					[`${jsonPluginRename}/indent`]: ["error", indent === "space" ? indentSize : indent],
+					[`${jsonPluginRename}/key-spacing`]: ["error", { afterColon: true, beforeColon: false }],
+					[`${jsonPluginRename}/object-curly-newline`]: ["error", { consistent: true, multiline: true }],
+					[`${jsonPluginRename}/object-curly-spacing`]: ["error", "always"],
 					[`${jsonPluginRename}/object-property-newline`]: [
-						'error',
+						"error",
 						{ allowMultiplePropertiesPerLine: true },
 					],
-					[`${jsonPluginRename}/quote-props`]: 'error',
-					[`${jsonPluginRename}/quotes`]: 'error',
+					[`${jsonPluginRename}/quote-props`]: "error",
+					[`${jsonPluginRename}/quotes`]: "error",
 				},
 			},
 			...JSON_SORT_KEYS_CONFIG
@@ -505,7 +510,6 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 		config.push({
 			files: GLOB_MARKDOWN_JSON,
 			name: STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_JSON,
-
 			rules: {
 				'json/indent': ['error', 2],
 			},
@@ -516,7 +520,6 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 		config.push({
 			files: GLOB_MARKDOWN_ASTRO,
 			name: STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_ASRTO,
-
 			rules: {
 				[`${stylisticPluginRename}/indent`]: ['error', 2],
 			},
