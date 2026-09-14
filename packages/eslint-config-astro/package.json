@@ -1,19 +1,17 @@
 {
-	"name": "@hexadrop/eslint-config-react",
+	"name": "@hexadrop/eslint-config-astro",
 	"version": "1.0.11",
-	"description": "React slice of the hexadrop ESLint config: eslint-plugin-react, react-hooks and react-refresh rules.",
+	"description": "Astro slice of the hexadrop ESLint config: eslint-plugin-astro, astro-eslint-parser and prettier-plugin-astro rules.",
 	"keywords": [
 		"lint",
 		"eslint",
 		"eslint-config",
-		"react",
-		"react-hooks",
-		"react-refresh"
+		"astro"
 	],
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/hexadrop/eslint-config.git",
-		"directory": "packages/eslint-config-react"
+		"directory": "packages/eslint-config-astro"
 	},
 	"homepage": "https://github.com/hexadrop/eslint-config",
 	"bugs": {
@@ -43,18 +41,22 @@
 	},
 	"peerDependencies": {
 		"@hexadrop/eslint-config-typescript": "^1.0.11",
+		"@typescript-eslint/parser": "^8.68.0",
 		"eslint": "^9.17.0 || ^10.0.0"
 	},
 	"peerDependenciesMeta": {
 		"@hexadrop/eslint-config-typescript": {
 			"optional": true
+		},
+		"@typescript-eslint/parser": {
+			"optional": true
 		}
 	},
 	"dependencies": {
+		"astro-eslint-parser": "3.1.0",
 		"eslint-flat-config-utils": "3.2.0",
-		"eslint-plugin-react": "7.37.5",
-		"eslint-plugin-react-hooks": "7.1.1",
-		"eslint-plugin-react-refresh": "0.5.5",
+		"eslint-plugin-astro": "3.1.0",
+		"globals": "17.11.0",
 		"local-pkg": "1.2.1"
 	},
 	"devDependencies": {
