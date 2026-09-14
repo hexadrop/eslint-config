@@ -1,4 +1,4 @@
-import type { HexadropEslintStylisticOptions } from '../../options';
+import type { HexadropEslintStylisticOptions } from './stylistic.options';
 
 interface PrettierOptions {
 	[k: string]: unknown;

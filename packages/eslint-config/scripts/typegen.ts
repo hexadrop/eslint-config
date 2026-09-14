@@ -2,12 +2,14 @@ import { config as astro } from '@hexadrop/eslint-config-astro';
 import { config as json } from '@hexadrop/eslint-config-json';
 import { config as markdown } from '@hexadrop/eslint-config-markdown';
 import { config as react } from '@hexadrop/eslint-config-react';
+import { config as stylistic } from '@hexadrop/eslint-config-stylistic';
+import type { HexadropEslintStylisticOptions } from '@hexadrop/eslint-config-stylistic';
 import { config as typescript } from '@hexadrop/eslint-config-typescript';
 import { builtinRules } from 'eslint/use-at-your-own-risk';
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 
 import { combine } from '../src';
-import { core, ignore, imports, stylistic } from '../src/config';
+import { core, ignore, imports } from '../src/config';
 import { defaultOptions } from '../src/options';
 
 const options = defaultOptions();
@@ -28,7 +30,14 @@ const configs = await combine(
 	json(),
 	markdown(),
 	imports(options),
-	stylistic(options)
+	stylistic({
+		astro: options.astro ?? false,
+		isTypeAware: typeof options.typescript === 'object' ? !!options.typescript.project : false,
+		json: options.json ?? false,
+		markdown: options.markdown ?? false,
+		stylistic: options.stylistic as HexadropEslintStylisticOptions,
+		typescript: options.typescript !== false,
+	})
 );
 
 const configNames = configs.map(index => index.name).filter(Boolean) as string[];
