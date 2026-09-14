@@ -1,9 +1,19 @@
-import Importer from 'jiti';
+import { createJiti } from 'jiti';
 
-const importer = Importer(import.meta.url);
+const jiti = createJiti(import.meta.url, {
+	tsconfigPaths: true,
+});
 /**
- * @type {import('./src').default}
+ *@type {import('./packages/eslint-config/src').default}
  */
-const hexadrop = importer('./src').default;
+const hexadrop = jiti('./packages/eslint-config/src').default;
 
-export default hexadrop();
+export default hexadrop(
+	{ ignores: ['packages/**/e2e/fixtures'] },
+	{
+		name: 'hexadrop/shared-imports',
+		rules: {
+			'import/no-extraneous-dependencies': ['error', { whitelist: ['@hexadrop/eslint-config-shared'] }],
+		},
+	}
+);

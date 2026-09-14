@@ -1,0 +1,49 @@
+import type { ESLint, Linter } from 'eslint';
+
+import renameRules from './rename-rules';
+
+function pluginConfigOverrideRules(
+	plugin: ESLint.Plugin,
+	configName: string,
+	indexOrMap?: number | Record<string, string>
+): Linter.RulesRecord;
+function pluginConfigOverrideRules(
+	plugin: ESLint.Plugin,
+	configName: string,
+	indexOrMap: number,
+	map: Record<string, string>
+): Linter.RulesRecord;
+function pluginConfigOverrideRules(
+	plugin: ESLint.Plugin,
+	configName: string,
+	indexOrMap?: number | Record<string, string>,
+	map2?: Record<string, string>
+): Linter.RulesRecord {
+	let index = 0;
+	let map: Record<string, string> = {};
+	if (typeof indexOrMap === 'number') {
+		index = indexOrMap;
+	}
+	if (typeof indexOrMap === 'object') {
+		map = indexOrMap;
+	} else if (typeof map2 === 'object') {
+		map = map2;
+	}
+
+	let rules = {};
+	if (plugin.configs && Object.hasOwn(plugin.configs, configName)) {
+		const config = plugin.configs[configName];
+		if (config && 'overrides' in config) {
+			const overrides = config.overrides;
+
+			const indexOverride = overrides ? overrides[index] : undefined;
+			if (indexOverride?.rules) {
+				rules = indexOverride.rules;
+			}
+		}
+	}
+
+	return renameRules(rules, map);
+}
+
+export default pluginConfigOverrideRules;

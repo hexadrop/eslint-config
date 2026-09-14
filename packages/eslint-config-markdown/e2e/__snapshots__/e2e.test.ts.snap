@@ -1,0 +1,14 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`e2e fixtures markdown: fixtures/markdown.md through eslint --fix: markdown-diagnostics 1`] = `[]`;
+
+exports[`e2e fixtures markdown: fixtures/markdown.md through eslint --fix: markdown-content 1`] = `
+"# Fixture
+
+Some text with bad   spacing.
+
+\`\`\`ts
+const a=1
+\`\`\`
+"
+`;

@@ -1,0 +1,6 @@
+{
+	zeta: 1,
+	alpha: [1, 2, 3],
+	// trailing comma below is legal json5
+	nested: { b: true, a: false },
+}

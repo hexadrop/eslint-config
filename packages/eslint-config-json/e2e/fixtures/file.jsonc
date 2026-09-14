@@ -1,0 +1,5 @@
+{
+	// comment in a jsonc fixture
+	"zeta": 1,
+	"alpha": [1, 2, 3]
+}

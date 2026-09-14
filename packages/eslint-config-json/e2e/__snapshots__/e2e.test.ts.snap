@@ -1,0 +1,135 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`e2e fixtures clean: fixtures/clean.json through eslint --fix: clean-diagnostics 1`] = `[]`;
+
+exports[`e2e fixtures clean: fixtures/clean.json through eslint --fix: clean-content 1`] = `
+"{
+	"alpha": 1,
+	"beta": [1, 2, 3],
+	"gamma": {
+		"a": true,
+		"b": false
+	}
+}
+"
+`;
+
+exports[`e2e fixtures json: fixtures/file.json through eslint --fix: json-diagnostics 1`] = `[]`;
+
+exports[`e2e fixtures json: fixtures/file.json through eslint --fix: json-content 1`] = `
+"{"zeta": 1,"alpha": [1,2,3],"nested": {"b": true, "a": false}}
+"
+`;
+
+exports[`e2e fixtures jsonc: fixtures/file.jsonc through eslint --fix: jsonc-diagnostics 1`] = `[]`;
+
+exports[`e2e fixtures jsonc: fixtures/file.jsonc through eslint --fix: jsonc-content 1`] = `
+"{
+	// comment in a jsonc fixture
+	"zeta": 1,
+	"alpha": [1, 2, 3]
+}
+"
+`;
+
+exports[`e2e fixtures json5: fixtures/file.json5 through eslint --fix: json5-diagnostics 1`] = `[]`;
+
+exports[`e2e fixtures json5: fixtures/file.json5 through eslint --fix: json5-content 1`] = `
+"{
+	zeta: 1,
+	alpha: [1, 2, 3],
+	// trailing comma below is legal json5
+	nested: { b: true, a: false },
+}
+"
+`;
+
+exports[`e2e fixtures invalid: fixtures/invalid.json through eslint --fix: invalid-diagnostics 1`] = `
+[
+  {
+    "column": 12,
+    "line": 1,
+    "message": "Duplicate key 'dupe'.",
+    "ruleId": "json/no-dupe-keys",
+    "severity": 2,
+  },
+  {
+    "column": 29,
+    "line": 1,
+    "message": "NaN should not be used.",
+    "ruleId": "json/no-nan",
+    "severity": 2,
+  },
+  {
+    "column": 29,
+    "line": 1,
+    "message": "\`NaN\` are not allowed in JSON.",
+    "ruleId": "json/valid-json-number",
+    "severity": 2,
+  },
+  {
+    "column": 45,
+    "line": 1,
+    "message": "Infinity should not be used.",
+    "ruleId": "json/no-infinity",
+    "severity": 2,
+  },
+  {
+    "column": 45,
+    "line": 1,
+    "message": "\`Infinity\` are not allowed in JSON.",
+    "ruleId": "json/valid-json-number",
+    "severity": 2,
+  },
+  {
+    "column": 84,
+    "line": 1,
+    "message": "\`undefined\` is not allowed.",
+    "ruleId": "json/no-undefined-value",
+    "severity": 2,
+  },
+]
+`;
+
+exports[`e2e fixtures invalid: fixtures/invalid.json through eslint --fix: invalid-content 1`] = `
+"{"dupe": 1,"dupe": 2,"nan": NaN,"infinity": Infinity,"template": "hi","undefined": undefined}
+"
+`;
+
+exports[`e2e fixtures package-json: fixtures/package.json through eslint --fix: package-json-diagnostics 1`] = `[]`;
+
+exports[`e2e fixtures package-json: fixtures/package.json through eslint --fix: package-json-content 1`] = `
+"{"name":"fixture","version":"1.0.0","files":["dist","src"],"scripts":{"build":"tsdown","test":"bun test"},"dependencies":{"alpha":"1.0.0","zeta":"1.0.0"}}
+"
+`;
+
+exports[`e2e fixtures tsconfig-json: fixtures/tsconfig.json through eslint --fix: tsconfig-json-diagnostics 1`] = `[]`;
+
+exports[`e2e fixtures tsconfig-json: fixtures/tsconfig.json through eslint --fix: tsconfig-json-content 1`] = `
+"{"extends":"@hexadrop/tsconfig","compilerOptions":{"target":"ES2022","strict":true},"include":["src"]}
+"
+`;
+
+exports[`e2e fixtures rule-override: fixtures/rule-override.json through eslint --fix: rule-override-diagnostics 1`] = `
+[
+  {
+    "column": 29,
+    "line": 1,
+    "message": "NaN should not be used.",
+    "ruleId": "json/no-nan",
+    "severity": 2,
+  },
+  {
+    "column": 29,
+    "line": 1,
+    "message": "\`NaN\` are not allowed in JSON.",
+    "ruleId": "json/valid-json-number",
+    "severity": 2,
+  },
+]
+`;
+
+exports[`e2e fixtures rule-override: fixtures/rule-override.json through eslint --fix: rule-override-content 1`] = `
+"{"dupe": 1,"dupe": 2,"nan": NaN}
+"
+`;
