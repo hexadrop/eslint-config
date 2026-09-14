@@ -167,7 +167,6 @@ export default function defaultOptions(
 			...(tsOptions.tsconfigRootDir && { tsconfigRootDir: tsOptions.tsconfigRootDir }),
 		} as TypescriptOptions;
 	} else if (isInstalledTypescript) {
-		/* eslint-enable typescript/no-unnecessary-condition */
 		if (options.typescript === undefined) {
 			typescript = { project: getCwdTsconfigPath() ?? true };
 		} else if (typeof options.typescript === 'string') {
