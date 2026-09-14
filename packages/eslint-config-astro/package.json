@@ -1,6 +1,6 @@
 {
 	"name": "@hexadrop/eslint-config-astro",
-	"version": "1.0.11",
+	"version": "1.0.12",
 	"description": "Astro slice of the hexadrop ESLint config: eslint-plugin-astro, astro-eslint-parser and prettier-plugin-astro rules.",
 	"keywords": [
 		"lint",
@@ -40,7 +40,7 @@
 		"prepublishOnly": "bun run build"
 	},
 	"peerDependencies": {
-		"@hexadrop/eslint-config-typescript": "^1.0.11",
+		"@hexadrop/eslint-config-typescript": "^1.0.12",
 		"@typescript-eslint/parser": "^8.68.0",
 		"eslint": "^9.17.0 || ^10.0.0"
 	},

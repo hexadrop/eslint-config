@@ -1,6 +1,6 @@
 {
 	"name": "@hexadrop/eslint-config-react",
-	"version": "1.0.11",
+	"version": "1.0.12",
 	"description": "React slice of the hexadrop ESLint config: eslint-plugin-react, react-hooks and react-refresh rules.",
 	"keywords": [
 		"lint",
@@ -42,7 +42,7 @@
 		"prepublishOnly": "bun run build"
 	},
 	"peerDependencies": {
-		"@hexadrop/eslint-config-typescript": "^1.0.11",
+		"@hexadrop/eslint-config-typescript": "^1.0.12",
 		"eslint": "^9.17.0 || ^10.0.0"
 	},
 	"peerDependenciesMeta": {

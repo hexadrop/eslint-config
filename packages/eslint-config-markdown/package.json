@@ -1,6 +1,6 @@
 {
 	"name": "@hexadrop/eslint-config-markdown",
-	"version": "1.0.11",
+	"version": "1.0.12",
 	"description": "Markdown slice of the hexadrop ESLint config: markdown plugin processors merged with a pass-through processor and the plain parser for markdown files.",
 	"keywords": [
 		"lint",
