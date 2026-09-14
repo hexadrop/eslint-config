@@ -15,7 +15,8 @@ async function resolveGolden(cell: MatrixCell): Promise<unknown> {
 describe('golden resolved config', () => {
 	beforeAll(() => {
 		void mock.module('local-pkg', () => ({
-			isPackageExists: (name: string) => name === 'vite' || name === '@hexadrop/eslint-config-typescript',
+			isPackageExists: (name: string) =>
+				name === 'vite' || name === '@hexadrop/eslint-config-typescript' || name === 'typescript',
 		}));
 	});
 
