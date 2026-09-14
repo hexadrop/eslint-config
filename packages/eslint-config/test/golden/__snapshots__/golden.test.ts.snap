@@ -29838,7 +29838,9 @@ exports[`golden resolved config astro-ts: astro with typescript: astro-ts 1`] = 
         "extraFileExtensions": [
           ".astro",
         ],
-        "parser": undefined,
+        "parser": {
+          "$module": "typescript-eslint/parser@8.68.0",
+        },
       },
       "sourceType": "module",
     },
@@ -32261,9 +32263,7 @@ exports[`golden resolved config astro-ts: astro with typescript: astro-ts 1`] = 
         "$module": "typescript-eslint/parser@8.68.0",
       },
       "parserOptions": {
-        "project": [
-          undefined,
-        ],
+        "project": undefined,
       },
       "sourceType": "module",
     },
@@ -36850,7 +36850,9 @@ exports[`golden resolved config astro-react-ts: full stack: astro, react and typ
         "extraFileExtensions": [
           ".astro",
         ],
-        "parser": undefined,
+        "parser": {
+          "$module": "typescript-eslint/parser@8.68.0",
+        },
       },
       "sourceType": "module",
     },
@@ -39273,9 +39275,7 @@ exports[`golden resolved config astro-react-ts: full stack: astro, react and typ
         "$module": "typescript-eslint/parser@8.68.0",
       },
       "parserOptions": {
-        "project": [
-          undefined,
-        ],
+        "project": undefined,
       },
       "sourceType": "module",
     },

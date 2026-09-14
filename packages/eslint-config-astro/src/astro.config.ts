@@ -37,6 +37,8 @@ export default async function astroConfig(options: AstroConfigOptions = {}): Pro
 		interopDefault(import('astro-eslint-parser')),
 	] as const);
 
+	const parserTypescript = isTypescript ? await interopDefault(import('@typescript-eslint/parser')) : undefined;
+
 	const configs: TypedFlatConfigItem[] = [
 		{
 			name: ASTRO_CONFIG_NAME_SETUP,
@@ -55,7 +57,7 @@ export default async function astroConfig(options: AstroConfigOptions = {}): Pro
 				parser,
 				parserOptions: {
 					extraFileExtensions: ['.astro'],
-					parser: undefined,
+					parser: parserTypescript,
 				},
 				sourceType: 'module',
 			},
@@ -75,8 +77,6 @@ export default async function astroConfig(options: AstroConfigOptions = {}): Pro
 	];
 
 	if (isTypescript) {
-		const parserTypescript = await interopDefault(import('@typescript-eslint/parser'));
-
 		configs.push({
 			files: GLOB_ASTRO_TYPESCRIPT,
 			languageOptions: {
@@ -85,7 +85,10 @@ export default async function astroConfig(options: AstroConfigOptions = {}): Pro
 				},
 				parser: parserTypescript,
 				parserOptions: {
-					project: options.typescript === true ? undefined : toArray(options.typescript as string | string[]),
+					project:
+						Boolean(options.typescript) && options.typescript !== true
+							? toArray(options.typescript as string | string[])
+							: undefined,
 				},
 				sourceType: 'module',
 			},
