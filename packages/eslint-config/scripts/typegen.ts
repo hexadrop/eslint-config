@@ -23,7 +23,7 @@ const configs = await combine(
 	ignore(options),
 	core(options),
 	typescript(options.typescript ? (typeof options.typescript === 'boolean' ? {} : options.typescript) : undefined),
-	react(options.typescript ? {} : { typescript: false }),
+	react(options.typescript === false ? { typescript: false as const } : {}),
 	astro(options.typescript === false ? { typescript: false as const } : {}),
 	json(),
 	markdown(),
