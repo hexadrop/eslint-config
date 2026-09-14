@@ -55,7 +55,11 @@ export default function hexadrop(
 	let pipeline = new FlatConfigComposer<TypedFlatConfigItem, ConfigNames>(
 		ignore(options),
 		core(options),
-		...optionalPlugin(options.astro, () => import('@hexadrop/eslint-config-astro')),
+		...optionalPlugin(
+			options.astro,
+			() => import('@hexadrop/eslint-config-astro'),
+			options.typescript === false ? { typescript: false as const } : {}
+		),
 		...optionalPlugin(
 			options.typescript,
 			() => import('@hexadrop/eslint-config-typescript'),
