@@ -10,20 +10,31 @@ import {
 	toArray,
 } from '@hexadrop/eslint-config-shared';
 import globals from 'globals';
+import { isPackageExists } from 'local-pkg';
 
-import type { HexadropEslintOptions } from '../../options';
-import type { TypedFlatConfigItem } from '../../typed-config';
+import type { TypedFlatConfigItem } from './astro.typed-config';
 
-export default async function astro(options: HexadropEslintOptions): Promise<TypedFlatConfigItem[]> {
-	const { astro, typescript } = options;
-	if (!astro) {
-		return [];
+function isTypescriptEnabled(options: AstroConfigOptions): boolean {
+	if (options.typescript !== undefined) {
+		if (options.typescript && !isPackageExists('@hexadrop/eslint-config-typescript')) {
+			throw new Error(
+				'Astro typescript integration is enabled but @hexadrop/eslint-config-typescript is not installed. ' +
+					'Install it with your package manager or set typescript: false to disable TS support.'
+			);
+		}
+
+		return Boolean(options.typescript);
 	}
 
-	const [plugin, parser, parserTypescript] = await Promise.all([
+	return isPackageExists('@hexadrop/eslint-config-typescript');
+}
+
+export default async function astroConfig(options: AstroConfigOptions = {}): Promise<TypedFlatConfigItem[]> {
+	const isTypescript = isTypescriptEnabled(options);
+
+	const [plugin, parser] = await Promise.all([
 		interopDefault(import('eslint-plugin-astro')),
 		interopDefault(import('astro-eslint-parser')),
-		interopDefault(import('@typescript-eslint/parser')),
 	] as const);
 
 	const configs: TypedFlatConfigItem[] = [
@@ -44,12 +55,12 @@ export default async function astro(options: HexadropEslintOptions): Promise<Typ
 				parser,
 				parserOptions: {
 					extraFileExtensions: ['.astro'],
-					parser: typescript ? parserTypescript : undefined,
+					parser: undefined,
 				},
 				sourceType: 'module',
 			},
 			name: ASTRO_CONFIG_NAME_SETUP_PARSER,
-			processor: typescript ? 'astro/client-side-ts' : 'astro/astro',
+			processor: isTypescript ? 'astro/client-side-ts' : 'astro/astro',
 		},
 		{
 			files: GLOB_ASTRO_JAVASCRIPT,
@@ -63,7 +74,9 @@ export default async function astro(options: HexadropEslintOptions): Promise<Typ
 		},
 	];
 
-	if (typescript) {
+	if (isTypescript) {
+		const parserTypescript = await interopDefault(import('@typescript-eslint/parser'));
+
 		configs.push({
 			files: GLOB_ASTRO_TYPESCRIPT,
 			languageOptions: {
@@ -72,7 +85,7 @@ export default async function astro(options: HexadropEslintOptions): Promise<Typ
 				},
 				parser: parserTypescript,
 				parserOptions: {
-					project: typescript === true ? undefined : toArray(typescript),
+					project: options.typescript === true ? undefined : toArray(options.typescript as string | string[]),
 				},
 				sourceType: 'module',
 			},
@@ -97,4 +110,17 @@ export default async function astro(options: HexadropEslintOptions): Promise<Typ
 	});
 
 	return configs;
+}
+
+export interface AstroConfigOptions {
+	/**
+	 * Whether typescript support should be enabled (TS parsing, TS script linting).
+	 *
+	 * When omitted, auto-detected via `@hexadrop/eslint-config-typescript` presence.
+	 * Set explicitly to override auto-detection: `false` forces JS-only mode,
+	 * `true` forces TS mode — throws an actionable error if the peer is not installed.
+	 *
+	 * @default undefined (auto-detect)
+	 */
+	typescript?: boolean | string | string[];
 }

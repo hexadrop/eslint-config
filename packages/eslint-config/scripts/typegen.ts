@@ -6,7 +6,7 @@ import { builtinRules } from 'eslint/use-at-your-own-risk';
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 
 import { combine } from '../src';
-import { astro, core, ignore, imports, stylistic } from '../src/config';
+import { core, ignore, imports, stylistic } from '../src/config';
 import { defaultOptions } from '../src/options';
 
 const options = defaultOptions();
@@ -23,7 +23,6 @@ const configs = await combine(
 	core(options),
 	typescript(options.typescript ? (typeof options.typescript === 'boolean' ? {} : options.typescript) : undefined),
 	react(options.typescript ? {} : { typescript: false }),
-	astro(options),
 	json(),
 	markdown(),
 	imports(options),
