@@ -3,11 +3,11 @@ import path from 'node:path';
 import process from 'node:process';
 
 import type { Nullable, RecursivePartial } from '@hexadrop/eslint-config-shared';
+import type { HexadropEslintStylisticOptions } from '@hexadrop/eslint-config-stylistic';
 import { isPackageExists } from 'local-pkg';
 
 import type { HexadropEslintIgnoreOptions } from './hexadrop-eslint-ignore.options';
 import type { HexadropEslintModulesOptions } from './hexadrop-eslint-module.options';
-import type { HexadropEslintStylisticOptions } from './hexadrop-eslint-stylistic.options';
 
 interface HexadropEslintOptions {
 	/**
@@ -82,7 +82,6 @@ interface HexadropEslintOptions {
 	 * 	bracketSpacing: true,
 	 * 	endOfLine: 'lf',
 	 * 	format: true,
-	 * 	imports: true,
 	 * 	indent: 'tab',
 	 * 	indentSize: 4,
 	 * 	perfectionist: true,
@@ -230,7 +229,6 @@ export default function defaultOptions(
 						bracketSpacing: true,
 						endOfLine: 'lf',
 						format: true,
-						imports: true,
 						indent: 'tab',
 						indentSize: 4,
 						perfectionist: true,

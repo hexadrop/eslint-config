@@ -74,18 +74,14 @@ export default function hexadrop(
 		...optionalPlugin(options.json, () => import('@hexadrop/eslint-config-json')),
 		...optionalPlugin(options.markdown, () => import('@hexadrop/eslint-config-markdown')),
 		imports(options),
-		...optionalPlugin(
-			options.stylistic !== false,
-			() => import('@hexadrop/eslint-config-stylistic'),
-			{
-				astro: options.astro ?? false,
-				isTypeAware: typeof options.typescript === 'object' ? !!options.typescript.project : false,
-				json: options.json ?? false,
-				markdown: options.markdown ?? false,
-				stylistic: options.stylistic as HexadropEslintStylisticOptions,
-				typescript: options.typescript !== false,
-			}
-		)
+		...optionalPlugin(options.stylistic !== false, () => import('@hexadrop/eslint-config-stylistic'), {
+			astro: options.astro,
+			isTypeAware: typeof options.typescript === 'object',
+			json: options.json,
+			markdown: options.markdown,
+			stylistic: options.stylistic as HexadropEslintStylisticOptions,
+			typescript: options.typescript !== false,
+		})
 	).renamePlugins(PLUGIN_RENAME);
 
 	/*

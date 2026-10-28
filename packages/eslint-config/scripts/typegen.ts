@@ -2,8 +2,8 @@ import { config as astro } from '@hexadrop/eslint-config-astro';
 import { config as json } from '@hexadrop/eslint-config-json';
 import { config as markdown } from '@hexadrop/eslint-config-markdown';
 import { config as react } from '@hexadrop/eslint-config-react';
-import { config as stylistic } from '@hexadrop/eslint-config-stylistic';
 import type { HexadropEslintStylisticOptions } from '@hexadrop/eslint-config-stylistic';
+import { config as stylistic } from '@hexadrop/eslint-config-stylistic';
 import { config as typescript } from '@hexadrop/eslint-config-typescript';
 import { builtinRules } from 'eslint/use-at-your-own-risk';
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
@@ -31,10 +31,10 @@ const configs = await combine(
 	markdown(),
 	imports(options),
 	stylistic({
-		astro: options.astro ?? false,
-		isTypeAware: typeof options.typescript === 'object' ? !!options.typescript.project : false,
-		json: options.json ?? false,
-		markdown: options.markdown ?? false,
+		astro: options.astro,
+		isTypeAware: typeof options.typescript === 'object',
+		json: options.json,
+		markdown: options.markdown,
 		stylistic: options.stylistic as HexadropEslintStylisticOptions,
 		typescript: options.typescript !== false,
 	})

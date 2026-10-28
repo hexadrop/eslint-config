@@ -16,7 +16,7 @@ import {
 	STYLISTIC_CONFIG_NAME_RULES,
 	STYLISTIC_CONFIG_NAME_RULES_ASTRO,
 	STYLISTIC_CONFIG_NAME_RULES_JSON,
-	STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_ASRTO,
+	STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_ASTRO,
 	STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_JSON,
 	STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_SOURCE,
 	STYLISTIC_CONFIG_NAME_RULES_PERFECTIONIST,
@@ -33,7 +33,6 @@ import {
 	STYLISTIC_CONFIG_NAME_SETUP,
 	TYPESCRIPT_GLOBS,
 } from '@hexadrop/eslint-config-shared';
-import { JSON_SORT_KEYS_CONFIG } from '@hexadrop/eslint-config-json';
 import type { Linter } from 'eslint';
 
 import type { HexadropEslintStylisticOptions } from './stylistic.options';
@@ -43,15 +42,23 @@ import type { TypedFlatConfigItem } from './stylistic.typed-config';
 
 export interface StylisticConfigOptions {
 	astro: boolean;
+	isTypeAware?: boolean;
 	json: boolean;
 	markdown: boolean;
 	stylistic: HexadropEslintStylisticOptions;
 	typescript: boolean;
-	isTypeAware?: boolean;
 }
 
 export default async function stylisticConfig(options: StylisticConfigOptions): Promise<TypedFlatConfigItem[]> {
-	const { astro, json, markdown, stylistic, typescript, isTypeAware = false } = options;
+	const { astro, isTypeAware = false, json, markdown, stylistic, typescript } = options;
+	/*
+	 * Loaded lazily so this package never takes part in the same module
+	 * resolution pass as the meta-package's own dynamic import of `-json`
+	 * (jiti resolves the two concurrent loads to a partially-initialised
+	 * module).
+	 */
+	const jsonPackage = json ? await import('@hexadrop/eslint-config-json') : undefined;
+	const jsonSortKeysConfig = jsonPackage?.JSON_SORT_KEYS_CONFIG ?? [];
 	const { format, indent, indentSize, perfectionist, unicorn } = stylistic;
 	const typescriptPluginRename = PLUGIN_RENAME['@typescript-eslint'];
 	const stylisticPluginRename = PLUGIN_RENAME['@stylistic'];
@@ -323,22 +330,22 @@ export default async function stylisticConfig(options: StylisticConfigOptions): 
 				files: GLOB_JSON,
 				name: STYLISTIC_CONFIG_NAME_RULES_JSON,
 				rules: {
-					[`${jsonPluginRename}/array-bracket-spacing`]: ["error", "never"],
-					[`${jsonPluginRename}/comma-dangle`]: ["error", "never"],
-					[`${jsonPluginRename}/comma-style`]: ["error", "last"],
-					[`${jsonPluginRename}/indent`]: ["error", indent === "space" ? indentSize : indent],
-					[`${jsonPluginRename}/key-spacing`]: ["error", { afterColon: true, beforeColon: false }],
-					[`${jsonPluginRename}/object-curly-newline`]: ["error", { consistent: true, multiline: true }],
-					[`${jsonPluginRename}/object-curly-spacing`]: ["error", "always"],
+					[`${jsonPluginRename}/array-bracket-spacing`]: ['error', 'never'],
+					[`${jsonPluginRename}/comma-dangle`]: ['error', 'never'],
+					[`${jsonPluginRename}/comma-style`]: ['error', 'last'],
+					[`${jsonPluginRename}/indent`]: ['error', indent === 'space' ? indentSize : indent],
+					[`${jsonPluginRename}/key-spacing`]: ['error', { afterColon: true, beforeColon: false }],
+					[`${jsonPluginRename}/object-curly-newline`]: ['error', { consistent: true, multiline: true }],
+					[`${jsonPluginRename}/object-curly-spacing`]: ['error', 'always'],
 					[`${jsonPluginRename}/object-property-newline`]: [
-						"error",
+						'error',
 						{ allowMultiplePropertiesPerLine: true },
 					],
-					[`${jsonPluginRename}/quote-props`]: "error",
-					[`${jsonPluginRename}/quotes`]: "error",
+					[`${jsonPluginRename}/quote-props`]: 'error',
+					[`${jsonPluginRename}/quotes`]: 'error',
 				},
 			},
-			...JSON_SORT_KEYS_CONFIG
+			...jsonSortKeysConfig
 		);
 	}
 
@@ -519,7 +526,7 @@ export default async function stylisticConfig(options: StylisticConfigOptions): 
 	if (astro) {
 		config.push({
 			files: GLOB_MARKDOWN_ASTRO,
-			name: STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_ASRTO,
+			name: STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_ASTRO,
 			rules: {
 				[`${stylisticPluginRename}/indent`]: ['error', 2],
 			},

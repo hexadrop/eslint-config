@@ -1,6 +1,6 @@
 {
 	"name": "@hexadrop/eslint-config-stylistic",
-	"version": "1.0.0",
+	"version": "1.0.11",
 	"description": "Stylistic slice of the hexadrop ESLint config: @stylistic, unicorn, perfectionist, format/prettier rules and conditional sections for typescript, json and astro.",
 	"keywords": [
 		"lint",
@@ -44,11 +44,21 @@
 		"prepublishOnly": "bun run build"
 	},
 	"peerDependencies": {
+		"@hexadrop/eslint-config-astro": "^1.0.11",
+		"@hexadrop/eslint-config-typescript": "^1.0.11",
+		"@typescript-eslint/eslint-plugin": "^8.68.0",
 		"eslint": "^9.17.0 || ^10.0.0"
 	},
-	"peerDependenciesOptional": {
-		"@hexadrop/eslint-config-astro": ">=1.0.0",
-		"@hexadrop/eslint-config-typescript": ">=1.0.0"
+	"peerDependenciesMeta": {
+		"@hexadrop/eslint-config-astro": {
+			"optional": true
+		},
+		"@hexadrop/eslint-config-typescript": {
+			"optional": true
+		},
+		"@typescript-eslint/eslint-plugin": {
+			"optional": true
+		}
 	},
 	"dependencies": {
 		"@hexadrop/eslint-config-json": "1.0.11",
@@ -56,7 +66,10 @@
 		"eslint-flat-config-utils": "3.2.0",
 		"eslint-plugin-format": "2.0.1",
 		"eslint-plugin-perfectionist": "5.10.1",
-		"eslint-plugin-unicorn": "73.0.0"
+		"eslint-plugin-unicorn": "73.0.0",
+		"local-pkg": "1.2.1",
+		"prettier": "3.9.6",
+		"prettier-plugin-astro": "0.14.1"
 	},
 	"devDependencies": {
 		"tsdown": "0.22.14"

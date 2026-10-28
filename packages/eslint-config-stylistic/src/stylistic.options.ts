@@ -1,15 +1,26 @@
-export interface StylisticFactoryOptions {
+import type { RecursivePartial } from '@hexadrop/eslint-config-shared';
+
+interface StylisticFactoryOptions {
 	/**
-	 * Whether astro support is enabled (presence of @hexadrop/eslint-config-astro).
+	 * Whether astro support is enabled. When omitted, it is auto-detected from
+	 * the presence of `@hexadrop/eslint-config-astro`.
 	 *
-	 * @default false
+	 * @default auto-detected
 	 */
 	astro?: boolean;
 
 	/**
-	 * Whether json support is enabled (presence of @hexadrop/eslint-config-json).
+	 * Whether type-aware linting is enabled (requires a tsconfig path).
 	 *
 	 * @default false
+	 */
+	isTypeAware?: boolean;
+
+	/**
+	 * Whether json support is enabled. When omitted, it is auto-detected from
+	 * the presence of `@hexadrop/eslint-config-json`.
+	 *
+	 * @default auto-detected
 	 */
 	json?: boolean;
 
@@ -21,29 +32,23 @@ export interface StylisticFactoryOptions {
 	markdown?: boolean;
 
 	/**
-	 * Whether typescript support is enabled (presence of @hexadrop/eslint-config-typescript).
-	 *
-	 * @default false
-	 */
-	typescript?: boolean;
-
-	/**
-	 * Whether type-aware linting is enabled (requires tsconfigPath).
-	 *
-	 * @default false
-	 */
-	isTypeAware?: boolean;
-
-	/**
 	 * Stylistic rules sub-options. When `false`, the entire stylistic module
 	 * is disabled.
 	 *
 	 * @default a full set of defaults
 	 */
-	stylistic?: false | HexadropEslintStylisticOptions;
+	stylistic?: false | RecursivePartial<HexadropEslintStylisticOptions>;
+
+	/**
+	 * Whether typescript support is enabled. When omitted, it is auto-detected
+	 * from the presence of `@hexadrop/eslint-config-typescript`.
+	 *
+	 * @default auto-detected
+	 */
+	typescript?: boolean;
 }
 
-export interface HexadropEslintStylisticOptions {
+interface HexadropEslintStylisticOptions {
 	/**
 	 * Include parentheses around a sole arrow function parameter.
 	 *
@@ -86,13 +91,6 @@ export interface HexadropEslintStylisticOptions {
 	 * @default true
 	 */
 	format: boolean;
-
-	/**
-	 * Enable import rules.
-	 *
-	 * @default true
-	 */
-	imports: boolean;
 
 	/**
 	 * Indentation style.
@@ -146,7 +144,7 @@ export interface HexadropEslintStylisticOptions {
 	/**
 	 * Use single attribute per line in HTML, Vue and JSX.
 	 *
-	 * @default false
+	 * @default true
 	 */
 	singleAttributePerLine: boolean;
 
@@ -164,3 +162,14 @@ export interface HexadropEslintStylisticOptions {
 	 */
 	unicorn: boolean;
 }
+
+interface ResolvedStylisticFactoryOptions {
+	astro: boolean;
+	isTypeAware: boolean;
+	json: boolean;
+	markdown: boolean;
+	stylistic: false | HexadropEslintStylisticOptions;
+	typescript: boolean;
+}
+
+export type { HexadropEslintStylisticOptions, ResolvedStylisticFactoryOptions, StylisticFactoryOptions };

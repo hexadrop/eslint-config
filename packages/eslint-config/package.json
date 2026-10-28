@@ -46,7 +46,7 @@
 		"@hexadrop/eslint-config-json": "1.0.11",
 		"@hexadrop/eslint-config-markdown": "1.0.11",
 		"@hexadrop/eslint-config-react": "1.0.11",
-		"@hexadrop/eslint-config-stylistic": "1.0.0",
+		"@hexadrop/eslint-config-stylistic": "1.0.11",
 		"@hexadrop/eslint-config-typescript": "1.0.11",
 		"@typescript-eslint/eslint-plugin": "8.68.0",
 		"@typescript-eslint/parser": "8.68.0",

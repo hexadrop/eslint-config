@@ -2,11 +2,15 @@ import { writeFlatConfigs } from '@hexadrop/eslint-config-shared';
 
 import stylisticConfig from '../src/stylistic.config';
 
+/*
+ * Resolve every optional section so the generated `ConfigNames` union covers
+ * the whole peer matrix, not just the sections enabled by default.
+ */
 const configs = await stylisticConfig({
-	astro: false,
+	astro: true,
 	isTypeAware: true,
-	json: false,
-	markdown: false,
+	json: true,
+	markdown: true,
 	stylistic: {
 		arrowParens: 'avoid',
 		braceStyle: '1tbs',
@@ -14,7 +18,6 @@ const configs = await stylisticConfig({
 		bracketSpacing: true,
 		endOfLine: 'lf',
 		format: true,
-		imports: true,
 		indent: 'tab',
 		indentSize: 4,
 		perfectionist: true,
