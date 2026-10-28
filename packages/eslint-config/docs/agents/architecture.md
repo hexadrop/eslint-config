@@ -4,13 +4,13 @@
 
 ## Entry points
 
-| Area                  | Responsibility                                                                 |
-|-----------------------|--------------------------------------------------------------------------------|
-| `src/factory.ts`      | Exports the default `hexadrop()` factory and creates the `FlatConfigComposer`. |
-| `src/config/`         | Defines one independent configuration concern per directory.                   |
-| `src/options/`        | Defines public options and resolves feature defaults.                          |
-| `src/typed-config.ts` | Binds the shared generic `TypedFlatConfigItem` to this package's typegen.      |
-| `scripts/typegen.ts`  | Generates typed rules and configuration names.                                 |
+| Area                  | Responsibility                                                                                                 |
+|-----------------------|----------------------------------------------------------------------------------------------------------------|
+| `src/factory.ts`      | Exports the default `hexadrop()` factory and creates the `FlatConfigComposer`.                                  |
+| `src/config/`         | Defines the local concerns (`core`, `ignore`, `imports`). The remaining concerns come from the feature packages. |
+| `src/options/`        | Defines public options and resolves feature defaults.                                                           |
+| `src/typed-config.ts` | Binds the shared generic `TypedFlatConfigItem` to this package's typegen.                                       |
+| `scripts/typegen.ts`  | Generates typed rules and configuration names.                                                                  |
 
 Shared types, constants and helpers (`PLUGIN_PREFIX`, `PLUGIN_RENAME`, `interopDefault`, `toArray`, `renameRules`, `combine`, `extractTypedFlatConfigItem`, `pluginConfigRules`, `pluginConfigOverrideRules`, `Awaitable`, `Nullable`, `RecursivePartial`) live in the private `@hexadrop/eslint-config-shared` package and are bundled into `dist/` at build time.
 
@@ -26,9 +26,9 @@ The factory composes concerns in this order:
 6. `json` — supports JSON and JSONC.
 7. `markdown` — lints Markdown code blocks.
 8. `imports` — validates, sorts, and removes unused imports.
-9. `stylistic` — applies stylistic, Unicorn, Perfectionist, and Prettier-via-format rules.
+9. `stylistic` — composes `@hexadrop/eslint-config-stylistic` (stylistic, Unicorn, Perfectionist and Prettier-via-format rules).
 
-Each `src/config/<concern>/` module exports an async default function returning `Promise<TypedFlatConfigItem[]>`.
+The local concerns in `src/config/` export an async default function returning `Promise<TypedFlatConfigItem[]>`; the extracted concerns are loaded lazily from their feature packages through `optionalPlugin()`.
 
 ## Public API
 
