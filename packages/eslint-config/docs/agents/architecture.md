@@ -7,10 +7,11 @@
 | Area                  | Responsibility                                                                                                 |
 |-----------------------|----------------------------------------------------------------------------------------------------------------|
 | `src/factory.ts`      | Exports the default `hexadrop()` factory and creates the `FlatConfigComposer`.                                  |
-| `src/config/`         | Defines the local concerns (`core`, `ignore`, `imports`). The remaining concerns come from the feature packages. |
 | `src/options/`        | Defines public options and resolves feature defaults.                                                           |
 | `src/typed-config.ts` | Binds the shared generic `TypedFlatConfigItem` to this package's typegen.                                       |
 | `scripts/typegen.ts`  | Generates typed rules and configuration names.                                                                  |
+
+The base concerns (`core`, `ignore`, `imports`) come from `@hexadrop/eslint-config-core`; the framework concerns come from their feature packages.
 
 Shared types, constants and helpers (`PLUGIN_PREFIX`, `PLUGIN_RENAME`, `interopDefault`, `toArray`, `renameRules`, `combine`, `extractTypedFlatConfigItem`, `pluginConfigRules`, `pluginConfigOverrideRules`, `Awaitable`, `Nullable`, `RecursivePartial`) live in the private `@hexadrop/eslint-config-shared` package and are bundled into `dist/` at build time.
 
@@ -18,17 +19,17 @@ Shared types, constants and helpers (`PLUGIN_PREFIX`, `PLUGIN_RENAME`, `interopD
 
 The factory composes concerns in this order:
 
-1. `ignore` — integrates `.gitignore` through `eslint-config-flat-gitignore`.
-2. `core` — supplies base ESLint and `eslint-plugin-n` rules.
+1. `ignore` — from `@hexadrop/eslint-config-core`; integrates `.gitignore`.
+2. `core` — from `@hexadrop/eslint-config-core`; base ESLint and `eslint-plugin-n` rules.
 3. `astro` — adds Astro support when requested or detected.
 4. `typescript` — configures the TypeScript parser and rules.
 5. `react` — configures React, hooks, and refresh rules.
 6. `json` — supports JSON and JSONC.
 7. `markdown` — lints Markdown code blocks.
-8. `imports` — validates, sorts, and removes unused imports.
+8. `imports` — from `@hexadrop/eslint-config-core`; validates, sorts, and removes unused imports.
 9. `stylistic` — composes `@hexadrop/eslint-config-stylistic` (stylistic, Unicorn, Perfectionist and Prettier-via-format rules).
 
-The local concerns in `src/config/` export an async default function returning `Promise<TypedFlatConfigItem[]>`; the extracted concerns are loaded lazily from their feature packages through `optionalPlugin()`.
+The core concerns are imported as raw config functions; the extracted framework concerns are loaded lazily through `optionalPlugin()`.
 
 ## Public API
 
@@ -54,4 +55,4 @@ Set `typescript: true` to enable TypeScript without type-aware rules. Pass one o
 
 ## Generated types
 
-`scripts/typegen.ts` resolves the full pipeline and writes `src/generated.d.ts` (git-ignored). See [Development](development.md) for when to regenerate it.
+`scripts/typegen.ts` resolves the full pipeline and writes `src/typegen.d.ts` (git-ignored). See [Development](development.md) for when to regenerate it.
