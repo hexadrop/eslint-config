@@ -113,6 +113,17 @@ export { doubled, tripled };
 "
 `;
 
+exports[`e2e fixtures workspace: fixtures/workspace/packages/app/src/app.tsx through eslint --fix: workspace-diagnostics 1`] = `[]`;
+
+exports[`e2e fixtures workspace: fixtures/workspace/packages/app/src/app.tsx through eslint --fix: workspace-content 1`] = `
+"import { answer } from '@app/answer';
+
+export default function App(): string {
+	return String(answer);
+}
+"
+`;
+
 exports[`e2e fixtures javascript: fixtures/javascript.js through eslint --fix: javascript-diagnostics 1`] = `
 [
   {

@@ -1,4 +1,7 @@
+import { cwd } from 'node:process';
+
 import {
+	getWorkspaceDirectories,
 	GLOB_REACT_JSX,
 	GLOB_REACT_TSX,
 	interopDefault,
@@ -22,7 +25,7 @@ import type { ReactConfigOptions, ReactRefreshOptions } from './react.types';
  * ESLint 9 and 10.
  */
 function detectReactVersion(): string | undefined {
-	return getPackageInfoSync('react')?.version;
+	return getPackageInfoSync('react', { paths: getWorkspaceDirectories(cwd()) })?.version;
 }
 
 interface ResolvedRefreshRule {

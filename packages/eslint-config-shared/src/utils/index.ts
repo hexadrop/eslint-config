@@ -6,3 +6,4 @@ export { default as pluginConfigRules } from './plugin-config-rules';
 export { default as renameRules } from './rename-rules';
 export { default as toArray } from './to-array';
 export { default as expandTsconfigProjects } from './tsconfig';
+export { default as getWorkspaceDirectories } from './workspace';

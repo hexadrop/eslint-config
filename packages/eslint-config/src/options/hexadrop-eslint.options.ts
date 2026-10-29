@@ -5,9 +5,10 @@ import process from 'node:process';
 import type { CoreTypescriptOptions } from '@hexadrop/eslint-config-core';
 import type { ReactConfigOptions } from '@hexadrop/eslint-config-react';
 import type { Nullable, RecursivePartial } from '@hexadrop/eslint-config-shared';
+import { getWorkspaceDirectories } from '@hexadrop/eslint-config-shared';
 import type { StylisticFormattingOptions } from '@hexadrop/eslint-config-stylistic';
 import type { TypescriptParserOptions } from '@hexadrop/eslint-config-typescript';
-import { isPackageExists } from 'local-pkg';
+import { isPackageExists, isPackageListedSync } from 'local-pkg';
 
 import type { HexadropEslintIgnoreOptions } from './hexadrop-eslint-ignore.options';
 import type { HexadropEslintModulesOptions } from './hexadrop-eslint-module.options';
@@ -176,14 +177,35 @@ interface TypescriptOptions extends CoreTypescriptOptions {
 	parserOptions?: Partial<TypescriptParserOptions>;
 }
 
-function getCwdTsconfigPath(): string | undefined {
+/**
+ * Resolve the default TypeScript project(s) without consumer input.
+ *
+ * A root `tsconfig.json` wins (solution-style roots are expanded by the
+ * TypeScript and import packages). When the root has no tsconfig, the tsconfigs
+ * of the workspace packages are used, which covers monorepos whose root only
+ * holds tooling configuration.
+ */
+function getDefaultTypescriptProject(): string | string[] | undefined {
 	const root = process.cwd();
-	const cwdTsconfigPath = path.resolve(root, 'tsconfig.json');
-	if (existsSync(cwdTsconfigPath)) {
+
+	if (existsSync(path.resolve(root, 'tsconfig.json'))) {
 		return 'tsconfig.json';
 	}
 
-	return undefined;
+	const projects = getWorkspaceDirectories(root)
+		.map(directory => path.join(directory, 'tsconfig.json'))
+		.filter(file => existsSync(file))
+		.map(file => `./${path.relative(root, file).split(path.sep).join('/')}`);
+
+	return projects.length > 0 ? projects : undefined;
+}
+
+function isReactInstalled(): boolean {
+	if (isPackageExists('react')) {
+		return true;
+	}
+
+	return getWorkspaceDirectories().some(directory => isPackageListedSync('react', directory));
 }
 
 export type {
@@ -199,7 +221,7 @@ export default function defaultOptions(
 ): ResolvedHexadropEslintOptions {
 	let typescript: ResolvedHexadropEslintOptions['typescript'] = false;
 	const isInstalledTypescript = isPackageExists('typescript');
-	const isInstalledReact = isPackageExists('react');
+	const isInstalledReact = isReactInstalled();
 	const isInstalledAstro = isPackageExists('astro');
 
 	/* eslint-disable typescript/no-unnecessary-condition -- RecursivePartial narrows types but runtime checks are needed */
@@ -215,7 +237,7 @@ export default function defaultOptions(
 		const tsOptions = options.typescript as TypescriptOptions;
 		typescript = { ...tsOptions };
 	} else if (isInstalledTypescript && options.typescript === undefined) {
-		typescript = { project: getCwdTsconfigPath() ?? true };
+		typescript = { project: getDefaultTypescriptProject() ?? true };
 	}
 
 	return {

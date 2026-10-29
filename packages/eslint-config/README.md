@@ -193,6 +193,16 @@ export default hexadrop({
 
 The configured projects are forwarded to `eslint-import-resolver-typescript`, so `import/no-unresolved` understands tsconfig `paths` aliases without a consumer override. Solution-style tsconfigs (`files: []` plus `references`) are expanded into their concrete projects automatically.
 
+### Monorepos and workspaces
+
+When React or TypeScript live in a workspace package instead of the repository root, they are still auto-detected:
+
+- React is enabled when any `package.json#workspaces` package declares `react`, and the resolved version is looked up across the workspace.
+- TypeScript uses the root `tsconfig.json` when present (solution roots included); otherwise the `tsconfig.json` of every workspace package is used.
+- `react: true` and an explicit `typescript.project` remain available and take precedence over detection.
+
+No `parserOptions.project` or `settings['import-x/resolver-next']` override is needed for the common Bun/npm/pnpm workspace layout.
+
 ### Plugins Renaming
 
 Since flat config requires us to explicitly provide the plugin names (instead of the mandatory convention from npm

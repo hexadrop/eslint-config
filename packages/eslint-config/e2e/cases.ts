@@ -8,6 +8,10 @@ import type { TypedFlatConfigItem } from '../src/typed-config';
 const FIXTURES_DIR = path.join(import.meta.dir, 'fixtures');
 
 interface EndToEndCase extends BaseEndToEndCase {
+	/**
+	 *Working directory for this case, relative to the fixtures directory.
+	 */
+	cwd?: string;
 	extraConfigs?: TypedFlatConfigItem[];
 	options?: RecursivePartial<HexadropEslintOptions>;
 }
@@ -59,6 +63,12 @@ export const END_TO_END_CASES: EndToEndCase[] = [
 			typescript: { project: './solution/tsconfig.json', tsconfigRootDir: FIXTURES_DIR },
 		},
 		slug: 'typescript-solution',
+	},
+	{
+		cwd: 'workspace',
+		file: 'workspace/packages/app/src/app.tsx',
+		options: { astro: false },
+		slug: 'workspace',
 	},
 	{
 		file: 'javascript.js',
