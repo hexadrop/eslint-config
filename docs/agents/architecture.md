@@ -1,56 +1,46 @@
 # Architecture
 
-`hexadrop()` composes the package's ESLint v9 flat configuration in a fixed, named pipeline so consumers can enable features and target overrides predictably.
+The repository is a Bun workspaces monorepo. It publishes the zero-config meta-package plus one package per concern, so consumers can choose between the all-in-one preset and a granular install.
 
-## Entry points
+## Package graph
 
-| Area | Responsibility |
-| --- | --- |
-| `src/factory.ts` | Exports the default `hexadrop()` factory and creates the `FlatConfigComposer`. |
-| `src/config/` | Defines one independent configuration concern per directory. |
-| `src/options/` | Defines public options and resolves feature defaults. |
-| `src/const/` | Stores shared constants, including plugin-prefix mappings. |
-| `src/utils/` | Provides small composition and interop helpers. |
-| `scripts/typegen.ts` | Generates typed rules and configuration names. |
+| Package | Role | Depends on |
+|---|---|---|
+| `@hexadrop/eslint-config` | Meta-package: option resolution, framework autodetection and composition. | All feature packages + `core`. |
+| `@hexadrop/eslint-config-core` | Base ESLint rules, globals, ignores, `import-x` and `n`; core/ignore/imports config names and option types. | Its own plugins. |
+| `@hexadrop/eslint-config-typescript` | TypeScript parser, plugin and type-aware rules. | Its own plugins. |
+| `@hexadrop/eslint-config-json` | JSON/JSONC rules and the `package.json`/`tsconfig.json` sort-keys slice. | Its own plugins. |
+| `@hexadrop/eslint-config-markdown` | Markdown processor and plain parser. | Its own plugins. |
+| `@hexadrop/eslint-config-react` | React, hooks and refresh rules. | Optional peer: `-typescript`. |
+| `@hexadrop/eslint-config-astro` | Astro plugin, parser and TS-in-astro. | Optional peer: `-typescript`. |
+| `@hexadrop/eslint-config-stylistic` | `@stylistic`, Unicorn, Perfectionist and Prettier. | Optional peers: `-typescript`, `-astro`, `-json`. |
+| `@hexadrop/eslint-config-shared` | **Private, never published**: types, constants, utilities and file globs. | — |
 
-## Configuration pipeline
+Feature packages do **not** depend on core. They import the shared globs and utilities from the private `shared` package, which is bundled into each package's `dist/` via tsdown `deps.alwaysBundle`, so each package only ships what it imports.
 
-The factory composes concerns in this order:
+## Composition
 
-1. `ignore` — integrates `.gitignore` through `eslint-config-flat-gitignore`.
-2. `core` — supplies base ESLint and `eslint-plugin-n` rules.
-3. `astro` — adds Astro support when requested or detected.
-4. `typescript` — configures the TypeScript parser and rules.
-5. `react` — configures React, hooks, and refresh rules.
-6. `json` — supports JSON and JSONC.
-7. `markdown` — lints Markdown code blocks.
-8. `imports` — validates, sorts, and removes unused imports.
-9. `stylistic` — applies stylistic, Unicorn, Perfectionist, and Prettier-via-format rules.
+`hexadrop()` builds the pipeline in this order:
 
-Each `src/config/<concern>/` module exports an async default function returning `Promise<TypedFlatConfigItem[]>`.
+1. `ignore` and `core` from `@hexadrop/eslint-config-core`.
+2. `astro` when enabled or detected.
+3. `typescript`.
+4. `react` when enabled or detected.
+5. `json`.
+6. `markdown`.
+7. `imports` from `@hexadrop/eslint-config-core`.
+8. `stylistic` from `@hexadrop/eslint-config-stylistic`.
 
-## Public API
+The base concerns are raw config functions imported from core. The framework concerns are loaded lazily with `optionalPlugin()` so their plugins are only evaluated when the section is enabled.
 
-`hexadrop()` accepts an options object or a flat config item followed by additional overrides. It returns a `FlatConfigComposer`; consumers may use `.override()`, `.prepend()`, `.append()`, `.remove()`, and `.renamePlugins()`.
+Each package exposes a factory that returns a `FlatConfigComposer`, plus named exports for its raw config pieces, config names and globs where they are public. The meta-package keeps the existing `hexadrop()` API and reproduces the 1.0.x resolved config.
 
-```js
-import hexadrop from '@hexadrop/eslint-config';
+## Typegen
 
-export default hexadrop(
-  { react: true, typescript: true },
-  {
-    files: ['**/*.ts'],
-    rules: { 'style/indent': 'off' },
-  }
-);
-```
+Each package runs `eslint-typegen` over its own pipeline and writes a git-ignored `src/typegen.d.ts`. The meta-package combines every package's pipeline in `packages/eslint-config/scripts/typegen.ts`, which keeps the factory return types narrow.
 
-## Feature resolution
+## Related guides
 
-`defaultOptions()` in `src/options/hexadrop-eslint.options.ts` enables `ignore`, `imports`, `json`, `markdown`, `node`, and `stylistic` by default. It enables `react`, `astro`, and `typescript` when their packages are installed; a root `tsconfig.json` automatically enables TypeScript's type-aware configuration.
-
-Set `typescript: true` to enable TypeScript without type-aware rules. Pass one or more `tsconfig.json` paths to enable type-aware rules.
-
-## Generated types
-
-`scripts/typegen.ts` resolves the full pipeline with `eslint-typegen` and writes `src/typegen.d.ts`. The generated file provides typed `RuleOptions` and the `ConfigNames` union. See [Development](development.md) for when to regenerate it.
+- [Feature packages](feature-packages.md) — conventions every `packages/*` package follows.
+- [Release process](release-process.md) — changesets, beta snapshots and stable releases.
+- [Development](development.md) — commands and targeted validation.

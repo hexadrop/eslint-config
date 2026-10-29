@@ -1,80 +1,12 @@
-<h1 align="center">
-  Hexadrop's ESLint configuration
-</h1>
+# Hexadrop ESLint config
 
-<p align="center">
-  Opinionated ESLint ruleset designed for large teams and projects considering modern JavaScript best practices and
-  providing consistency to your code.
-</p>
+Opinionated ESLint configuration for modern JavaScript and TypeScript projects. The repository publishes the zero-config meta-package `@hexadrop/eslint-config` and a set of granular packages so a project only installs the plugins it actually uses.
 
-<p align="center">
-    <a href="https://www.npmjs.com/package/@hexadrop/eslint-config" rel="nofollow">
-        <img src="https://img.shields.io/npm/v/@hexadrop/eslint-config?style=flat-square" alt="npm" style="max-width: 100%;">
-    </a>
-    <a href="https://github.com/hexadrop/eslint-config">
-        <img src="https://img.shields.io/github/issues/hexadrop/eslint-config?style=flat-square" alt="GitHub issues" style="max-width: 100%;">
-    </a>
-</p>
-
-## Installation
+## Zero-config default
 
 ```bash
-npm install --save-dev eslint @hexadrop/eslint-config
+bun add -D eslint @hexadrop/eslint-config
 ```
-
-**Using bun**
-
-```bash
-bun add eslint @hexadrop/eslint-config --dev
-```
-
-## What it does
-
-- Auto fix for formatting (aimed to be used standalone **without** Prettier)
-- Respects .gitignore by default
-- **Style principle**: Minimal for reading, stable for diff, consistent
-   - Sorted imports, dangling commas
-   - Single quotes, use of semicolons
-   - Using [ESLint Stylistic](https://github.com/eslint-stylistic/eslint-stylistic)
-- Opinionated, but [very customizable](#customization)
-- Reasonable defaults, best practices, only one line of config
-- Designed to work with TypeScript, JSX, JSON, Markdown, etc. Out-of-box.
-- Supports ESLint v9 or v8.50.0+
-- [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new), compose easily!
-
-## How to use
-
-1. Create `eslint.config.js` in your project root:
-
-    ```js
-    // eslint.config.js
-    import hexadrop from '@hexadrop/eslint-config';
-
-    export default hexadrop();
-    ```
-
-2. Run eslint
-
-    ```shell
-     eslint .
-    ```
-
-   **Or adding to your package.json**
-
-    ```json
-    {
-      "scripts": {
-        "lint": "eslint .",
-        "lint:fix": "eslint --fix ."
-      }
-    }
-    ```
-
-> Note that `.eslintignore` no longer works in Flat config, see [customization](#customization) for more details.
-
-## Customization
-
-Normally you only need to import the `hexadrop` preset:
 
 ```js
 // eslint.config.js
@@ -83,228 +15,88 @@ import hexadrop from '@hexadrop/eslint-config';
 export default hexadrop();
 ```
 
-And that's it! Or you can configure each integration individually, for example:
+`hexadrop()` detects TypeScript, React and Astro from the consumer's dependencies and keeps the same resolved configuration as the 1.0.x package. See the [meta-package README](./packages/eslint-config/README.md) for every option and customization.
+
+## Granular packages
+
+| Package | What it brings | Install |
+|---|---|---|
+| [`@hexadrop/eslint-config-core`](./packages/eslint-config-core/README.md) | Base ESLint rules, globals, ignores, `import-x` and `n`. | `bun add -D @hexadrop/eslint-config-core eslint` |
+| [`@hexadrop/eslint-config-typescript`](./packages/eslint-config-typescript/README.md) | `typescript-eslint` parser, plugin and type-aware rules. | `bun add -D @hexadrop/eslint-config-typescript` |
+| [`@hexadrop/eslint-config-json`](./packages/eslint-config-json/README.md) | JSON/JSONC rules and the `package.json`/`tsconfig.json` sort-keys slice. | `bun add -D @hexadrop/eslint-config-json` |
+| [`@hexadrop/eslint-config-markdown`](./packages/eslint-config-markdown/README.md) | Markdown processor and plain parser for code blocks. | `bun add -D @hexadrop/eslint-config-markdown` |
+| [`@hexadrop/eslint-config-react`](./packages/eslint-config-react/README.md) | React, hooks and refresh rules. | `bun add -D @hexadrop/eslint-config-react` |
+| [`@hexadrop/eslint-config-astro`](./packages/eslint-config-astro/README.md) | Astro plugin, parser and TS-in-astro support. | `bun add -D @hexadrop/eslint-config-astro` |
+| [`@hexadrop/eslint-config-stylistic`](./packages/eslint-config-stylistic/README.md) | `@stylistic`, Unicorn, Perfectionist and Prettier formatting. | `bun add -D @hexadrop/eslint-config-stylistic` |
+| `@hexadrop/eslint-config` | The zero-config meta-package composing everything above. | `bun add -D @hexadrop/eslint-config` |
+
+`@hexadrop/eslint-config-shared` is private: it is never published and its types, utilities and file globs are bundled into each package.
+
+All publishable packages share the same version and are released together, so the granular packages and the meta-package always match.
+
+## Granular usage
+
+A Node.js project only needs core:
 
 ```js
 // eslint.config.js
-import hexadrop from '@hexadrop/eslint-config';
+import coreFactory from '@hexadrop/eslint-config-core';
 
-export default hexadrop({
-  // React are auto-detected, you can also explicitly enable them:
-  react: true,
-
-  // Disable stylistic formatting rules
-  // stylistic: false,
-
-  // Or customize the stylistic rules
-  stylistic: {
-    indent: 'spaces', // or 'tab'
-    quotes: 'single', // or 'double'
-  },
-
-  // TypeScript are auto-detected, you can also explicitly enable them:
-  typescript: true,
-});
+export default coreFactory();
 ```
 
-The `hexadrop` factory function also accepts any number of arbitrary custom config overrides:
+A TypeScript project adds the TypeScript and stylistic slices:
 
 ```js
 // eslint.config.js
-import hexadrop from '@hexadrop/eslint-config';
+import coreFactory from '@hexadrop/eslint-config-core';
+import stylistic from '@hexadrop/eslint-config-stylistic';
+import typescript from '@hexadrop/eslint-config-typescript';
 
-export default hexadrop(
-  {
-    // Configures for hexadrop's config
-  },
-
-  // From the second arguments they are ESLint Flat Configs
-  // you can have multiple configs
-  {
-    files: ['**/*.ts'],
-    rules: {},
-  },
-  {
-    rules: {},
-  }
-);
+export default coreFactory().append(typescript({ project: 'tsconfig.json' }), stylistic());
 ```
 
-Check out the [options](https://github.com/hexattol/eslint-config/blob/main/src/options/hexadrop-eslint.options.ts) and [factory](https://github.com/hexadrop/eslint-config/blob/main/src/factory.ts) for more details.
-
-### Plugins Renaming
-
-Since flat config requires us to explicitly provide the plugin names (instead of the mandatory convention from npm
-package name), we renamed some plugins to make the overall scope more consistent and easier to write.
-
-| New Prefix        | Original Prefix        | Source Plugin                      |
-|-------------------|------------------------|------------------------------------|
-| `style/*`         | `@stylistic/*`         | [@stylistic/eslint-plugin]         |
-| `typescript/*`    | `@typescript-eslint/*` | [@typescript-eslint/eslint-plugin] |
-| `import/*`        | `import-x/*`           | [eslint-plugin-import-x]           |
-| `json/*`          | `jsonc/*`              | [eslint-plugin-jsonc]              |
-| `node/*`          | `n/*`                  | [eslint-plugin-n]                  |
-| `import-sort/*`   | `simple-import-sort/*` | [eslint-plugin-simple-import-sort] |
-| `import-unused/*` | `unused-imports/*`     | [eslint-plugin-unused-imports]     |
-
-When you want to override rules, or disable them inline, you need to update to the new prefix:
-
-```diff
--// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
-+// eslint-disable-next-line typescript/consistent-type-definitions
-type foo = { bar: 2 }
-```
-
-> [!NOTE]
-> About plugin renaming - it is actually rather a dangerous move that might lead to potential naming collisions,
-> pointed out [here](https://github.com/eslint/eslint/discussions/17766)
-> and [here](https://github.com/prettier/eslint-config-prettier#eslintconfigjs-flat-config-plugin-caveat). As this
-> config
-> also very **personal** and **opinionated**, I ambitiously position this config as the only **"top-level"** config per
-> project, that might pivot the taste of how rules are named.
->
-> This config cares more about the user-facings DX, and try to ease out the implementation details. For example, users
-> could keep using the semantic `import/order` without ever knowing the underlying plugin has migrated twice
-> to `eslint-plugin-i` and then to `eslint-plugin-import-x`. User are also not forced to migrate to the
-> implicit `i/order`
-> halfway only because we swapped the implementation to a fork.
->
-> That said, it's probably still not a good idea. You might not want to do this if you are maintaining your own
-> eslint config.
->
-> Feel free to open issues if you want to combine this config with some other config presets but faced naming
-> collisions. I am happy to figure out a way to make them work. But at this moment I have no plan to revert the
-> renaming.
-
-### Rules Overrides
-
-Certain rules would only be enabled in specific files, for example, `ts/*` rules would only be enabled in `.ts` files and `vue/*` rules would only be enabled in `.vue` files. If you want to override the rules, you need to specify the file extension:
+An Astro project can compose the same way; the astro, typescript and stylistic sections auto-detect each other through optional peers:
 
 ```js
 // eslint.config.js
-import hexadrop from '@hexadrop/eslint-config';
+import astro from '@hexadrop/eslint-config-astro';
+import coreFactory from '@hexadrop/eslint-config-core';
+import stylistic from '@hexadrop/eslint-config-stylistic';
+import typescript from '@hexadrop/eslint-config-typescript';
 
-export default hexadrop(
-  {
-    react: true,
-    typescript: true,
-  },
-  {
-    // Remember to specify the file glob here, otherwise it might cause the vue plugin to handle non-vue files
-    files: ['**/*.jsx'],
-    rules: {
-      'style/jsx-indent': 'off',
-    },
-  },
-  {
-    // Without `files`, they are general rules for all files
-    rules: {
-      'style/semi': ['error', 'never'],
-    },
-  }
-);
+export default coreFactory().append(astro(), typescript({ project: 'tsconfig.json' }), stylistic());
 ```
 
-### Config Composer
+### Optional peers
 
-The factory function `hexadrop()` returns a [`FlatConfigComposer` object from `eslint-flat-config-utils`](https://github.com/antfu/eslint-flat-config-utils#composer) where you can chain the methods to compose the config even more flexibly.
+The granular packages enable their cross-package sections when the sibling package is installed:
 
-```js
-// eslint.config.js
-import hexadrop from '@hexadrop/eslint-config';
+- `astro` and `react` auto-detect `@hexadrop/eslint-config-typescript`.
+- `stylistic` auto-detects `@hexadrop/eslint-config-typescript`, `@hexadrop/eslint-config-astro` and `@hexadrop/eslint-config-json`.
 
-export default hexadrop()
-  // some configs before the main config
-  .prepend()
-  // overrides any named configs
-  .override('hexadrop/core/rules', {
-    rules: {
-      'no-console': 'off',
-    },
-  })
-  // directly remove a named config
-  .remove('hexadrop/typescript/rules/dts')
-  // rename plugin prefixes
-  .renamePlugins({
-    'old-prefix': 'new-prefix',
-    // ...
-  });
-// ...
-```
+Pass `true` to force a section (it throws an actionable error if the peer is missing) or `false` to disable it.
 
-### Lint Staged
+## How the packages fit
 
-If you want to apply lint and auto-fix before every commit, you can add the following to your `package.json`:
+- The meta-package composes the base (`core`, `ignore`, `imports`) and the framework slices.
+- Feature packages do not depend on `core`; they own their plugins and import the shared globs and utilities from the private `shared` package, which is bundled into each `dist/`.
+- Each package runs its own typegen so its factory keeps fine-grained rule typing.
 
-```json
-{
-  "simple-git-hooks": {
-    "pre-commit": "pnpm lint-staged"
-  },
-  "lint-staged": {
-    "*": "eslint --fix"
-  }
-}
-```
+See [Architecture](docs/agents/architecture.md) for the package graph and the composition order.
 
-and then
+## Development
 
 ```bash
-npm i -D lint-staged simple-git-hooks
-
-// to active the hooks
-npx simple-git-hooks
-```
-
-## View what rules are enabled
-
-There is a [visual tool](https://github.com/eslint/config-inspector) to help you view what rules are enabled in your  project and apply them to what files.
-
-Go to your project root that contains `eslint.config.js` and run:
-
-```bash
-npx @eslint/config-inspector
-```
-
-## Inspiration and Credits
-
-Here are some inspiration for this package.
-
-- [@antfu/eslint-config](https://github.com/antfu/eslint-config)
-- [eslint-config-codely](https://github.com/CodelyTV/eslint-config-codely)
-
-## Contributing
-
-This project uses [Bun](https://bun.sh) as its runtime, test runner, and bundler.
-
-```bash
-git clone git@github.com:hexadrop/eslint-config.git
-cd eslint-config
 bun install
+bun run test
+bun run typecheck
+bun run lint:fix
 bun run build
 ```
 
-Read the full [contribution guidelines](./CONTRIBUTING.md) before opening an issue or pull request.
+Read [CONTRIBUTING.md](./CONTRIBUTING.md) before opening an issue or pull request.
 
-## MIT License
+## License
 
-[Copyright 2021-2026 Hexadrop](./LICENSE)
-
-## Hexadrop Code Quality Standards
-
-Publishing this package we are committing ourselves to the following code quality standards:
-
-- Respect **Semantic Versioning**: No breaking changes in patch or minor versions
-- No surprises in transitive dependencies: Use the **bare minimum dependencies** needed to meet the purpose
-- **One specific purpose** to meet without having to carry a bunch of unnecessary other utilities
-- **Tests** as documentation and usage examples
-- **Well documented README** showing how to install and use
-- **License favoring Open Source** and collaboration
-
-  [@stylistic/eslint-plugin]: https://github.com/eslint-stylistic/eslint-stylistic
-  [@typescript-eslint/eslint-plugin]: https://github.com/typescript-eslint/typescript-eslint
-  [eslint-plugin-jsonc]: https://github.com/ota-meshi/eslint-plugin-jsonc
-  [eslint-plugin-import-x]: https://github.com/un-es/eslint-plugin-import-x
-  [eslint-plugin-n]: https://github.com/eslint-community/eslint-plugin-n
-  [eslint-plugin-simple-import-sort]: https://github.com/lydell/eslint-plugin-simple-import-sort
-  [eslint-plugin-unused-imports]: https://github.com/sweepline/eslint-plugin-unused-imports
+[MIT](./LICENSE)
