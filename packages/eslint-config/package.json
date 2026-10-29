@@ -53,7 +53,7 @@
 		"local-pkg": "1.2.1"
 	},
 	"devDependencies": {
-		"eslint-typegen": "2.3.1",
+		"eslint-typegen": "2.3.2",
 		"react": "19.2.8",
 		"tsdown": "0.22.14"
 	}
