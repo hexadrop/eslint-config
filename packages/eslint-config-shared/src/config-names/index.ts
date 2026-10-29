@@ -1,7 +1,4 @@
 export * from './astro.config-name';
-export * from './core.config-name';
-export * from './ignore.config-name';
-export * from './imports.config-name';
 export * from './json.config-name';
 export * from './markdown.config-name';
 export * from './react.config-name';

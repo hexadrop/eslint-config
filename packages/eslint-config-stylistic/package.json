@@ -45,12 +45,16 @@
 	},
 	"peerDependencies": {
 		"@hexadrop/eslint-config-astro": "^1.0.11",
+		"@hexadrop/eslint-config-json": "^1.0.11",
 		"@hexadrop/eslint-config-typescript": "^1.0.11",
 		"@typescript-eslint/eslint-plugin": "^8.68.0",
 		"eslint": "^9.17.0 || ^10.0.0"
 	},
 	"peerDependenciesMeta": {
 		"@hexadrop/eslint-config-astro": {
+			"optional": true
+		},
+		"@hexadrop/eslint-config-json": {
 			"optional": true
 		},
 		"@hexadrop/eslint-config-typescript": {
@@ -61,7 +65,6 @@
 		}
 	},
 	"dependencies": {
-		"@hexadrop/eslint-config-json": "1.0.11",
 		"@stylistic/eslint-plugin": "5.10.0",
 		"eslint-flat-config-utils": "3.2.0",
 		"eslint-plugin-format": "2.0.1",

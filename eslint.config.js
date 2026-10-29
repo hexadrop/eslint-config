@@ -9,7 +9,7 @@ const jiti = createJiti(import.meta.url, {
 const hexadrop = jiti('./packages/eslint-config/src').default;
 
 export default hexadrop(
-	{ ignores: ['packages/**/e2e/fixtures'] },
+	{ ignores: ['packages/**/e2e/fixtures', '.archify/**'] },
 	{
 		name: 'hexadrop/shared-imports',
 		rules: {

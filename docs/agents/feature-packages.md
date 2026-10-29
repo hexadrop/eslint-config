@@ -2,6 +2,16 @@
 
 The monorepo splits the config into granular feature packages under `packages/`. Every feature package follows the same conventions; this guide is the single source of truth for them.
 
+## The core package
+
+`@hexadrop/eslint-config-core` (`packages/eslint-config-core`) is **publishable** and owns the base concern:
+
+- Base ESLint rules, globals and ignores.
+- `eslint-plugin-import-x`, `eslint-plugin-n` and the import sorting/unused-import rules.
+- The `core`, `ignore` and `imports` config names and option types.
+
+The meta-package composes core's raw `core`, `ignore` and `imports` config functions. Feature packages do **not** depend on core: the file globs live in the private `shared` package and are bundled into each package's `dist/`, so a package only ships the globs it imports.
+
 ## The shared package
 
 `@hexadrop/eslint-config-shared` (`packages/eslint-config-shared`) is **private — never published**. It holds what every feature package needs:
@@ -9,6 +19,7 @@ The monorepo splits the config into granular feature packages under `packages/`.
 - Types: `Awaitable`, `Nullable`, `RecursivePartial`, and the generic `TypedFlatConfigItem<RuleOptionsType>`.
 - Constants: `PLUGIN_PREFIX`.
 - Utilities: `interopDefault`, `toArray`, `renameRules`, `pluginConfigRules`, `pluginConfigOverrideRules`.
+- Globs: the universal and feature-specific file globs, bundled into each package.
 
 ### Consumption rules
 

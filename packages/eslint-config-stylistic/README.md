@@ -64,6 +64,7 @@ Each concern lives in its own adapter module under `src/adapters/`, so `format`,
 
 - `@hexadrop/eslint-config-typescript` — enables the typescript section.
 - `@hexadrop/eslint-config-astro` — enables the astro section.
+- `@hexadrop/eslint-config-json` — enables the json section and the `package.json`/`tsconfig.json` sort-keys items.
 - `@typescript-eslint/eslint-plugin` — loaded only when the typescript section is active.
 
 Detection uses `isPackageExists` from `local-pkg`:
@@ -71,8 +72,6 @@ Detection uses `isPackageExists` from `local-pkg`:
 - **Omitted** → the section is enabled when its peer is installed.
 - **`true`** → forced on; throws an actionable error when the peer is missing.
 - **`false`** → forced off.
-
-`@hexadrop/eslint-config-json` is a regular dependency: the `package.json`/`tsconfig.json` sort-keys slice is owned by that package and only loaded when `json` is enabled.
 
 ## Formatting
 
