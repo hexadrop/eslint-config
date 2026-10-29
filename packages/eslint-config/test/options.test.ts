@@ -97,6 +97,12 @@ describe('typescript option resolution', () => {
 		expect(names).toContain('hexadrop/typescript/rules/type-aware');
 	});
 
+	test('preserves react refresh options', () => {
+		const options = defaultOptions({ react: { refresh: { allowExportNames: ['loader'] } } });
+
+		expect(options.react).toEqual({ refresh: { allowExportNames: ['loader'] } });
+	});
+
 	test('emits the type-aware parser and rules for a string tsconfig', async () => {
 		const configs = await hexadrop({ astro: false, react: false, typescript: './tsconfig.json' });
 		const names = configs.map(config => config.name);

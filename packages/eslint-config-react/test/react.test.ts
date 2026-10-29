@@ -15,15 +15,18 @@ const REACT_VERSION = '19.2.8';
 interface MockPackagesOptions {
 	reactVersion?: string | undefined;
 	typescript?: boolean;
+	vite?: boolean;
 }
 
 function mockPackages(options: MockPackagesOptions = {}) {
 	const reactVersion = 'reactVersion' in options ? options.reactVersion : REACT_VERSION;
+	const hasVite = options.vite ?? true;
 
 	void mock.module('local-pkg', () => ({
 		getPackageInfoSync: (name: string) =>
 			name === 'react' && reactVersion ? { name, version: reactVersion } : undefined,
-		isPackageExists: (name: string) => name === 'vite' || (Boolean(options.typescript) && name === TYPESCRIPT_PKG),
+		isPackageExists: (name: string) =>
+			(name === 'vite' && hasVite) || (Boolean(options.typescript) && name === TYPESCRIPT_PKG),
 	}));
 }
 
@@ -37,6 +40,10 @@ function mockPackagePresent() {
 
 function mockReactAbsent() {
 	mockPackages({ reactVersion: undefined, typescript: true });
+}
+
+function mockWithoutVite() {
+	mockPackages({ typescript: true, vite: false });
 }
 
 afterEach(() => {
@@ -146,7 +153,8 @@ describe('react config', () => {
 		expect(hooks?.rules?.['react-hooks/rules-of-hooks']).toBe('error');
 	});
 
-	test('react-refresh rule is present as warn', async () => {
+	test('react-refresh rule is present as warn when Vite is installed', async () => {
+		mockPackagePresent();
 		const configs = await config();
 		const refresh = configs.find(c => c.name === RULES_REFRESH);
 
@@ -154,6 +162,43 @@ describe('react config', () => {
 		const level = Array.isArray(rule) ? rule[0] : undefined;
 
 		expect(level).toBe('warn');
+	});
+
+	test('react-refresh is off by default without Vite', async () => {
+		mockWithoutVite();
+		const configs = await config();
+		const refresh = configs.find(c => c.name === RULES_REFRESH);
+
+		expect(refresh?.rules?.['react-refresh/only-export-components']).toBe('off');
+	});
+
+	test('refresh: true forces the rule on without Vite', async () => {
+		mockWithoutVite();
+		const configs = await config({ refresh: true });
+		const refresh = configs.find(c => c.name === RULES_REFRESH);
+
+		const rule = refresh?.rules?.['react-refresh/only-export-components'];
+
+		expect(Array.isArray(rule) ? rule[0] : undefined).toBe('warn');
+	});
+
+	test('refresh: false disables the rule even with Vite', async () => {
+		mockPackagePresent();
+		const configs = await config({ refresh: false });
+		const refresh = configs.find(c => c.name === RULES_REFRESH);
+
+		expect(refresh?.rules?.['react-refresh/only-export-components']).toBe('off');
+	});
+
+	test('refresh options forward allowExportNames', async () => {
+		mockWithoutVite();
+		const configs = await config({ refresh: { allowExportNames: ['loader'] } });
+		const refresh = configs.find(c => c.name === RULES_REFRESH);
+
+		const rule = refresh?.rules?.['react-refresh/only-export-components'];
+		const settings = Array.isArray(rule) ? rule[1] : undefined;
+
+		expect(settings).toEqual({ allowConstantExport: false, allowExportNames: ['loader'] });
 	});
 
 	test('factory returns FlatConfigComposer with correct config names', async () => {

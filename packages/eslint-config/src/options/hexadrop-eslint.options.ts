@@ -3,6 +3,7 @@ import path from 'node:path';
 import process from 'node:process';
 
 import type { CoreTypescriptOptions } from '@hexadrop/eslint-config-core';
+import type { ReactRefreshOptions } from '@hexadrop/eslint-config-react';
 import type { Nullable, RecursivePartial } from '@hexadrop/eslint-config-shared';
 import type { StylisticFormattingOptions } from '@hexadrop/eslint-config-stylistic';
 import type { TypescriptParserOptions } from '@hexadrop/eslint-config-typescript';
@@ -38,6 +39,17 @@ interface HexadropEslintStylisticOptions extends StylisticFormattingOptions {
 	 * @default true
 	 */
 	unicorn: boolean;
+}
+
+interface HexadropEslintReactOptions {
+	/**
+	 * Enable `react-refresh/only-export-components`.
+	 *
+	 * When omitted it is enabled only when Vite (Fast Refresh) is installed.
+	 * `true` forces it on, `false` turns it off and an object enables it with
+	 * extra allowed export names.
+	 */
+	refresh?: boolean | ReactRefreshOptions;
 }
 
 interface HexadropEslintOptions {
@@ -100,8 +112,9 @@ interface HexadropEslintOptions {
 	 *
 	 * If `false`, react support will be disabled.
 	 * If `true`, or empty it will be enabled.
+	 * Pass an object to customize the react preset (`refresh`).
 	 */
-	react: boolean;
+	react: boolean | HexadropEslintReactOptions;
 
 	/**
 	 * Configure stylistic rules.
@@ -177,7 +190,13 @@ function getCwdTsconfigPath(): string | undefined {
 	return undefined;
 }
 
-export type { HexadropEslintOptions, HexadropEslintStylisticOptions, ResolvedHexadropEslintOptions, TypescriptOptions };
+export type {
+	HexadropEslintOptions,
+	HexadropEslintReactOptions,
+	HexadropEslintStylisticOptions,
+	ResolvedHexadropEslintOptions,
+	TypescriptOptions,
+};
 
 export default function defaultOptions(
 	options: RecursivePartial<HexadropEslintOptions> = {}
@@ -244,7 +263,7 @@ export default function defaultOptions(
 			],
 		},
 		node: options.node ?? true,
-		react: options.react ?? isInstalledReact,
+		react: (options.react ?? isInstalledReact) as boolean | HexadropEslintReactOptions,
 		stylistic:
 			options.stylistic === false
 				? false

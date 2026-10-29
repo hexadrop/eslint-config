@@ -10,6 +10,7 @@ import {
 import { getPackageInfoSync, isPackageExists } from 'local-pkg';
 
 import type { TypedFlatConfigItem } from './react.typed-config';
+import type { ReactConfigOptions } from './react.types';
 
 const REACT_REFRESH_ALLOW_CONSTANT_EXPORT_PACKAGES = ['vite'];
 
@@ -49,6 +50,8 @@ export default async function reactConfig(options: ReactConfigOptions = {}): Pro
 		interopDefault(import('eslint-plugin-react-refresh')),
 	] as const);
 	const isAllowConstantExport = REACT_REFRESH_ALLOW_CONSTANT_EXPORT_PACKAGES.some(index => isPackageExists(index));
+	const isRefreshEnabled = typeof options.refresh === 'object' ? true : (options.refresh ?? isAllowConstantExport);
+	const refreshOptions = typeof options.refresh === 'object' ? options.refresh : {};
 	const reactVersion = detectReactVersion();
 
 	const files = [...GLOB_REACT_JSX, ...(isTypescript ? GLOB_REACT_TSX : [])];
@@ -114,21 +117,16 @@ export default async function reactConfig(options: ReactConfigOptions = {}): Pro
 			files,
 			name: REACT_CONFIG_NAME_RULES_REFRESH,
 			rules: {
-				'react-refresh/only-export-components': ['warn', { allowConstantExport: isAllowConstantExport }],
+				'react-refresh/only-export-components': isRefreshEnabled
+					? [
+							'warn',
+							{
+								allowConstantExport: isAllowConstantExport,
+								...refreshOptions,
+							},
+						]
+					: 'off',
 			},
 		},
 	];
-}
-
-export interface ReactConfigOptions {
-	/**
-	 * Whether typescript support should be enabled (TSX globs, TS-specific rules).
-	 *
-	 * When omitted, auto-detected via `@hexadrop/eslint-config-typescript` presence.
-	 * Set explicitly to override auto-detection: `false` forces JS-only mode,
-	 * `true` forces TS mode — throws an actionable error if the peer is not installed.
-	 *
-	 * @default undefined (auto-detect)
-	 */
-	typescript?: boolean;
 }

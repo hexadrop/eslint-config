@@ -146,6 +146,23 @@ export default hexadrop(
 
 Check out the [options](https://github.com/hexadrop/eslint-config/blob/main/packages/eslint-config/src/options/hexadrop-eslint.options.ts) and [factory](https://github.com/hexadrop/eslint-config/blob/main/packages/eslint-config/src/factory.ts) for more details.
 
+### React
+
+React is enabled automatically when it is installed. Use an object to customize the preset:
+
+```js
+// eslint.config.js
+import hexadrop from '@hexadrop/eslint-config';
+
+export default hexadrop({
+  react: {
+    // `react-refresh/only-export-components` is enabled only when Vite is
+    // installed (Fast Refresh). Force it on/off, or allow extra exports.
+    refresh: { allowExportNames: ['loader', 'action'] },
+  },
+});
+```
+
 ### TypeScript
 
 TypeScript is enabled automatically when it is installed. The option accepts the same forms as before, plus an object for advanced project resolution:

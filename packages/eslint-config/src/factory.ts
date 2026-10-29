@@ -90,11 +90,10 @@ export default function hexadrop(
 			() => import('@hexadrop/eslint-config-typescript'),
 			toTypescriptFactoryOptions(options.typescript)
 		),
-		...optionalPlugin(
-			options.react,
-			() => import('@hexadrop/eslint-config-react'),
-			options.typescript === false ? { typescript: false as const } : {}
-		),
+		...optionalPlugin(options.react, () => import('@hexadrop/eslint-config-react'), {
+			...(typeof options.react === 'object' && options.react),
+			...(options.typescript === false && { typescript: false as const }),
+		}),
 		...optionalPlugin(options.json, () => import('@hexadrop/eslint-config-json')),
 		...optionalPlugin(options.markdown, () => import('@hexadrop/eslint-config-markdown')),
 		imports(options),

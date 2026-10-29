@@ -35,6 +35,7 @@ The meta-package `@hexadrop/eslint-config` enables react automatically when `rea
 
 | Option | Default | Description |
 |---|---|---|
+| `refresh` | auto-detected | Enables `react-refresh/only-export-components`. Enabled only when Vite (Fast Refresh) is installed; `true` forces it on, `false` turns it off, and an object (`{ allowExportNames }`) enables it with extra allowed exports. |
 | `typescript` | auto-detected | Adds TSX globs and the TypeScript-specific rule adjustments. `true` forces TS mode (throws if the peer is missing), `false` forces JS-only mode. When omitted, the section follows `@hexadrop/eslint-config-typescript` presence. |
 
 ## Optional peers
