@@ -194,6 +194,15 @@ describe('stylistic config', () => {
 			expect(names).toContain('hexadrop/stylistic/rules/json');
 		});
 
+		test('skips the json section when its peer is missing', async () => {
+			mockInstalled(ASTRO_PKG, TYPESCRIPT_PKG);
+
+			const configs = await stylisticFactory(autoDetectOptions);
+			const names = configs.map(c => c.name);
+
+			expect(names).not.toContain('hexadrop/stylistic/rules/json');
+		});
+
 		test('enables the astro section when its peer is installed', async () => {
 			mockInstalled(ASTRO_PKG);
 

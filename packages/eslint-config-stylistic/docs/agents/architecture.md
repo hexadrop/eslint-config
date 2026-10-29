@@ -58,9 +58,9 @@ The meta-package always passes explicit booleans (its own resolved options), so 
 
 `@typescript-eslint/eslint-plugin` is an optional peer: the typescript section imports it, and it is only required when `@hexadrop/eslint-config-typescript` is installed.
 
-## The json dependency
+## The json optional peer
 
-`@hexadrop/eslint-config-json` is a regular dependency because the `package.json`/`tsconfig.json` sort-keys slice lives there and is composed into the json section.
+`@hexadrop/eslint-config-json` is an optional peer: the `package.json`/`tsconfig.json` sort-keys slice lives there and is composed into the json section only when the peer is present (or `json: true` is forced, which throws an actionable error if it is missing).
 
 The module is imported dynamically inside `jsonAdapter()` (which only runs when `json` is enabled) instead of statically at the top of the module: the meta-package imports `-json` dynamically too, and loading both concurrently through jiti (the repo's TypeScript config loader) resolves one of them to a partially-initialized module.
 
