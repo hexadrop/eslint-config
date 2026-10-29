@@ -35,6 +35,9 @@ The meta-package enables this slice automatically when `typescript` is installed
 |---|---|---|
 | `project` | `undefined` | `true` enables TS without type-aware linting; a path or list of paths enables type-aware linting; `false`/omitted returns an empty config. |
 | `tsconfigRootDir` | `process.cwd()` | Root directory used to resolve the tsconfig paths. |
+| `parserOptions` | `undefined` | Extra typescript-eslint parser options merged after `project`/`tsconfigRootDir`. Use `{ projectService: true }` for solution-style tsconfigs or workspaces; `project` is then omitted. |
+
+When using the meta-package, `parserOptions` is forwarded unchanged from `typescript.parserOptions`.
 
 ## Optional peers
 
