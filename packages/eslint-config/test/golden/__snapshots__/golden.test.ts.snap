@@ -7271,7 +7271,7 @@ exports[`golden resolved config defaults-ts: defaults on a typescript project: d
           "unified-signatures",
           "use-unknown-in-catch-callback-variable",
         ],
-        "version": "8.68.0",
+        "version": "8.69.0",
       },
     },
   },
@@ -7281,7 +7281,7 @@ exports[`golden resolved config defaults-ts: defaults on a typescript project: d
     ],
     "languageOptions": {
       "parser": {
-        "$module": "typescript-eslint/parser@8.68.0",
+        "$module": "typescript-eslint/parser@8.69.0",
       },
       "parserOptions": {
         "sourceType": "module",
@@ -11551,7 +11551,7 @@ exports[`golden resolved config tsconfig-paths: typescript with an explicit tsco
           "unified-signatures",
           "use-unknown-in-catch-callback-variable",
         ],
-        "version": "8.68.0",
+        "version": "8.69.0",
       },
     },
   },
@@ -11562,7 +11562,7 @@ exports[`golden resolved config tsconfig-paths: typescript with an explicit tsco
     ],
     "languageOptions": {
       "parser": {
-        "$module": "typescript-eslint/parser@8.68.0",
+        "$module": "typescript-eslint/parser@8.69.0",
       },
       "parserOptions": {
         "sourceType": "module",
@@ -11579,7 +11579,7 @@ exports[`golden resolved config tsconfig-paths: typescript with an explicit tsco
     ],
     "languageOptions": {
       "parser": {
-        "$module": "typescript-eslint/parser@8.68.0",
+        "$module": "typescript-eslint/parser@8.69.0",
       },
       "parserOptions": {
         "project": [
@@ -20021,7 +20021,7 @@ exports[`golden resolved config react-ts: react with typescript: react-ts 1`] = 
           "unified-signatures",
           "use-unknown-in-catch-callback-variable",
         ],
-        "version": "8.68.0",
+        "version": "8.69.0",
       },
     },
   },
@@ -20031,7 +20031,7 @@ exports[`golden resolved config react-ts: react with typescript: react-ts 1`] = 
     ],
     "languageOptions": {
       "parser": {
-        "$module": "typescript-eslint/parser@8.68.0",
+        "$module": "typescript-eslint/parser@8.69.0",
       },
       "parserOptions": {
         "sourceType": "module",
@@ -29911,7 +29911,7 @@ exports[`golden resolved config astro-ts: astro with typescript: astro-ts 1`] = 
           ".astro",
         ],
         "parser": {
-          "$module": "typescript-eslint/parser@8.68.0",
+          "$module": "typescript-eslint/parser@8.69.0",
         },
       },
       "sourceType": "module",
@@ -32348,7 +32348,7 @@ exports[`golden resolved config astro-ts: astro with typescript: astro-ts 1`] = 
         "window",
       ],
       "parser": {
-        "$module": "typescript-eslint/parser@8.68.0",
+        "$module": "typescript-eslint/parser@8.69.0",
       },
       "parserOptions": {
         "project": undefined,
@@ -32517,7 +32517,7 @@ exports[`golden resolved config astro-ts: astro with typescript: astro-ts 1`] = 
           "unified-signatures",
           "use-unknown-in-catch-callback-variable",
         ],
-        "version": "8.68.0",
+        "version": "8.69.0",
       },
     },
   },
@@ -32527,7 +32527,7 @@ exports[`golden resolved config astro-ts: astro with typescript: astro-ts 1`] = 
     ],
     "languageOptions": {
       "parser": {
-        "$module": "typescript-eslint/parser@8.68.0",
+        "$module": "typescript-eslint/parser@8.69.0",
       },
       "parserOptions": {
         "sourceType": "module",
@@ -36947,7 +36947,7 @@ exports[`golden resolved config astro-react-ts: full stack: astro, react and typ
           ".astro",
         ],
         "parser": {
-          "$module": "typescript-eslint/parser@8.68.0",
+          "$module": "typescript-eslint/parser@8.69.0",
         },
       },
       "sourceType": "module",
@@ -39384,7 +39384,7 @@ exports[`golden resolved config astro-react-ts: full stack: astro, react and typ
         "window",
       ],
       "parser": {
-        "$module": "typescript-eslint/parser@8.68.0",
+        "$module": "typescript-eslint/parser@8.69.0",
       },
       "parserOptions": {
         "project": undefined,
@@ -39553,7 +39553,7 @@ exports[`golden resolved config astro-react-ts: full stack: astro, react and typ
           "unified-signatures",
           "use-unknown-in-catch-callback-variable",
         ],
-        "version": "8.68.0",
+        "version": "8.69.0",
       },
     },
   },
@@ -39563,7 +39563,7 @@ exports[`golden resolved config astro-react-ts: full stack: astro, react and typ
     ],
     "languageOptions": {
       "parser": {
-        "$module": "typescript-eslint/parser@8.68.0",
+        "$module": "typescript-eslint/parser@8.69.0",
       },
       "parserOptions": {
         "sourceType": "module",
@@ -44171,7 +44171,7 @@ exports[`golden resolved config stylistic-no-format: stylistic with formatting d
           "unified-signatures",
           "use-unknown-in-catch-callback-variable",
         ],
-        "version": "8.68.0",
+        "version": "8.69.0",
       },
     },
   },
@@ -44181,7 +44181,7 @@ exports[`golden resolved config stylistic-no-format: stylistic with formatting d
     ],
     "languageOptions": {
       "parser": {
-        "$module": "typescript-eslint/parser@8.68.0",
+        "$module": "typescript-eslint/parser@8.69.0",
       },
       "parserOptions": {
         "sourceType": "module",
@@ -48385,7 +48385,7 @@ exports[`golden resolved config stylistic-no-unicorn: stylistic with unicorn dis
           "unified-signatures",
           "use-unknown-in-catch-callback-variable",
         ],
-        "version": "8.68.0",
+        "version": "8.69.0",
       },
     },
   },
@@ -48395,7 +48395,7 @@ exports[`golden resolved config stylistic-no-unicorn: stylistic with unicorn dis
     ],
     "languageOptions": {
       "parser": {
-        "$module": "typescript-eslint/parser@8.68.0",
+        "$module": "typescript-eslint/parser@8.69.0",
       },
       "parserOptions": {
         "sourceType": "module",
@@ -51924,7 +51924,7 @@ exports[`golden resolved config stylistic-no-perfectionist: stylistic with perfe
           "unified-signatures",
           "use-unknown-in-catch-callback-variable",
         ],
-        "version": "8.68.0",
+        "version": "8.69.0",
       },
     },
   },
@@ -51934,7 +51934,7 @@ exports[`golden resolved config stylistic-no-perfectionist: stylistic with perfe
     ],
     "languageOptions": {
       "parser": {
-        "$module": "typescript-eslint/parser@8.68.0",
+        "$module": "typescript-eslint/parser@8.69.0",
       },
       "parserOptions": {
         "sourceType": "module",
@@ -56063,7 +56063,7 @@ exports[`golden resolved config stylistic-off: stylistic fully disabled on a typ
           "unified-signatures",
           "use-unknown-in-catch-callback-variable",
         ],
-        "version": "8.68.0",
+        "version": "8.69.0",
       },
     },
   },
@@ -56073,7 +56073,7 @@ exports[`golden resolved config stylistic-off: stylistic fully disabled on a typ
     ],
     "languageOptions": {
       "parser": {
-        "$module": "typescript-eslint/parser@8.68.0",
+        "$module": "typescript-eslint/parser@8.69.0",
       },
       "parserOptions": {
         "sourceType": "module",
@@ -58392,7 +58392,7 @@ exports[`golden resolved config stylistic-custom-style: stylistic with space ind
           "unified-signatures",
           "use-unknown-in-catch-callback-variable",
         ],
-        "version": "8.68.0",
+        "version": "8.69.0",
       },
     },
   },
@@ -58402,7 +58402,7 @@ exports[`golden resolved config stylistic-custom-style: stylistic with space ind
     ],
     "languageOptions": {
       "parser": {
-        "$module": "typescript-eslint/parser@8.68.0",
+        "$module": "typescript-eslint/parser@8.69.0",
       },
       "parserOptions": {
         "sourceType": "module",
@@ -62662,7 +62662,7 @@ exports[`golden resolved config no-json-markdown: json and markdown disabled: no
           "unified-signatures",
           "use-unknown-in-catch-callback-variable",
         ],
-        "version": "8.68.0",
+        "version": "8.69.0",
       },
     },
   },
@@ -62672,7 +62672,7 @@ exports[`golden resolved config no-json-markdown: json and markdown disabled: no
     ],
     "languageOptions": {
       "parser": {
-        "$module": "typescript-eslint/parser@8.68.0",
+        "$module": "typescript-eslint/parser@8.69.0",
       },
       "parserOptions": {
         "sourceType": "module",
@@ -66320,7 +66320,7 @@ exports[`golden resolved config no-imports-node: imports and node rules disabled
           "unified-signatures",
           "use-unknown-in-catch-callback-variable",
         ],
-        "version": "8.68.0",
+        "version": "8.69.0",
       },
     },
   },
@@ -66330,7 +66330,7 @@ exports[`golden resolved config no-imports-node: imports and node rules disabled
     ],
     "languageOptions": {
       "parser": {
-        "$module": "typescript-eslint/parser@8.68.0",
+        "$module": "typescript-eslint/parser@8.69.0",
       },
       "parserOptions": {
         "sourceType": "module",
@@ -74142,7 +74142,7 @@ exports[`golden resolved config custom-ignores: custom ignore globs: custom-igno
           "unified-signatures",
           "use-unknown-in-catch-callback-variable",
         ],
-        "version": "8.68.0",
+        "version": "8.69.0",
       },
     },
   },
@@ -74152,7 +74152,7 @@ exports[`golden resolved config custom-ignores: custom ignore globs: custom-igno
     ],
     "languageOptions": {
       "parser": {
-        "$module": "typescript-eslint/parser@8.68.0",
+        "$module": "typescript-eslint/parser@8.69.0",
       },
       "parserOptions": {
         "sourceType": "module",
@@ -78422,7 +78422,7 @@ exports[`golden resolved config consumer-append: extra consumer config appended 
           "unified-signatures",
           "use-unknown-in-catch-callback-variable",
         ],
-        "version": "8.68.0",
+        "version": "8.69.0",
       },
     },
   },
@@ -78432,7 +78432,7 @@ exports[`golden resolved config consumer-append: extra consumer config appended 
     ],
     "languageOptions": {
       "parser": {
-        "$module": "typescript-eslint/parser@8.68.0",
+        "$module": "typescript-eslint/parser@8.69.0",
       },
       "parserOptions": {
         "sourceType": "module",
