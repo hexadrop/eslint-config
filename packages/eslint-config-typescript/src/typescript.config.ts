@@ -1,20 +1,22 @@
 import {
 	DTS_GLOBS,
 	GLOB_MARKDOWN_SOURCE,
-	interopDefault,
 	JAVASCRIPT_GLOBS,
+	SOURCE_GLOBS,
+	TEST_GLOBS,
+	TYPESCRIPT_GLOBS,
+} from '@hexadrop/eslint-config-core';
+import {
+	interopDefault,
 	PLUGIN_RENAME_TYPESCRIPT,
 	pluginConfigOverrideRules,
 	pluginConfigRules,
-	SOURCE_GLOBS,
-	TEST_GLOBS,
 	toArray,
 	TYPESCRIPT_CONFIG_NAME_RULES,
 	TYPESCRIPT_CONFIG_NAME_RULES_DTS,
 	TYPESCRIPT_CONFIG_NAME_RULES_TEST,
 	TYPESCRIPT_CONFIG_NAME_RULES_TYPEAWARE,
 	TYPESCRIPT_CONFIG_NAME_SETUP,
-	TYPESCRIPT_GLOBS,
 } from '@hexadrop/eslint-config-shared';
 
 import typescriptParser from './typescript.parser';

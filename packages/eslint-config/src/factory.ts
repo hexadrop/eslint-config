@@ -1,10 +1,10 @@
+import { core, ignore, imports } from '@hexadrop/eslint-config-core';
 import type { RecursivePartial } from '@hexadrop/eslint-config-shared';
 import { extractTypedFlatConfigItem, PLUGIN_RENAME } from '@hexadrop/eslint-config-shared';
 import type { TypescriptFactoryOptions } from '@hexadrop/eslint-config-typescript';
 import type { ResolvableFlatConfig } from 'eslint-flat-config-utils';
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 
-import { core, ignore, imports } from './config';
 import type { HexadropEslintOptions, ResolvedHexadropEslintOptions } from './options';
 import defaultOptions from './options/hexadrop-eslint.options';
 import type { TypedFlatConfigItem } from './typed-config';

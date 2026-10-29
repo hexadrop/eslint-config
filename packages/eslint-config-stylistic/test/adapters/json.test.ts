@@ -1,4 +1,4 @@
-import { GLOB_MARKDOWN_JSON } from '@hexadrop/eslint-config-shared';
+import { GLOB_MARKDOWN_JSON } from '@hexadrop/eslint-config-core';
 import { describe, expect, test } from 'bun:test';
 
 import { config } from '../../src';

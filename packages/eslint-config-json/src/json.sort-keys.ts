@@ -1,6 +1,5 @@
+import { GLOB_JSON_PACKAGE, GLOB_JSON_TSCONFIG } from '@hexadrop/eslint-config-core';
 import {
-	GLOB_JSON_PACKAGE,
-	GLOB_JSON_TSCONFIG,
 	JSON_CONFIG_NAME_STYLISTIC_RULES_JSON_PACKAGE,
 	JSON_CONFIG_NAME_STYLISTIC_RULES_JSON_TSCONFIG,
 } from '@hexadrop/eslint-config-shared';
