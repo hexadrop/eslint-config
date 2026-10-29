@@ -19,6 +19,7 @@
 	"bugs": {
 		"url": "https://github.com/hexadrop/eslint-config/issues"
 	},
+	"license": "MIT",
 	"private": true,
 	"workspaces": [
 		"packages/*"

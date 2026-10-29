@@ -31,25 +31,29 @@ export default markdown();
 
 ### Options
 
-```js
-markdown({ markdown: false }); // resolves to an empty pipeline
-```
-
-Additional flat configs can be appended after the markdown slice:
+The factory takes no options: the slice is the whole feature, so importing it is what enables it. It accepts any number of extra flat configs, which it appends after the markdown slice:
 
 ```js
-export default markdown({ markdown: true }, { name: 'my/override', rules: { 'markdown/no-html': 'off' } });
+export default markdown({ name: 'my/override', rules: { 'markdown/no-html': 'off' } });
 ```
+
+To disable the slice, use the meta-package (`markdown: false`) or simply do not import this package.
+
+### With the meta-package
+
+`@hexadrop/eslint-config` composes this slice as a regular dependency and controls it with its own `markdown` option (`markdown: false` skips it).
+
+### Optional peers
+
+No optional peers: `eslint` is the only peer dependency.
 
 ### Named exports
 
-| Export                                                                                                      | Description                                                                           |
-|-------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
-| `markdown`                                                                                                  | The raw markdown config items (the function the factory composes).                    |
-| `GLOB_MARKDOWN`                                                                                             | Markdown files (`**/*.md`).                                                           |
-| `GLOB_MARKDOWN_IN_MARKDOWN`                                                                                 | Nested markdown-in-markdown virtual files (`**/*.md/*.md`), ignored by the processor. |
-| `GLOB_MARKDOWN_SOURCE` / `GLOB_MARKDOWN_JSON` / `GLOB_MARKDOWN_ASTRO`                                       | Code-block virtual file globs inside markdown files.                                  |
-| `MARKDOWN_CONFIG_NAME_SETUP` / `MARKDOWN_CONFIG_NAME_SETUP_PROCESSOR` / `MARKDOWN_CONFIG_NAME_SETUP_PARSER` | Config names of the markdown slice.                                                   |
+| Export     | Description                                              |
+|------------|----------------------------------------------------------|
+| `config`   | The raw markdown config function the factory composes.   |
+
+Globs and config names stay internal: the file globs live in the private `@hexadrop/eslint-config-shared` package and are bundled into this package's `dist/`.
 
 ## License
 

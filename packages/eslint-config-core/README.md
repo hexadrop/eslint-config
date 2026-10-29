@@ -36,19 +36,23 @@ export default coreFactory({
 
 `@hexadrop/eslint-config` composes the raw `core`, `ignore` and `imports` configs in its pipeline, so the meta-package keeps the exact same behavior as before the extraction.
 
+## Optional peers
+
+No optional peers: `eslint` is the only peer dependency. The base plugins (`eslint-plugin-import-x`, `eslint-plugin-n`, `eslint-config-flat-gitignore` and the import sorting/unused-import plugins) are regular dependencies of this package.
+
 ## Options
 
-| Option        | Default | Description                                                                                  |
-|---------------|---------|----------------------------------------------------------------------------------------------|
-| `astro`       | `false` | Adds the astro-specific import overrides.                                                     |
-| `ignore`      | `true`  | Adds the default ignores and integrates `.gitignore`. Pass an object to add globs.            |
-| `imports`     | `true`  | Adds the `import-x` setup and rules.                                                          |
-| `json`        | `false` | Adds the JSON import overrides.                                                               |
-| `markdown`    | `false` | Adds the markdown source overrides.                                                           |
-| `module`      | node    | Enables AMD, CommonJS, Node and webpack module rules.                                         |
-| `node`        | `true`  | Registers `eslint-plugin-n` and its rules.                                                    |
-| `stylistic`   | `false` | Adds the import sorting and unused-import rules.                                              |
-| `typescript`  | `false` | Adds the TypeScript import settings and rules.                                                |
+| Option        | Default          | Description                                                                                  |
+|---------------|------------------|----------------------------------------------------------------------------------------------|
+| `astro`       | `false`          | Adds the astro-specific import overrides.                                                     |
+| `ignore`      | `true`           | Adds the default ignores and integrates `.gitignore`. Pass an object to add globs.            |
+| `imports`     | `true`           | Adds the `import-x` setup and rules.                                                          |
+| `json`        | `false`          | Adds the JSON import overrides.                                                               |
+| `markdown`    | `false`          | Adds the markdown source overrides.                                                           |
+| `module`      | `{ node: true }` | Configures the AMD, CommonJS, Node and webpack module rules (`amd`, `commonjs`, `node`, `webpack` and extra `ignore` globs). |
+| `node`        | `true`           | Registers `eslint-plugin-n` and its rules.                                                    |
+| `stylistic`   | `false`          | Adds the import sorting and unused-import rules.                                              |
+| `typescript`  | `false`          | Adds the TypeScript import settings and rules.                                                |
 
 ## Named exports
 

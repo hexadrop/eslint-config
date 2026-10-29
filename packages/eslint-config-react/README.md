@@ -13,12 +13,13 @@ bun add -D @hexadrop/eslint-config-react eslint
 ### Standalone
 
 ```js
+// eslint.config.js
 import react from '@hexadrop/eslint-config-react';
 
 export default react();
 ```
 
-With typescript enabled manually:
+With TypeScript support enabled explicitly:
 
 ```js
 import react from '@hexadrop/eslint-config-react';
@@ -30,9 +31,18 @@ export default react({ typescript: true });
 
 The meta-package `@hexadrop/eslint-config` enables react automatically when `react` is installed.
 
-## Typescript support
+## Options
 
-The package auto-detects `@hexadrop/eslint-config-typescript`. When installed as an **optional peer**, TSX files and rules are included. When absent, only JSX files are linted.
+| Option | Default | Description |
+|---|---|---|
+| `typescript` | auto-detected | Adds TSX globs and the TypeScript-specific rule adjustments. `true` forces TS mode (throws if the peer is missing), `false` forces JS-only mode. When omitted, the section follows `@hexadrop/eslint-config-typescript` presence. |
 
-- `typescript: true` — force TS mode (throws if the peer is missing)
-- `typescript: false` — force JS-only mode
+## Optional peers
+
+- `@hexadrop/eslint-config-typescript` — enables TSX files and the TypeScript-specific rules.
+
+When the peer is absent, only JSX files are linted.
+
+## License
+
+MIT

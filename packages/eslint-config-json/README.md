@@ -30,27 +30,30 @@ export default json();
 
 ### Options
 
-```js
-json({ json: false }); // resolves to an empty pipeline
-```
-
-Additional flat configs can be appended after the json slice:
+The factory takes no options: the slice is the whole feature, so importing it is what enables it. It accepts any number of extra flat configs, which it appends after the json slice:
 
 ```js
-export default json({ json: true }, { name: 'my/override', rules: { 'json/no-nan': 'off' } });
+export default json({ name: 'my/override', rules: { 'json/no-nan': 'off' } });
 ```
+
+To disable the slice, use the meta-package (`json: false`) or simply do not import this package.
+
+### With the meta-package
+
+`@hexadrop/eslint-config` composes this slice as a regular dependency and controls it with its own `json` option (`json: false` skips it).
+
+### Optional peers
+
+No optional peers: `eslint` is the only peer dependency.
 
 ### Named exports
 
-| Export                                                                                             | Description                                                                                     |
-|----------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|
-| `json`                                                                                             | The raw json config items (the function the factory composes).                                  |
-| `GLOB_JSON`                                                                                        | Files the json rules apply to (`**/*.json`, `**/*.json5`, `**/*.jsonc`).                        |
-| `GLOB_JSON_PACKAGE`                                                                                | `**/package.json` files.                                                                        |
-| `GLOB_JSON_TSCONFIG`                                                                               | `**/tsconfig.json` and `**/tsconfig.*.json` files.                                              |
-| `JSON_CONFIG_NAME_SETUP` / `JSON_CONFIG_NAME_SETUP_PARSER` / `JSON_CONFIG_NAME_RULES`              | Config names of the base json slice.                                                            |
-| `JSON_SORT_KEYS_CONFIG`                                                                            | Canonical key ordering for `package.json` and `tsconfig.json`, ready to append to any pipeline. |
-| `JSON_CONFIG_NAME_STYLISTIC_RULES_JSON_PACKAGE` / `JSON_CONFIG_NAME_STYLISTIC_RULES_JSON_TSCONFIG` | Config names of the sort-keys items.                                                            |
+| Export                                       | Description                                                                                     |
+|----------------------------------------------|-------------------------------------------------------------------------------------------------|
+| `config` (default export of `json.config`)    | The raw json config function the factory composes.                                              |
+| `JSON_SORT_KEYS_CONFIG`                      | Canonical key ordering for `package.json` and `tsconfig.json`, ready to append to any pipeline. |
+
+Globs and config names stay internal: the file globs live in the private `@hexadrop/eslint-config-shared` package and are bundled into this package's `dist/`.
 
 ## License
 

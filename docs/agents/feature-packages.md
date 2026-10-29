@@ -1,6 +1,6 @@
 # Feature packages
 
-The monorepo splits the config into granular feature packages under `packages/`. Every feature package follows the same conventions; this guide is the single source of truth for them.
+The monorepo splits the config into granular feature packages under `packages/`. Every feature package follows the same conventions; this guide is the single source of truth for them. See [Architecture](architecture.md) for the package graph and composition order.
 
 ## The core package
 
