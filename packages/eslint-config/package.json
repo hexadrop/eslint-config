@@ -49,11 +49,8 @@
 		"@hexadrop/eslint-config-react": "1.0.11",
 		"@hexadrop/eslint-config-stylistic": "1.0.11",
 		"@hexadrop/eslint-config-typescript": "1.0.11",
-		"@typescript-eslint/eslint-plugin": "8.68.0",
-		"@typescript-eslint/parser": "8.68.0",
 		"eslint-flat-config-utils": "3.2.0",
-		"local-pkg": "1.2.1",
-		"tslib": "2.8.1"
+		"local-pkg": "1.2.1"
 	},
 	"devDependencies": {
 		"eslint-typegen": "2.3.1",
