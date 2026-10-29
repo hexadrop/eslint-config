@@ -1,0 +1,80 @@
+{
+	"name": "@hexadrop/eslint-config-stylistic",
+	"version": "1.1.0",
+	"description": "Stylistic slice of the hexadrop ESLint config: @stylistic, unicorn, perfectionist, format/prettier rules and conditional sections for typescript, json and astro.",
+	"keywords": [
+		"lint",
+		"eslint",
+		"eslint-config",
+		"stylistic",
+		"unicorn",
+		"perfectionist",
+		"prettier",
+		"format"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/hexadrop/eslint-config.git",
+		"directory": "packages/eslint-config-stylistic"
+	},
+	"homepage": "https://github.com/hexadrop/eslint-config",
+	"bugs": {
+		"url": "https://github.com/hexadrop/eslint-config/issues"
+	},
+	"license": "MIT",
+	"publishConfig": {
+		"access": "public"
+	},
+	"type": "module",
+	"sideEffects": false,
+	"files": [
+		"dist"
+	],
+	"exports": {
+		".": {
+			"development": "./src/index.ts",
+			"types": "./dist/index.d.mts",
+			"default": "./dist/index.mjs"
+		}
+	},
+	"scripts": {
+		"build": "bun run build:types && tsdown",
+		"build:types": "bun run scripts/typegen.ts",
+		"prepare": "bun run build:types",
+		"prepublishOnly": "bun run build"
+	},
+	"peerDependencies": {
+		"@hexadrop/eslint-config-astro": "^1.1.0",
+		"@hexadrop/eslint-config-json": "^1.1.0",
+		"@hexadrop/eslint-config-typescript": "^1.1.0",
+		"@typescript-eslint/eslint-plugin": "^8.68.0",
+		"eslint": "^9.17.0 || ^10.0.0"
+	},
+	"peerDependenciesMeta": {
+		"@hexadrop/eslint-config-astro": {
+			"optional": true
+		},
+		"@hexadrop/eslint-config-json": {
+			"optional": true
+		},
+		"@hexadrop/eslint-config-typescript": {
+			"optional": true
+		},
+		"@typescript-eslint/eslint-plugin": {
+			"optional": true
+		}
+	},
+	"dependencies": {
+		"@stylistic/eslint-plugin": "5.10.0",
+		"eslint-flat-config-utils": "3.2.0",
+		"eslint-plugin-format": "2.0.1",
+		"eslint-plugin-perfectionist": "5.11.0",
+		"eslint-plugin-unicorn": "73.0.0",
+		"local-pkg": "1.2.1",
+		"prettier": "3.9.6",
+		"prettier-plugin-astro": "0.14.1"
+	},
+	"devDependencies": {
+		"tsdown": "0.22.14"
+	}
+}
