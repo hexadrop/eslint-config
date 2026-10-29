@@ -42,6 +42,20 @@ bun add eslint @hexadrop/eslint-config --dev
 - Supports ESLint v9 or v8.50.0+
 - [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new), compose easily!
 
+## Granular packages
+
+The configuration is also published as one package per concern, so a project can install only the plugins it uses. The meta-package remains the zero-config default; the granular packages are documented in the [repository README](../../README.md).
+
+| Package | Use it for |
+|---|---|
+| `@hexadrop/eslint-config-core` | Base ESLint rules, globals, ignores, import-x and n. |
+| `@hexadrop/eslint-config-typescript` | TypeScript parser, plugin and type-aware rules. |
+| `@hexadrop/eslint-config-json` | JSON/JSONC and the package.json/tsconfig.json sort-keys slice. |
+| `@hexadrop/eslint-config-markdown` | Markdown processor and parser. |
+| `@hexadrop/eslint-config-react` | React, hooks and refresh rules. |
+| `@hexadrop/eslint-config-astro` | Astro plugin, parser and TS-in-astro support. |
+| `@hexadrop/eslint-config-stylistic` | Stylistic, Unicorn, Perfectionist and Prettier formatting. |
+
 ## How to use
 
 1. Create `eslint.config.js` in your project root:
@@ -130,7 +144,7 @@ export default hexadrop(
 );
 ```
 
-Check out the [options](https://github.com/hexattol/eslint-config/blob/main/src/options/hexadrop-eslint.options.ts) and [factory](https://github.com/hexadrop/eslint-config/blob/main/src/factory.ts) for more details.
+Check out the [options](https://github.com/hexadrop/eslint-config/blob/main/packages/eslint-config/src/options/hexadrop-eslint.options.ts) and [factory](https://github.com/hexadrop/eslint-config/blob/main/packages/eslint-config/src/factory.ts) for more details.
 
 ### Plugins Renaming
 

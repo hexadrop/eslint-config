@@ -15,6 +15,15 @@ npm install eslint-config@beta
 
 Snapshot releases do not modify or commit version files. They use the pending changesets to calculate a version such as `0.2.0-beta-20260802153000`. Documentation, tooling, and other changes without a changeset do not publish a beta.
 
+### Monorepo packages
+
+Each publishable package under `packages/` has its own version and changeset; there is no linked versioning. The meta-package is the zero-config default, and the feature packages are published independently.
+
+- Add a changeset for every package whose behavior or manifest changes (`bun changeset add`).
+- The beta snapshot publishes the packages whose changesets are pending, so a change in one feature does not force a release of the others.
+- New packages created during the split were initialized at the workspace version (`1.0.11`) and received patch changesets, so their first stable release follows the current `1.0.x` line. The meta-package receives a minor bump for the split release.
+- The private `@hexadrop/eslint-config-shared` package is never published and has no changeset.
+
 ## Stable release
 
 1. When `develop` contains non-empty changesets, `release-prepare.yml` creates or updates the draft `changeset-release/main` pull request targeting `main`.
