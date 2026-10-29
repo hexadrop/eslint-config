@@ -49,7 +49,6 @@
       "name": "@hexadrop/eslint-config-astro",
       "version": "1.0.11",
       "dependencies": {
-        "@hexadrop/eslint-config-core": "1.0.11",
         "astro-eslint-parser": "3.1.0",
         "eslint-flat-config-utils": "3.2.0",
         "eslint-plugin-astro": "3.1.0",
@@ -94,7 +93,6 @@
       "name": "@hexadrop/eslint-config-json",
       "version": "1.0.11",
       "dependencies": {
-        "@hexadrop/eslint-config-core": "1.0.11",
         "eslint-flat-config-utils": "3.2.0",
         "eslint-plugin-jsonc": "3.4.2",
         "jsonc-eslint-parser": "3.3.0",
@@ -111,7 +109,6 @@
       "version": "1.0.11",
       "dependencies": {
         "@eslint/markdown": "8.0.3",
-        "@hexadrop/eslint-config-core": "1.0.11",
         "eslint-flat-config-utils": "3.2.0",
         "eslint-merge-processors": "2.0.0",
         "eslint-parser-plain": "0.1.1",
@@ -127,7 +124,6 @@
       "name": "@hexadrop/eslint-config-react",
       "version": "1.0.11",
       "dependencies": {
-        "@hexadrop/eslint-config-core": "1.0.11",
         "eslint-flat-config-utils": "3.2.0",
         "eslint-plugin-react": "7.37.5",
         "eslint-plugin-react-hooks": "7.1.1",
@@ -157,7 +153,6 @@
       "name": "@hexadrop/eslint-config-stylistic",
       "version": "1.0.11",
       "dependencies": {
-        "@hexadrop/eslint-config-core": "1.0.11",
         "@stylistic/eslint-plugin": "5.10.0",
         "eslint-flat-config-utils": "3.2.0",
         "eslint-plugin-format": "2.0.1",
@@ -188,7 +183,6 @@
       "name": "@hexadrop/eslint-config-typescript",
       "version": "1.0.11",
       "dependencies": {
-        "@hexadrop/eslint-config-core": "1.0.11",
         "@typescript-eslint/eslint-plugin": "8.68.0",
         "@typescript-eslint/parser": "8.68.0",
         "eslint-flat-config-utils": "3.2.0",

@@ -1,5 +1,6 @@
-import { GLOB_REACT_JSX, GLOB_REACT_TSX } from '@hexadrop/eslint-config-core';
 import {
+	GLOB_REACT_JSX,
+	GLOB_REACT_TSX,
 	interopDefault,
 	REACT_CONFIG_NAME_RULES,
 	REACT_CONFIG_NAME_RULES_HOOKS,

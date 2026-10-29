@@ -1,5 +1,7 @@
-import { GLOB_MARKDOWN_ASTRO, GLOB_MARKDOWN_JSON, GLOB_MARKDOWN_SOURCE } from '@hexadrop/eslint-config-core';
 import {
+	GLOB_MARKDOWN_ASTRO,
+	GLOB_MARKDOWN_JSON,
+	GLOB_MARKDOWN_SOURCE,
 	interopDefault,
 	PLUGIN_RENAME,
 	renameRules,

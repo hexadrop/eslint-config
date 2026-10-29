@@ -13,7 +13,6 @@
 | `src/core.factory.ts`         | `coreFactory(options?, ...configs)` returns a `FlatConfigComposer` composing `ignore`, `core` and `imports`.                     |
 | `src/core.options.ts`         | Public option types and `defaultCoreOptions()`.                                                                                  |
 | `src/core.typed-config.ts`    | Local `TypedFlatConfigItem` alias binding the shared generic to this package's generated `RuleOptions`.                          |
-| `src/globs/`                  | Universal file globs used by every feature package.                                                                              |
 | `src/config-names/`           | Config names for the core, ignore and imports concerns.                                                                          |
 | `scripts/typegen.ts`          | Generates typed rules and configuration names.                                                                                   |
 
@@ -40,12 +39,12 @@ See [Feature packages](../../../../docs/agents/feature-packages.md#dependency-ve
 `coreFactory()` accepts an optional options object (`CoreFactoryOptions`) followed by additional flat config items to append. It returns a `FlatConfigComposer`; consumers may use `.override()`, `.prepend()`, `.append()`, `.remove()`, and `.renamePlugins()`.
 
 ```js
-import core from '@hexadrop/eslint-config-core';
+import coreFactory from '@hexadrop/eslint-config-core';
 
-export default core({ markdown: true, typescript: true });
+export default coreFactory({ markdown: true, typescript: true });
 ```
 
-Every feature package imports the universal globs and its config names from this package, which is a regular dependency of them all.
+The file globs live in the private `@hexadrop/eslint-config-shared` package and are bundled into each published package. Feature packages import them from there instead of depending on core.
 
 ## Generated types
 

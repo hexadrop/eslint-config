@@ -4,13 +4,13 @@ The monorepo splits the config into granular feature packages under `packages/`.
 
 ## The core package
 
-`@hexadrop/eslint-config-core` (`packages/eslint-config-core`) is **publishable** and owns the universal concerns:
+`@hexadrop/eslint-config-core` (`packages/eslint-config-core`) is **publishable** and owns the base concern:
 
 - Base ESLint rules, globals and ignores.
 - `eslint-plugin-import-x`, `eslint-plugin-n` and the import sorting/unused-import rules.
-- The universal globs and the `core`, `ignore` and `imports` config names.
+- The `core`, `ignore` and `imports` config names and option types.
 
-Every feature package depends on it with pinned semver and imports the universal globs and config names from `@hexadrop/eslint-config-core` instead of duplicating them. The meta-package composes core's raw `core`, `ignore` and `imports` config functions.
+The meta-package composes core's raw `core`, `ignore` and `imports` config functions. Feature packages do **not** depend on core: the file globs live in the private `shared` package and are bundled into each package's `dist/`, so a package only ships the globs it imports.
 
 ## The shared package
 
@@ -19,6 +19,7 @@ Every feature package depends on it with pinned semver and imports the universal
 - Types: `Awaitable`, `Nullable`, `RecursivePartial`, and the generic `TypedFlatConfigItem<RuleOptionsType>`.
 - Constants: `PLUGIN_PREFIX`.
 - Utilities: `interopDefault`, `toArray`, `renameRules`, `pluginConfigRules`, `pluginConfigOverrideRules`.
+- Globs: the universal and feature-specific file globs, bundled into each package.
 
 ### Consumption rules
 
@@ -37,7 +38,7 @@ Every feature package depends on it with pinned semver and imports the universal
 
 ## Independence
 
-Each feature package must stay publishable standalone: it owns its plugin/parser dependencies and never imports from `@hexadrop/eslint-config` source files — only from `@hexadrop/eslint-config-shared` and `@hexadrop/eslint-config-core`.
+Each feature package must stay publishable standalone: it owns its plugin/parser dependencies and never imports from `@hexadrop/eslint-config` source files — only from `@hexadrop/eslint-config-shared`.
 
 ## Dependency versions
 

@@ -1,6 +1,6 @@
 # @hexadrop/eslint-config-core
 
-Core slice of the hexadrop ESLint config: base ESLint rules, globals, ignores, `eslint-plugin-import-x`, `eslint-plugin-n` and the universal globs shared by every feature package.
+Core slice of the hexadrop ESLint config: base ESLint rules, globals, ignores, `eslint-plugin-import-x`, `eslint-plugin-n`, the core/ignore/imports config names and their option types.
 
 ## Installation
 
@@ -13,17 +13,17 @@ bun add -D @hexadrop/eslint-config-core eslint
 ### Standalone
 
 ```js
-import core from '@hexadrop/eslint-config-core';
+import coreFactory from '@hexadrop/eslint-config-core';
 
-export default core();
+export default coreFactory();
 ```
 
 Customize the base concerns:
 
 ```js
-import core from '@hexadrop/eslint-config-core';
+import coreFactory from '@hexadrop/eslint-config-core';
 
-export default core({
+export default coreFactory({
   imports: true,
   markdown: true,
   node: false,
@@ -53,9 +53,10 @@ export default core({
 ## Named exports
 
 - `core`, `ignore`, `imports` — the raw config functions the meta-package composes.
-- Universal globs — `SOURCE_GLOBS`, `JAVASCRIPT_GLOBS`, `ESLINT_CONFIG_GLOBS`, `IGNORE_GLOB`, `GLOB_ASTRO*`, `GLOB_JSON*`, `GLOB_MARKDOWN*`, `GLOB_REACT*`, `TYPESCRIPT_GLOBS`, `DTS_GLOBS`, `TEST_GLOBS`.
 - Config names — `CORE_CONFIG_NAME_*`, `IGNORE_CONFIG_NAME_*`, `IMPORTS_CONFIG_NAME_*`.
 - Types — `CoreFactoryOptions`, `CoreOptions`, `CoreIgnoreOptions`, `CoreModuleOptions`.
+
+The file globs live in the private `@hexadrop/eslint-config-shared` package and are bundled into each published package; feature packages import them from there, so they do not depend on core.
 
 ## Generated types
 

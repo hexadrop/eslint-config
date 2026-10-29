@@ -1,3 +1,4 @@
+import { GLOB_MARKDOWN_SOURCE } from '@hexadrop/eslint-config-shared';
 import { describe, expect, test } from 'bun:test';
 
 import coreFactory, {
@@ -5,7 +6,6 @@ import coreFactory, {
 	CORE_CONFIG_NAME_RULES_MARKDOWN_SOURCE,
 	CORE_CONFIG_NAME_RULES_NODE,
 	CORE_CONFIG_NAME_SETUP,
-	GLOB_MARKDOWN_SOURCE,
 	IGNORE_CONFIG_NAME_ADDITIONAL,
 	IGNORE_CONFIG_NAME_DEFAULT,
 	IMPORTS_CONFIG_NAME_RULES_ASTRO,

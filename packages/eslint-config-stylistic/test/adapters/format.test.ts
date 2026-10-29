@@ -4,7 +4,7 @@ import {
 	GLOB_MARKDOWN_SOURCE,
 	JAVASCRIPT_GLOBS,
 	SOURCE_GLOBS,
-} from '@hexadrop/eslint-config-core';
+} from '@hexadrop/eslint-config-shared';
 import { describe, expect, test } from 'bun:test';
 
 import { config } from '../../src';

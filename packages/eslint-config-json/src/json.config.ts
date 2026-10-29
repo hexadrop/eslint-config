@@ -1,5 +1,5 @@
-import { GLOB_JSON } from '@hexadrop/eslint-config-core';
 import {
+	GLOB_JSON,
 	interopDefault,
 	JSON_CONFIG_NAME_RULES,
 	JSON_CONFIG_NAME_SETUP,

@@ -2,9 +2,9 @@
 
 ## Working on `packages/eslint-config-core`
 
-When rules, plugins, globs or config names change:
+When rules, plugins or config names change:
 
-1. Update the corresponding source (`src/core.config.ts`, `src/ignore.config.ts`, `src/imports.config.ts`, `src/globs/` or `src/config-names/`).
+1. Update the corresponding source (`src/core.config.ts`, `src/ignore.config.ts`, `src/imports.config.ts` or `src/config-names/`). The file globs live in `packages/eslint-config-shared/src/globs/`.
 2. Regenerate types with `bun run --filter @hexadrop/eslint-config-core build:types`.
 3. Rebuild the package with `bun run --filter @hexadrop/eslint-config-core build` — the meta-package composes its `dist/`, so a stale build breaks root tests.
 4. Run `bun run lint:fix` and `bun run typecheck` from the root.

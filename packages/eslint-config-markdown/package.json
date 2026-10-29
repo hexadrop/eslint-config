@@ -44,7 +44,6 @@
 	},
 	"dependencies": {
 		"@eslint/markdown": "8.0.3",
-		"@hexadrop/eslint-config-core": "1.0.11",
 		"eslint-flat-config-utils": "3.2.0",
 		"eslint-merge-processors": "2.0.0",
 		"eslint-parser-plain": "0.1.1"

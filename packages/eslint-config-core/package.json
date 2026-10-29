@@ -1,7 +1,7 @@
 {
 	"name": "@hexadrop/eslint-config-core",
 	"version": "1.0.11",
-	"description": "Core slice of the hexadrop ESLint config: base ESLint rules, globals, ignores, import-x and eslint-plugin-n integration plus the universal globs shared by every feature package.",
+	"description": "Core slice of the hexadrop ESLint config: base ESLint rules, globals, ignores, import-x and eslint-plugin-n integration, config names and option types.",
 	"keywords": [
 		"lint",
 		"eslint",

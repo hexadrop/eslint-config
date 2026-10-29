@@ -3,7 +3,7 @@ import {
 	GLOB_MARKDOWN_ASTRO,
 	GLOB_MARKDOWN_JSON,
 	GLOB_MARKDOWN_SOURCE,
-} from '@hexadrop/eslint-config-core';
+} from '@hexadrop/eslint-config-shared';
 import { describe, expect, test } from 'bun:test';
 
 import { config } from '../../src';

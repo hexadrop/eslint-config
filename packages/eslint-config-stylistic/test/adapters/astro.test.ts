@@ -1,4 +1,4 @@
-import { GLOB_MARKDOWN_ASTRO } from '@hexadrop/eslint-config-core';
+import { GLOB_MARKDOWN_ASTRO } from '@hexadrop/eslint-config-shared';
 import { describe, expect, test } from 'bun:test';
 
 import { config } from '../../src';

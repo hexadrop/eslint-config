@@ -1,12 +1,15 @@
-import { DTS_GLOBS, GLOB_MARKDOWN_SOURCE, SOURCE_GLOBS, TYPESCRIPT_GLOBS } from '@hexadrop/eslint-config-core';
 import {
+	DTS_GLOBS,
+	GLOB_MARKDOWN_SOURCE,
 	interopDefault,
 	PLUGIN_RENAME,
 	PLUGIN_RENAME_TYPESCRIPT,
 	pluginConfigRules,
+	SOURCE_GLOBS,
 	STYLISTIC_CONFIG_NAME_RULES_TYPESCRIPT,
 	STYLISTIC_CONFIG_NAME_RULES_TYPESCRIPT_DTS,
 	STYLISTIC_CONFIG_NAME_RULES_TYPESCRIPT_TYPE_AWARE,
+	TYPESCRIPT_GLOBS,
 } from '@hexadrop/eslint-config-shared';
 
 import type { StylisticConfigOptions } from '../stylistic.options';
