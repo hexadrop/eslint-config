@@ -46,15 +46,15 @@ bun add eslint @hexadrop/eslint-config --dev
 
 The configuration is also published as one package per concern, so a project can install only the plugins it uses. The meta-package remains the zero-config default; the granular packages are documented in the [repository README](../../README.md).
 
-| Package | Use it for |
-|---|---|
-| `@hexadrop/eslint-config-core` | Base ESLint rules, globals, ignores, import-x and n. |
-| `@hexadrop/eslint-config-typescript` | TypeScript parser, plugin and type-aware rules. |
-| `@hexadrop/eslint-config-json` | JSON/JSONC and the package.json/tsconfig.json sort-keys slice. |
-| `@hexadrop/eslint-config-markdown` | Markdown processor and parser. |
-| `@hexadrop/eslint-config-react` | React, hooks and refresh rules. |
-| `@hexadrop/eslint-config-astro` | Astro plugin, parser and TS-in-astro support. |
-| `@hexadrop/eslint-config-stylistic` | Stylistic, Unicorn, Perfectionist and Prettier formatting. |
+| Package                              | Use it for                                                     |
+|--------------------------------------|----------------------------------------------------------------|
+| `@hexadrop/eslint-config-core`       | Base ESLint rules, globals, ignores, import-x and n.           |
+| `@hexadrop/eslint-config-typescript` | TypeScript parser, plugin and type-aware rules.                |
+| `@hexadrop/eslint-config-json`       | JSON/JSONC and the package.json/tsconfig.json sort-keys slice. |
+| `@hexadrop/eslint-config-markdown`   | Markdown processor and parser.                                 |
+| `@hexadrop/eslint-config-react`      | React, hooks and refresh rules.                                |
+| `@hexadrop/eslint-config-astro`      | Astro plugin, parser and TS-in-astro support.                  |
+| `@hexadrop/eslint-config-stylistic`  | Stylistic, Unicorn, Perfectionist and Prettier formatting.     |
 
 ## How to use
 

@@ -15,6 +15,7 @@
       <excludeFolder url="file://$MODULE_DIR$/packages/eslint-config-markdown/test/__snapshots__" />
       <excludeFolder url="file://$MODULE_DIR$/packages/eslint-config/e2e/__snapshots__" />
       <excludeFolder url="file://$MODULE_DIR$/packages/eslint-config/test/golden/__snapshots__" />
+      <excludeFolder url="file://$MODULE_DIR$/.archify" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
