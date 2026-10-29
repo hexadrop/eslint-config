@@ -1,5 +1,8 @@
+import { cwd } from 'node:process';
+
 import {
 	DTS_GLOBS,
+	expandTsconfigProjects,
 	GLOB_MARKDOWN_SOURCE,
 	interopDefault,
 	JAVASCRIPT_GLOBS,
@@ -57,7 +60,8 @@ export default async function typescriptConfig(options: TypescriptFactoryOptions
 	const typescriptPluginRename = PLUGIN_RENAME_TYPESCRIPT['@typescript-eslint'];
 
 	const config: TypedFlatConfigItem[] = [];
-	const tsconfigPath = project && project !== true ? toArray(project) : undefined;
+	const tsconfigPath =
+		project && project !== true ? expandTsconfigProjects(toArray(project), tsconfigRootDir ?? cwd()) : undefined;
 	const isTypeAwareLinting = isTypeAware(tsconfigPath, parserOptions);
 
 	config.push({

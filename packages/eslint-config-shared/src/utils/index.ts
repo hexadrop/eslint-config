@@ -5,3 +5,4 @@ export { default as pluginConfigOverrideRules } from './plugin-config-override-r
 export { default as pluginConfigRules } from './plugin-config-rules';
 export { default as renameRules } from './rename-rules';
 export { default as toArray } from './to-array';
+export { expandTsconfigProjects } from './tsconfig';

@@ -39,6 +39,17 @@ The meta-package enables this slice automatically when `typescript` is installed
 
 `tsconfigRootDir` is forwarded in both modes, so a workspace can root project resolution without replacing the whole config item. When using the meta-package, `parserOptions` is forwarded unchanged from `typescript.parserOptions`.
 
+### Solution-style tsconfigs
+
+A root `tsconfig.json` that only lists `references` (`files: []` plus `project references`) is expanded automatically: every reference is followed recursively (cycles are cut, duplicates removed) and the concrete projects are handed to the parser and the import resolver. Set `tsconfigRootDir` when the solution file lives outside `process.cwd()`:
+
+```js
+export default typescript({
+  project: './tsconfig.json',
+  tsconfigRootDir: import.meta.dirname,
+});
+```
+
 ## Optional peers
 
 No optional peers: `eslint` is the only peer dependency. `typescript-eslint` is shipped as a regular dependency of this package.

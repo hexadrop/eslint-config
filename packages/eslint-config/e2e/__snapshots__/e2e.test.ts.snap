@@ -101,6 +101,18 @@ export { doubled, tripled };
 "
 `;
 
+exports[`e2e fixtures typescript-solution: fixtures/solution/src/solution.ts through eslint --fix: typescript-solution-diagnostics 1`] = `[]`;
+
+exports[`e2e fixtures typescript-solution: fixtures/solution/src/solution.ts through eslint --fix: typescript-solution-content 1`] = `
+"import { answer } from '@solution/answer';
+
+const doubled = answer * 2;
+const tripled = answer * 3;
+
+export { doubled, tripled };
+"
+`;
+
 exports[`e2e fixtures javascript: fixtures/javascript.js through eslint --fix: javascript-diagnostics 1`] = `
 [
   {

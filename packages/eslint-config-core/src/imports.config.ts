@@ -4,6 +4,7 @@ import { cwd } from 'node:process';
 import {
 	DTS_GLOBS,
 	ESLINT_CONFIG_GLOBS,
+	expandTsconfigProjects,
 	GLOB_ASTRO,
 	GLOB_MARKDOWN_ASTRO,
 	GLOB_MARKDOWN_JSON,
@@ -52,7 +53,7 @@ export function typeScriptResolverOptions(typescript: CoreOptions['typescript'])
 	const configuredProject = project && project !== true ? project : options.project;
 
 	if (configuredProject) {
-		options.project = toArray(configuredProject).map(index =>
+		options.project = expandTsconfigProjects(toArray(configuredProject), root).map(index =>
 			path.isAbsolute(index) ? index : path.resolve(root, index)
 		);
 	}
