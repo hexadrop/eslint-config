@@ -1,3 +1,8 @@
+import { mkdtempSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
+import process from 'node:process';
+
 import { GLOB_MARKDOWN_SOURCE } from '@hexadrop/eslint-config-shared';
 import { describe, expect, test } from 'bun:test';
 
@@ -8,6 +13,7 @@ import coreFactory, {
 	CORE_CONFIG_NAME_SETUP,
 	IGNORE_CONFIG_NAME_ADDITIONAL,
 	IGNORE_CONFIG_NAME_DEFAULT,
+	IGNORE_CONFIG_NAME_GITIGNORE,
 	IMPORTS_CONFIG_NAME_RULES_ASTRO,
 	IMPORTS_CONFIG_NAME_RULES_STATIC,
 	IMPORTS_CONFIG_NAME_RULES_STYLISTIC,
@@ -72,6 +78,24 @@ describe('core factory', () => {
 		const configs = await coreFactory({ ...ALL_OFF, ignore: false });
 
 		expect(configs.some(config => config.name?.startsWith('hexadrop/ignore'))).toBe(false);
+	});
+
+	test('keeps the default ignores when ignore is true and the cwd has no .gitignore', async () => {
+		const previousCwd = process.cwd();
+		const directory = mkdtempSync(path.join(tmpdir(), 'hexadrop-ignore-'));
+
+		try {
+			process.chdir(directory);
+
+			const configs = await coreFactory({ ...ALL_OFF, ignore: true });
+			const defaultIgnores = configs.find(config => config.name === IGNORE_CONFIG_NAME_DEFAULT);
+
+			expect(defaultIgnores?.ignores).toContain('**/node_modules');
+			expect(configs.some(config => config.name === IGNORE_CONFIG_NAME_GITIGNORE)).toBe(false);
+		} finally {
+			process.chdir(previousCwd);
+			rmSync(directory, { force: true, recursive: true });
+		}
 	});
 
 	test('adds the import setup and warnings when imports is enabled', async () => {
