@@ -193,10 +193,7 @@ export default function defaultOptions(
 		options.typescript !== null
 	) {
 		const tsOptions = options.typescript as TypescriptOptions;
-		typescript = {
-			...tsOptions,
-			project: tsOptions.project ?? undefined,
-		} as TypescriptOptions;
+		typescript = { ...tsOptions };
 	} else if (isInstalledTypescript) {
 		if (options.typescript === undefined) {
 			typescript = { project: getCwdTsconfigPath() ?? true };

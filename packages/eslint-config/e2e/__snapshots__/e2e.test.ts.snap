@@ -207,3 +207,15 @@ exports[`e2e fixtures stylistic-off: fixtures/stylistic-off.ts through eslint --
 "export default function add( a:number,b:number ):number{return a+b}
 "
 `;
+
+exports[`e2e fixtures typescript-alias-project: fixtures/src/alias.ts through eslint --fix: typescript-alias-project-diagnostics 1`] = `[]`;
+
+exports[`e2e fixtures typescript-alias-project: fixtures/src/alias.ts through eslint --fix: typescript-alias-project-content 1`] = `
+"import { answer } from '@fixture/alias-target';
+
+const doubled = answer * 2;
+const tripled = answer * 3;
+
+export { doubled, tripled };
+"
+`;

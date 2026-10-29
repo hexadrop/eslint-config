@@ -157,7 +157,8 @@ import hexadrop from '@hexadrop/eslint-config';
 export default hexadrop({
   typescript: {
     // Extra typescript-eslint parser options. Use projectService for
-    // solution-style tsconfigs or workspace layouts; `project` is then omitted.
+    // solution-style tsconfigs or workspace layouts; `project` is then
+    // optional and omitted from the parser options.
     parserOptions: { projectService: true },
 
     // One or more tsconfigs used for type-aware linting and import resolution.
