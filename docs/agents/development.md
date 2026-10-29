@@ -15,5 +15,4 @@ Use the smallest command that validates the changed behavior.
 | Type-check                | `bun run typecheck`                                   |
 | Build all packages        | `bun run build`                                       |
 | Build one package         | `bun run --filter @hexadrop/eslint-config-core build` |
-| Golden resolved config    | `bun test packages/eslint-config/test/golden`         |
 | End-to-end fixtures       | `bun test packages/eslint-config/e2e`                 |
