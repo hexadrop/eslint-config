@@ -1,6 +1,6 @@
 import type { StylisticCustomizeOptions } from '@stylistic/eslint-plugin';
 
-import type { HexadropEslintStylisticOptions } from '../../options';
+import type { HexadropEslintStylisticOptions } from './stylistic.options';
 
 export default function stylisticOptions(options: HexadropEslintStylisticOptions): StylisticCustomizeOptions {
 	const {

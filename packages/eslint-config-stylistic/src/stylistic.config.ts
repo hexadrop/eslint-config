@@ -1,4 +1,3 @@
-import { JSON_SORT_KEYS_CONFIG } from '@hexadrop/eslint-config-json';
 import {
 	DTS_GLOBS,
 	GLOB_ASTRO,
@@ -17,7 +16,7 @@ import {
 	STYLISTIC_CONFIG_NAME_RULES,
 	STYLISTIC_CONFIG_NAME_RULES_ASTRO,
 	STYLISTIC_CONFIG_NAME_RULES_JSON,
-	STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_ASRTO,
+	STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_ASTRO,
 	STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_JSON,
 	STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_SOURCE,
 	STYLISTIC_CONFIG_NAME_RULES_PERFECTIONIST,
@@ -36,18 +35,31 @@ import {
 } from '@hexadrop/eslint-config-shared';
 import type { Linter } from 'eslint';
 
-import type { HexadropEslintOptions } from '../../options';
-import type { TypedFlatConfigItem } from '../../typed-config';
+import type { HexadropEslintStylisticOptions } from './stylistic.options';
 import prettierOptions from './stylistic.options-prettier';
 import stylisticOptions from './stylistic.options-stylistic';
+import type { TypedFlatConfigItem } from './stylistic.typed-config';
 
-export default async function stylistic(options: HexadropEslintOptions): Promise<TypedFlatConfigItem[]> {
-	const { astro, json, markdown, stylistic, typescript } = options;
-	if (stylistic === false) {
-		return [];
-	}
+export interface StylisticConfigOptions {
+	astro: boolean;
+	isTypeAware?: boolean;
+	json: boolean;
+	markdown: boolean;
+	stylistic: HexadropEslintStylisticOptions;
+	typescript: boolean;
+}
+
+export default async function stylisticConfig(options: StylisticConfigOptions): Promise<TypedFlatConfigItem[]> {
+	const { astro, isTypeAware = false, json, markdown, stylistic, typescript } = options;
+	/*
+	 * Loaded lazily so this package never takes part in the same module
+	 * resolution pass as the meta-package's own dynamic import of `-json`
+	 * (jiti resolves the two concurrent loads to a partially-initialised
+	 * module).
+	 */
+	const jsonPackage = json ? await import('@hexadrop/eslint-config-json') : undefined;
+	const jsonSortKeysConfig = jsonPackage?.JSON_SORT_KEYS_CONFIG ?? [];
 	const { format, indent, indentSize, perfectionist, unicorn } = stylistic;
-	const isTypeAware = typeof typescript !== 'boolean';
 	const typescriptPluginRename = PLUGIN_RENAME['@typescript-eslint'];
 	const stylisticPluginRename = PLUGIN_RENAME['@stylistic'];
 	const jsonPluginRename = PLUGIN_RENAME.jsonc;
@@ -333,7 +345,7 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 					[`${jsonPluginRename}/quotes`]: 'error',
 				},
 			},
-			...JSON_SORT_KEYS_CONFIG
+			...jsonSortKeysConfig
 		);
 	}
 
@@ -505,7 +517,6 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 		config.push({
 			files: GLOB_MARKDOWN_JSON,
 			name: STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_JSON,
-
 			rules: {
 				'json/indent': ['error', 2],
 			},
@@ -515,8 +526,7 @@ export default async function stylistic(options: HexadropEslintOptions): Promise
 	if (astro) {
 		config.push({
 			files: GLOB_MARKDOWN_ASTRO,
-			name: STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_ASRTO,
-
+			name: STYLISTIC_CONFIG_NAME_RULES_MARKDOWN_ASTRO,
 			rules: {
 				[`${stylisticPluginRename}/indent`]: ['error', 2],
 			},

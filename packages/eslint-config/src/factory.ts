@@ -1,10 +1,11 @@
 import type { RecursivePartial } from '@hexadrop/eslint-config-shared';
 import { extractTypedFlatConfigItem, PLUGIN_RENAME } from '@hexadrop/eslint-config-shared';
+import type { HexadropEslintStylisticOptions } from '@hexadrop/eslint-config-stylistic';
 import type { TypescriptFactoryOptions } from '@hexadrop/eslint-config-typescript';
 import type { ResolvableFlatConfig } from 'eslint-flat-config-utils';
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
 
-import { core, ignore, imports, stylistic } from './config';
+import { core, ignore, imports } from './config';
 import type { HexadropEslintOptions, ResolvedHexadropEslintOptions } from './options';
 import defaultOptions from './options/hexadrop-eslint.options';
 import type { TypedFlatConfigItem } from './typed-config';
@@ -73,7 +74,14 @@ export default function hexadrop(
 		...optionalPlugin(options.json, () => import('@hexadrop/eslint-config-json')),
 		...optionalPlugin(options.markdown, () => import('@hexadrop/eslint-config-markdown')),
 		imports(options),
-		stylistic(options)
+		...optionalPlugin(options.stylistic !== false, () => import('@hexadrop/eslint-config-stylistic'), {
+			astro: options.astro,
+			isTypeAware: typeof options.typescript === 'object',
+			json: options.json,
+			markdown: options.markdown,
+			stylistic: options.stylistic as HexadropEslintStylisticOptions,
+			typescript: options.typescript !== false,
+		})
 	).renamePlugins(PLUGIN_RENAME);
 
 	/*
