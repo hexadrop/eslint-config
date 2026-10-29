@@ -17,49 +17,47 @@ function mockInstalled(...packageNames: string[]) {
 
 const fullOptions = {
 	astro: false,
+	format: true,
 	isTypeAware: true,
 	json: false,
 	markdown: false,
+	perfectionist: true,
 	stylistic: {
 		arrowParens: 'avoid' as const,
 		braceStyle: '1tbs' as const,
 		bracketSameLine: true,
 		bracketSpacing: true,
 		endOfLine: 'lf' as const,
-		format: true,
 		indent: 'tab' as const,
 		indentSize: 4,
-		perfectionist: true,
 		printWidth: 120,
 		quoteProps: 'as-needed' as const,
 		quotes: 'single' as const,
 		semicolons: true,
 		singleAttributePerLine: true,
 		trailingComma: 'es5' as const,
-		unicorn: true,
 	},
 	typescript: true,
-};
-
-const minimalStylisticOptions = {
-	...fullOptions.stylistic,
-	format: false,
-	perfectionist: false,
-	unicorn: false,
+	unicorn: true,
 };
 
 const minimalOptions = {
 	...fullOptions,
-	stylistic: minimalStylisticOptions,
+	format: false,
+	perfectionist: false,
+	unicorn: false,
 };
 
 /**
  * Options that leave the optional peers to auto-detection.
  */
 const autoDetectOptions = {
+	format: false,
 	isTypeAware: true,
 	markdown: false,
-	stylistic: minimalStylisticOptions,
+	perfectionist: false,
+	stylistic: fullOptions.stylistic,
+	unicorn: false,
 };
 
 beforeEach(() => {
@@ -94,7 +92,7 @@ describe('stylistic config', () => {
 		expect(setup?.plugins?.['style']).toBeDefined();
 	});
 
-	describe('peer matrix', () => {
+	describe('concern toggles', () => {
 		test('includes typescript section when typescript is enabled', async () => {
 			const configs = await config({ ...minimalOptions, typescript: true });
 			const names = configs.map(c => c.name);
@@ -132,8 +130,7 @@ describe('stylistic config', () => {
 		});
 
 		test('includes unicorn section when unicorn is enabled', async () => {
-			const options = { ...minimalOptions, stylistic: { ...minimalOptions.stylistic, unicorn: true } };
-			const configs = await config(options);
+			const configs = await config({ ...minimalOptions, unicorn: true });
 			const names = configs.map(c => c.name);
 			expect(names).toContain('hexadrop/stylistic/rules/unicorn');
 		});
@@ -145,8 +142,7 @@ describe('stylistic config', () => {
 		});
 
 		test('includes perfectionist section when perfectionist is enabled', async () => {
-			const options = { ...minimalOptions, stylistic: { ...minimalOptions.stylistic, perfectionist: true } };
-			const configs = await config(options);
+			const configs = await config({ ...minimalOptions, perfectionist: true });
 			const names = configs.map(c => c.name);
 			expect(names).toContain('hexadrop/stylistic/rules/perfectionist');
 		});
@@ -158,8 +154,7 @@ describe('stylistic config', () => {
 		});
 
 		test('includes format/prettier section when format is enabled', async () => {
-			const options = { ...minimalOptions, stylistic: { ...minimalOptions.stylistic, format: true } };
-			const configs = await config(options);
+			const configs = await config({ ...minimalOptions, format: true });
 			const names = configs.map(c => c.name);
 			expect(names).toContain('hexadrop/stylistic/rules/prettier');
 		});
@@ -242,7 +237,6 @@ describe('stylistic config', () => {
 		const composer = stylisticFactory({ stylistic: false });
 		const configs = await composer;
 
-		// The factory returns an empty FlatConfigComposer when stylistic is false
 		expect(configs.length).toBe(0);
 	});
 

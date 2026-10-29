@@ -8,9 +8,7 @@ import {
 import type { TypedFlatConfigItem } from './json.typed-config';
 
 /**
- * Canonical key ordering for package.json and tsconfig.json files, applied on
- * top of the base json rules. In the meta-package this slice lives in the
- * stylistic concern and the sort-keys items move there with it.
+ * Canonical key ordering for package.json and tsconfig.json files.
  */
 const JSON_SORT_KEYS_CONFIG: TypedFlatConfigItem[] = [
 	{

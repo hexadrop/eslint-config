@@ -2,7 +2,6 @@ import { config as astro } from '@hexadrop/eslint-config-astro';
 import { config as json } from '@hexadrop/eslint-config-json';
 import { config as markdown } from '@hexadrop/eslint-config-markdown';
 import { config as react } from '@hexadrop/eslint-config-react';
-import type { HexadropEslintStylisticOptions } from '@hexadrop/eslint-config-stylistic';
 import { config as stylistic } from '@hexadrop/eslint-config-stylistic';
 import { config as typescript } from '@hexadrop/eslint-config-typescript';
 import { builtinRules } from 'eslint/use-at-your-own-risk';
@@ -10,9 +9,11 @@ import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 
 import { combine } from '../src';
 import { core, ignore, imports } from '../src/config';
+import type { HexadropEslintStylisticOptions } from '../src/options';
 import { defaultOptions } from '../src/options';
 
 const options = defaultOptions();
+const stylisticOptions = options.stylistic as HexadropEslintStylisticOptions;
 
 const configs = await combine(
 	{
@@ -32,11 +33,14 @@ const configs = await combine(
 	imports(options),
 	stylistic({
 		astro: options.astro,
+		format: stylisticOptions.format,
 		isTypeAware: typeof options.typescript === 'object',
 		json: options.json,
 		markdown: options.markdown,
-		stylistic: options.stylistic as HexadropEslintStylisticOptions,
+		perfectionist: stylisticOptions.perfectionist,
+		stylistic: stylisticOptions,
 		typescript: options.typescript !== false,
+		unicorn: stylisticOptions.unicorn,
 	})
 );
 

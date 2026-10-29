@@ -13,11 +13,20 @@ When rules, plugins, config names or sections change:
 
 `test/stylistic.test.ts` covers the factory contract through the highest available seam:
 
-- **Sections**: config names, plugin registration and the on/off state of every optional section.
-- **Peer matrix**: the typescript, json, astro, unicorn, perfectionist and format sections with each option on and off.
+- **Concern toggles**: config names and the on/off state of every optional section.
 - **Peer auto-detection**: `local-pkg` is mocked with `mock.module()` to simulate every peer being installed or missing, including the actionable error when a peer is forced on but absent.
 - **Composition**: consumer configs appended after the internal slice and the `stylistic: false` opt-out.
 - **Snapshot**: the full config structure (plugins reduced to their keys).
+
+`test/adapters/*.test.ts` exercises each adapter independently through the public `config` seam, with `test/helpers.ts` providing a baseline where every concern is off:
+
+- `base` — setup plugins, base rules, `operator-linebreak` and markdown source overrides.
+- `typescript` — typescript, type-aware and `.d.ts` items.
+- `json` — json rules, indentation, sort-keys slice and the markdown json override.
+- `astro` — astro rules and the markdown astro override.
+- `unicorn` — rules and markdown filename exceptions.
+- `perfectionist` — rule overrides.
+- `format` — prettier rules, astro plugin variant and 2-space markdown variants.
 
 ## Typegen
 

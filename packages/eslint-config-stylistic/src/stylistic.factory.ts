@@ -21,20 +21,19 @@ export default function stylisticFactory(
 			: [
 					stylisticConfig({
 						astro: resolved.astro,
+						format: resolved.format,
 						isTypeAware: resolved.isTypeAware,
 						json: resolved.json,
 						markdown: resolved.markdown,
+						perfectionist: resolved.perfectionist,
 						stylistic: resolved.stylistic,
 						typescript: resolved.typescript,
+						unicorn: resolved.unicorn,
 					}),
 				];
 
 	let pipeline = new FlatConfigComposer<TypedFlatConfigItem, ConfigNames>(...configSlice);
 
-	/*
-	 * User can optionally pass a flat config item to the first argument
-	 * We extract it and append it to the pipeline
-	 */
 	const flatConfig = extractTypedFlatConfigItem(options);
 	if (flatConfig) {
 		pipeline = pipeline.append(flatConfig);

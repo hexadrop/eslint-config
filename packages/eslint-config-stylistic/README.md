@@ -18,13 +18,15 @@ import stylistic from '@hexadrop/eslint-config-stylistic';
 export default stylistic();
 ```
 
-Customize the formatting rules:
+Customize the formatting rules and toggle concerns:
 
 ```js
 import stylistic from '@hexadrop/eslint-config-stylistic';
 
 export default stylistic({
+  format: false,
   stylistic: { indent: 'space', indentSize: 2, quotes: 'double' },
+  unicorn: false,
 });
 ```
 
@@ -36,24 +38,27 @@ export default stylistic({ stylistic: false });
 
 ### With the meta-package
 
-`@hexadrop/eslint-config` composes this package last and forwards its resolved options, so the meta-package keeps the exact same behavior as before the extraction.
+`@hexadrop/eslint-config` composes this package last and forwards its resolved options, so the meta-package keeps the exact same behavior as before the extraction. The meta-package keeps `format`, `unicorn` and `perfectionist` nested under `stylistic` for backwards compatibility; only the standalone factory exposes them as top-level options.
 
 ## Options
 
-| Option        | Default           | Description                                                                                                   |
-|---------------|-------------------|---------------------------------------------------------------------------------------------------------------|
-| `astro`       | auto-detected     | Adds the astro rules section. Requires `@hexadrop/eslint-config-astro`.                                        |
-| `isTypeAware` | `false`           | Adds the type-aware TypeScript stylistic rules (needs a tsconfig path in the typescript slice).                |
-| `json`        | auto-detected     | Adds the json rules and the `package.json`/`tsconfig.json` sort-keys items from `@hexadrop/eslint-config-json`. |
-| `markdown`    | `false`           | Adds the stylistic rules for markdown code blocks.                                                             |
-| `stylistic`   | full defaults     | Rules sub-options. `false` disables the entire slice.                                                          |
-| `typescript`  | auto-detected     | Adds the TypeScript stylistic rules. Requires `@hexadrop/eslint-config-typescript`.                            |
+| Option          | Default         | Description                                                                                                     |
+|-----------------|-----------------|-----------------------------------------------------------------------------------------------------------------|
+| `astro`         | auto-detected   | Adds the astro rules section. Requires `@hexadrop/eslint-config-astro`.                                          |
+| `format`        | `true`          | Enables the Prettier formatting rules (including the astro and markdown variants).                              |
+| `isTypeAware`   | `false`         | Adds the type-aware TypeScript stylistic rules (needs a tsconfig path in the typescript slice).                  |
+| `json`          | auto-detected   | Adds the json rules and the `package.json`/`tsconfig.json` sort-keys items from `@hexadrop/eslint-config-json`. |
+| `markdown`      | `false`         | Adds the stylistic rules for markdown code blocks.                                                               |
+| `perfectionist` | `true`          | Enables the perfectionist rules.                                                                                 |
+| `stylistic`     | full defaults   | Formatting sub-options. `false` disables the entire slice.                                                       |
+| `typescript`    | auto-detected   | Adds the TypeScript stylistic rules. Requires `@hexadrop/eslint-config-typescript`.                              |
+| `unicorn`       | `true`          | Enables the unicorn rules.                                                                                       |
 
 ### `stylistic` sub-options
 
-`arrowParens`, `braceStyle`, `bracketSameLine`, `bracketSpacing`, `endOfLine`, `format`, `indent`, `indentSize`, `perfectionist`, `printWidth`, `quoteProps`, `quotes`, `semicolons`, `singleAttributePerLine`, `trailingComma` and `unicorn`.
+`arrowParens`, `braceStyle`, `bracketSameLine`, `bracketSpacing`, `endOfLine`, `indent`, `indentSize`, `printWidth`, `quoteProps`, `quotes`, `semicolons`, `singleAttributePerLine` and `trailingComma`. They map to both the `@stylistic` rules and the Prettier options.
 
-`format`, `unicorn` and `perfectionist` toggle their whole ruleset; the rest map to both the `@stylistic` rules and the Prettier options.
+Each concern lives in its own adapter module under `src/adapters/`, so `format`, `unicorn` and `perfectionist` are independent top-level switches instead of nested toggles.
 
 ## Optional peers
 

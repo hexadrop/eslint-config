@@ -1,22 +1,7 @@
 import type { Linter } from 'eslint';
 
 /**
- * Rename plugin prefixes in a rule object.
- * Accepts a map of prefixes to rename.
- *
- * @example
- * ```ts
- * import { renameRules } from '@hexadrop/eslint-config'
- *
- * export default [{
- *   rules: renameRules(
- *     {
- *       '@typescript-eslint/indent': 'error'
- *     },
- *     { '@typescript-eslint': 'ts' }
- *   )
- * }]
- * ```
+ * Rename plugin prefixes in a rule object using a `from -> to` map.
  */
 export default function renameRules(rules: Linter.RulesRecord, map: Record<string, string>): Linter.RulesRecord {
 	if (Object.keys(map).length === 0) {

@@ -3,11 +3,40 @@ import path from 'node:path';
 import process from 'node:process';
 
 import type { Nullable, RecursivePartial } from '@hexadrop/eslint-config-shared';
-import type { HexadropEslintStylisticOptions } from '@hexadrop/eslint-config-stylistic';
+import type { StylisticFormattingOptions } from '@hexadrop/eslint-config-stylistic';
 import { isPackageExists } from 'local-pkg';
 
 import type { HexadropEslintIgnoreOptions } from './hexadrop-eslint-ignore.options';
 import type { HexadropEslintModulesOptions } from './hexadrop-eslint-module.options';
+
+/**
+ * The meta-package keeps the formatting, unicorn, perfectionist and format
+ * toggles nested under `stylistic` for backwards compatibility. The extracted
+ * `@hexadrop/eslint-config-stylistic` package exposes `format`, `unicorn` and
+ * `perfectionist` as top-level factory options instead.
+ */
+interface HexadropEslintStylisticOptions extends StylisticFormattingOptions {
+	/**
+	 * Enable formatting rules.
+	 *
+	 * @default true
+	 */
+	format: boolean;
+
+	/**
+	 * Enable perfectionist rules.
+	 *
+	 * @default true
+	 */
+	perfectionist: boolean;
+
+	/**
+	 * Enable unicorn rules.
+	 *
+	 * @default true
+	 */
+	unicorn: boolean;
+}
 
 interface HexadropEslintOptions {
 	/**
@@ -142,7 +171,7 @@ function getCwdTsconfigPath(): string | undefined {
 	return undefined;
 }
 
-export type { HexadropEslintOptions, ResolvedHexadropEslintOptions, TypescriptOptions };
+export type { HexadropEslintOptions, HexadropEslintStylisticOptions, ResolvedHexadropEslintOptions, TypescriptOptions };
 
 export default function defaultOptions(
 	options: RecursivePartial<HexadropEslintOptions> = {}

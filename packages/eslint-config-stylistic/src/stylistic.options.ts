@@ -10,6 +10,13 @@ interface StylisticFactoryOptions {
 	astro?: boolean;
 
 	/**
+	 * Enable the Prettier formatting rules.
+	 *
+	 * @default true
+	 */
+	format?: boolean;
+
+	/**
 	 * Whether type-aware linting is enabled (requires a tsconfig path).
 	 *
 	 * @default false
@@ -32,12 +39,19 @@ interface StylisticFactoryOptions {
 	markdown?: boolean;
 
 	/**
-	 * Stylistic rules sub-options. When `false`, the entire stylistic module
-	 * is disabled.
+	 * Enable the perfectionist rules.
+	 *
+	 * @default true
+	 */
+	perfectionist?: boolean;
+
+	/**
+	 * Stylistic formatting sub-options. When `false`, the entire stylistic
+	 * module is disabled.
 	 *
 	 * @default a full set of defaults
 	 */
-	stylistic?: false | RecursivePartial<HexadropEslintStylisticOptions>;
+	stylistic?: false | RecursivePartial<StylisticFormattingOptions>;
 
 	/**
 	 * Whether typescript support is enabled. When omitted, it is auto-detected
@@ -46,9 +60,16 @@ interface StylisticFactoryOptions {
 	 * @default auto-detected
 	 */
 	typescript?: boolean;
+
+	/**
+	 * Enable the unicorn rules.
+	 *
+	 * @default true
+	 */
+	unicorn?: boolean;
 }
 
-interface HexadropEslintStylisticOptions {
+interface StylisticFormattingOptions {
 	/**
 	 * Include parentheses around a sole arrow function parameter.
 	 *
@@ -86,13 +107,6 @@ interface HexadropEslintStylisticOptions {
 	endOfLine: 'auto' | 'cr' | 'crlf' | 'lf';
 
 	/**
-	 * Enable formatting rules.
-	 *
-	 * @default true
-	 */
-	format: boolean;
-
-	/**
 	 * Indentation style.
 	 *
 	 * @default 'tab'
@@ -105,13 +119,6 @@ interface HexadropEslintStylisticOptions {
 	 * @default 4
 	 */
 	indentSize: number;
-
-	/**
-	 * Enable perfectionist rules.
-	 *
-	 * @default true
-	 */
-	perfectionist: boolean;
 
 	/**
 	 * Specify the line length that the printer will wrap on.
@@ -154,22 +161,35 @@ interface HexadropEslintStylisticOptions {
 	 * @default 'es5'
 	 */
 	trailingComma: 'all' | 'es5' | 'none';
-
-	/**
-	 * Enable unicorn rules.
-	 *
-	 * @default true
-	 */
-	unicorn: boolean;
 }
 
 interface ResolvedStylisticFactoryOptions {
 	astro: boolean;
+	format: boolean;
 	isTypeAware: boolean;
 	json: boolean;
 	markdown: boolean;
-	stylistic: false | HexadropEslintStylisticOptions;
+	perfectionist: boolean;
+	stylistic: false | StylisticFormattingOptions;
 	typescript: boolean;
+	unicorn: boolean;
 }
 
-export type { HexadropEslintStylisticOptions, ResolvedStylisticFactoryOptions, StylisticFactoryOptions };
+interface StylisticConfigOptions {
+	astro: boolean;
+	format: boolean;
+	isTypeAware?: boolean;
+	json: boolean;
+	markdown: boolean;
+	perfectionist: boolean;
+	stylistic: StylisticFormattingOptions;
+	typescript: boolean;
+	unicorn: boolean;
+}
+
+export type {
+	ResolvedStylisticFactoryOptions,
+	StylisticConfigOptions,
+	StylisticFactoryOptions,
+	StylisticFormattingOptions,
+};

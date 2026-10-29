@@ -7,12 +7,29 @@
 | Area                              | Responsibility                                                                                                                                            |
 |-----------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `src/index.ts`                    | Exports the default `stylisticFactory()` factory, the named `config` export, and the option types.                                                       |
-| `src/stylistic.config.ts`         | Defines the stylistic slice: `@stylistic` rules plus the optional typescript, json, astro, unicorn, perfectionist, prettier and markdown sections.        |
+| `src/stylistic.config.ts`         | Thin composition of the per-concern adapters, in the frozen config order.                                                                                |
+| `src/adapters/`                   | One adapter per concern: `base`, `typescript`, `json`, `astro`, `unicorn`, `perfectionist` and `format`.                                                    |
 | `src/stylistic.factory.ts`        | `stylisticFactory(options?, ...configs)` returns a `FlatConfigComposer` wrapping `stylisticConfig()`.                                                      |
 | `src/stylistic.resolve-options.ts`| Fills the option defaults and resolves the optional peers through `local-pkg`.                                                                            |
-| `src/stylistic.options.ts`        | Public option types: `StylisticFactoryOptions` and `HexadropEslintStylisticOptions`.                                                                       |
+| `src/stylistic.options.ts`        | Public option types: `StylisticFactoryOptions` and `StylisticFormattingOptions`.                                                                            |
 | `src/stylistic.typed-config.ts`   | Provides the local `TypedFlatConfigItem` alias binding the shared generic to this package's generated `RuleOptions`.                                      |
 | `scripts/typegen.ts`              | Generates typed rules and configuration names.                                                                                                            |
+
+## Adapters
+
+Every concern is an independent adapter module under `src/adapters/`. Each exports a function that receives the resolved config options and returns its own config items:
+
+| Adapter            | Emits                                                                                                       |
+|--------------------|-------------------------------------------------------------------------------------------------------------|
+| `base.ts`          | The `setup` item (plugins), the base `@stylistic` rules and the markdown source overrides.                   |
+| `typescript.ts`    | `rules/typescript`, `rules/typescript/type-aware` and `rules/typescript/dts`.                               |
+| `json.ts`          | `rules/json` plus the `package.json`/`tsconfig.json` sort-keys slice; `jsonMarkdownAdapter()` for markdown.  |
+| `astro.ts`         | `rules/astro`; `astroMarkdownAdapter()` for markdown.                                                       |
+| `unicorn.ts`       | `rules/unicorn` and its markdown variants.                                                                  |
+| `perfectionist.ts` | `rules/perfectionist`.                                                                                      |
+| `format.ts`        | The Prettier rule, including the astro and 2-space markdown variants.                                       |
+
+`format`, `unicorn` and `perfectionist` are top-level factory options: turning one off skips its adapter (and its plugin) entirely. `@stylistic` itself is always emitted; only `stylistic: false` disables the whole slice.
 
 ## Sections
 
@@ -45,7 +62,7 @@ The meta-package always passes explicit booleans (its own resolved options), so 
 
 `@hexadrop/eslint-config-json` is a regular dependency because the `package.json`/`tsconfig.json` sort-keys slice lives there and is composed into the json section.
 
-The module is imported dynamically inside `stylisticConfig()` (only when `json` is enabled) instead of statically at the top of the module: the meta-package imports `-json` dynamically too, and loading both concurrently through jiti (the repo's TypeScript config loader) resolves one of them to a partially-initialized module.
+The module is imported dynamically inside `jsonAdapter()` (which only runs when `json` is enabled) instead of statically at the top of the module: the meta-package imports `-json` dynamically too, and loading both concurrently through jiti (the repo's TypeScript config loader) resolves one of them to a partially-initialized module.
 
 ## Independence
 
@@ -57,7 +74,7 @@ See [Feature packages](../../../../docs/agents/feature-packages.md#dependency-ve
 
 ## Public API
 
-`stylisticFactory()` accepts an optional options object (`StylisticFactoryOptions`, defaults to auto-detect) followed by additional flat config items to append. It returns a `FlatConfigComposer`; consumers may use `.override()`, `.prepend()`, `.append()`, `.remove()`, and `.renamePlugins()`.
+`stylisticFactory()` accepts an optional options object (`StylisticFactoryOptions`, defaults to auto-detect) followed by additional flat config items to append. `format`, `unicorn` and `perfectionist` default to `true`; `stylistic: false` disables everything. It returns a `FlatConfigComposer`; consumers may use `.override()`, `.prepend()`, `.append()`, `.remove()`, and `.renamePlugins()`.
 
 ```js
 import stylistic from '@hexadrop/eslint-config-stylistic';

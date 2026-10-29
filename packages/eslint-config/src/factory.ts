@@ -1,6 +1,5 @@
 import type { RecursivePartial } from '@hexadrop/eslint-config-shared';
 import { extractTypedFlatConfigItem, PLUGIN_RENAME } from '@hexadrop/eslint-config-shared';
-import type { HexadropEslintStylisticOptions } from '@hexadrop/eslint-config-stylistic';
 import type { TypescriptFactoryOptions } from '@hexadrop/eslint-config-typescript';
 import type { ResolvableFlatConfig } from 'eslint-flat-config-utils';
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
@@ -46,6 +45,31 @@ function toTypescriptFactoryOptions(
 	return typescript;
 }
 
+/**
+ * Compose the stylistic package slice.
+ *
+ * The meta-package keeps `format`, `unicorn` and `perfectionist` nested inside
+ * `stylistic` for backwards compatibility; the extracted package takes them as
+ * top-level options.
+ */
+function stylisticSection(options: ResolvedHexadropEslintOptions): ResolvableFlatConfig<TypedFlatConfigItem>[] {
+	if (options.stylistic === false) {
+		return [];
+	}
+
+	return optionalPlugin(true, () => import('@hexadrop/eslint-config-stylistic'), {
+		astro: options.astro,
+		format: options.stylistic.format,
+		isTypeAware: typeof options.typescript === 'object',
+		json: options.json,
+		markdown: options.markdown,
+		perfectionist: options.stylistic.perfectionist,
+		stylistic: options.stylistic,
+		typescript: options.typescript !== false,
+		unicorn: options.stylistic.unicorn,
+	});
+}
+
 // eslint-disable-next-line typescript/promise-function-async
 export default function hexadrop(
 	optionsOrFlatConfigItem?: RecursivePartial<HexadropEslintOptions> & TypedFlatConfigItem,
@@ -74,14 +98,7 @@ export default function hexadrop(
 		...optionalPlugin(options.json, () => import('@hexadrop/eslint-config-json')),
 		...optionalPlugin(options.markdown, () => import('@hexadrop/eslint-config-markdown')),
 		imports(options),
-		...optionalPlugin(options.stylistic !== false, () => import('@hexadrop/eslint-config-stylistic'), {
-			astro: options.astro,
-			isTypeAware: typeof options.typescript === 'object',
-			json: options.json,
-			markdown: options.markdown,
-			stylistic: options.stylistic as HexadropEslintStylisticOptions,
-			typescript: options.typescript !== false,
-		})
+		...stylisticSection(options)
 	).renamePlugins(PLUGIN_RENAME);
 
 	/*
