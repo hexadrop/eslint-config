@@ -17,12 +17,13 @@ Snapshot releases do not modify or commit version files. They use the pending ch
 
 ### Monorepo packages
 
-Each publishable package under `packages/` has its own version and changeset; there is no linked versioning. The meta-package is the zero-config default, and the feature packages are published independently.
+Every publishable package under `packages/` belongs to a single `fixed` group in `.changeset/config.json`, so all of them share one version and are published together. The meta-package remains the zero-config default; the feature packages are granular installs of the same release.
 
-- Add a changeset for every package whose behavior or manifest changes (`bun changeset add`).
-- The beta snapshot publishes the packages whose changesets are pending, so a change in one feature does not force a release of the others.
-- New packages created during the split were initialized at the workspace version (`1.0.11`) and received patch changesets, so their first stable release follows the current `1.0.x` line. The meta-package receives a minor bump for the split release.
-- The private `@hexadrop/eslint-config-shared` package is never published and has no changeset.
+- Add a changeset for every package whose behavior or manifest changes (`bun changeset add`). You only need to list the affected packages: changesets applies the highest bump in the group to all of them, so a patch to one package releases every package at the same version.
+- Version numbers are kept in lockstep. A release is never partial, which means packages with no changes also get a version bump, a changelog entry and an npm publish.
+- The beta snapshot publishes every package in the fixed group, even those without pending changesets.
+- New packages created during the split were initialized at the workspace version (`1.0.11`) and the group enforces that alignment from then on.
+- The private `@hexadrop/eslint-config-shared` package is excluded from the fixed group and is never published or versioned.
 
 ## Stable release
 

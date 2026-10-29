@@ -32,6 +32,8 @@ export default hexadrop();
 
 `@hexadrop/eslint-config-shared` is private: it is never published and its types, utilities and file globs are bundled into each package.
 
+All publishable packages share the same version and are released together, so the granular packages and the meta-package always match.
+
 ## Granular usage
 
 A Node.js project only needs core:

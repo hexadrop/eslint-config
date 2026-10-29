@@ -44,6 +44,8 @@ Each feature package must stay publishable standalone: it owns its plugin/parser
 
 Cross-package dependencies between **publishable** packages use pinned semver (e.g. `"@hexadrop/eslint-config-json": "1.0.11"` in the meta-package), never the `workspace:` protocol — changesets does not replace bare `workspace:*` ranges in published tarballs (only `workspace:^`/`~`/explicit ranges).
 
+The publishable packages form a changesets `fixed` group, so those pins and the peer ranges are rewritten to the new shared version on every release.
+
 ## Local development resolution
 
 The root `tsconfig.json` `paths` maps **every** package name to its `src/` entry — every package except the `@hexadrop/eslint-config` meta-package itself, which must always be imported via relative paths inside this repo (its own `prepare` typegen cannot resolve itself through `paths` on a clean install).
