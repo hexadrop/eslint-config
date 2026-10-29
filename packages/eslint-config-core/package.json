@@ -1,0 +1,62 @@
+{
+	"name": "@hexadrop/eslint-config-core",
+	"version": "1.1.0",
+	"description": "Core slice of the hexadrop ESLint config: base ESLint rules, globals, ignores, import-x and eslint-plugin-n integration, config names and option types.",
+	"keywords": [
+		"lint",
+		"eslint",
+		"eslint-config",
+		"core",
+		"imports",
+		"globals",
+		"ignores"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/hexadrop/eslint-config.git",
+		"directory": "packages/eslint-config-core"
+	},
+	"homepage": "https://github.com/hexadrop/eslint-config",
+	"bugs": {
+		"url": "https://github.com/hexadrop/eslint-config/issues"
+	},
+	"license": "MIT",
+	"publishConfig": {
+		"access": "public"
+	},
+	"type": "module",
+	"sideEffects": false,
+	"files": [
+		"dist"
+	],
+	"exports": {
+		".": {
+			"development": "./src/index.ts",
+			"types": "./dist/index.d.mts",
+			"default": "./dist/index.mjs"
+		}
+	},
+	"scripts": {
+		"build": "bun run build:types && tsdown",
+		"build:types": "bun run scripts/typegen.ts",
+		"prepare": "bun run build:types",
+		"prepublishOnly": "bun run build"
+	},
+	"peerDependencies": {
+		"eslint": "^9.17.0 || ^10.0.0"
+	},
+	"dependencies": {
+		"eslint-config-flat-gitignore": "2.4.0",
+		"eslint-flat-config-utils": "3.2.0",
+		"eslint-import-resolver-typescript": "4.4.5",
+		"eslint-plugin-import-x": "4.17.1",
+		"eslint-plugin-n": "18.3.0",
+		"eslint-plugin-simple-import-sort": "14.0.0",
+		"eslint-plugin-unused-imports": "4.4.1",
+		"globals": "17.12.0"
+	},
+	"devDependencies": {
+		"eslint-typegen": "2.3.2",
+		"tsdown": "0.22.14"
+	}
+}
