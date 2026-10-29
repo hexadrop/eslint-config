@@ -12,10 +12,6 @@ import {
 import type { StylisticConfigOptions } from '../stylistic.options';
 import type { TypedFlatConfigItem } from '../stylistic.typed-config';
 
-/**
- * Unicorn concern: the recommended ruleset with the hexadrop overrides plus the
- * markdown filename exceptions.
- */
 export default async function unicornAdapter(options: StylisticConfigOptions): Promise<TypedFlatConfigItem[]> {
 	const { astro, json, markdown } = options;
 

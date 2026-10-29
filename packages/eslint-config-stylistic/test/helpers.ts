@@ -18,7 +18,7 @@ const formatting: StylisticFormattingOptions = {
 };
 
 /**
- *Every concern disabled; tests enable only what they exercise.
+ * Every concern disabled; tests enable only what they exercise.
  */
 const baseOptions: StylisticConfigOptions = {
 	astro: false,
@@ -36,9 +36,6 @@ function configOptions(overrides: Partial<StylisticConfigOptions> = {}): Stylist
 	return { ...baseOptions, ...overrides };
 }
 
-/**
- *Whether a resolved config item targets any of the given globs.
- */
 function hasFiles(item: TypedFlatConfigItem, globs: string[]): boolean {
 	if (!item.files) {
 		return false;

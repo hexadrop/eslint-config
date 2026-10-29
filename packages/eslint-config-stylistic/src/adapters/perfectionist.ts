@@ -2,10 +2,6 @@ import { interopDefault, STYLISTIC_CONFIG_NAME_RULES_PERFECTIONIST } from '@hexa
 
 import type { TypedFlatConfigItem } from '../stylistic.typed-config';
 
-/**
- * Perfectionist concern: the recommended-natural ruleset with the hexadrop
- * overrides.
- */
 export default async function perfectionistAdapter(): Promise<TypedFlatConfigItem[]> {
 	const pluginPerfectionistRoot = await interopDefault(import('eslint-plugin-perfectionist'));
 	const pluginPerfectionist = pluginPerfectionistRoot.configs['recommended-natural'];

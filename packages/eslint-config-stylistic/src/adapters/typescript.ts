@@ -15,11 +15,6 @@ import {
 import type { StylisticConfigOptions } from '../stylistic.options';
 import type { TypedFlatConfigItem } from '../stylistic.typed-config';
 
-/**
- * TypeScript concern: the stylistic rules provided by
- * `@typescript-eslint/eslint-plugin`, the type-aware variants and the `.d.ts`
- * overrides.
- */
 export default async function typescriptAdapter(options: StylisticConfigOptions): Promise<TypedFlatConfigItem[]> {
 	const { isTypeAware = false } = options;
 	const typescriptPluginRename = PLUGIN_RENAME['@typescript-eslint'];
@@ -192,7 +187,7 @@ export default async function typescriptAdapter(options: StylisticConfigOptions)
 			name: STYLISTIC_CONFIG_NAME_RULES_TYPESCRIPT_TYPE_AWARE,
 			rules: {
 				...pluginConfigRules(plugin, 'stylistic-type-checked-only', PLUGIN_RENAME_TYPESCRIPT),
-				// Move this rule here cause needs tsconfig.json
+				// Requires tsconfig.json, so it only runs in the type-aware pass.
 				[`${typescriptPluginRename}/consistent-type-assertions`]: 'error',
 			},
 		});

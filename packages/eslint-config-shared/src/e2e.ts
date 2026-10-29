@@ -4,24 +4,21 @@ import type { Linter } from 'eslint';
 import { ESLint } from 'eslint';
 
 /**
- * Minimal case every e2e suite extends in its own `cases.ts`. Packages that
- * need extra fields (e.g. `options`, `extraConfigs`) add them through
- * intersection.
+ * Minimal case each e2e suite extends with its own fields.
  */
 interface EndToEndCase {
 	/**
-	 *Dirty fixture file (relative to the e2e/fixtures/ directory).
+	 * Dirty fixture file, relative to the `e2e/fixtures/` directory.
 	 */
 	file: string;
 	/**
-	 *Stable snapshot key, e.g. "clean", "json", "package-json".
+	 * Stable snapshot key, e.g. "clean", "json", "package-json".
 	 */
 	slug: string;
 }
 
 /**
- * Normalised diagnostic snapshot — the subset of an ESLint message that is
- *  pinned in every e2e snapshot.
+ * The subset of an ESLint message pinned in every e2e snapshot.
  */
 interface DiagnosticSnapshot {
 	column: number;
@@ -31,16 +28,13 @@ interface DiagnosticSnapshot {
 	severity: number;
 }
 
-/**
- *Result payload returned by {@link fixFixture}.
- */
 interface E2EResult {
 	content: string;
 	diagnostics: DiagnosticSnapshot[];
 }
 
 /**
- * Resolve the absolute path of a fixture file and assert it exists.
+ * Resolve a fixture path and assert it exists.
  *
  * @throws {Error} when the fixture file is missing.
  */
@@ -55,9 +49,8 @@ async function resolveFixturePath(fixturesDirectory: string, file: string): Prom
 }
 
 /**
- * Create a real ESLint instance wired to the given flat-config array with
- * `fix` enabled. The `cwd` is the fixtures directory so relative-path rules
- * are resolved correctly.
+ * Create a real ESLint instance with `fix` enabled; `cwd` is the fixtures
+ * directory so relative-path rules resolve correctly.
  */
 function createESLint(cwd: string, overrideConfig: Linter.Config[]): ESLint {
 	return new ESLint({
@@ -69,13 +62,8 @@ function createESLint(cwd: string, overrideConfig: Linter.Config[]): ESLint {
 }
 
 /**
- * Run the fixture through the real ESLint engine in fix mode and freeze both
- * halves of its behaviour:
- *
- * - `content`: the file content after `eslint --fix`, pinned so formatting
- *   regressions surface as snapshot diffs.
- * - `diagnostics`: the messages that survive autofix, normalised to a stable
- *   shape (`DiagnosticSnapshot`).
+ * Run the fixture through ESLint in fix mode and return the fixed content plus
+ * the diagnostics that survive autofix.
  */
 async function fixFixture(eslint: ESLint, inputPath: string): Promise<E2EResult> {
 	const [result] = await eslint.lintFiles([inputPath]);

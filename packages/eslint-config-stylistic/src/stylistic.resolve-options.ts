@@ -3,10 +3,7 @@ import { isPackageExists } from 'local-pkg';
 import type { ResolvedStylisticFactoryOptions, StylisticFactoryOptions } from './stylistic.options';
 
 /**
- * Resolve an optional peer section: an explicit option always wins, otherwise
- * the sibling package presence enables the section. Requesting a section whose
- * peer is missing fails with an actionable message instead of silently
- * producing rules for an unregistered plugin.
+ * Explicit true/false wins over presence detection; forcing a missing peer throws.
  */
 function isFeatureEnabled(option: boolean | undefined, packageName: string, optionKey: string): boolean {
 	if (option === undefined) {
@@ -23,12 +20,6 @@ function isFeatureEnabled(option: boolean | undefined, packageName: string, opti
 	return option;
 }
 
-/**
- * Resolve the stylistic factory options with defaults.
- *
- * Optional peers that are neither enabled nor disabled are auto-detected from
- * the presence of their sibling package.
- */
 export default function resolveOptions(options: StylisticFactoryOptions = {}): ResolvedStylisticFactoryOptions {
 	if (options.stylistic === false) {
 		return {

@@ -237,7 +237,6 @@ describe('stylistic config', () => {
 		const composer = stylisticFactory({ stylistic: false });
 		const configs = await composer;
 
-		// The factory returns an empty FlatConfigComposer when stylistic is false
 		expect(configs.length).toBe(0);
 	});
 

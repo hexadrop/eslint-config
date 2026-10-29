@@ -15,11 +15,6 @@ import type { StylisticConfigOptions } from '../stylistic.options';
 import stylisticOptions from '../stylistic.options-stylistic';
 import type { TypedFlatConfigItem } from '../stylistic.typed-config';
 
-/**
- * Base @stylistic concern: registers the stylistic plugin (plus the optional
- * unicorn, perfectionist and format plugins in the same setup item) and emits
- * the shared stylistic ruleset, including the markdown code-block overrides.
- */
 export default async function baseAdapter(options: StylisticConfigOptions): Promise<TypedFlatConfigItem[]> {
 	const { astro, format, json, markdown, perfectionist, stylistic, unicorn } = options;
 	const stylisticPluginRename = PLUGIN_RENAME['@stylistic'];

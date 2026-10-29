@@ -29,9 +29,8 @@ export default async function markdownConfig(): Promise<TypedFlatConfigItem[]> {
 			ignores: GLOB_MARKDOWN_IN_MARKDOWN,
 			name: MARKDOWN_CONFIG_NAME_SETUP_PROCESSOR,
 			/*
-			 * `@eslint/markdown` only creates virtual files for code blocks,
-			 * but not the markdown file itself. We use `eslint-merge-processors` to
-			 * add a pass-through processor for the markdown file itself.
+			 * `@eslint/markdown` only emits code-block virtual files; the pass-through
+			 * processor keeps the markdown file itself lintable.
 			 */
 			processor: mergeProcessors([processor, processorPassThrough] as Linter.Processor[]),
 		},

@@ -9,14 +9,9 @@ import {
 import type { StylisticConfigOptions } from '../stylistic.options';
 import type { TypedFlatConfigItem } from '../stylistic.typed-config';
 
-/**
- * JSON concern: the stylistic rules for JSON files plus the `package.json` and
- * `tsconfig.json` sort-keys slice owned by `@hexadrop/eslint-config-json`.
- *
- * The sort-keys slice is imported lazily so this package never takes part in
- * the same module resolution pass as the meta-package's own dynamic import of
- * `-json` (jiti resolves the two concurrent loads to a partially-initialised
- * module).
+/*
+ * Imported lazily so the meta-package's concurrent `-json` load doesn't resolve
+ * to a partially initialised module in jiti.
  */
 export default async function jsonAdapter(options: StylisticConfigOptions): Promise<TypedFlatConfigItem[]> {
 	const { indent, indentSize } = options.stylistic;
@@ -46,8 +41,7 @@ export default async function jsonAdapter(options: StylisticConfigOptions): Prom
 }
 
 /**
- * JSON overrides for markdown JSON code blocks. Emitted after the formatting
- * concern, matching the historical order of the resolved config.
+ * Markdown JSON overrides; must stay after the format concern (frozen order).
  */
 export function jsonMarkdownAdapter(): TypedFlatConfigItem[] {
 	return [

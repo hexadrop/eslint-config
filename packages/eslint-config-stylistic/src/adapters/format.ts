@@ -15,10 +15,6 @@ import type { StylisticConfigOptions } from '../stylistic.options';
 import prettierOptions from '../stylistic.options-prettier';
 import type { TypedFlatConfigItem } from '../stylistic.typed-config';
 
-/**
- * Format concern: Prettier through `eslint-plugin-format`, including the
- * string-referenced astro parser and the 2-space markdown code-block variants.
- */
 export default function formatAdapter(options: StylisticConfigOptions): TypedFlatConfigItem[] {
 	const { astro, json, markdown, stylistic, typescript } = options;
 	const prettierConfig = prettierOptions(stylistic);

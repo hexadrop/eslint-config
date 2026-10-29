@@ -17,10 +17,6 @@ export default function typescriptFactory(
 		typescriptConfig(optionsOrFlatConfigItem as TypescriptFactoryOptions | undefined)
 	);
 
-	/*
-	 * User can optionally pass a flat config item to the first argument
-	 * We extract it and append it to the pipeline
-	 */
 	const flatConfig = extractTypedFlatConfigItem(optionsOrFlatConfigItem);
 	if (flatConfig) {
 		pipeline = pipeline.append(flatConfig);

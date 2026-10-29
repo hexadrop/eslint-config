@@ -2,10 +2,7 @@ import { writeFlatConfigs } from '@hexadrop/eslint-config-shared';
 
 import stylisticConfig from '../src/stylistic.config';
 
-/*
- * Resolve every optional section so the generated `ConfigNames` union covers
- * the whole peer matrix, not just the sections enabled by default.
- */
+// All sections on so ConfigNames covers the peer matrix.
 const configs = await stylisticConfig({
 	astro: true,
 	format: true,

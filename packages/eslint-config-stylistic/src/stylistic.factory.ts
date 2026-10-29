@@ -34,10 +34,6 @@ export default function stylisticFactory(
 
 	let pipeline = new FlatConfigComposer<TypedFlatConfigItem, ConfigNames>(...configSlice);
 
-	/*
-	 * User can optionally pass a flat config item to the first argument
-	 * We extract it and append it to the pipeline
-	 */
 	const flatConfig = extractTypedFlatConfigItem(options);
 	if (flatConfig) {
 		pipeline = pipeline.append(flatConfig);

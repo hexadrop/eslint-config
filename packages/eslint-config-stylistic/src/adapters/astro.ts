@@ -27,8 +27,7 @@ export default function astroAdapter(): TypedFlatConfigItem[] {
 }
 
 /**
- * Astro overrides for astro code blocks inside markdown. Emitted after the
- * formatting concern, matching the historical order of the resolved config.
+ * Markdown astro overrides; must stay after the format concern (frozen order).
  */
 export function astroMarkdownAdapter(): TypedFlatConfigItem[] {
 	const stylisticPluginRename = PLUGIN_RENAME['@stylistic'];

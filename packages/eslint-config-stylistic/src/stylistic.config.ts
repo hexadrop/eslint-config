@@ -9,12 +9,8 @@ import type { StylisticConfigOptions } from './stylistic.options';
 import type { TypedFlatConfigItem } from './stylistic.typed-config';
 
 /**
- * Compose the stylistic slice from one adapter per concern.
- *
- * The order below is part of the public behavior: the golden snapshots of the
- * meta-package freeze the resolved config array, so adapters that contribute
- * early and late config items (json and astro markdown overrides) are called in
- * the historical position.
+ * The order is frozen by the golden snapshots: json/astro keep their markdown
+ * overrides after the format concern.
  */
 export default async function stylisticConfig(options: StylisticConfigOptions): Promise<TypedFlatConfigItem[]> {
 	const { astro, format, json, perfectionist, typescript, unicorn } = options;

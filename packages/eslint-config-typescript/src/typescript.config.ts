@@ -23,12 +23,12 @@ import type { TypedFlatConfigItem } from './typescript.typed-config';
 export interface TypescriptFactoryOptions {
 	/**
 	 * If true, enables TS support without type-aware linting.
-	 *  If a string or array, enables type-aware linting with those tsconfig paths.
-	 *  If false/undefined, returns an empty config.
+	 * If a string or array, enables type-aware linting with those tsconfig paths.
+	 * If false/undefined, returns an empty config.
 	 */
 	project?: boolean | string | string[];
 	/**
-	 *Root directory for tsconfig resolution. Defaults to cwd().
+	 * Root directory for tsconfig resolution. Defaults to cwd().
 	 */
 	tsconfigRootDir?: string;
 }
