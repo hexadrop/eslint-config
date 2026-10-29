@@ -35,10 +35,11 @@ import type { TypedFlatConfigItem } from './core.typed-config';
 /**
  * Build the options forwarded to `eslint-import-resolver-typescript`.
  *
- * The configured project paths are resolved against `tsconfigRootDir` (or
- * `cwd()`) so the resolver and the TypeScript parser agree on the same files,
- * and extra resolver options (`bun`, `alwaysTryTypes`, `conditionNames`, …) are
- * forwarded untouched.
+ * Project paths from `project` (or `resolver.project` when no top-level
+ * project is configured) are resolved against `tsconfigRootDir` (or `cwd()`) so
+ * the resolver and the TypeScript parser agree on the same files. Extra
+ * resolver options (`bun`, `alwaysTryTypes`, `conditionNames`, …) are forwarded
+ * untouched.
  */
 export function typeScriptResolverOptions(typescript: CoreOptions['typescript']): TypeScriptResolverOptions {
 	if (typeof typescript !== 'object') {
@@ -47,11 +48,13 @@ export function typeScriptResolverOptions(typescript: CoreOptions['typescript'])
 
 	const { project, resolver, tsconfigRootDir } = typescript;
 	const options: TypeScriptResolverOptions = { ...resolver };
-	const projects = project && project !== true ? toArray(project) : undefined;
 	const root = tsconfigRootDir ?? cwd();
+	const configuredProject = project && project !== true ? project : options.project;
 
-	if (projects && projects.length > 0) {
-		options.project = projects.map(index => (path.isAbsolute(index) ? index : path.resolve(root, index)));
+	if (configuredProject) {
+		options.project = toArray(configuredProject).map(index =>
+			path.isAbsolute(index) ? index : path.resolve(root, index)
+		);
 	}
 
 	return options;

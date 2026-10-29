@@ -136,12 +136,23 @@ describe('core factory', () => {
 		expect(options).toEqual({ bun: true, project: ['/repository/tsconfig.json'] });
 	});
 
-	test('keeps absolute project paths and resolver-only projects', () => {
+	test('keeps absolute project paths and resolves resolver-only projects', () => {
 		expect(typeScriptResolverOptions({ project: ['/abs/tsconfig.json'], tsconfigRootDir: '/ignored' })).toEqual({
 			project: ['/abs/tsconfig.json'],
 		});
-		expect(typeScriptResolverOptions({ resolver: { project: ['tsconfig.json'] } })).toEqual({
-			project: ['tsconfig.json'],
+		expect(
+			typeScriptResolverOptions({ resolver: { project: ['tsconfig.json'] }, tsconfigRootDir: '/repository' })
+		).toEqual({
+			project: ['/repository/tsconfig.json'],
+		});
+		expect(
+			typeScriptResolverOptions({
+				project: ['./app.json'],
+				resolver: { project: ['./ignored.json'] },
+				tsconfigRootDir: '/repository',
+			})
+		).toEqual({
+			project: ['/repository/app.json'],
 		});
 	});
 

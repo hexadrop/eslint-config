@@ -13,10 +13,10 @@ interface CoreIgnoreOptions extends Omit<FlatGitignoreOptions, 'name'> {
 
 interface CoreTypescriptOptions {
 	/**
-	 * tsconfig path or paths used by the TypeScript parser and import resolver.
+	 * tsconfig path or paths forwarded to the TypeScript import resolver.
 	 *
-	 * `true` enables TypeScript without type-aware imports; a path or list of
-	 * paths enables type-aware resolution.
+	 * `true` enables TypeScript import resolution without an explicit project;
+	 * a path or list of paths enables type-aware alias resolution.
 	 */
 	project?: boolean | string | string[];
 
