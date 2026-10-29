@@ -3726,7 +3726,7 @@ exports[`golden resolved config defaults-js: defaults on a plain javascript proj
           "sort-union-types",
           "sort-variable-declarations",
         ],
-        "version": "5.10.1",
+        "version": "5.11.0",
       },
       "style": {
         "$plugin": "@stylistic/eslint-plugin",
@@ -7869,7 +7869,7 @@ exports[`golden resolved config defaults-ts: defaults on a typescript project: d
           "sort-union-types",
           "sort-variable-declarations",
         ],
-        "version": "5.10.1",
+        "version": "5.11.0",
       },
       "style": {
         "$plugin": "@stylistic/eslint-plugin",
@@ -12270,7 +12270,7 @@ exports[`golden resolved config tsconfig-paths: typescript with an explicit tsco
           "sort-union-types",
           "sort-variable-declarations",
         ],
-        "version": "5.10.1",
+        "version": "5.11.0",
       },
       "style": {
         "$plugin": "@stylistic/eslint-plugin",
@@ -16476,7 +16476,7 @@ exports[`golden resolved config react-js: react without typescript: react-js 1`]
           "sort-union-types",
           "sort-variable-declarations",
         ],
-        "version": "5.10.1",
+        "version": "5.11.0",
       },
       "style": {
         "$plugin": "@stylistic/eslint-plugin",
@@ -20836,7 +20836,7 @@ exports[`golden resolved config react-ts: react with typescript: react-ts 1`] = 
           "sort-union-types",
           "sort-variable-declarations",
         ],
-        "version": "5.10.1",
+        "version": "5.11.0",
       },
       "style": {
         "$plugin": "@stylistic/eslint-plugin",
@@ -26243,7 +26243,7 @@ exports[`golden resolved config astro-js: astro without typescript: astro-js 1`]
           "sort-union-types",
           "sort-variable-declarations",
         ],
-        "version": "5.10.1",
+        "version": "5.11.0",
       },
       "style": {
         "$plugin": "@stylistic/eslint-plugin",
@@ -33142,7 +33142,7 @@ exports[`golden resolved config astro-ts: astro with typescript: astro-ts 1`] = 
           "sort-union-types",
           "sort-variable-declarations",
         ],
-        "version": "5.10.1",
+        "version": "5.11.0",
       },
       "style": {
         "$plugin": "@stylistic/eslint-plugin",
@@ -40395,7 +40395,7 @@ exports[`golden resolved config astro-react-ts: full stack: astro, react and typ
           "sort-union-types",
           "sort-variable-declarations",
         ],
-        "version": "5.10.1",
+        "version": "5.11.0",
       },
       "style": {
         "$plugin": "@stylistic/eslint-plugin",
@@ -44760,7 +44760,7 @@ exports[`golden resolved config stylistic-no-format: stylistic with formatting d
           "sort-union-types",
           "sort-variable-declarations",
         ],
-        "version": "5.10.1",
+        "version": "5.11.0",
       },
       "style": {
         "$plugin": "@stylistic/eslint-plugin",
@@ -48983,7 +48983,7 @@ exports[`golden resolved config stylistic-no-unicorn: stylistic with unicorn dis
           "sort-union-types",
           "sort-variable-declarations",
         ],
-        "version": "5.10.1",
+        "version": "5.11.0",
       },
       "style": {
         "$plugin": "@stylistic/eslint-plugin",
@@ -58990,7 +58990,7 @@ exports[`golden resolved config stylistic-custom-style: stylistic with space ind
           "sort-union-types",
           "sort-variable-declarations",
         ],
-        "version": "5.10.1",
+        "version": "5.11.0",
       },
       "style": {
         "$plugin": "@stylistic/eslint-plugin",
@@ -63074,7 +63074,7 @@ exports[`golden resolved config no-json-markdown: json and markdown disabled: no
           "sort-union-types",
           "sort-variable-declarations",
         ],
-        "version": "5.10.1",
+        "version": "5.11.0",
       },
       "style": {
         "$plugin": "@stylistic/eslint-plugin",
@@ -66631,7 +66631,7 @@ exports[`golden resolved config no-imports-node: imports and node rules disabled
           "sort-union-types",
           "sort-variable-declarations",
         ],
-        "version": "5.10.1",
+        "version": "5.11.0",
       },
       "style": {
         "$plugin": "@stylistic/eslint-plugin",
@@ -70590,7 +70590,7 @@ exports[`golden resolved config module-commonjs: commonjs module environment: mo
           "sort-union-types",
           "sort-variable-declarations",
         ],
-        "version": "5.10.1",
+        "version": "5.11.0",
       },
       "style": {
         "$plugin": "@stylistic/eslint-plugin",
@@ -74740,7 +74740,7 @@ exports[`golden resolved config custom-ignores: custom ignore globs: custom-igno
           "sort-union-types",
           "sort-variable-declarations",
         ],
-        "version": "5.10.1",
+        "version": "5.11.0",
       },
       "style": {
         "$plugin": "@stylistic/eslint-plugin",
@@ -79020,7 +79020,7 @@ exports[`golden resolved config consumer-append: extra consumer config appended 
           "sort-union-types",
           "sort-variable-declarations",
         ],
-        "version": "5.10.1",
+        "version": "5.11.0",
       },
       "style": {
         "$plugin": "@stylistic/eslint-plugin",
