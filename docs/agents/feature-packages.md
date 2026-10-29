@@ -42,9 +42,7 @@ Each feature package must stay publishable standalone: it owns its plugin/parser
 
 ## Dependency versions
 
-Cross-package dependencies between **publishable** packages use pinned semver (e.g. `"@hexadrop/eslint-config-json": "1.0.11"` in the meta-package), never the `workspace:` protocol — changesets does not replace bare `workspace:*` ranges in published tarballs (only `workspace:^`/`~`/explicit ranges).
-
-The publishable packages form a changesets `fixed` group, so those pins and the peer ranges are rewritten to the new shared version on every release.
+Cross-package dependencies between **publishable** packages use pinned semver (e.g. `"@hexadrop/eslint-config-json": "1.0.11"` in the meta-package), never the `workspace:` protocol — changesets does not replace bare `workspace:*` ranges in published tarballs (only `workspace:^`/`~`/explicit ranges). Changesets rewrites those pins and peer ranges on release only for the packages listed in the changeset, so keep them in sync with the published versions.
 
 ## Local development resolution
 
