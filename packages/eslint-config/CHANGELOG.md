@@ -1,5 +1,40 @@
 # @hexadrop/eslint-config
 
+## 1.1.0
+
+### Minor Changes
+
+- 03e9769: Finalize the split: document every granular package (factory options, optional peers and standalone examples), add the monorepo README and architecture/release guides, and validate the meta-package's resolved config against the golden snapshots. The meta-package remains the zero-config default and bumps minor; the feature packages keep the current `1.0.x` line.
+
+### Patch Changes
+
+- a60d291: Extract the Astro concern into the new `@hexadrop/eslint-config-astro` package, publishable and usable standalone via its `astro()` factory. The meta-package lazy-loads it via `optionalPlugin` so astro integration activates only when the consumer installs it.
+- d5d86b8: Extract the core concern into the new `@hexadrop/eslint-config-core` package, publishable and usable standalone via its `core()` factory. The meta-package composes the raw `core`, `ignore` and `imports` configs with no behavior change. The file globs stay in the private `@hexadrop/eslint-config-shared` package and are bundled into each published package, so feature packages do not depend on core; each package only ships the globs it imports.
+- 78050b6: Simplify `package.json` entry points for ESM-only consumption: remove the legacy root `main` and `types` fields and declare `types` explicitly inside the `exports` map, using `default` as the runtime condition. No behavior change for consumers on modern tooling (Node.js ≥12.7, bundlers, TypeScript with `node16`/`nodenext`/`bundler` module resolution).
+- 2c9c1e8: Extract the json concern into the new `@hexadrop/eslint-config-json` package, publishable and usable standalone via its `json()` factory. The meta-package composes it as a regular dependency with no behavior change.
+- 5310aed: Extract the markdown concern into the new `@hexadrop/eslint-config-markdown` package, publishable and usable standalone via its `markdown()` factory. The meta-package composes it as a regular dependency with no behavior change.
+- d5d86b8: Drop unused direct dependencies from the meta-package: `tslib` (not imported by source or dist, still installed transitively through core's resolver chain) and the duplicate `@typescript-eslint/eslint-plugin`/`parser` declarations (still provided by `@hexadrop/eslint-config-typescript` and the optional peers of the feature packages). The resolved config is unchanged.
+- 5c91a09: Extract the React concern into the new `@hexadrop/eslint-config-react` package, publishable and usable standalone via its `react()` factory. The meta-package composes it as a regular dependency with no behavior change.
+- 9578f01: Extract the stylistic concern into the new `@hexadrop/eslint-config-stylistic` package, publishable and usable standalone via its `stylistic()` factory. The meta-package composes it through `optionalPlugin()` with no behavior change. The optional peers on `@hexadrop/eslint-config-typescript`, `@hexadrop/eslint-config-astro` and `@typescript-eslint/eslint-plugin` gate the embedded sections via presence detection, and the `package.json`/`tsconfig.json` sort-keys slice comes from `@hexadrop/eslint-config-json`.
+- 90de0ce: Decompose the stylistic mega-module into one adapter per concern (base, typescript, json, astro, unicorn, perfectionist and format). `format`, `unicorn` and `perfectionist` become top-level options of the standalone `stylistic()` factory; the meta-package keeps them nested under `stylistic` and maps them, so the resolved config is unchanged.
+- e5004c2: Extract the TypeScript concern into the new `@hexadrop/eslint-config-typescript` package, publishable and usable standalone via its `typescript()` factory. The meta-package composes it as a regular dependency with no behavior change.
+- Updated dependencies [a60d291]
+- Updated dependencies [d5d86b8]
+- Updated dependencies [2c9c1e8]
+- Updated dependencies [5310aed]
+- Updated dependencies [5c91a09]
+- Updated dependencies [d5d86b8]
+- Updated dependencies [9578f01]
+- Updated dependencies [90de0ce]
+- Updated dependencies [e5004c2]
+  - @hexadrop/eslint-config-astro@1.1.0
+  - @hexadrop/eslint-config-core@1.1.0
+  - @hexadrop/eslint-config-json@1.1.0
+  - @hexadrop/eslint-config-markdown@1.1.0
+  - @hexadrop/eslint-config-react@1.1.0
+  - @hexadrop/eslint-config-stylistic@1.1.0
+  - @hexadrop/eslint-config-typescript@1.1.0
+
 ## 1.0.11
 
 ### Patch Changes
