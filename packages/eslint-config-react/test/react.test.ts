@@ -10,17 +10,33 @@ const JSX_GLOBS = ['**/*.?([cm])jsx', '**/*.?([cm])tsx'];
 const JS_GLOBS = ['**/*.?([cm])jsx'];
 
 const TYPESCRIPT_PKG = '@hexadrop/eslint-config-typescript';
+const REACT_VERSION = '19.2.8';
 
-function mockPackageAbsent() {
+interface MockPackagesOptions {
+	reactVersion?: string | undefined;
+	typescript?: boolean;
+}
+
+function mockPackages(options: MockPackagesOptions = {}) {
+	const reactVersion = 'reactVersion' in options ? options.reactVersion : REACT_VERSION;
+
 	void mock.module('local-pkg', () => ({
-		isPackageExists: (name: string) => name === 'vite',
+		getPackageInfoSync: (name: string) =>
+			name === 'react' && reactVersion ? { name, version: reactVersion } : undefined,
+		isPackageExists: (name: string) => name === 'vite' || (Boolean(options.typescript) && name === TYPESCRIPT_PKG),
 	}));
 }
 
+function mockPackageAbsent() {
+	mockPackages();
+}
+
 function mockPackagePresent() {
-	void mock.module('local-pkg', () => ({
-		isPackageExists: (name: string) => name === 'vite' || name === TYPESCRIPT_PKG,
-	}));
+	mockPackages({ typescript: true });
+}
+
+function mockReactAbsent() {
+	mockPackages({ reactVersion: undefined, typescript: true });
 }
 
 afterEach(() => {
@@ -54,13 +70,22 @@ describe('react config', () => {
 		expect(setup?.plugins?.['react-refresh']).toBeDefined();
 	});
 
-	test('settings has react version set to detect', async () => {
+	test('settings pins the installed react version instead of detect', async () => {
+		mockPackagePresent();
 		const configs = await config();
 		const setup = configs.find(c => c.name === SETUP);
 
 		const settings = setup?.settings as Record<string, Record<string, unknown>> | undefined;
 
-		expect(settings?.['react']?.['version']).toBe('detect');
+		expect(settings?.['react']?.['version']).toBe(REACT_VERSION);
+	});
+
+	test('omits the react settings when react cannot be resolved', async () => {
+		mockReactAbsent();
+		const configs = await config({ typescript: false });
+		const setup = configs.find(c => c.name === SETUP);
+
+		expect(setup?.settings).toBeUndefined();
 	});
 
 	test('includes TSX globs when typescript is auto-detected (default)', async () => {

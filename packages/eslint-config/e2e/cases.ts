@@ -66,8 +66,6 @@ export const END_TO_END_CASES: EndToEndCase[] = [
 		slug: 'markdown',
 	},
 	{
-		// `version: 'detect'` cannot resolve react from fixture dirs, so the version is pinned.
-		extraConfigs: [{ name: 'e2e/react-version', settings: { react: { version: '19' } } }],
 		file: 'react.tsx',
 		options: { astro: false, react: true, typescript: true },
 		slug: 'tsx',

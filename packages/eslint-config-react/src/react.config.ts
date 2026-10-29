@@ -7,11 +7,23 @@ import {
 	REACT_CONFIG_NAME_RULES_REFRESH,
 	REACT_CONFIG_NAME_SETUP,
 } from '@hexadrop/eslint-config-shared';
-import { isPackageExists } from 'local-pkg';
+import { getPackageInfoSync, isPackageExists } from 'local-pkg';
 
 import type { TypedFlatConfigItem } from './react.typed-config';
 
 const REACT_REFRESH_ALLOW_CONSTANT_EXPORT_PACKAGES = ['vite'];
+
+/**
+ * Resolve the installed React version at config time.
+ *
+ * `settings.react.version: 'detect'` crashes on ESLint 10: eslint-plugin-react
+ * resolves it through `context.getFilename()`, which no longer exists. Reading
+ * the version ourselves keeps the plugin on a code path that works on both
+ * ESLint 9 and 10.
+ */
+function detectReactVersion(): string | undefined {
+	return getPackageInfoSync('react')?.version;
+}
 
 function isTypescriptEnabled(options: ReactConfigOptions): boolean {
 	if (options.typescript !== undefined) {
@@ -37,6 +49,7 @@ export default async function reactConfig(options: ReactConfigOptions = {}): Pro
 		interopDefault(import('eslint-plugin-react-refresh')),
 	] as const);
 	const isAllowConstantExport = REACT_REFRESH_ALLOW_CONSTANT_EXPORT_PACKAGES.some(index => isPackageExists(index));
+	const reactVersion = detectReactVersion();
 
 	const files = [...GLOB_REACT_JSX, ...(isTypescript ? GLOB_REACT_TSX : [])];
 
@@ -48,11 +61,13 @@ export default async function reactConfig(options: ReactConfigOptions = {}): Pro
 				'react-hooks': pluginReactHooks,
 				'react-refresh': pluginReactRefresh,
 			},
-			settings: {
-				react: {
-					version: 'detect',
+			...(reactVersion && {
+				settings: {
+					react: {
+						version: reactVersion,
+					},
 				},
-			},
+			}),
 		},
 		{
 			files,

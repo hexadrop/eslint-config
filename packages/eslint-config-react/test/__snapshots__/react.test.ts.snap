@@ -11,7 +11,7 @@ exports[`react config snapshot: full config structure (TS available): react-full
     ],
     "settings": {
       "react": {
-        "version": "detect",
+        "version": "19.2.8",
       },
     },
   },
@@ -87,7 +87,7 @@ exports[`react config snapshot: full config structure (JS only): react-full-conf
     ],
     "settings": {
       "react": {
-        "version": "detect",
+        "version": "19.2.8",
       },
     },
   },
