@@ -8,28 +8,28 @@ import stylisticConfig from '../src/stylistic.config';
  */
 const configs = await stylisticConfig({
 	astro: true,
+	format: true,
 	isTypeAware: true,
 	json: true,
 	markdown: true,
+	perfectionist: true,
 	stylistic: {
 		arrowParens: 'avoid',
 		braceStyle: '1tbs',
 		bracketSameLine: true,
 		bracketSpacing: true,
 		endOfLine: 'lf',
-		format: true,
 		indent: 'tab',
 		indentSize: 4,
-		perfectionist: true,
 		printWidth: 120,
 		quoteProps: 'as-needed',
 		quotes: 'single',
 		semicolons: true,
 		singleAttributePerLine: true,
 		trailingComma: 'es5',
-		unicorn: true,
 	},
 	typescript: true,
+	unicorn: true,
 });
 
 await writeFlatConfigs(configs, 'src/typegen.d.ts');

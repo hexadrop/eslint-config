@@ -1,11 +1,11 @@
-import type { HexadropEslintStylisticOptions } from './stylistic.options';
+import type { StylisticFormattingOptions } from './stylistic.options';
 
 interface PrettierOptions {
 	[k: string]: unknown;
 	parser?: string;
 }
 
-export default function prettierOptions(options: HexadropEslintStylisticOptions): PrettierOptions {
+export default function prettierOptions(options: StylisticFormattingOptions): PrettierOptions {
 	const {
 		arrowParens,
 		bracketSameLine,

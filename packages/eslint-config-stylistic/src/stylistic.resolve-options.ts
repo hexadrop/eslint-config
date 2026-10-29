@@ -33,37 +33,40 @@ export default function resolveOptions(options: StylisticFactoryOptions = {}): R
 	if (options.stylistic === false) {
 		return {
 			astro: false,
+			format: false,
 			isTypeAware: false,
 			json: false,
 			markdown: false,
+			perfectionist: false,
 			stylistic: false,
 			typescript: false,
+			unicorn: false,
 		};
 	}
 
 	return {
 		astro: isFeatureEnabled(options.astro, '@hexadrop/eslint-config-astro', 'astro'),
+		format: options.format ?? true,
 		isTypeAware: options.isTypeAware ?? false,
 		json: isFeatureEnabled(options.json, '@hexadrop/eslint-config-json', 'json'),
 		markdown: options.markdown ?? false,
+		perfectionist: options.perfectionist ?? true,
 		stylistic: {
 			arrowParens: options.stylistic?.arrowParens ?? 'avoid',
 			braceStyle: options.stylistic?.braceStyle ?? '1tbs',
 			bracketSameLine: options.stylistic?.bracketSameLine ?? true,
 			bracketSpacing: options.stylistic?.bracketSpacing ?? true,
 			endOfLine: options.stylistic?.endOfLine ?? 'lf',
-			format: options.stylistic?.format ?? true,
 			indent: options.stylistic?.indent ?? 'tab',
 			indentSize: options.stylistic?.indentSize ?? 4,
-			perfectionist: options.stylistic?.perfectionist ?? true,
 			printWidth: options.stylistic?.printWidth ?? 120,
 			quoteProps: options.stylistic?.quoteProps ?? 'as-needed',
 			quotes: options.stylistic?.quotes ?? 'single',
 			semicolons: options.stylistic?.semicolons ?? true,
 			singleAttributePerLine: options.stylistic?.singleAttributePerLine ?? true,
 			trailingComma: options.stylistic?.trailingComma ?? 'es5',
-			unicorn: options.stylistic?.unicorn ?? true,
 		},
 		typescript: isFeatureEnabled(options.typescript, '@hexadrop/eslint-config-typescript', 'typescript'),
+		unicorn: options.unicorn ?? true,
 	};
 }

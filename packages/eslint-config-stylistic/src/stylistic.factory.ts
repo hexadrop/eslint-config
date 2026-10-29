@@ -21,11 +21,14 @@ export default function stylisticFactory(
 			: [
 					stylisticConfig({
 						astro: resolved.astro,
+						format: resolved.format,
 						isTypeAware: resolved.isTypeAware,
 						json: resolved.json,
 						markdown: resolved.markdown,
+						perfectionist: resolved.perfectionist,
 						stylistic: resolved.stylistic,
 						typescript: resolved.typescript,
+						unicorn: resolved.unicorn,
 					}),
 				];
 
