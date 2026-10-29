@@ -14,9 +14,17 @@ interface TypescriptParserOptions {
 	files: string[];
 	ignores?: string[];
 	parser: TypescriptParser;
-	parserOptions?: Partial<ParserOptions> | undefined;
+	parserOptions?: Partial<ParserOptions>;
 	tsconfigPath?: string[];
 	tsconfigRootDir?: string;
+}
+
+/**
+ * Whether the parser resolves projects explicitly or through `projectService`.
+ * Shared with the config so the parser and the rule slices agree.
+ */
+export function isTypeAware(tsconfigPath?: string[], parserOptions?: Partial<ParserOptions>): boolean {
+	return Boolean(tsconfigPath) || Boolean(parserOptions?.projectService);
 }
 
 export default function typescriptParser({
@@ -27,21 +35,21 @@ export default function typescriptParser({
 	tsconfigPath,
 	tsconfigRootDir,
 }: TypescriptParserOptions): TypedFlatConfigItem {
-	const isTypeAware = Boolean(tsconfigPath) || Boolean(parserOptions?.projectService);
+	const resolvedTsconfigRootDirectory = tsconfigRootDir ?? (tsconfigPath ? cwd() : undefined);
 	const config: TypedFlatConfigItem = {
 		files,
 		languageOptions: {
 			parser,
 			parserOptions: {
 				sourceType: 'module',
-				...(tsconfigPath && {
-					project: tsconfigPath,
-					tsconfigRootDir: tsconfigRootDir ?? cwd(),
-				}),
+				...(tsconfigPath && { project: tsconfigPath }),
+				...(resolvedTsconfigRootDirectory && { tsconfigRootDir: resolvedTsconfigRootDirectory }),
 				...parserOptions,
 			},
 		},
-		name: isTypeAware ? TYPESCRIPT_CONFIG_NAME_SETUP_PARSER_TYPEAWARE : TYPESCRIPT_CONFIG_NAME_SETUP_PARSER,
+		name: isTypeAware(tsconfigPath, parserOptions)
+			? TYPESCRIPT_CONFIG_NAME_SETUP_PARSER_TYPEAWARE
+			: TYPESCRIPT_CONFIG_NAME_SETUP_PARSER,
 	};
 
 	if (ignores) {

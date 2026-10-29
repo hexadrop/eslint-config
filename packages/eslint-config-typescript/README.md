@@ -35,9 +35,9 @@ The meta-package enables this slice automatically when `typescript` is installed
 |---|---|---|
 | `project` | `undefined` | `true` enables TS without type-aware linting; a path or list of paths enables type-aware linting; `false`/omitted returns an empty config. |
 | `tsconfigRootDir` | `process.cwd()` | Root directory used to resolve the tsconfig paths. |
-| `parserOptions` | `undefined` | Extra typescript-eslint parser options merged after `project`/`tsconfigRootDir`. Use `{ projectService: true }` for solution-style tsconfigs or workspaces; `project` is then omitted. |
+| `parserOptions` | `undefined` | Extra typescript-eslint parser options merged after `project`/`tsconfigRootDir`. Use `{ projectService: true }` for solution-style tsconfigs or workspaces; `project` is then optional and omitted from the parser options. |
 
-When using the meta-package, `parserOptions` is forwarded unchanged from `typescript.parserOptions`.
+`tsconfigRootDir` is forwarded in both modes, so a workspace can root project resolution without replacing the whole config item. When using the meta-package, `parserOptions` is forwarded unchanged from `typescript.parserOptions`.
 
 ## Optional peers
 
@@ -45,7 +45,7 @@ No optional peers: `eslint` is the only peer dependency. `typescript-eslint` is 
 
 ## Named exports
 
-`config` is the raw config function the factory composes; the default export is the `typescript()` factory. `TypescriptFactoryOptions` describes the options above.
+`config` is the raw config function the factory composes; the default export is the `typescript()` factory. `TypescriptFactoryOptions` describes the options above and `TypescriptParserOptions` re-exports the typescript-eslint parser options type.
 
 ## License
 

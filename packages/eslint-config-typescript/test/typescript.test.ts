@@ -108,6 +108,22 @@ describe('typescript config', () => {
 		expect(parserOptions?.['projectService']).toBe(true);
 	});
 
+	test('enables type-aware linting with projectService and no project', async () => {
+		const configs = await typescriptFactory({
+			parserOptions: { projectService: true },
+			tsconfigRootDir: '/custom/root',
+		});
+		const names = configs.map(config => config.name);
+		const parser = configs.find(config => config.name === SETUP_PARSER_TYPEAWARE);
+		const parserOptions = parser?.languageOptions?.['parserOptions'] as Record<string, unknown> | undefined;
+
+		expect(names).toContain(SETUP_PARSER_TYPEAWARE);
+		expect(names).toContain(RULES_TYPEAWARE);
+		expect(parserOptions?.['project']).toBeUndefined();
+		expect(parserOptions?.['projectService']).toBe(true);
+		expect(parserOptions?.['tsconfigRootDir']).toBe('/custom/root');
+	});
+
 	test('applies eslint-recommended overrides on SOURCE_GLOBS', async () => {
 		const configs = await typescriptFactory({ project: true });
 		const rules = configs.find(config => config.name === RULES);
