@@ -52,7 +52,23 @@ No optional peers: `eslint` is the only peer dependency. The base plugins (`esli
 | `module`      | `{ node: true }` | Configures the AMD, CommonJS, Node and webpack module rules (`amd`, `commonjs`, `node`, `webpack` and extra `ignore` globs). |
 | `node`        | `true`           | Registers `eslint-plugin-n` and its rules.                                                    |
 | `stylistic`   | `false`          | Adds the import sorting and unused-import rules.                                              |
-| `typescript`  | `false`          | Adds the TypeScript import settings and rules.                                                |
+| `typescript`  | `false`          | Adds the TypeScript import settings and rules. Pass `{ project, tsconfigRootDir, resolver }` to forward the tsconfig projects and `eslint-import-resolver-typescript` options. |
+
+### TypeScript import resolution
+
+```js
+import coreFactory from '@hexadrop/eslint-config-core';
+
+export default coreFactory({
+  typescript: {
+    project: ['./tsconfig.json'],
+    resolver: { alwaysTryTypes: true, bun: true },
+    tsconfigRootDir: import.meta.dirname,
+  },
+});
+```
+
+`project` paths are resolved against `tsconfigRootDir` (or `cwd()`) before they reach the resolver, so path aliases declared in the tsconfig resolve in `import/no-unresolved` without a consumer `settings` override.
 
 ## Named exports
 

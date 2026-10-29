@@ -89,6 +89,18 @@ export default exported;
 "
 `;
 
+exports[`e2e fixtures typescript-alias: fixtures/src/alias.ts through eslint --fix: typescript-alias-diagnostics 1`] = `[]`;
+
+exports[`e2e fixtures typescript-alias: fixtures/src/alias.ts through eslint --fix: typescript-alias-content 1`] = `
+"import { answer } from '@fixture/alias-target';
+
+const doubled = answer * 2;
+const tripled = answer * 3;
+
+export { doubled, tripled };
+"
+`;
+
 exports[`e2e fixtures javascript: fixtures/javascript.js through eslint --fix: javascript-diagnostics 1`] = `
 [
   {
@@ -132,7 +144,17 @@ exports[`e2e fixtures package-json: fixtures/package.json through eslint --fix: 
 exports[`e2e fixtures tsconfig-json: fixtures/tsconfig.json through eslint --fix: tsconfig-json-diagnostics 1`] = `[]`;
 
 exports[`e2e fixtures tsconfig-json: fixtures/tsconfig.json through eslint --fix: tsconfig-json-content 1`] = `
-"{ "extends": "@hexadrop/tsconfig", "compilerOptions": { "target": "ES2022", "strict": true }, "include": ["src"] }
+"{
+	"extends": "@hexadrop/tsconfig",
+	"compilerOptions": {
+		"target": "ES2022",
+		"paths": {
+			"@fixture/*": ["./src/*"]
+		},
+		"strict": true
+	},
+	"include": ["src"]
+}
 "
 `;
 

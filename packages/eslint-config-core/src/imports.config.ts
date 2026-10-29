@@ -1,3 +1,6 @@
+import path from 'node:path';
+import { cwd } from 'node:process';
+
 import {
 	DTS_GLOBS,
 	ESLINT_CONFIG_GLOBS,
@@ -7,8 +10,10 @@ import {
 	GLOB_MARKDOWN_SOURCE,
 	interopDefault,
 	PLUGIN_RENAME,
+	toArray,
 	TYPESCRIPT_GLOBS,
 } from '@hexadrop/eslint-config-shared';
+import type { TypeScriptResolverOptions } from 'eslint-import-resolver-typescript';
 
 import {
 	IMPORTS_CONFIG_NAME_RULES_ASTRO,
@@ -26,6 +31,31 @@ import {
 } from './config-names';
 import type { CoreOptions } from './core.options';
 import type { TypedFlatConfigItem } from './core.typed-config';
+
+/**
+ * Build the options forwarded to `eslint-import-resolver-typescript`.
+ *
+ * The configured project paths are resolved against `tsconfigRootDir` (or
+ * `cwd()`) so the resolver and the TypeScript parser agree on the same files,
+ * and extra resolver options (`bun`, `alwaysTryTypes`, `conditionNames`, …) are
+ * forwarded untouched.
+ */
+export function typeScriptResolverOptions(typescript: CoreOptions['typescript']): TypeScriptResolverOptions {
+	if (typeof typescript !== 'object') {
+		return {};
+	}
+
+	const { project, resolver, tsconfigRootDir } = typescript;
+	const options: TypeScriptResolverOptions = { ...resolver };
+	const projects = project && project !== true ? toArray(project) : undefined;
+	const root = tsconfigRootDir ?? cwd();
+
+	if (projects && projects.length > 0) {
+		options.project = projects.map(index => (path.isAbsolute(index) ? index : path.resolve(root, index)));
+	}
+
+	return options;
+}
 
 export default async function imports(options: CoreOptions): Promise<TypedFlatConfigItem[]> {
 	const {
@@ -66,6 +96,7 @@ export default async function imports(options: CoreOptions): Promise<TypedFlatCo
 
 	if (typescript) {
 		const typeScriptExtensions = ['.ts', '.tsx'] as const;
+		const resolverOptions = typeScriptResolverOptions(typescript);
 		configs.push({
 			files: TYPESCRIPT_GLOBS,
 			name: IMPORTS_CONFIG_NAME_SETUP_TYPESCRIPT,
@@ -75,7 +106,10 @@ export default async function imports(options: CoreOptions): Promise<TypedFlatCo
 				[`${importXPlugin}/parsers`]: {
 					'@typescript-eslint/parser': [...typeScriptExtensions, '.cts', '.mts'],
 				},
-				[`${importXPlugin}/resolver-next`]: [createNodeResolver(), createTypeScriptImportResolver()],
+				[`${importXPlugin}/resolver-next`]: [
+					createNodeResolver(),
+					createTypeScriptImportResolver(resolverOptions),
+				],
 			},
 		});
 	}

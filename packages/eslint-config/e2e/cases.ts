@@ -1,7 +1,11 @@
+import path from 'node:path';
+
 import type { EndToEndCase as BaseEndToEndCase, RecursivePartial } from '@hexadrop/eslint-config-shared';
 
 import type { HexadropEslintOptions } from '../src/options';
 import type { TypedFlatConfigItem } from '../src/typed-config';
+
+const FIXTURES_DIR = path.join(import.meta.dir, 'fixtures');
 
 interface EndToEndCase extends BaseEndToEndCase {
 	extraConfigs?: TypedFlatConfigItem[];
@@ -39,6 +43,14 @@ export const END_TO_END_CASES: EndToEndCase[] = [
 		file: 'typescript.ts',
 		options: DEFAULTS,
 		slug: 'typescript',
+	},
+	{
+		file: 'src/alias.ts',
+		options: {
+			...DEFAULTS,
+			typescript: { project: './tsconfig.json', tsconfigRootDir: FIXTURES_DIR },
+		},
+		slug: 'typescript-alias',
 	},
 	{
 		file: 'javascript.js',
