@@ -36,7 +36,7 @@ export default async function ignore({ ignore }: CoreOptions): Promise<TypedFlat
 			return [...config, { ...gitignore(), name: IGNORE_CONFIG_NAME_GITIGNORE }];
 		}
 
-		return [];
+		return config;
 	}
 
 	const gitignore = await interopDefault(import('eslint-config-flat-gitignore'));
