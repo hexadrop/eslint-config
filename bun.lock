@@ -34,7 +34,7 @@
         "local-pkg": "1.2.1",
       },
       "devDependencies": {
-        "eslint-typegen": "2.3.1",
+        "eslint-typegen": "2.3.2",
         "react": "19.2.8",
         "tsdown": "0.22.14",
       },
@@ -79,7 +79,7 @@
         "globals": "17.11.0",
       },
       "devDependencies": {
-        "eslint-typegen": "2.3.1",
+        "eslint-typegen": "2.3.2",
         "tsdown": "0.22.14",
       },
       "peerDependencies": {
@@ -143,7 +143,7 @@
       "version": "0.0.0",
       "devDependencies": {
         "eslint": "10.9.1",
-        "eslint-typegen": "2.3.1",
+        "eslint-typegen": "2.3.2",
       },
     },
     "packages/eslint-config-stylistic": {
@@ -857,7 +857,7 @@
 
     "eslint-scope": ["eslint-scope@9.1.2", "", { "dependencies": { "@types/esrecurse": "^4.3.1", "@types/estree": "^1.0.8", "esrecurse": "^4.3.0", "estraverse": "^5.2.0" } }, "sha512-xS90H51cKw0jltxmvmHy2Iai1LIqrfbw57b79w/J7MfvDfkIkFZ+kj6zC3BjtUwh150HsSSdxXZcsuv72miDFQ=="],
 
-    "eslint-typegen": ["eslint-typegen@2.3.1", "", { "dependencies": { "json-schema-to-typescript-lite": "^15.0.0", "ohash": "^2.0.11" }, "peerDependencies": { "eslint": "^9.0.0 || ^10.0.0" } }, "sha512-zVdh8rThBvv2o5T/K524Fr5iy1Jo0q09rHL7y7FbOhgMB177T2gw+shxfC4ChCEqdq6/y6LJA4j8Fbr/Xls9aw=="],
+    "eslint-typegen": ["eslint-typegen@2.3.2", "", { "dependencies": { "json-schema-to-typescript-lite": "^15.0.0", "ohash": "^2.0.11" }, "peerDependencies": { "eslint": "^9.0.0 || ^10.0.0" } }, "sha512-6spoueTVxyuRaL57VmMgB3vVObOFemXEmmmyIHIyQ4dM/7kBsRoEy0zJ+YtdRM6M+Z8Gl1Rh1Zq/zcTJu0lKSA=="],
 
     "eslint-visitor-keys": ["eslint-visitor-keys@5.0.1", "", {}, "sha512-tD40eHxA35h0PEIZNeIjkHoDR4YjjJp34biM0mDvplBe//mB+IHCqHDGV7pxF+7MklTvighcCPPZC7ynWyjdTA=="],
 
