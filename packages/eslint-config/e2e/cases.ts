@@ -91,6 +91,16 @@ export const END_TO_END_CASES: EndToEndCase[] = [
 		slug: 'tsx',
 	},
 	{
+		file: 'react-refresh.jsx',
+		options: { astro: false, react: true, typescript: true },
+		slug: 'jsx-refresh-off',
+	},
+	{
+		file: 'react-refresh.jsx',
+		options: { astro: false, react: { refresh: true }, typescript: true },
+		slug: 'jsx-refresh-on',
+	},
+	{
 		file: 'astro.astro',
 		options: { astro: true, react: false, typescript: true },
 		slug: 'astro',
