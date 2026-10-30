@@ -1,5 +1,14 @@
 # @hexadrop/eslint-config-stylistic
 
+## 1.1.3
+
+### Patch Changes
+
+- 70f356e: fix(deps): update dependency eslint-plugin-perfectionist to v5.12.1
+- Updated dependencies [b3f753e]
+- Updated dependencies [2214141]
+  - @hexadrop/eslint-config-astro@1.1.3
+
 ## 1.1.2
 
 ### Patch Changes

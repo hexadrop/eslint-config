@@ -1,5 +1,11 @@
 # @hexadrop/eslint-config-core
 
+## 1.3.1
+
+### Patch Changes
+
+- 2214141: fix(deps): update dependency globals to v17.13.0
+
 ## 1.3.0
 
 ### Minor Changes
