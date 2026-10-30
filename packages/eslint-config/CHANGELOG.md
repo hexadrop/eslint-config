@@ -1,5 +1,50 @@
 # @hexadrop/eslint-config
 
+## 1.3.0
+
+### Minor Changes
+
+- 169598d: Enable `react-refresh/only-export-components` only when the project declares a bundler with Fast Refresh (`vite` or `next`) instead of warning in every React project on component-library patterns. Only declared dependencies count, so a `vite` installed transitively through `vitest` no longer enables the rule. The rule can be forced with `react: { refresh: true }`, disabled with `refresh: false`, or tuned with `{ allowExportNames }`.
+- 9aa4206: Support solution-style tsconfigs (`files: []` plus `references`). The configured project is expanded recursively into its concrete projects (cycles cut, duplicates removed, JSONC comments and trailing commas accepted), and the expanded list is used by both the TypeScript parser and `eslint-import-resolver-typescript`, so a root solution tsconfig works with automatic detection — `hexadrop()` picks up `./tsconfig.json` — and alias imports resolve through the referenced projects.
+
+  Expanded references are passed to the parser and the resolver as absolute paths, resolved from the config that declares them. Project entries that cannot be expanded — non-solution configs, glob patterns and missing files — are forwarded unchanged.
+
+- 8467bef: Forward the configured TypeScript project(s) to `eslint-import-resolver-typescript`, so `import/no-unresolved` resolves tsconfig `paths` aliases without a consumer `settings['import-x/resolver-next']` override. `typescript` now accepts `{ project, tsconfigRootDir, resolver }`: project paths from `project` or `resolver.project` are resolved against `tsconfigRootDir` and resolver options (`bun`, `alwaysTryTypes`, `conditionNames`, `noWarnOnMultipleProjects`, …) are forwarded untouched.
+- 8467bef: Expose `parserOptions` on the TypeScript factory and the meta-package `typescript` option. Extra typescript-eslint parser options are merged into the type-aware parser config after the internal `project`/`tsconfigRootDir`, which makes `projectService` (solution-style tsconfigs and workspaces) available without replacing the whole parser configuration. When `projectService` is set, `project` becomes optional and is omitted from the parser options so both resolution modes are never enabled at once; `tsconfigRootDir` is still forwarded.
+- 018f663: Detect React and TypeScript across workspace packages instead of only in `process.cwd()`:
+  - Workspace packages are read from `package.json#workspaces` and `pnpm-workspace.yaml`, including nested, `**` and negated patterns.
+  - React is enabled when it is installed in the root or in any workspace package, and its version is resolved from the same directories.
+  - TypeScript is detected the same way, and when the root has no `tsconfig.json`, the workspace package tsconfigs are used for type-aware linting.
+
+  The previous root-only behavior remains the fallback and explicit options keep taking precedence. The meta-package and `@hexadrop/eslint-config-react` now depend on `yaml` to read `pnpm-workspace.yaml`.
+
+### Patch Changes
+
+- d2b79b4: Keep the default ignore globs when `ignore: true` and the working directory has no `.gitignore`. Previously the whole ignore slice was dropped, so `node_modules`, `dist`, lock files and the other defaults were linted.
+- 9562d53: Resolve the installed React version at config time instead of setting `settings.react.version` to `'detect'`. On ESLint 10, `eslint-plugin-react` resolves `'detect'` through the removed `context.getFilename()`, so the first `.tsx` file crashed with `TypeError: contextOrFilename.getFilename is not a function`. When React cannot be resolved the setting is omitted, which keeps the plugin on its default version instead of crashing.
+- 0a5bfe8: Silence `eslint-import-resolver-typescript`'s "Multiple projects found" warning when the resolver receives the project list forwarded from the `typescript` option. Solution-style tsconfigs intentionally expand to several projects, so the warning was noise in every monorepo run; set `resolver.noWarnOnMultipleProjects: false` to opt back in.
+- Updated dependencies [d2b79b4]
+- Updated dependencies [49474aa]
+- Updated dependencies [ad20379]
+- Updated dependencies [549d5a0]
+- Updated dependencies [1b00982]
+- Updated dependencies [66bba1f]
+- Updated dependencies [c6146b2]
+- Updated dependencies [72398a5]
+- Updated dependencies [d2dbb26]
+- Updated dependencies [9562d53]
+- Updated dependencies [169598d]
+- Updated dependencies [018f663]
+- Updated dependencies [0a5bfe8]
+- Updated dependencies [9aa4206]
+- Updated dependencies [8467bef]
+- Updated dependencies [8467bef]
+  - @hexadrop/eslint-config-core@1.3.0
+  - @hexadrop/eslint-config-stylistic@1.1.2
+  - @hexadrop/eslint-config-astro@1.1.2
+  - @hexadrop/eslint-config-typescript@1.3.0
+  - @hexadrop/eslint-config-react@1.3.0
+
 ## 1.2.0
 
 ### Minor Changes
