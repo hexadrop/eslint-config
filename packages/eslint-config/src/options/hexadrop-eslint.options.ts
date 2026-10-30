@@ -148,7 +148,8 @@ interface HexadropEslintOptions {
 	 * and {@link TypescriptOptions.parserOptions}.
 	 * If you leave empty, automatic detection will be used: the root
 	 * `tsconfig.json` when there is one, which a solution-style root expands
-	 * into its referenced projects.
+	 * into its referenced projects; otherwise the `tsconfig.json` of every
+	 * workspace package (`package.json#workspaces` or `pnpm-workspace.yaml`).
 	 *
 	 */
 	typescript: boolean | string | string[] | TypescriptOptions;
