@@ -1,5 +1,20 @@
 # @hexadrop/eslint-config-stylistic
 
+## 1.1.2
+
+### Patch Changes
+
+- ad20379: fix(deps): update dependency eslint-plugin-perfectionist to v5.11.0
+- 549d5a0: fix(deps): update typescript-eslint monorepo to v8.69.0
+- c6146b2: fix(deps): update dependency prettier to v3.9.10
+- Updated dependencies [549d5a0]
+- Updated dependencies [1b00982]
+- Updated dependencies [72398a5]
+- Updated dependencies [9aa4206]
+- Updated dependencies [8467bef]
+  - @hexadrop/eslint-config-astro@1.1.2
+  - @hexadrop/eslint-config-typescript@1.3.0
+
 ## 1.1.1
 
 ### Patch Changes
