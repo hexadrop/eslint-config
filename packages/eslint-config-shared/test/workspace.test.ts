@@ -6,12 +6,20 @@ import { describe, expect, test } from 'bun:test';
 
 import { getWorkspaceDirectories } from '../src';
 
+function createPackage(root: string, directory: string): void {
+	const target = path.join(root, directory);
+
+	mkdirSync(target, { recursive: true });
+	writeFileSync(path.join(target, 'package.json'), JSON.stringify({ name: directory || 'root', private: true }));
+}
+
 function createWorkspace(manifest: object, directories: string[]): string {
 	const root = mkdtempSync(path.join(tmpdir(), 'hexadrop-workspace-'));
+
 	writeFileSync(path.join(root, 'package.json'), JSON.stringify(manifest));
 
 	for (const directory of directories) {
-		mkdirSync(path.join(root, directory), { recursive: true });
+		createPackage(root, directory);
 	}
 
 	return root;
@@ -23,7 +31,6 @@ describe('getWorkspaceDirectories', () => {
 			'packages/app',
 			'packages/lib',
 			'apps/web',
-			'node_modules/ignored',
 		]);
 
 		try {
@@ -43,6 +50,67 @@ describe('getWorkspaceDirectories', () => {
 
 		try {
 			expect(getWorkspaceDirectories(root)).toEqual([root, path.join(root, 'ha-finassists')]);
+		} finally {
+			rmSync(root, { force: true, recursive: true });
+		}
+	});
+
+	test('expands nested patterns', () => {
+		const root = createWorkspace({ workspaces: ['apps/*/packages/*'] }, [
+			'apps/web/packages/ui',
+			'apps/web/packages/utils',
+		]);
+
+		try {
+			expect(getWorkspaceDirectories(root)).toEqual([
+				root,
+				path.join(root, 'apps', 'web', 'packages', 'ui'),
+				path.join(root, 'apps', 'web', 'packages', 'utils'),
+			]);
+		} finally {
+			rmSync(root, { force: true, recursive: true });
+		}
+	});
+
+	test('expands globstars and skips dependency and build directories', () => {
+		const root = createWorkspace({ workspaces: ['packages/**'] }, [
+			'packages/app',
+			'packages/app/packages/ui',
+			'packages/app/node_modules/ignored',
+			'packages/app/dist',
+		]);
+
+		try {
+			expect(getWorkspaceDirectories(root)).toEqual([
+				root,
+				path.join(root, 'packages', 'app'),
+				path.join(root, 'packages', 'app', 'packages', 'ui'),
+			]);
+		} finally {
+			rmSync(root, { force: true, recursive: true });
+		}
+	});
+
+	test('removes packages matched by a negated pattern', () => {
+		const root = createWorkspace({ workspaces: ['packages/*', '!packages/legacy'] }, [
+			'packages/app',
+			'packages/legacy',
+		]);
+
+		try {
+			expect(getWorkspaceDirectories(root)).toEqual([root, path.join(root, 'packages', 'app')]);
+		} finally {
+			rmSync(root, { force: true, recursive: true });
+		}
+	});
+
+	test('ignores matched directories without a manifest', () => {
+		const root = createWorkspace({ workspaces: ['packages/*', 'fixtures'] }, ['packages/app']);
+
+		try {
+			mkdirSync(path.join(root, 'fixtures'), { recursive: true });
+
+			expect(getWorkspaceDirectories(root)).toEqual([root, path.join(root, 'packages', 'app')]);
 		} finally {
 			rmSync(root, { force: true, recursive: true });
 		}
