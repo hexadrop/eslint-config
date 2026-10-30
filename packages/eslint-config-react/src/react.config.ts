@@ -11,7 +11,7 @@ import { getPackageInfoSync, isPackageExists } from 'local-pkg';
 
 import isFastRefreshProject from './react.refresh';
 import type { TypedFlatConfigItem } from './react.typed-config';
-import type { ReactConfigOptions } from './react.types';
+import type { ReactConfigOptions, ReactRefreshOptions } from './react.types';
 
 /**
  * Resolve the installed React version at config time.
@@ -23,6 +23,25 @@ import type { ReactConfigOptions } from './react.types';
  */
 function detectReactVersion(): string | undefined {
 	return getPackageInfoSync('react')?.version;
+}
+
+interface ResolvedRefreshRule {
+	enabled: boolean;
+	options: ReactRefreshOptions;
+}
+
+/**
+ * Resolve the `refresh` option against the detected project.
+ *
+ * An object implies the rule is on, `true`/`false` are explicit and `undefined`
+ * defers to Fast Refresh detection.
+ */
+function resolveRefreshRule(refresh: ReactConfigOptions['refresh'], isFastRefresh: boolean): ResolvedRefreshRule {
+	if (typeof refresh === 'object') {
+		return { enabled: true, options: refresh };
+	}
+
+	return { enabled: refresh ?? isFastRefresh, options: {} };
 }
 
 function isTypescriptEnabled(options: ReactConfigOptions): boolean {
@@ -49,8 +68,7 @@ export default async function reactConfig(options: ReactConfigOptions = {}): Pro
 		interopDefault(import('eslint-plugin-react-refresh')),
 	] as const);
 	const isFastRefresh = isFastRefreshProject();
-	const isRefreshEnabled = typeof options.refresh === 'object' ? true : (options.refresh ?? isFastRefresh);
-	const refreshOptions = typeof options.refresh === 'object' ? options.refresh : {};
+	const refresh = resolveRefreshRule(options.refresh, isFastRefresh);
 	const reactVersion = detectReactVersion();
 
 	const files = [...GLOB_REACT_JSX, ...(isTypescript ? GLOB_REACT_TSX : [])];
@@ -116,12 +134,12 @@ export default async function reactConfig(options: ReactConfigOptions = {}): Pro
 			files,
 			name: REACT_CONFIG_NAME_RULES_REFRESH,
 			rules: {
-				'react-refresh/only-export-components': isRefreshEnabled
+				'react-refresh/only-export-components': refresh.enabled
 					? [
 							'warn',
 							{
 								allowConstantExport: isFastRefresh,
-								...refreshOptions,
+								...refresh.options,
 							},
 						]
 					: 'off',

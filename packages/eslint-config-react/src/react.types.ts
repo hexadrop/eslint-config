@@ -2,14 +2,14 @@ interface ReactConfigOptions {
 	/**
 	 * Enable `react-refresh/only-export-components`.
 	 *
-	 * When omitted, the rule is enabled only when Vite (Fast Refresh) is
-	 * installed, because the rule is about HMR boundaries and warns on
-	 * component-library patterns in projects without Fast Refresh.
+	 * When omitted, the rule is enabled only when the project declares a
+	 * bundler with Fast Refresh, because the rule is about HMR boundaries and
+	 * warns on component-library patterns in projects without Fast Refresh.
 	 *
 	 * `true` forces it on, `false` turns it off, and an object enables it with
 	 * extra allowed export names.
 	 *
-	 * @default undefined (auto-detect Vite)
+	 * @default undefined (auto-detect a Fast Refresh bundler)
 	 */
 	refresh?: boolean | ReactRefreshOptions;
 
