@@ -32,6 +32,7 @@
         "@hexadrop/eslint-config-typescript": "1.1.0",
         "eslint-flat-config-utils": "3.2.0",
         "local-pkg": "1.2.1",
+        "yaml": "2.9.1",
       },
       "devDependencies": {
         "eslint-typegen": "2.3.2",
@@ -126,6 +127,7 @@
         "eslint-plugin-react-hooks": "7.1.1",
         "eslint-plugin-react-refresh": "0.5.7",
         "local-pkg": "1.2.1",
+        "yaml": "2.9.1",
       },
       "devDependencies": {
         "tsdown": "0.23.1",
@@ -145,6 +147,14 @@
         "eslint": "10.13.0",
         "eslint-typegen": "2.3.2",
       },
+      "peerDependencies": {
+        "local-pkg": "^1.2.1",
+        "yaml": "^2.9.1",
+      },
+      "optionalPeers": [
+        "local-pkg",
+        "yaml",
+      ],
     },
     "packages/eslint-config-stylistic": {
       "name": "@hexadrop/eslint-config-stylistic",

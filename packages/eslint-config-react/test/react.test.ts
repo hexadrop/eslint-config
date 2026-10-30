@@ -1,6 +1,7 @@
 import path from 'node:path';
 import process from 'node:process';
 
+import { getWorkspaceDirectories } from '@hexadrop/eslint-config-shared';
 import { afterEach, describe, expect, mock, test } from 'bun:test';
 
 import react, { config } from '../src';
@@ -23,12 +24,17 @@ interface MockPackagesOptions {
 	typescript?: boolean;
 }
 
+const packageResolution: { paths: string[] } = { paths: [] };
+
 function mockPackages(options: MockPackagesOptions = {}) {
 	const reactVersion = 'reactVersion' in options ? options.reactVersion : REACT_VERSION;
 
 	void mock.module('local-pkg', () => ({
-		getPackageInfoSync: (name: string) =>
-			name === 'react' && reactVersion ? { name, version: reactVersion } : undefined,
+		getPackageInfoSync: (name: string, resolveOptions?: { paths?: string[] }) => {
+			packageResolution.paths = resolveOptions?.paths ?? [];
+
+			return name === 'react' && reactVersion ? { name, version: reactVersion } : undefined;
+		},
 		isPackageExists: (name: string) => Boolean(options.typescript) && name === TYPESCRIPT_PKG,
 	}));
 }
@@ -103,6 +109,13 @@ describe('react config', () => {
 		const settings = setup?.settings as Record<string, Record<string, unknown>> | undefined;
 
 		expect(settings?.['react']?.['version']).toBe(REACT_VERSION);
+	});
+
+	test('looks up the react version across the workspace directories', async () => {
+		mockPackagePresent();
+		await config();
+
+		expect(packageResolution.paths).toEqual(getWorkspaceDirectories(process.cwd()));
 	});
 
 	test('omits the react settings when react cannot be resolved', async () => {

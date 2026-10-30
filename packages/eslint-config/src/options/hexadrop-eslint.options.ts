@@ -5,6 +5,7 @@ import process from 'node:process';
 import type { CoreTypescriptOptions } from '@hexadrop/eslint-config-core';
 import type { ReactConfigOptions } from '@hexadrop/eslint-config-react';
 import type { Nullable, RecursivePartial } from '@hexadrop/eslint-config-shared';
+import { getWorkspaceDirectories, getWorkspacePackageInfo } from '@hexadrop/eslint-config-shared';
 import type { StylisticFormattingOptions } from '@hexadrop/eslint-config-stylistic';
 import type { TypescriptParserOptions } from '@hexadrop/eslint-config-typescript';
 import { isPackageExists } from 'local-pkg';
@@ -147,7 +148,8 @@ interface HexadropEslintOptions {
 	 * and {@link TypescriptOptions.parserOptions}.
 	 * If you leave empty, automatic detection will be used: the root
 	 * `tsconfig.json` when there is one, which a solution-style root expands
-	 * into its referenced projects.
+	 * into its referenced projects; otherwise the `tsconfig.json` of every
+	 * workspace package (`package.json#workspaces` or `pnpm-workspace.yaml`).
 	 *
 	 */
 	typescript: boolean | string | string[] | TypescriptOptions;
@@ -176,14 +178,42 @@ interface TypescriptOptions extends CoreTypescriptOptions {
 	parserOptions?: Partial<TypescriptParserOptions>;
 }
 
-function getCwdTsconfigPath(): string | undefined {
+/**
+ * Resolve the default TypeScript project(s) without consumer input.
+ *
+ * A root `tsconfig.json` wins and keeps its bare `'tsconfig.json'` form
+ * (solution-style roots are expanded by the TypeScript and import packages).
+ * When the root has no tsconfig, the tsconfigs of the workspace packages are
+ * used, which covers monorepos whose root only holds tooling configuration.
+ */
+function getDefaultTypescriptProject(): string | string[] | undefined {
 	const root = process.cwd();
-	const cwdTsconfigPath = path.resolve(root, 'tsconfig.json');
-	if (existsSync(cwdTsconfigPath)) {
+
+	if (existsSync(path.resolve(root, 'tsconfig.json'))) {
 		return 'tsconfig.json';
 	}
 
-	return undefined;
+	const projects = getWorkspaceDirectories(root)
+		.map(directory => path.join(directory, 'tsconfig.json'))
+		.filter(file => existsSync(file))
+		.map(file => {
+			const relative = path.relative(root, file).split(path.sep).join('/');
+
+			return relative.startsWith('..') ? relative : `./${relative}`;
+		});
+
+	return projects.length > 0 ? projects : undefined;
+}
+
+/**
+ * Whether a package is installed in the root or in any workspace package.
+ *
+ * `local-pkg` resolves `node_modules` from each directory and its ancestors, so
+ * this covers React or TypeScript hoisted to the repository root as well as
+ * installed in a child package by an isolated workspace layout.
+ */
+function isWorkspacePackageInstalled(name: string): boolean {
+	return getWorkspacePackageInfo(name) !== undefined;
 }
 
 export type {
@@ -198,8 +228,8 @@ export default function defaultOptions(
 	options: RecursivePartial<HexadropEslintOptions> = {}
 ): ResolvedHexadropEslintOptions {
 	let typescript: ResolvedHexadropEslintOptions['typescript'] = false;
-	const isInstalledTypescript = isPackageExists('typescript');
-	const isInstalledReact = isPackageExists('react');
+	const isInstalledTypescript = isWorkspacePackageInstalled('typescript');
+	const isInstalledReact = isWorkspacePackageInstalled('react');
 	const isInstalledAstro = isPackageExists('astro');
 
 	/* eslint-disable typescript/no-unnecessary-condition -- RecursivePartial narrows types but runtime checks are needed */
@@ -213,9 +243,20 @@ export default function defaultOptions(
 		};
 	} else if (typeof options.typescript === 'object' && options.typescript !== null) {
 		const tsOptions = options.typescript as TypescriptOptions;
-		typescript = { ...tsOptions };
+		const hasProject = tsOptions.project !== undefined;
+		const hasProjectService = Boolean(tsOptions.parserOptions?.projectService);
+
+		/*
+		 * `projectService: false` disables the only resolution mode the object
+		 * form asked for, so fall back to detection instead of shipping a config
+		 * that silently turns TypeScript support off.
+		 */
+		typescript =
+			hasProject || hasProjectService
+				? { ...tsOptions }
+				: { ...tsOptions, project: getDefaultTypescriptProject() ?? true };
 	} else if (isInstalledTypescript && options.typescript === undefined) {
-		typescript = { project: getCwdTsconfigPath() ?? true };
+		typescript = { project: getDefaultTypescriptProject() ?? true };
 	}
 
 	return {

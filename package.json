@@ -27,12 +27,13 @@
 	"type": "module",
 	"scripts": {
 		"build": "bun run --filter '*' build",
+		"check:dist": "bun run build && bun scripts/check-distribution-dependencies.ts",
 		"commitlint": "commitlint --edit",
 		"lint": "NODE_OPTIONS='--conditions=development' eslint --cache .",
 		"lint:ci": "NODE_OPTIONS='--conditions=development' eslint --cache --cache-strategy content .",
 		"lint:fix": "NODE_OPTIONS='--conditions=development' eslint --cache --fix .",
 		"prepare": "husky && bun run --filter '*' prepare",
-		"test": "bun test packages",
+		"test": "bun test --isolate packages",
 		"typecheck": "tsc --noEmit"
 	},
 	"devDependencies": {
