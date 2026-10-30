@@ -56,6 +56,6 @@
 	"devDependencies": {
 		"eslint-typegen": "2.3.2",
 		"react": "19.3.1",
-		"tsdown": "0.23.2"
+		"tsdown": "0.23.4"
 	}
 }
