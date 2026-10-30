@@ -1,6 +1,6 @@
 {
 	"name": "@hexadrop/eslint-config",
-	"version": "1.2.0",
+	"version": "1.3.0",
 	"description": "Opinionated linting configuration using best practices and providing consistency to your code.",
 	"keywords": [
 		"lint",
@@ -42,13 +42,13 @@
 		"eslint": "^9.17.0 || ^10.0.0"
 	},
 	"dependencies": {
-		"@hexadrop/eslint-config-astro": "1.1.1",
-		"@hexadrop/eslint-config-core": "1.2.0",
+		"@hexadrop/eslint-config-astro": "1.1.2",
+		"@hexadrop/eslint-config-core": "1.3.0",
 		"@hexadrop/eslint-config-json": "1.1.0",
 		"@hexadrop/eslint-config-markdown": "1.1.0",
-		"@hexadrop/eslint-config-react": "1.2.0",
-		"@hexadrop/eslint-config-stylistic": "1.1.1",
-		"@hexadrop/eslint-config-typescript": "1.2.0",
+		"@hexadrop/eslint-config-react": "1.3.0",
+		"@hexadrop/eslint-config-stylistic": "1.1.2",
+		"@hexadrop/eslint-config-typescript": "1.3.0",
 		"eslint-flat-config-utils": "3.2.0",
 		"local-pkg": "1.2.1",
 		"yaml": "2.9.1"
@@ -56,6 +56,6 @@
 	"devDependencies": {
 		"eslint-typegen": "2.3.2",
 		"react": "19.3.1",
-		"tsdown": "0.23.1"
+		"tsdown": "0.23.2"
 	}
 }
