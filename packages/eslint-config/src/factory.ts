@@ -1,4 +1,5 @@
 import { core, ignore, imports } from '@hexadrop/eslint-config-core';
+import type { ReactConfigOptions } from '@hexadrop/eslint-config-react';
 import type { RecursivePartial } from '@hexadrop/eslint-config-shared';
 import { extractTypedFlatConfigItem, PLUGIN_RENAME } from '@hexadrop/eslint-config-shared';
 import type { TypescriptFactoryOptions } from '@hexadrop/eslint-config-typescript';
@@ -46,6 +47,18 @@ function toTypescriptFactoryOptions(
 }
 
 /**
+ * Convert the resolved react option to the shape the react config expects.
+ * The object form is forwarded as is, and `typescript: false` is mirrored so
+ * the react slice never re-enables TSX when the top-level option disables it.
+ */
+function toReactFactoryOptions(options: ResolvedHexadropEslintOptions): ReactConfigOptions {
+	return {
+		...(typeof options.react === 'object' && options.react),
+		...(options.typescript === false && { typescript: false }),
+	};
+}
+
+/**
  * Compose the stylistic package slice.
  *
  * The meta-package keeps `format`, `unicorn` and `perfectionist` nested inside
@@ -90,10 +103,7 @@ export default function hexadrop(
 			() => import('@hexadrop/eslint-config-typescript'),
 			toTypescriptFactoryOptions(options.typescript)
 		),
-		...optionalPlugin(options.react, () => import('@hexadrop/eslint-config-react'), {
-			...(typeof options.react === 'object' && options.react),
-			...(options.typescript === false && { typescript: false as const }),
-		}),
+		...optionalPlugin(options.react, () => import('@hexadrop/eslint-config-react'), toReactFactoryOptions(options)),
 		...optionalPlugin(options.json, () => import('@hexadrop/eslint-config-json')),
 		...optionalPlugin(options.markdown, () => import('@hexadrop/eslint-config-markdown')),
 		imports(options),
