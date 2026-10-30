@@ -8,7 +8,7 @@ import type { Nullable, RecursivePartial } from '@hexadrop/eslint-config-shared'
 import { getWorkspaceDirectories } from '@hexadrop/eslint-config-shared';
 import type { StylisticFormattingOptions } from '@hexadrop/eslint-config-stylistic';
 import type { TypescriptParserOptions } from '@hexadrop/eslint-config-typescript';
-import { isPackageExists, isPackageListedSync } from 'local-pkg';
+import { getPackageInfoSync, isPackageExists } from 'local-pkg';
 
 import type { HexadropEslintIgnoreOptions } from './hexadrop-eslint-ignore.options';
 import type { HexadropEslintModulesOptions } from './hexadrop-eslint-module.options';
@@ -200,12 +200,15 @@ function getDefaultTypescriptProject(): string | string[] | undefined {
 	return projects.length > 0 ? projects : undefined;
 }
 
-function isReactInstalled(): boolean {
-	if (isPackageExists('react')) {
-		return true;
-	}
-
-	return getWorkspaceDirectories().some(directory => isPackageListedSync('react', directory));
+/**
+ * Whether a package is installed in the root or in any workspace package.
+ *
+ * `local-pkg` resolves `node_modules` from each directory and its ancestors, so
+ * this covers React or TypeScript hoisted to the repository root as well as
+ * installed in a child package by an isolated workspace layout.
+ */
+function isWorkspacePackageInstalled(name: string): boolean {
+	return getPackageInfoSync(name, { paths: getWorkspaceDirectories() }) !== undefined;
 }
 
 export type {
@@ -220,8 +223,8 @@ export default function defaultOptions(
 	options: RecursivePartial<HexadropEslintOptions> = {}
 ): ResolvedHexadropEslintOptions {
 	let typescript: ResolvedHexadropEslintOptions['typescript'] = false;
-	const isInstalledTypescript = isPackageExists('typescript');
-	const isInstalledReact = isReactInstalled();
+	const isInstalledTypescript = isWorkspacePackageInstalled('typescript');
+	const isInstalledReact = isWorkspacePackageInstalled('react');
 	const isInstalledAstro = isPackageExists('astro');
 
 	/* eslint-disable typescript/no-unnecessary-condition -- RecursivePartial narrows types but runtime checks are needed */
