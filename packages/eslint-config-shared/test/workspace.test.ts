@@ -25,6 +25,18 @@ function createWorkspace(manifest: object, directories: string[]): string {
 	return root;
 }
 
+function createPnpmWorkspace(contents: string, directories: string[]): string {
+	const root = mkdtempSync(path.join(tmpdir(), 'hexadrop-workspace-'));
+
+	writeFileSync(path.join(root, 'pnpm-workspace.yaml'), contents);
+
+	for (const directory of directories) {
+		createPackage(root, directory);
+	}
+
+	return root;
+}
+
 describe('getWorkspaceDirectories', () => {
 	test('returns the root and the directories matched by array workspaces', () => {
 		const root = createWorkspace({ workspaces: ['packages/*', 'apps/*'] }, [
@@ -110,6 +122,35 @@ describe('getWorkspaceDirectories', () => {
 		try {
 			mkdirSync(path.join(root, 'fixtures'), { recursive: true });
 
+			expect(getWorkspaceDirectories(root)).toEqual([root, path.join(root, 'packages', 'app')]);
+		} finally {
+			rmSync(root, { force: true, recursive: true });
+		}
+	});
+
+	test('reads pnpm workspace patterns and their negations', () => {
+		const root = createPnpmWorkspace(
+			['packages:', '  - packages/*', '  - "apps/*" # commented', '  - "!packages/legacy"'].join('\n'),
+			['packages/app', 'packages/legacy', 'apps/web']
+		);
+
+		try {
+			expect(getWorkspaceDirectories(root)).toEqual([
+				root,
+				path.join(root, 'packages', 'app'),
+				path.join(root, 'apps', 'web'),
+			]);
+		} finally {
+			rmSync(root, { force: true, recursive: true });
+		}
+	});
+
+	test('reads inline pnpm patterns and ignores other keys', () => {
+		const root = createPnpmWorkspace(['catalog:', '  react: ^19.0.0', 'packages: [packages/*]'].join('\n'), [
+			'packages/app',
+		]);
+
+		try {
 			expect(getWorkspaceDirectories(root)).toEqual([root, path.join(root, 'packages', 'app')]);
 		} finally {
 			rmSync(root, { force: true, recursive: true });

@@ -197,6 +197,7 @@ The configured projects are forwarded to `eslint-import-resolver-typescript`, so
 
 When React or TypeScript live in a workspace package instead of the repository root, they are still auto-detected:
 
+- Workspace packages come from `package.json#workspaces` (array or `{ packages }`) or `pnpm-workspace.yaml`, with nested, `**` and negated patterns supported.
 - React is enabled when any `package.json#workspaces` package declares `react`, and the resolved version is looked up across the workspace.
 - TypeScript uses the root `tsconfig.json` when present (solution roots included); otherwise the `tsconfig.json` of every workspace package is used.
 - `react: true` and an explicit `typescript.project` remain available and take precedence over detection.
