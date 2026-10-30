@@ -156,8 +156,8 @@ import hexadrop from '@hexadrop/eslint-config';
 
 export default hexadrop({
   react: {
-    // `react-refresh/only-export-components` is enabled only when Vite is
-    // installed (Fast Refresh). Force it on/off, or allow extra exports.
+    // `react-refresh/only-export-components` is enabled only when the project
+    // declares vite or next. Force it on/off, or allow extra exports.
     refresh: { allowExportNames: ['loader', 'action'] },
   },
 });
