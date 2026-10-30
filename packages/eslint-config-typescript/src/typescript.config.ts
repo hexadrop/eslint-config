@@ -61,7 +61,9 @@ export default async function typescriptConfig(options: TypescriptFactoryOptions
 
 	const config: TypedFlatConfigItem[] = [];
 	const tsconfigPath =
-		project && project !== true ? expandTsconfigProjects(toArray(project), tsconfigRootDir ?? cwd()) : undefined;
+		project && project !== true && !hasProjectService
+			? expandTsconfigProjects(toArray(project), tsconfigRootDir ?? cwd())
+			: undefined;
 	const isTypeAwareLinting = isTypeAware(tsconfigPath, parserOptions);
 
 	config.push({
