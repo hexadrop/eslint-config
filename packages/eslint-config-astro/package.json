@@ -1,6 +1,6 @@
 {
 	"name": "@hexadrop/eslint-config-astro",
-	"version": "1.1.2",
+	"version": "1.1.3",
 	"description": "Astro slice of the hexadrop ESLint config: eslint-plugin-astro, astro-eslint-parser and prettier-plugin-astro rules.",
 	"keywords": [
 		"lint",
