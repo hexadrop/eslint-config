@@ -199,7 +199,7 @@ When React or TypeScript live in a workspace package instead of the repository r
 
 - Workspace packages come from `package.json#workspaces` (array or `{ packages }`) or `pnpm-workspace.yaml`, with nested, `**` and negated patterns supported.
 - React is enabled when it is installed in the root or in any workspace package, and the resolved version is looked up across the same directories.
-- TypeScript uses the root `tsconfig.json` when present (solution roots included); otherwise the `tsconfig.json` of every workspace package is used.
+- TypeScript uses the root `tsconfig.json` when present (solution roots included); otherwise the `tsconfig.json` of every workspace package is used. A root `tsconfig.json` always wins, even when it only covers tooling: if it is not solution-style, pass an explicit `typescript.project` to lint the packages with type information.
 - `react: true` and an explicit `typescript.project` remain available and take precedence over detection.
 
 No `parserOptions.project` or `settings['import-x/resolver-next']` override is needed for the common Bun/npm/pnpm workspace layout.
