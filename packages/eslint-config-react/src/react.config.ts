@@ -9,15 +9,9 @@ import {
 } from '@hexadrop/eslint-config-shared';
 import { getPackageInfoSync, isPackageExists } from 'local-pkg';
 
+import isFastRefreshProject from './react.refresh';
 import type { TypedFlatConfigItem } from './react.typed-config';
 import type { ReactConfigOptions } from './react.types';
-
-/**
- * Packages that ship React Fast Refresh. `react-refresh/only-export-components`
- * only makes sense for projects that re-render components in place: elsewhere
- * it warns on the component-plus-variant pattern of component libraries.
- */
-const FAST_REFRESH_PACKAGES = ['vite'];
 
 /**
  * Resolve the installed React version at config time.
@@ -54,8 +48,8 @@ export default async function reactConfig(options: ReactConfigOptions = {}): Pro
 		interopDefault(import('eslint-plugin-react-hooks')),
 		interopDefault(import('eslint-plugin-react-refresh')),
 	] as const);
-	const isAllowConstantExport = FAST_REFRESH_PACKAGES.some(packageName => isPackageExists(packageName));
-	const isRefreshEnabled = typeof options.refresh === 'object' ? true : (options.refresh ?? isAllowConstantExport);
+	const isFastRefresh = isFastRefreshProject();
+	const isRefreshEnabled = typeof options.refresh === 'object' ? true : (options.refresh ?? isFastRefresh);
 	const refreshOptions = typeof options.refresh === 'object' ? options.refresh : {};
 	const reactVersion = detectReactVersion();
 
@@ -126,7 +120,7 @@ export default async function reactConfig(options: ReactConfigOptions = {}): Pro
 					? [
 							'warn',
 							{
-								allowConstantExport: isAllowConstantExport,
+								allowConstantExport: isFastRefresh,
 								...refreshOptions,
 							},
 						]
