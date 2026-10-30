@@ -187,23 +187,17 @@ export default function defaultOptions(
 	/* eslint-disable typescript/no-unnecessary-condition -- RecursivePartial narrows types but runtime checks are needed */
 	if (options.typescript === true) {
 		typescript = true;
-	} else if (
-		typeof options.typescript === 'object' &&
-		!Array.isArray(options.typescript) &&
-		options.typescript !== null
-	) {
+	} else if (typeof options.typescript === 'string') {
+		typescript = { project: options.typescript.length > 0 ? options.typescript : true };
+	} else if (Array.isArray(options.typescript)) {
+		typescript = {
+			project: options.typescript.length > 0 ? (options.typescript.filter(Boolean) as string[]) : true,
+		};
+	} else if (typeof options.typescript === 'object' && options.typescript !== null) {
 		const tsOptions = options.typescript as TypescriptOptions;
 		typescript = { ...tsOptions };
-	} else if (isInstalledTypescript) {
-		if (options.typescript === undefined) {
-			typescript = { project: getCwdTsconfigPath() ?? true };
-		} else if (typeof options.typescript === 'string') {
-			typescript = { project: options.typescript.length > 0 ? options.typescript : true };
-		} else if (Array.isArray(options.typescript)) {
-			typescript = {
-				project: options.typescript.length > 0 ? (options.typescript.filter(Boolean) as string[]) : true,
-			};
-		}
+	} else if (isInstalledTypescript && options.typescript === undefined) {
+		typescript = { project: getCwdTsconfigPath() ?? true };
 	}
 
 	return {

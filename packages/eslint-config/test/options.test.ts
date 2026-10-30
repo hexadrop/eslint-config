@@ -32,6 +32,17 @@ describe('typescript option resolution', () => {
 		expect(options.typescript).toEqual({ project: ['./tsconfig.json', './tsconfig.tools.json'] });
 	});
 
+	test('keeps an explicit string tsconfig when typescript is not detected', () => {
+		void mock.module('local-pkg', () => ({
+			getPackageInfoSync: () => ({}),
+			isPackageExists: () => false,
+		}));
+
+		const options = defaultOptions({ typescript: './tsconfig.json' });
+
+		expect(options.typescript).toEqual({ project: './tsconfig.json' });
+	});
+
 	test('keeps the object form including tsconfigRootDir', () => {
 		const options = defaultOptions({
 			typescript: { project: './tsconfig.json', tsconfigRootDir: '/repository' },
