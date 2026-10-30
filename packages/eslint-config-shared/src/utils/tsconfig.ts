@@ -21,19 +21,19 @@ function readTsconfig(file: string): TsconfigShape | undefined {
 	}
 }
 
-function isFile(file: string): boolean {
+function isJsonFile(file: string): boolean {
 	return existsSync(file) && file.endsWith('.json');
 }
 
 /**
- * Resolve a `references[].path` value (a directory or a tsconfig file) to an
+ * Resolve a tsconfig reference — a directory or a tsconfig file — to an
  * existing tsconfig file.
  */
-function resolveReference(reference: string, baseDirectory: string): string | undefined {
+function resolveTsconfigFile(reference: string, baseDirectory: string): string | undefined {
 	const absolute = path.isAbsolute(reference) ? reference : path.resolve(baseDirectory, reference);
 	const candidates = [absolute, `${absolute}.json`, path.join(absolute, 'tsconfig.json')];
 
-	return candidates.find(candidate => isFile(candidate));
+	return candidates.find(candidate => isJsonFile(candidate));
 }
 
 function appendUnique(target: string[], seen: Set<string>, files: string[]): void {
@@ -68,10 +68,7 @@ export function expandTsconfigProjects(projects: string[], rootDirectory: string
 	const seen = new Set<string>();
 
 	function resolve(project: string, stack: Set<string>): string[] | undefined {
-		const absolute = path.isAbsolute(project) ? project : path.resolve(rootDirectory, project);
-		const configPath = [absolute, `${absolute}.json`, path.join(absolute, 'tsconfig.json')].find(candidate =>
-			isFile(candidate)
-		);
+		const configPath = resolveTsconfigFile(project, rootDirectory);
 
 		if (!configPath || stack.has(configPath)) {
 			return undefined;
@@ -92,7 +89,7 @@ export function expandTsconfigProjects(projects: string[], rootDirectory: string
 		const resolved: string[] = [];
 
 		for (const reference of references) {
-			const target = resolveReference(reference.path, path.dirname(configPath));
+			const target = resolveTsconfigFile(reference.path, path.dirname(configPath));
 			const nested = target ? resolve(target, stack) : undefined;
 
 			if (nested) {
