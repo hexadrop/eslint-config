@@ -133,11 +133,16 @@ describe('core factory', () => {
 			tsconfigRootDir: '/repository',
 		});
 
-		expect(options).toEqual({ bun: true, project: ['/repository/tsconfig.json'] });
+		expect(options).toEqual({
+			bun: true,
+			noWarnOnMultipleProjects: true,
+			project: ['/repository/tsconfig.json'],
+		});
 	});
 
 	test('keeps absolute project paths and resolves resolver-only projects', () => {
 		expect(typeScriptResolverOptions({ project: ['/abs/tsconfig.json'], tsconfigRootDir: '/ignored' })).toEqual({
+			noWarnOnMultipleProjects: true,
 			project: ['/abs/tsconfig.json'],
 		});
 		expect(
@@ -152,8 +157,21 @@ describe('core factory', () => {
 				tsconfigRootDir: '/repository',
 			})
 		).toEqual({
+			noWarnOnMultipleProjects: true,
 			project: ['/repository/app.json'],
 		});
+	});
+
+	test('silences the multiple-projects warning only when it forwards the project', () => {
+		expect(
+			typeScriptResolverOptions({
+				project: ['./tsconfig.json'],
+				resolver: { noWarnOnMultipleProjects: false },
+			}).noWarnOnMultipleProjects
+		).toBe(false);
+		expect(typeScriptResolverOptions({ resolver: { project: ['tsconfig.json'] } }).noWarnOnMultipleProjects).toBe(
+			undefined
+		);
 	});
 
 	test('returns empty resolver options for a boolean typescript option', () => {

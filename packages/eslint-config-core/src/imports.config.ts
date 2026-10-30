@@ -56,6 +56,15 @@ export function typeScriptResolverOptions(typescript: CoreOptions['typescript'])
 		options.project = expandTsconfigProjects(toArray(configuredProject), root).map(index =>
 			path.isAbsolute(index) ? index : path.resolve(root, index)
 		);
+
+		/*
+		 * The project list is intentional (solution-style tsconfigs expand to
+		 * several projects), so the resolver must not warn about it. Consumers can
+		 * still opt back in with `resolver.noWarnOnMultipleProjects: false`.
+		 */
+		if (project && project !== true) {
+			options.noWarnOnMultipleProjects ??= true;
+		}
 	}
 
 	return options;
