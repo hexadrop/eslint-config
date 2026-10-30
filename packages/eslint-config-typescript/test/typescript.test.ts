@@ -135,12 +135,9 @@ describe('typescript config', () => {
 			mkdirSync(path.join(directory, 'app'), { recursive: true });
 			writeFileSync(
 				path.join(directory, 'tools.tsconfig.json'),
-				'{\n\t// tools project with comments\n\t"include": ["*.ts"]\n}'
+				'{\n\t// tools project with comments\n\t"include": ["*.ts"],\n}'
 			);
-			writeFileSync(
-				path.join(directory, 'app', 'tsconfig.json'),
-				JSON.stringify({ include: ['src'], references: [{ path: '../tsconfig.json' }] })
-			);
+			writeFileSync(path.join(directory, 'app', 'tsconfig.json'), JSON.stringify({ include: ['src'] }));
 			writeFileSync(
 				path.join(directory, 'tsconfig.json'),
 				JSON.stringify({
