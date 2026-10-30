@@ -1,1 +1,11 @@
-{"include":["src"],"compilerOptions":{"strict":true,"target":"ES2022"},"extends":"@hexadrop/tsconfig"}
+{
+	"extends": "@hexadrop/tsconfig",
+	"compilerOptions": {
+		"paths": {
+			"@fixture/*": ["./src/*"]
+		},
+		"strict": true,
+		"target": "ES2022"
+	},
+	"include": ["src"]
+}

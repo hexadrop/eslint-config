@@ -2,8 +2,10 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 
+import type { CoreTypescriptOptions } from '@hexadrop/eslint-config-core';
 import type { Nullable, RecursivePartial } from '@hexadrop/eslint-config-shared';
 import type { StylisticFormattingOptions } from '@hexadrop/eslint-config-stylistic';
+import type { TypescriptParserOptions } from '@hexadrop/eslint-config-typescript';
 import { isPackageExists } from 'local-pkg';
 
 import type { HexadropEslintIgnoreOptions } from './hexadrop-eslint-ignore.options';
@@ -130,7 +132,9 @@ interface HexadropEslintOptions {
 	 * If `false`, typescript support will be disabled.
 	 * If `true`, typescript support will be enabled with default options.
 	 * If a string or string[], enables type-aware linting with those tsconfig paths.
-	 * If an object, allows passing {@link TypescriptOptions.project} and {@link TypescriptOptions.tsconfigRootDir}.
+	 * If an object, allows passing {@link TypescriptOptions.project},
+	 * {@link TypescriptOptions.tsconfigRootDir}, {@link TypescriptOptions.resolver}
+	 * and {@link TypescriptOptions.parserOptions}.
 	 * If you leave empty, automatic detection will be used.
 	 *
 	 */
@@ -148,17 +152,16 @@ type ResolvedHexadropEslintOptions = Omit<HexadropEslintOptions, 'typescript'> &
 	typescript: boolean | TypescriptOptions;
 };
 
-interface TypescriptOptions {
+interface TypescriptOptions extends CoreTypescriptOptions {
 	/**
-	 * If true, enables TS support without type-aware linting.
-	 * If a string or array, enables type-aware linting with those tsconfig paths.
-	 * If false/undefined, returns an empty config.
+	 * Extra parser options merged into the TypeScript parser config after the
+	 * internal `project`/`tsconfigRootDir`.
+	 *
+	 * Use `projectService` to let typescript-eslint resolve the project per
+	 * file (solution-style tsconfigs, workspaces). `project` is omitted in that
+	 * mode so both resolution modes are never enabled at the same time.
 	 */
-	project?: boolean | string | string[];
-	/**
-	 * Root directory for tsconfig resolution. Defaults to cwd().
-	 */
-	tsconfigRootDir?: string;
+	parserOptions?: Partial<TypescriptParserOptions>;
 }
 
 function getCwdTsconfigPath(): string | undefined {
@@ -184,26 +187,17 @@ export default function defaultOptions(
 	/* eslint-disable typescript/no-unnecessary-condition -- RecursivePartial narrows types but runtime checks are needed */
 	if (options.typescript === true) {
 		typescript = true;
-	} else if (
-		typeof options.typescript === 'object' &&
-		!Array.isArray(options.typescript) &&
-		options.typescript !== null
-	) {
-		const tsOptions = options.typescript as TypescriptOptions;
+	} else if (typeof options.typescript === 'string') {
+		typescript = { project: options.typescript.length > 0 ? options.typescript : true };
+	} else if (Array.isArray(options.typescript)) {
 		typescript = {
-			project: tsOptions.project ?? undefined,
-			...(tsOptions.tsconfigRootDir && { tsconfigRootDir: tsOptions.tsconfigRootDir }),
-		} as TypescriptOptions;
-	} else if (isInstalledTypescript) {
-		if (options.typescript === undefined) {
-			typescript = { project: getCwdTsconfigPath() ?? true };
-		} else if (typeof options.typescript === 'string') {
-			typescript = { project: options.typescript.length > 0 ? options.typescript : true };
-		} else if (Array.isArray(options.typescript)) {
-			typescript = {
-				project: options.typescript.length > 0 ? (options.typescript.filter(Boolean) as string[]) : true,
-			};
-		}
+			project: options.typescript.length > 0 ? (options.typescript.filter(Boolean) as string[]) : true,
+		};
+	} else if (typeof options.typescript === 'object' && options.typescript !== null) {
+		const tsOptions = options.typescript as TypescriptOptions;
+		typescript = { ...tsOptions };
+	} else if (isInstalledTypescript && options.typescript === undefined) {
+		typescript = { project: getCwdTsconfigPath() ?? true };
 	}
 
 	return {

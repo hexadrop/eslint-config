@@ -32,12 +32,53 @@ describe('typescript option resolution', () => {
 		expect(options.typescript).toEqual({ project: ['./tsconfig.json', './tsconfig.tools.json'] });
 	});
 
+	test('keeps an explicit string tsconfig when typescript is not detected', () => {
+		void mock.module('local-pkg', () => ({
+			getPackageInfoSync: () => ({}),
+			isPackageExists: () => false,
+		}));
+
+		const options = defaultOptions({ typescript: './tsconfig.json' });
+
+		expect(options.typescript).toEqual({ project: './tsconfig.json' });
+	});
+
 	test('keeps the object form including tsconfigRootDir', () => {
 		const options = defaultOptions({
 			typescript: { project: './tsconfig.json', tsconfigRootDir: '/repository' },
 		});
 
 		expect(options.typescript).toEqual({ project: './tsconfig.json', tsconfigRootDir: '/repository' });
+	});
+
+	test('forwards parserOptions and resolver from the object form', () => {
+		const options = defaultOptions({
+			typescript: {
+				parserOptions: { projectService: true },
+				project: './tsconfig.json',
+				resolver: { bun: true },
+				tsconfigRootDir: '/repository',
+			},
+		});
+
+		expect(options.typescript).toEqual({
+			parserOptions: { projectService: true },
+			project: './tsconfig.json',
+			resolver: { bun: true },
+			tsconfigRootDir: '/repository',
+		});
+	});
+
+	test('enables type-aware linting with projectService and no project', async () => {
+		const configs = await hexadrop({
+			astro: false,
+			react: false,
+			typescript: { parserOptions: { projectService: true } },
+		});
+		const names = configs.map(config => config.name);
+
+		expect(names).toContain('hexadrop/typescript/setup/parser/type-aware');
+		expect(names).toContain('hexadrop/typescript/rules/type-aware');
 	});
 
 	test('emits the type-aware parser and rules for a string tsconfig', async () => {

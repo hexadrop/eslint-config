@@ -146,6 +146,36 @@ export default hexadrop(
 
 Check out the [options](https://github.com/hexadrop/eslint-config/blob/main/packages/eslint-config/src/options/hexadrop-eslint.options.ts) and [factory](https://github.com/hexadrop/eslint-config/blob/main/packages/eslint-config/src/factory.ts) for more details.
 
+### TypeScript
+
+TypeScript is enabled automatically when it is installed. The option accepts the same forms as before, plus an object for advanced project resolution:
+
+```js
+// eslint.config.js
+import hexadrop from '@hexadrop/eslint-config';
+
+export default hexadrop({
+  typescript: {
+    // Extra typescript-eslint parser options. Use projectService for
+    // solution-style tsconfigs or workspace layouts; `project` is then
+    // optional and omitted from the parser options.
+    parserOptions: { projectService: true },
+
+    // One or more tsconfigs used for type-aware linting and import resolution.
+    project: ['./tsconfig.json', './tsconfig.tools.json'],
+
+    // Extra options forwarded to eslint-import-resolver-typescript
+    // (bun, alwaysTryTypes, conditionNames, noWarnOnMultipleProjects, …).
+    resolver: { bun: true },
+
+    // Root the project paths are resolved from. Defaults to process.cwd().
+    tsconfigRootDir: import.meta.dirname,
+  },
+});
+```
+
+The configured projects are forwarded to `eslint-import-resolver-typescript`, so `import/no-unresolved` understands tsconfig `paths` aliases without a consumer override.
+
 ### Plugins Renaming
 
 Since flat config requires us to explicitly provide the plugin names (instead of the mandatory convention from npm

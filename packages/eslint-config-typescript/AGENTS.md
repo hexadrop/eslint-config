@@ -8,7 +8,7 @@ TypeScript config slice: typescript-eslint plugin, parser, type-aware linting an
 - `src/typescript.parser.ts` — parser config helper (languageOptions with parser + projectService/tsconfig wiring).
 - `src/typescript.factory.ts` — `FlatConfigComposer` wrapper exported as default.
 - `src/typescript.typed-config.ts` — local `TypedFlatConfigItem` alias.
-- `src/index.ts` — public API: `config` (raw function), `default` factory.
+- `src/index.ts` — public API: `config` (raw function), `default` factory, `TypescriptFactoryOptions` and `TypescriptParserOptions` types.
 
 ## Tests
 

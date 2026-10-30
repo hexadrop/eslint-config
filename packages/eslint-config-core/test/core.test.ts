@@ -22,6 +22,7 @@ import coreFactory, {
 	IMPORTS_CONFIG_NAME_SETUP,
 	IMPORTS_CONFIG_NAME_SETUP_TYPESCRIPT,
 } from '../src';
+import { typeScriptResolverOptions } from '../src/imports.config';
 
 const ALL_OFF = {
 	astro: false,
@@ -123,6 +124,41 @@ describe('core factory', () => {
 		expect(configs.some(config => config.name === IMPORTS_CONFIG_NAME_RULES_TYPESCRIPT)).toBe(true);
 		expect(configs.some(config => config.name === IMPORTS_CONFIG_NAME_RULES_ASTRO)).toBe(true);
 		expect(configs.some(config => config.name === IMPORTS_CONFIG_NAME_RULES_STYLISTIC)).toBe(true);
+	});
+
+	test('forwards the configured project paths to the typescript import resolver', () => {
+		const options = typeScriptResolverOptions({
+			project: ['./tsconfig.json'],
+			resolver: { bun: true },
+			tsconfigRootDir: '/repository',
+		});
+
+		expect(options).toEqual({ bun: true, project: ['/repository/tsconfig.json'] });
+	});
+
+	test('keeps absolute project paths and resolves resolver-only projects', () => {
+		expect(typeScriptResolverOptions({ project: ['/abs/tsconfig.json'], tsconfigRootDir: '/ignored' })).toEqual({
+			project: ['/abs/tsconfig.json'],
+		});
+		expect(
+			typeScriptResolverOptions({ resolver: { project: ['tsconfig.json'] }, tsconfigRootDir: '/repository' })
+		).toEqual({
+			project: ['/repository/tsconfig.json'],
+		});
+		expect(
+			typeScriptResolverOptions({
+				project: ['./app.json'],
+				resolver: { project: ['./ignored.json'] },
+				tsconfigRootDir: '/repository',
+			})
+		).toEqual({
+			project: ['/repository/app.json'],
+		});
+	});
+
+	test('returns empty resolver options for a boolean typescript option', () => {
+		expect(typeScriptResolverOptions(true)).toEqual({});
+		expect(typeScriptResolverOptions(false)).toEqual({});
 	});
 
 	test('honours the module flags for dynamic require and webpack syntax', async () => {
