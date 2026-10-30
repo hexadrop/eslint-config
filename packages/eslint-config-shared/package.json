@@ -27,6 +27,14 @@
 		".": "./src/index.ts",
 		"./*": "./src/*"
 	},
+	"peerDependencies": {
+		"yaml": "^2.9.1"
+	},
+	"peerDependenciesMeta": {
+		"yaml": {
+			"optional": true
+		}
+	},
 	"devDependencies": {
 		"eslint": "10.13.0",
 		"eslint-typegen": "2.3.2"

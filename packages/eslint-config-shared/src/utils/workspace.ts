@@ -2,6 +2,8 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 
+import { parse as parseYaml } from 'yaml';
+
 import stripJsonc from './jsonc';
 
 interface WorkspaceManifest {
@@ -20,8 +22,11 @@ const IGNORED_DIRECTORIES = new Set([
 	'node_modules',
 ]);
 
-const PNPM_PACKAGES_KEY = 'packages:';
 const PNPM_WORKSPACE_FILE = 'pnpm-workspace.yaml';
+
+interface PnpmWorkspaceManifest {
+	packages?: unknown;
+}
 
 /**
  * Read the workspace patterns from `package.json#workspaces`, supporting both
@@ -45,40 +50,11 @@ function readJsonWorkspacePatterns(rootDirectory: string): string[] {
 }
 
 /**
- * Read a YAML scalar, dropping surrounding quotes and any trailing comment.
- */
-function parseScalar(value: string): string {
-	const trimmed = value.trim();
-	const comment = trimmed.indexOf(' #');
-	const withoutComment = (comment === -1 ? trimmed : trimmed.slice(0, comment)).trim();
-	const quoted = /^(?:'|")(?<value>.*?)(?:'|")$/u.exec(withoutComment);
-
-	return quoted?.groups?.['value'] ?? withoutComment;
-}
-
-/**
- * Read an inline YAML sequence such as `packages: ['apps/*', 'packages/*']`.
- */
-function parseInlineSequence(value: string): string[] {
-	const trimmed = value.trim();
-
-	if (!trimmed.startsWith('[') || !trimmed.endsWith(']')) {
-		return [];
-	}
-
-	return trimmed
-		.slice(1, -1)
-		.split(',')
-		.map(item => parseScalar(item))
-		.filter(item => item.length > 0);
-}
-
-/**
  * Read the `packages:` patterns from `pnpm-workspace.yaml`.
  *
- * Only the subset pnpm documents for workspace globs is supported: the block
- * sequence under `packages:` or its inline form, with optional quotes. Every
- * other key is ignored, so catalogs and settings do not interfere.
+ * pnpm keeps its workspace globs in YAML instead of the manifest, so the file
+ * is parsed with a YAML parser. A malformed file is treated as "no patterns"
+ * for the same reason as a missing manifest: config load must not throw.
  */
 function readPnpmWorkspacePatterns(rootDirectory: string): string[] {
 	const file = path.join(rootDirectory, PNPM_WORKSPACE_FILE);
@@ -87,39 +63,16 @@ function readPnpmWorkspacePatterns(rootDirectory: string): string[] {
 		return [];
 	}
 
-	const patterns: string[] = [];
-	let isInPackages = false;
+	try {
+		const manifest = parseYaml(readFileSync(file, 'utf8')) as null | PnpmWorkspaceManifest;
+		const packages = manifest?.packages;
 
-	for (const rawLine of readFileSync(file, 'utf8').split('\n')) {
-		const line = rawLine.replace(/\r$/u, '');
-		const trimmed = line.trim();
-
-		if (trimmed.length === 0 || trimmed.startsWith('#')) {
-			continue;
-		}
-
-		if (!/^\s/u.test(line) && !trimmed.startsWith('-')) {
-			isInPackages = trimmed.startsWith(PNPM_PACKAGES_KEY);
-
-			if (isInPackages) {
-				patterns.push(...parseInlineSequence(trimmed.slice(PNPM_PACKAGES_KEY.length)));
-			}
-
-			continue;
-		}
-
-		if (!isInPackages) {
-			continue;
-		}
-
-		const item = parseScalar(trimmed.startsWith('-') ? trimmed.slice(1) : trimmed);
-
-		if (item.length > 0) {
-			patterns.push(item);
-		}
+		return Array.isArray(packages)
+			? packages.filter((pattern): pattern is string => typeof pattern === 'string')
+			: [];
+	} catch {
+		return [];
 	}
-
-	return patterns;
 }
 
 /**
