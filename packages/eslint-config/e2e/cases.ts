@@ -9,9 +9,14 @@ const FIXTURES_DIR = path.join(import.meta.dir, 'fixtures');
 
 interface EndToEndCase extends BaseEndToEndCase {
 	/**
-	 *Working directory for this case, relative to the fixtures directory.
+	 * Working directory for this case, relative to the fixtures directory.
 	 */
 	cwd?: string;
+	/**
+	 * Config names the resolved config must include, used to prove that
+	 * auto-detection enabled the expected slices for this fixture.
+	 */
+	expectedConfigNames?: string[];
 	extraConfigs?: TypedFlatConfigItem[];
 	options?: RecursivePartial<HexadropEslintOptions>;
 }
@@ -66,6 +71,7 @@ export const END_TO_END_CASES: EndToEndCase[] = [
 	},
 	{
 		cwd: 'workspace',
+		expectedConfigNames: ['hexadrop/react/setup', 'hexadrop/typescript/setup'],
 		file: 'workspace/packages/app/src/app.tsx',
 		options: { astro: false },
 		slug: 'workspace',
