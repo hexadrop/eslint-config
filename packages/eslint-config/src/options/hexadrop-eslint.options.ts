@@ -3,7 +3,7 @@ import path from 'node:path';
 import process from 'node:process';
 
 import type { CoreTypescriptOptions } from '@hexadrop/eslint-config-core';
-import type { ReactRefreshOptions } from '@hexadrop/eslint-config-react';
+import type { ReactConfigOptions } from '@hexadrop/eslint-config-react';
 import type { Nullable, RecursivePartial } from '@hexadrop/eslint-config-shared';
 import type { StylisticFormattingOptions } from '@hexadrop/eslint-config-stylistic';
 import type { TypescriptParserOptions } from '@hexadrop/eslint-config-typescript';
@@ -41,16 +41,12 @@ interface HexadropEslintStylisticOptions extends StylisticFormattingOptions {
 	unicorn: boolean;
 }
 
-interface HexadropEslintReactOptions {
-	/**
-	 * Enable `react-refresh/only-export-components`.
-	 *
-	 * When omitted it is enabled only when Vite (Fast Refresh) is installed.
-	 * `true` forces it on, `false` turns it off and an object enables it with
-	 * extra allowed export names.
-	 */
-	refresh?: boolean | ReactRefreshOptions;
-}
+/**
+ * The react preset options the meta-package exposes. `typescript` is not
+ * forwarded: the top-level `typescript` option already decides it for every
+ * slice.
+ */
+type HexadropEslintReactOptions = Pick<ReactConfigOptions, 'refresh'>;
 
 interface HexadropEslintOptions {
 	/**
