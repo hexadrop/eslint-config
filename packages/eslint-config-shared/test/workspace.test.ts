@@ -157,6 +157,22 @@ describe('getWorkspaceDirectories', () => {
 		}
 	});
 
+	test('reads a commented package.json as JSONC', () => {
+		const root = mkdtempSync(path.join(tmpdir(), 'hexadrop-workspace-'));
+
+		try {
+			writeFileSync(
+				path.join(root, 'package.json'),
+				['{', '  // tooling only', '  "workspaces": ["packages/*"],', '}'].join('\n')
+			);
+			createPackage(root, 'packages/app');
+
+			expect(getWorkspaceDirectories(root)).toEqual([root, path.join(root, 'packages', 'app')]);
+		} finally {
+			rmSync(root, { force: true, recursive: true });
+		}
+	});
+
 	test('returns only the root when there is no package.json or workspaces', () => {
 		const root = mkdtempSync(path.join(tmpdir(), 'hexadrop-workspace-'));
 

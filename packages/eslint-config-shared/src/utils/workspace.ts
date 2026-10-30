@@ -2,6 +2,8 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 
+import stripJsonc from './jsonc';
+
 interface WorkspaceManifest {
 	workspaces?: string[] | { packages?: string[] };
 }
@@ -25,14 +27,15 @@ const PNPM_WORKSPACE_FILE = 'pnpm-workspace.yaml';
  * Read the workspace patterns from `package.json#workspaces`, supporting both
  * the array and the `{ packages }` form.
  *
+ * The manifest is parsed as JSONC, so a commented or trailing-comma
+ * `package.json` is read the same way the tsconfig resolver reads manifests.
  * A missing or unreadable manifest is not an error: workspaces are optional,
  * so it resolves to "no patterns" instead of throwing during config load.
  */
 function readJsonWorkspacePatterns(rootDirectory: string): string[] {
 	try {
-		const manifest = JSON.parse(
-			readFileSync(path.join(rootDirectory, 'package.json'), 'utf8')
-		) as WorkspaceManifest;
+		const source = readFileSync(path.join(rootDirectory, 'package.json'), 'utf8');
+		const manifest = JSON.parse(stripJsonc(source)) as WorkspaceManifest;
 		const workspaces = manifest.workspaces;
 
 		return Array.isArray(workspaces) ? workspaces : (workspaces?.packages ?? []);
