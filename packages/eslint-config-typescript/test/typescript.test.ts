@@ -1,3 +1,7 @@
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
+
 import { describe, expect, test } from 'bun:test';
 
 import typescriptFactory from '../src';
@@ -122,6 +126,37 @@ describe('typescript config', () => {
 		expect(parserOptions?.['project']).toBeUndefined();
 		expect(parserOptions?.['projectService']).toBe(true);
 		expect(parserOptions?.['tsconfigRootDir']).toBe('/custom/root');
+	});
+
+	test('expands solution-style tsconfig references into concrete projects', async () => {
+		const directory = mkdtempSync(path.join(tmpdir(), 'hexadrop-tsconfig-'));
+
+		try {
+			mkdirSync(path.join(directory, 'app'), { recursive: true });
+			writeFileSync(
+				path.join(directory, 'tools.tsconfig.json'),
+				'{\n\t// tools project with comments\n\t"include": ["*.ts"],\n}'
+			);
+			writeFileSync(path.join(directory, 'app', 'tsconfig.json'), JSON.stringify({ include: ['src'] }));
+			writeFileSync(
+				path.join(directory, 'tsconfig.json'),
+				JSON.stringify({
+					files: [],
+					references: [{ path: './tools.tsconfig.json' }, { path: './app' }, { path: './app' }],
+				})
+			);
+
+			const configs = await typescriptFactory({ project: path.join(directory, 'tsconfig.json') });
+			const parser = configs.find(config => config.name === SETUP_PARSER_TYPEAWARE);
+			const parserOptions = parser?.languageOptions?.['parserOptions'] as Record<string, unknown> | undefined;
+
+			expect(parserOptions?.['project']).toEqual([
+				path.join(directory, 'tools.tsconfig.json'),
+				path.join(directory, 'app', 'tsconfig.json'),
+			]);
+		} finally {
+			rmSync(directory, { force: true, recursive: true });
+		}
 	});
 
 	test('applies eslint-recommended overrides on SOURCE_GLOBS', async () => {

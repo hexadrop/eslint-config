@@ -27,7 +27,7 @@ export default typescript({ project: 'tsconfig.json' });
 
 ### With the meta-package
 
-The meta-package enables this slice automatically when `typescript` is installed, or explicitly with `typescript: true` / a tsconfig path.
+The meta-package enables this slice automatically when `typescript` is installed, using the root `tsconfig.json` when there is one (type-aware), or explicitly with `typescript: true` (non-type-aware) / a tsconfig path (type-aware).
 
 ## Options
 
@@ -35,9 +35,20 @@ The meta-package enables this slice automatically when `typescript` is installed
 |---|---|---|
 | `project` | `undefined` | `true` enables TS without type-aware linting; a path or list of paths enables type-aware linting; `false`/omitted returns an empty config. |
 | `tsconfigRootDir` | `process.cwd()` | Root directory used to resolve the tsconfig paths. |
-| `parserOptions` | `undefined` | Extra typescript-eslint parser options merged after `project`/`tsconfigRootDir`. Use `{ projectService: true }` for solution-style tsconfigs or workspaces; `project` is then optional and omitted from the parser options. |
+| `parserOptions` | `undefined` | Extra typescript-eslint parser options merged after `project`/`tsconfigRootDir`. Use `{ projectService: true }` when typescript-eslint should resolve the project per file (workspaces); `project` is then optional and omitted from the parser options. |
 
 `tsconfigRootDir` is forwarded in both modes, so a workspace can root project resolution without replacing the whole config item. When using the meta-package, `parserOptions` is forwarded unchanged from `typescript.parserOptions`.
+
+### Solution-style tsconfigs
+
+A root `tsconfig.json` that only lists `references` (`files: []` plus `project references`) is expanded automatically: every reference is followed recursively (cycles are cut, duplicates removed) and the concrete projects are handed to the parser and the import resolver. Only the configured project is expanded — `project: true` stays non-type-aware — and the expanded references are absolute paths resolved from the config that declares them. Set `tsconfigRootDir` when the solution file lives outside `process.cwd()`:
+
+```js
+export default typescript({
+  project: './tsconfig.json',
+  tsconfigRootDir: import.meta.dirname,
+});
+```
 
 ## Optional peers
 

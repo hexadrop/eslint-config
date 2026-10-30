@@ -18,7 +18,7 @@ The meta-package composes core's raw `core`, `ignore` and `imports` config funct
 
 - Types: `Awaitable`, `Nullable`, `RecursivePartial`, and the generic `TypedFlatConfigItem<RuleOptionsType>`.
 - Constants: `PLUGIN_PREFIX`.
-- Utilities: `interopDefault`, `toArray`, `renameRules`, `pluginConfigRules`, `pluginConfigOverrideRules`.
+- Utilities: `combine`, `expandTsconfigProjects`, `extractTypedFlatConfigItem`, `interopDefault`, `pluginConfigRules`, `pluginConfigOverrideRules`, `renameRules`, `toArray`.
 - Globs: the universal and feature-specific file globs, bundled into each package.
 
 ### Consumption rules

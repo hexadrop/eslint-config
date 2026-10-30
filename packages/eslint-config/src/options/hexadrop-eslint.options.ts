@@ -130,12 +130,15 @@ interface HexadropEslintOptions {
 	 * Configure typescript support.
 	 *
 	 * If `false`, typescript support will be disabled.
-	 * If `true`, typescript support will be enabled with default options.
+	 * If `true`, typescript support will be enabled without type-aware
+	 * linting; use a string, array or object to lint with type information.
 	 * If a string or string[], enables type-aware linting with those tsconfig paths.
 	 * If an object, allows passing {@link TypescriptOptions.project},
 	 * {@link TypescriptOptions.tsconfigRootDir}, {@link TypescriptOptions.resolver}
 	 * and {@link TypescriptOptions.parserOptions}.
-	 * If you leave empty, automatic detection will be used.
+	 * If you leave empty, automatic detection will be used: the root
+	 * `tsconfig.json` when there is one, which a solution-style root expands
+	 * into its referenced projects.
 	 *
 	 */
 	typescript: boolean | string | string[] | TypescriptOptions;

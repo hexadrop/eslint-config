@@ -53,6 +53,14 @@ export const END_TO_END_CASES: EndToEndCase[] = [
 		slug: 'typescript-alias',
 	},
 	{
+		file: 'solution/src/solution.ts',
+		options: {
+			...DEFAULTS,
+			typescript: { project: './solution/tsconfig.json', tsconfigRootDir: FIXTURES_DIR },
+		},
+		slug: 'typescript-solution',
+	},
+	{
 		file: 'javascript.js',
 		options: { astro: false, react: false, typescript: false },
 		slug: 'javascript',

@@ -174,7 +174,7 @@ export default hexadrop({
 });
 ```
 
-The configured projects are forwarded to `eslint-import-resolver-typescript`, so `import/no-unresolved` understands tsconfig `paths` aliases without a consumer override.
+The configured projects are forwarded to `eslint-import-resolver-typescript`, so `import/no-unresolved` understands tsconfig `paths` aliases without a consumer override. Solution-style tsconfigs (`files: []` plus `references`) are expanded into their concrete projects automatically.
 
 ### Plugins Renaming
 

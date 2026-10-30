@@ -1,3 +1,6 @@
+import { existsSync } from 'node:fs';
+import path from 'node:path';
+
 import { afterEach, beforeEach, describe, expect, mock, test } from 'bun:test';
 
 import hexadrop from '../src';
@@ -20,6 +23,19 @@ afterEach(() => {
 });
 
 describe('typescript option resolution', () => {
+	test('keeps typescript: true non-type-aware', () => {
+		const options = defaultOptions({ typescript: true });
+
+		expect(options.typescript).toBe(true);
+	});
+
+	test('detects the root tsconfig when typescript is left empty', () => {
+		const options = defaultOptions({});
+		const expected = existsSync(path.resolve('tsconfig.json')) ? 'tsconfig.json' : true;
+
+		expect(options.typescript).toEqual({ project: expected });
+	});
+
 	test('keeps a string tsconfig path instead of disabling typescript', () => {
 		const options = defaultOptions({ typescript: './tsconfig.json' });
 
