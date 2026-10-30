@@ -14,7 +14,7 @@ Internal shared types, constants, globs, feature config names and utilities for 
 |--------------|------------------------------------------------------------------------------------------------------------------|
 | `src/types/`        | Pure types: `Awaitable`, `Nullable`, `RecursivePartial`, and the generic `TypedFlatConfigItem<RuleOptionsType>`. |
 | `src/const/`        | `PLUGIN_PREFIX` (`'hexadrop'`).                                                                                  |
-| `src/utils/`        | `combine`, `expandTsconfigProjects`, `extractTypedFlatConfigItem`, `interopDefault`, `pluginConfigRules`, `pluginConfigOverrideRules`, `renameRules`, `toArray`. |
+| `src/utils/`        | `combine`, `expandTsconfigProjects`, `extractTypedFlatConfigItem`, `getWorkspaceDirectories`, `interopDefault`, `pluginConfigRules`, `pluginConfigOverrideRules`, `renameRules`, `toArray`. |
 | `src/globs/`        | Universal and feature-specific file globs, bundled into each package.                                            |
 | `src/config-names/` | Config names for the feature packages; the core/ignore/imports names live in `@hexadrop/eslint-config-core`.   |
 | `test/`             | Bun tests for the utilities; run `bun test packages` from the repository root.                                   |
