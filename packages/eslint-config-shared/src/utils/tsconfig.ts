@@ -1,6 +1,8 @@
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 
+import stripJsonc from './jsonc';
+
 interface TsconfigReference {
 	path: string;
 }
@@ -11,80 +13,9 @@ interface TsconfigShape {
 	references?: TsconfigReference[];
 }
 
-/**
- * Remove JSONC comments and trailing commas so a regular `JSON.parse` can read
- * a tsconfig. The scanner keeps string contents untouched, so URLs such as
- * `https://` in string values are not mistaken for comments.
- */
-function stripJsonComments(source: string): string {
-	let result = '';
-	let isEscaped = false;
-	let isInBlockComment = false;
-	let isInLineComment = false;
-	let isInString = false;
-
-	for (let index = 0; index < source.length; index++) {
-		const character = source.charAt(index);
-
-		if (isInLineComment) {
-			if (character === '\n') {
-				isInLineComment = false;
-				result += character;
-			}
-
-			continue;
-		}
-
-		if (isInBlockComment) {
-			if (character === '*' && source.charAt(index + 1) === '/') {
-				isInBlockComment = false;
-				index++;
-			}
-
-			continue;
-		}
-
-		if (isInString) {
-			result += character;
-
-			if (isEscaped) {
-				isEscaped = false;
-			} else if (character === '\\') {
-				isEscaped = true;
-			} else if (character === '"') {
-				isInString = false;
-			}
-
-			continue;
-		}
-
-		if (character === '"') {
-			isInString = true;
-			result += character;
-			continue;
-		}
-
-		if (character === '/' && source.charAt(index + 1) === '/') {
-			isInLineComment = true;
-			index++;
-			continue;
-		}
-
-		if (character === '/' && source.charAt(index + 1) === '*') {
-			isInBlockComment = true;
-			index++;
-			continue;
-		}
-
-		result += character;
-	}
-
-	return result.replaceAll(/,(?<closing>\s*[}\]])/g, '$<closing>');
-}
-
 function readTsconfig(file: string): TsconfigShape | undefined {
 	try {
-		return JSON.parse(stripJsonComments(readFileSync(file, 'utf8'))) as TsconfigShape;
+		return JSON.parse(stripJsonc(readFileSync(file, 'utf8'))) as TsconfigShape;
 	} catch {
 		return undefined;
 	}
