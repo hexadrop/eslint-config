@@ -20,3 +20,4 @@ For editing a concern, go to its package under `packages/`; the meta-package onl
 - [Release process](docs/agents/release-process.md) — changesets, beta snapshots, stable releases, and hotfixes.
 - [Pull requests](docs/agents/pull-requests.md) — approved-issue, labeling, checklist, and merge requirements.
 - [Branches and commits](docs/agents/branches-and-commits.md) — GitFlow branches, naming, conventions, and hooks.
+- [Automation](docs/agents/automation.md) — `hexabot` app, tokens, shared workflows, and key rotation.
