@@ -92,7 +92,7 @@ describe('typescript config', () => {
 		const parserOptions = parser?.languageOptions?.['parserOptions'] as Record<string, unknown> | undefined;
 
 		expect(parserOptions).toBeDefined();
-		expect(parserOptions?.['project']).toEqual([path.resolve('tsconfig.json')]);
+		expect(parserOptions?.['project']).toEqual(['tsconfig.json']);
 		expect(typeof parserOptions?.['tsconfigRootDir']).toBe('string');
 		expect(parserOptions?.['allowDefaultProject']).toEqual(['*.config.js']);
 	});

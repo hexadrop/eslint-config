@@ -105,6 +105,17 @@ function resolveReference(reference: string, baseDirectory: string): string | un
 	return candidates.find(candidate => isFile(candidate));
 }
 
+function appendUnique(target: string[], seen: Set<string>, files: string[]): void {
+	for (const file of files) {
+		if (seen.has(file)) {
+			continue;
+		}
+
+		seen.add(file);
+		target.push(file);
+	}
+}
+
 function isSolutionTsconfig(config: TsconfigShape): boolean {
 	return (
 		Boolean(config.references?.length) && (config.files?.length ?? 0) === 0 && (config.include?.length ?? 0) === 0
@@ -116,58 +127,65 @@ function isSolutionTsconfig(config: TsconfigShape): boolean {
  * concrete projects typescript-eslint can lint against.
  *
  * References are followed recursively, cycles are cut and duplicate projects
- * are removed. Non-solution projects and unreadable configs are returned as
- * given, so the previous behavior is preserved when a project cannot be
- * expanded.
+ * are removed. The expanded references are absolute paths, resolved from the
+ * config that declares them. Entries that cannot be expanded — non-solution
+ * configs, glob patterns, missing or unreadable files — are returned exactly as
+ * given, so the previous behavior is preserved for them.
  */
 export function expandTsconfigProjects(projects: string[], rootDirectory: string): string[] {
 	const expanded: string[] = [];
 	const seen = new Set<string>();
 
-	function visit(project: string, stack: Set<string>): void {
+	function resolve(project: string, stack: Set<string>): string[] | undefined {
 		const absolute = path.isAbsolute(project) ? project : path.resolve(rootDirectory, project);
 		const configPath = [absolute, `${absolute}.json`, path.join(absolute, 'tsconfig.json')].find(candidate =>
 			isFile(candidate)
 		);
 
 		if (!configPath || stack.has(configPath)) {
-			return;
+			return undefined;
 		}
 
 		const config = readTsconfig(configPath);
 
 		if (!config) {
-			return;
+			return undefined;
 		}
 
-		if (isSolutionTsconfig(config)) {
-			stack.add(configPath);
-			const references = config.references ?? [];
+		if (!isSolutionTsconfig(config)) {
+			return [project];
+		}
 
-			for (const reference of references) {
-				const target = resolveReference(reference.path, path.dirname(configPath));
+		stack.add(configPath);
+		const references = config.references ?? [];
+		const resolved: string[] = [];
 
-				if (target) {
-					visit(target, stack);
-				}
+		for (const reference of references) {
+			const target = resolveReference(reference.path, path.dirname(configPath));
+			const nested = target ? resolve(target, stack) : undefined;
+
+			if (nested) {
+				resolved.push(...nested);
 			}
-
-			stack.delete(configPath);
-
-			return;
 		}
 
-		if (!seen.has(configPath)) {
-			seen.add(configPath);
-			expanded.push(configPath);
-		}
+		stack.delete(configPath);
+
+		return resolved.length > 0 ? resolved : undefined;
 	}
 
 	for (const project of projects) {
-		visit(project, new Set());
+		const resolved = resolve(project, new Set());
+
+		if (!resolved) {
+			expanded.push(project);
+			continue;
+		}
+
+		appendUnique(expanded, seen, resolved);
 	}
 
-	return expanded.length > 0 ? expanded : projects;
+	return expanded;
 }
 
 export type { TsconfigReference, TsconfigShape };
