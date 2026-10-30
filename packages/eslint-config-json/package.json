@@ -49,6 +49,6 @@
 		"jsonc-eslint-parser": "3.3.0"
 	},
 	"devDependencies": {
-		"tsdown": "0.23.2"
+		"tsdown": "0.23.4"
 	}
 }
