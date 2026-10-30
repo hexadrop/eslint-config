@@ -238,7 +238,18 @@ export default function defaultOptions(
 		};
 	} else if (typeof options.typescript === 'object' && options.typescript !== null) {
 		const tsOptions = options.typescript as TypescriptOptions;
-		typescript = { ...tsOptions };
+		const hasProject = tsOptions.project !== undefined;
+		const hasProjectService = Boolean(tsOptions.parserOptions?.projectService);
+
+		/*
+		 * `projectService: false` disables the only resolution mode the object
+		 * form asked for, so fall back to detection instead of shipping a config
+		 * that silently turns TypeScript support off.
+		 */
+		typescript =
+			hasProject || hasProjectService
+				? { ...tsOptions }
+				: { ...tsOptions, project: getDefaultTypescriptProject() ?? true };
 	} else if (isInstalledTypescript && options.typescript === undefined) {
 		typescript = { project: getDefaultTypescriptProject() ?? true };
 	}

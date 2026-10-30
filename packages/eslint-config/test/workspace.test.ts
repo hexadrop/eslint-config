@@ -145,4 +145,27 @@ describe('workspace option detection', () => {
 			expect(defaultOptions({}).typescript).toEqual({ project: ['./packages/app/tsconfig.json'] });
 		});
 	});
+
+	test('keeps detection when projectService is explicitly disabled', () => {
+		const root = createWorkspace();
+
+		withWorkspace(root, () => {
+			expect(defaultOptions({ typescript: { parserOptions: { projectService: false } } }).typescript).toEqual({
+				parserOptions: { projectService: false },
+				project: ['./packages/app/tsconfig.json'],
+			});
+		});
+	});
+
+	test('keeps an explicit project when projectService is also set', () => {
+		const root = createWorkspace();
+
+		withWorkspace(root, () => {
+			expect(
+				defaultOptions({
+					typescript: { parserOptions: { projectService: false }, project: './tsconfig.tools.json' },
+				}).typescript
+			).toEqual({ parserOptions: { projectService: false }, project: './tsconfig.tools.json' });
+		});
+	});
 });
