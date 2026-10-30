@@ -63,7 +63,7 @@ function isSolutionTsconfig(config: TsconfigShape): boolean {
  * configs, glob patterns, missing or unreadable files — are returned exactly as
  * given, so the previous behavior is preserved for them.
  */
-export function expandTsconfigProjects(projects: string[], rootDirectory: string): string[] {
+export default function expandTsconfigProjects(projects: string[], rootDirectory: string): string[] {
 	const expanded: string[] = [];
 	const seen = new Set<string>();
 
@@ -115,5 +115,3 @@ export function expandTsconfigProjects(projects: string[], rootDirectory: string
 
 	return expanded;
 }
-
-export type { TsconfigReference, TsconfigShape };
