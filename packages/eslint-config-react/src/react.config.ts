@@ -9,9 +9,9 @@ import {
 } from '@hexadrop/eslint-config-shared';
 import { getPackageInfoSync, isPackageExists } from 'local-pkg';
 
+import isFastRefreshProject from './react.refresh';
 import type { TypedFlatConfigItem } from './react.typed-config';
-
-const REACT_REFRESH_ALLOW_CONSTANT_EXPORT_PACKAGES = ['vite'];
+import type { ReactConfigOptions, ReactRefreshOptions } from './react.types';
 
 /**
  * Resolve the installed React version at config time.
@@ -23,6 +23,25 @@ const REACT_REFRESH_ALLOW_CONSTANT_EXPORT_PACKAGES = ['vite'];
  */
 function detectReactVersion(): string | undefined {
 	return getPackageInfoSync('react')?.version;
+}
+
+interface ResolvedRefreshRule {
+	enabled: boolean;
+	options: ReactRefreshOptions;
+}
+
+/**
+ * Resolve the `refresh` option against the detected project.
+ *
+ * An object implies the rule is on, `true`/`false` are explicit and `undefined`
+ * defers to Fast Refresh detection.
+ */
+function resolveRefreshRule(refresh: ReactConfigOptions['refresh'], isFastRefresh: boolean): ResolvedRefreshRule {
+	if (typeof refresh === 'object') {
+		return { enabled: true, options: refresh };
+	}
+
+	return { enabled: refresh ?? isFastRefresh, options: {} };
 }
 
 function isTypescriptEnabled(options: ReactConfigOptions): boolean {
@@ -48,7 +67,8 @@ export default async function reactConfig(options: ReactConfigOptions = {}): Pro
 		interopDefault(import('eslint-plugin-react-hooks')),
 		interopDefault(import('eslint-plugin-react-refresh')),
 	] as const);
-	const isAllowConstantExport = REACT_REFRESH_ALLOW_CONSTANT_EXPORT_PACKAGES.some(index => isPackageExists(index));
+	const isFastRefresh = isFastRefreshProject();
+	const refresh = resolveRefreshRule(options.refresh, isFastRefresh);
 	const reactVersion = detectReactVersion();
 
 	const files = [...GLOB_REACT_JSX, ...(isTypescript ? GLOB_REACT_TSX : [])];
@@ -114,21 +134,16 @@ export default async function reactConfig(options: ReactConfigOptions = {}): Pro
 			files,
 			name: REACT_CONFIG_NAME_RULES_REFRESH,
 			rules: {
-				'react-refresh/only-export-components': ['warn', { allowConstantExport: isAllowConstantExport }],
+				'react-refresh/only-export-components': refresh.enabled
+					? [
+							'warn',
+							{
+								allowConstantExport: isFastRefresh,
+								...refresh.options,
+							},
+						]
+					: 'off',
 			},
 		},
 	];
-}
-
-export interface ReactConfigOptions {
-	/**
-	 * Whether typescript support should be enabled (TSX globs, TS-specific rules).
-	 *
-	 * When omitted, auto-detected via `@hexadrop/eslint-config-typescript` presence.
-	 * Set explicitly to override auto-detection: `false` forces JS-only mode,
-	 * `true` forces TS mode — throws an actionable error if the peer is not installed.
-	 *
-	 * @default undefined (auto-detect)
-	 */
-	typescript?: boolean;
 }

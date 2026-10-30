@@ -202,6 +202,53 @@ exports[`e2e fixtures tsx: fixtures/react.tsx through eslint --fix: tsx-content 
 "
 `;
 
+exports[`e2e fixtures jsx-refresh-off: fixtures/react-refresh.jsx through eslint --fix: jsx-refresh-off-diagnostics 1`] = `
+[
+  {
+    "column": 16,
+    "line": 2,
+    "message": "Missing return type on function.",
+    "ruleId": "typescript/explicit-module-boundary-types",
+    "severity": 2,
+  },
+]
+`;
+
+exports[`e2e fixtures jsx-refresh-off: fixtures/react-refresh.jsx through eslint --fix: jsx-refresh-off-content 1`] = `
+"export const buttonVariants = { primary: 'bg-blue-500', secondary: 'bg-gray-500' };
+export default function Button() {
+	return <button className={buttonVariants.primary}>ok</button>;
+}
+"
+`;
+
+exports[`e2e fixtures jsx-refresh-on: fixtures/react-refresh.jsx through eslint --fix: jsx-refresh-on-diagnostics 1`] = `
+[
+  {
+    "column": 14,
+    "line": 1,
+    "message": "Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components.",
+    "ruleId": "react-refresh/only-export-components",
+    "severity": 1,
+  },
+  {
+    "column": 16,
+    "line": 2,
+    "message": "Missing return type on function.",
+    "ruleId": "typescript/explicit-module-boundary-types",
+    "severity": 2,
+  },
+]
+`;
+
+exports[`e2e fixtures jsx-refresh-on: fixtures/react-refresh.jsx through eslint --fix: jsx-refresh-on-content 1`] = `
+"export const buttonVariants = { primary: 'bg-blue-500', secondary: 'bg-gray-500' };
+export default function Button() {
+	return <button className={buttonVariants.primary}>ok</button>;
+}
+"
+`;
+
 exports[`e2e fixtures astro: fixtures/astro.astro through eslint --fix: astro-diagnostics 1`] = `[]`;
 
 exports[`e2e fixtures astro: fixtures/astro.astro through eslint --fix: astro-content 1`] = `

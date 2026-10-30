@@ -35,7 +35,10 @@ The meta-package `@hexadrop/eslint-config` enables react automatically when `rea
 
 | Option | Default | Description |
 |---|---|---|
+| `refresh` | auto-detected | Enables `react-refresh/only-export-components`. Enabled only when the project declares `vite` or `next` in its `package.json`, because the rule is about Fast Refresh boundaries; `true` forces it on, `false` turns it off, and an object (`{ allowExportNames }`) enables it with extra allowed exports. |
 | `typescript` | auto-detected | Adds TSX globs and the TypeScript-specific rule adjustments. `true` forces TS mode (throws if the peer is missing), `false` forces JS-only mode. When omitted, the section follows `@hexadrop/eslint-config-typescript` presence. |
+
+Only declared dependencies count, so a `vite` that arrives transitively (through `vitest`, for example) does not enable the rule. Set `refresh: true` when the bundler lives in another workspace package, or `refresh: false` to keep the rule off.
 
 ## Optional peers
 

@@ -3,6 +3,7 @@ import path from 'node:path';
 import process from 'node:process';
 
 import type { CoreTypescriptOptions } from '@hexadrop/eslint-config-core';
+import type { ReactConfigOptions } from '@hexadrop/eslint-config-react';
 import type { Nullable, RecursivePartial } from '@hexadrop/eslint-config-shared';
 import type { StylisticFormattingOptions } from '@hexadrop/eslint-config-stylistic';
 import type { TypescriptParserOptions } from '@hexadrop/eslint-config-typescript';
@@ -39,6 +40,13 @@ interface HexadropEslintStylisticOptions extends StylisticFormattingOptions {
 	 */
 	unicorn: boolean;
 }
+
+/**
+ * The react preset options the meta-package exposes. `typescript` is not
+ * forwarded: the top-level `typescript` option already decides it for every
+ * slice.
+ */
+type HexadropEslintReactOptions = Pick<ReactConfigOptions, 'refresh'>;
 
 interface HexadropEslintOptions {
 	/**
@@ -100,8 +108,9 @@ interface HexadropEslintOptions {
 	 *
 	 * If `false`, react support will be disabled.
 	 * If `true`, or empty it will be enabled.
+	 * Pass an object to customize the react preset (`refresh`).
 	 */
-	react: boolean;
+	react: boolean | HexadropEslintReactOptions;
 
 	/**
 	 * Configure stylistic rules.
@@ -177,7 +186,13 @@ function getCwdTsconfigPath(): string | undefined {
 	return undefined;
 }
 
-export type { HexadropEslintOptions, HexadropEslintStylisticOptions, ResolvedHexadropEslintOptions, TypescriptOptions };
+export type {
+	HexadropEslintOptions,
+	HexadropEslintReactOptions,
+	HexadropEslintStylisticOptions,
+	ResolvedHexadropEslintOptions,
+	TypescriptOptions,
+};
 
 export default function defaultOptions(
 	options: RecursivePartial<HexadropEslintOptions> = {}
@@ -244,7 +259,7 @@ export default function defaultOptions(
 			],
 		},
 		node: options.node ?? true,
-		react: options.react ?? isInstalledReact,
+		react: (options.react ?? isInstalledReact) as boolean | HexadropEslintReactOptions,
 		stylistic:
 			options.stylistic === false
 				? false
