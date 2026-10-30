@@ -18,7 +18,7 @@ The meta-package composes core's raw `core`, `ignore` and `imports` config funct
 
 - Types: `Awaitable`, `Nullable`, `RecursivePartial`, and the generic `TypedFlatConfigItem<RuleOptionsType>`.
 - Constants: `PLUGIN_PREFIX`.
-- Utilities: `combine`, `expandTsconfigProjects`, `extractTypedFlatConfigItem`, `getWorkspaceDirectories`, `interopDefault`, `pluginConfigRules`, `pluginConfigOverrideRules`, `renameRules`, `toArray`.
+- Utilities: `combine`, `expandTsconfigProjects`, `extractTypedFlatConfigItem`, `getWorkspaceDirectories`, `getWorkspacePackageInfo`, `interopDefault`, `pluginConfigRules`, `pluginConfigOverrideRules`, `renameRules`, `toArray`.
 - Globs: the universal and feature-specific file globs, bundled into each package.
 
 ### Consumption rules
@@ -26,6 +26,7 @@ The meta-package composes core's raw `core`, `ignore` and `imports` config funct
 - Import from the package name (`@hexadrop/eslint-config-shared`), never via relative paths across packages.
 - **Do not declare it in `dependencies` or `devDependencies`.** It is resolved through the root `tsconfig.json` `paths` during development and type-checking, and the root `eslint.config.js` whitelists it for `import/no-extraneous-dependencies`.
 - Add `deps: { alwaysBundle: ['@hexadrop/eslint-config-shared'] }` to the package's `tsdown.config.ts` so the code is inlined into the published bundle. It must never appear as a runtime dependency of any published package.
+- A shared utility may import an external package, but only when not every package needs it: `shared` then declares that package as an **optional peer** in `peerDependencies` + `peerDependenciesMeta`, and every package that calls the utility must declare it in `dependencies`. `bun run check:dist` fails when a published bundle imports a package its manifest does not declare.
 - Each package keeps a local `TypedFlatConfigItem` alias, colocated with its config files as `src/<feature>.typed-config.ts`, binding the shared generic to its own generated `RuleOptions`:
 
   ```ts

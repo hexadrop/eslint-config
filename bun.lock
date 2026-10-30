@@ -148,9 +148,11 @@
         "eslint-typegen": "2.3.2",
       },
       "peerDependencies": {
+        "local-pkg": "^1.2.1",
         "yaml": "^2.9.1",
       },
       "optionalPeers": [
+        "local-pkg",
         "yaml",
       ],
     },

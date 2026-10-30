@@ -5,10 +5,10 @@ import process from 'node:process';
 import type { CoreTypescriptOptions } from '@hexadrop/eslint-config-core';
 import type { ReactConfigOptions } from '@hexadrop/eslint-config-react';
 import type { Nullable, RecursivePartial } from '@hexadrop/eslint-config-shared';
-import { getWorkspaceDirectories } from '@hexadrop/eslint-config-shared';
+import { getWorkspaceDirectories, getWorkspacePackageInfo } from '@hexadrop/eslint-config-shared';
 import type { StylisticFormattingOptions } from '@hexadrop/eslint-config-stylistic';
 import type { TypescriptParserOptions } from '@hexadrop/eslint-config-typescript';
-import { getPackageInfoSync, isPackageExists } from 'local-pkg';
+import { isPackageExists } from 'local-pkg';
 
 import type { HexadropEslintIgnoreOptions } from './hexadrop-eslint-ignore.options';
 import type { HexadropEslintModulesOptions } from './hexadrop-eslint-module.options';
@@ -213,7 +213,7 @@ function getDefaultTypescriptProject(): string | string[] | undefined {
  * installed in a child package by an isolated workspace layout.
  */
 function isWorkspacePackageInstalled(name: string): boolean {
-	return getPackageInfoSync(name, { paths: getWorkspaceDirectories() }) !== undefined;
+	return getWorkspacePackageInfo(name) !== undefined;
 }
 
 export type {

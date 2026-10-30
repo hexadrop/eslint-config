@@ -1,5 +1,5 @@
 import {
-	getWorkspaceDirectories,
+	getWorkspacePackageInfo,
 	GLOB_REACT_JSX,
 	GLOB_REACT_TSX,
 	interopDefault,
@@ -8,7 +8,7 @@ import {
 	REACT_CONFIG_NAME_RULES_REFRESH,
 	REACT_CONFIG_NAME_SETUP,
 } from '@hexadrop/eslint-config-shared';
-import { getPackageInfoSync, isPackageExists } from 'local-pkg';
+import { isPackageExists } from 'local-pkg';
 
 import isFastRefreshProject from './react.refresh';
 import type { TypedFlatConfigItem } from './react.typed-config';
@@ -23,7 +23,7 @@ import type { ReactConfigOptions, ReactRefreshOptions } from './react.types';
  * ESLint 9 and 10.
  */
 function detectReactVersion(): string | undefined {
-	return getPackageInfoSync('react', { paths: getWorkspaceDirectories() })?.version;
+	return getWorkspacePackageInfo('react')?.version;
 }
 
 interface ResolvedRefreshRule {

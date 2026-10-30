@@ -28,9 +28,13 @@
 		"./*": "./src/*"
 	},
 	"peerDependencies": {
+		"local-pkg": "^1.2.1",
 		"yaml": "^2.9.1"
 	},
 	"peerDependenciesMeta": {
+		"local-pkg": {
+			"optional": true
+		},
 		"yaml": {
 			"optional": true
 		}
