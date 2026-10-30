@@ -5,11 +5,13 @@ import process from 'node:process';
 import { isPackageExists } from 'local-pkg';
 
 /**
- * Packages that ship React Fast Refresh. `react-refresh/only-export-components`
+ * Packages that ship React Fast Refresh on by default. `react-refresh/only-export-components`
  * only makes sense for projects that re-render components in place: elsewhere
  * it warns on the component-plus-variant pattern of component libraries.
+ *
+ * Parcel is left out on purpose: its React Fast Refresh is still opt-in.
  */
-const FAST_REFRESH_PACKAGES = ['vite'];
+const FAST_REFRESH_PACKAGES = ['next', 'vite'];
 
 /**
  * The manifest fields that make a package the project's own dependency.
