@@ -1,5 +1,12 @@
 # @hexadrop/eslint-config-astro
 
+## 1.1.3
+
+### Patch Changes
+
+- b3f753e: fix(deps): update dependency eslint-plugin-astro to v3.2.1
+- 2214141: fix(deps): update dependency globals to v17.13.0
+
 ## 1.1.2
 
 ### Patch Changes

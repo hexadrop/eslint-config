@@ -1,5 +1,16 @@
 # @hexadrop/eslint-config
 
+## 1.3.1
+
+### Patch Changes
+
+- Updated dependencies [b3f753e]
+- Updated dependencies [70f356e]
+- Updated dependencies [2214141]
+  - @hexadrop/eslint-config-astro@1.1.3
+  - @hexadrop/eslint-config-stylistic@1.1.3
+  - @hexadrop/eslint-config-core@1.3.1
+
 ## 1.3.0
 
 ### Minor Changes
