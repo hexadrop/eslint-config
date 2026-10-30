@@ -1,0 +1,9 @@
+{
+	"extends": "@hexadrop/tsconfig",
+	"compilerOptions": {
+		"paths": {
+			"@app/*": ["./src/*"]
+		}
+	},
+	"include": ["src"]
+}

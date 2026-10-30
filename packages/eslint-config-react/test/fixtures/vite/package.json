@@ -1,0 +1,10 @@
+{
+	"name": "vite-app",
+	"private": true,
+	"dependencies": {
+		"react": "^19.0.0"
+	},
+	"devDependencies": {
+		"vite": "^7.0.0"
+	}
+}

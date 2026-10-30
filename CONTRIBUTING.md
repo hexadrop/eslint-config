@@ -292,8 +292,6 @@ bun changeset add
 
 Select the appropriate semver bump and describe the change. The changeset will be used to generate the changelog and version bump during release.
 
-All publishable packages are versioned in lockstep through a changesets `fixed` group. List only the packages you changed: the highest bump in the group is applied to every package, and they are published together at the same version.
-
 ### Automated PR Checks
 
 All PRs go through automated checks:

@@ -2,8 +2,12 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 
+import type { CoreTypescriptOptions } from '@hexadrop/eslint-config-core';
+import type { ReactConfigOptions } from '@hexadrop/eslint-config-react';
 import type { Nullable, RecursivePartial } from '@hexadrop/eslint-config-shared';
+import { getWorkspaceDirectories, getWorkspacePackageInfo } from '@hexadrop/eslint-config-shared';
 import type { StylisticFormattingOptions } from '@hexadrop/eslint-config-stylistic';
+import type { TypescriptParserOptions } from '@hexadrop/eslint-config-typescript';
 import { isPackageExists } from 'local-pkg';
 
 import type { HexadropEslintIgnoreOptions } from './hexadrop-eslint-ignore.options';
@@ -37,6 +41,13 @@ interface HexadropEslintStylisticOptions extends StylisticFormattingOptions {
 	 */
 	unicorn: boolean;
 }
+
+/**
+ * The react preset options the meta-package exposes. `typescript` is not
+ * forwarded: the top-level `typescript` option already decides it for every
+ * slice.
+ */
+type HexadropEslintReactOptions = Pick<ReactConfigOptions, 'refresh'>;
 
 interface HexadropEslintOptions {
 	/**
@@ -98,8 +109,9 @@ interface HexadropEslintOptions {
 	 *
 	 * If `false`, react support will be disabled.
 	 * If `true`, or empty it will be enabled.
+	 * Pass an object to customize the react preset (`refresh`).
 	 */
-	react: boolean;
+	react: boolean | HexadropEslintReactOptions;
 
 	/**
 	 * Configure stylistic rules.
@@ -128,10 +140,16 @@ interface HexadropEslintOptions {
 	 * Configure typescript support.
 	 *
 	 * If `false`, typescript support will be disabled.
-	 * If `true`, typescript support will be enabled with default options.
+	 * If `true`, typescript support will be enabled without type-aware
+	 * linting; use a string, array or object to lint with type information.
 	 * If a string or string[], enables type-aware linting with those tsconfig paths.
-	 * If an object, allows passing {@link TypescriptOptions.project} and {@link TypescriptOptions.tsconfigRootDir}.
-	 * If you leave empty, automatic detection will be used.
+	 * If an object, allows passing {@link TypescriptOptions.project},
+	 * {@link TypescriptOptions.tsconfigRootDir}, {@link TypescriptOptions.resolver}
+	 * and {@link TypescriptOptions.parserOptions}.
+	 * If you leave empty, automatic detection will be used: the root
+	 * `tsconfig.json` when there is one, which a solution-style root expands
+	 * into its referenced projects; otherwise the `tsconfig.json` of every
+	 * workspace package (`package.json#workspaces` or `pnpm-workspace.yaml`).
 	 *
 	 */
 	typescript: boolean | string | string[] | TypescriptOptions;
@@ -148,62 +166,97 @@ type ResolvedHexadropEslintOptions = Omit<HexadropEslintOptions, 'typescript'> &
 	typescript: boolean | TypescriptOptions;
 };
 
-interface TypescriptOptions {
+interface TypescriptOptions extends CoreTypescriptOptions {
 	/**
-	 * If true, enables TS support without type-aware linting.
-	 * If a string or array, enables type-aware linting with those tsconfig paths.
-	 * If false/undefined, returns an empty config.
+	 * Extra parser options merged into the TypeScript parser config after the
+	 * internal `project`/`tsconfigRootDir`.
+	 *
+	 * Use `projectService` to let typescript-eslint resolve the project per
+	 * file (solution-style tsconfigs, workspaces). `project` is omitted in that
+	 * mode so both resolution modes are never enabled at the same time.
 	 */
-	project?: boolean | string | string[];
-	/**
-	 * Root directory for tsconfig resolution. Defaults to cwd().
-	 */
-	tsconfigRootDir?: string;
+	parserOptions?: Partial<TypescriptParserOptions>;
 }
 
-function getCwdTsconfigPath(): string | undefined {
+/**
+ * Resolve the default TypeScript project(s) without consumer input.
+ *
+ * A root `tsconfig.json` wins and keeps its bare `'tsconfig.json'` form
+ * (solution-style roots are expanded by the TypeScript and import packages).
+ * When the root has no tsconfig, the tsconfigs of the workspace packages are
+ * used, which covers monorepos whose root only holds tooling configuration.
+ */
+function getDefaultTypescriptProject(): string | string[] | undefined {
 	const root = process.cwd();
-	const cwdTsconfigPath = path.resolve(root, 'tsconfig.json');
-	if (existsSync(cwdTsconfigPath)) {
+
+	if (existsSync(path.resolve(root, 'tsconfig.json'))) {
 		return 'tsconfig.json';
 	}
 
-	return undefined;
+	const projects = getWorkspaceDirectories(root)
+		.map(directory => path.join(directory, 'tsconfig.json'))
+		.filter(file => existsSync(file))
+		.map(file => {
+			const relative = path.relative(root, file).split(path.sep).join('/');
+
+			return relative.startsWith('..') ? relative : `./${relative}`;
+		});
+
+	return projects.length > 0 ? projects : undefined;
 }
 
-export type { HexadropEslintOptions, HexadropEslintStylisticOptions, ResolvedHexadropEslintOptions, TypescriptOptions };
+/**
+ * Whether a package is installed in the root or in any workspace package.
+ *
+ * `local-pkg` resolves `node_modules` from each directory and its ancestors, so
+ * this covers React or TypeScript hoisted to the repository root as well as
+ * installed in a child package by an isolated workspace layout.
+ */
+function isWorkspacePackageInstalled(name: string): boolean {
+	return getWorkspacePackageInfo(name) !== undefined;
+}
+
+export type {
+	HexadropEslintOptions,
+	HexadropEslintReactOptions,
+	HexadropEslintStylisticOptions,
+	ResolvedHexadropEslintOptions,
+	TypescriptOptions,
+};
 
 export default function defaultOptions(
 	options: RecursivePartial<HexadropEslintOptions> = {}
 ): ResolvedHexadropEslintOptions {
 	let typescript: ResolvedHexadropEslintOptions['typescript'] = false;
-	const isInstalledTypescript = isPackageExists('typescript');
-	const isInstalledReact = isPackageExists('react');
+	const isInstalledTypescript = isWorkspacePackageInstalled('typescript');
+	const isInstalledReact = isWorkspacePackageInstalled('react');
 	const isInstalledAstro = isPackageExists('astro');
 
 	/* eslint-disable typescript/no-unnecessary-condition -- RecursivePartial narrows types but runtime checks are needed */
 	if (options.typescript === true) {
 		typescript = true;
-	} else if (
-		typeof options.typescript === 'object' &&
-		!Array.isArray(options.typescript) &&
-		options.typescript !== null
-	) {
-		const tsOptions = options.typescript as TypescriptOptions;
+	} else if (typeof options.typescript === 'string') {
+		typescript = { project: options.typescript.length > 0 ? options.typescript : true };
+	} else if (Array.isArray(options.typescript)) {
 		typescript = {
-			project: tsOptions.project ?? undefined,
-			...(tsOptions.tsconfigRootDir && { tsconfigRootDir: tsOptions.tsconfigRootDir }),
-		} as TypescriptOptions;
-	} else if (isInstalledTypescript) {
-		if (options.typescript === undefined) {
-			typescript = { project: getCwdTsconfigPath() ?? true };
-		} else if (typeof options.typescript === 'string') {
-			typescript = { project: options.typescript.length > 0 ? options.typescript : true };
-		} else if (Array.isArray(options.typescript)) {
-			typescript = {
-				project: options.typescript.length > 0 ? (options.typescript.filter(Boolean) as string[]) : true,
-			};
-		}
+			project: options.typescript.length > 0 ? (options.typescript.filter(Boolean) as string[]) : true,
+		};
+	} else if (typeof options.typescript === 'object' && options.typescript !== null) {
+		const tsOptions = options.typescript as TypescriptOptions;
+		const hasProject = tsOptions.project !== undefined;
+		const hasProjectService = Boolean(tsOptions.parserOptions?.projectService);
+
+		/*
+		 * `projectService: false` disables the only resolution mode the object
+		 * form asked for, so fall back to detection instead of shipping a config
+		 * that silently turns TypeScript support off.
+		 */
+		typescript =
+			hasProject || hasProjectService
+				? { ...tsOptions }
+				: { ...tsOptions, project: getDefaultTypescriptProject() ?? true };
+	} else if (isInstalledTypescript && options.typescript === undefined) {
+		typescript = { project: getDefaultTypescriptProject() ?? true };
 	}
 
 	return {
@@ -247,7 +300,7 @@ export default function defaultOptions(
 			],
 		},
 		node: options.node ?? true,
-		react: options.react ?? isInstalledReact,
+		react: (options.react ?? isInstalledReact) as boolean | HexadropEslintReactOptions,
 		stylistic:
 			options.stylistic === false
 				? false

@@ -146,6 +146,64 @@ export default hexadrop(
 
 Check out the [options](https://github.com/hexadrop/eslint-config/blob/main/packages/eslint-config/src/options/hexadrop-eslint.options.ts) and [factory](https://github.com/hexadrop/eslint-config/blob/main/packages/eslint-config/src/factory.ts) for more details.
 
+### React
+
+React is enabled automatically when it is installed. Use an object to customize the preset:
+
+```js
+// eslint.config.js
+import hexadrop from '@hexadrop/eslint-config';
+
+export default hexadrop({
+  react: {
+    // `react-refresh/only-export-components` is enabled only when the project
+    // declares vite or next. Force it on/off, or allow extra exports.
+    refresh: { allowExportNames: ['loader', 'action'] },
+  },
+});
+```
+
+### TypeScript
+
+TypeScript is enabled automatically when it is installed. The option accepts the same forms as before, plus an object for advanced project resolution:
+
+```js
+// eslint.config.js
+import hexadrop from '@hexadrop/eslint-config';
+
+export default hexadrop({
+  typescript: {
+    // Extra typescript-eslint parser options. Use projectService for
+    // solution-style tsconfigs or workspace layouts; `project` is then
+    // optional and omitted from the parser options.
+    parserOptions: { projectService: true },
+
+    // One or more tsconfigs used for type-aware linting and import resolution.
+    project: ['./tsconfig.json', './tsconfig.tools.json'],
+
+    // Extra options forwarded to eslint-import-resolver-typescript
+    // (bun, alwaysTryTypes, conditionNames, noWarnOnMultipleProjects, …).
+    resolver: { bun: true },
+
+    // Root the project paths are resolved from. Defaults to process.cwd().
+    tsconfigRootDir: import.meta.dirname,
+  },
+});
+```
+
+The configured projects are forwarded to `eslint-import-resolver-typescript`, so `import/no-unresolved` understands tsconfig `paths` aliases without a consumer override. Solution-style tsconfigs (`files: []` plus `references`) are expanded into their concrete projects automatically.
+
+### Monorepos and workspaces
+
+When React or TypeScript live in a workspace package instead of the repository root, they are still auto-detected:
+
+- Workspace packages come from `package.json#workspaces` (array or `{ packages }`) or `pnpm-workspace.yaml`, with nested, `**` and negated patterns supported.
+- React is enabled when it is installed in the root or in any workspace package, and the resolved version is looked up across the same directories.
+- TypeScript uses the root `tsconfig.json` when present (solution roots included); otherwise the `tsconfig.json` of every workspace package is used. A root `tsconfig.json` always wins, even when it only covers tooling: if it is not solution-style, pass an explicit `typescript.project` to lint the packages with type information.
+- `react: true` and an explicit `typescript.project` remain available and take precedence over detection.
+
+No `parserOptions.project` or `settings['import-x/resolver-next']` override is needed for the common Bun/npm/pnpm workspace layout.
+
 ### Plugins Renaming
 
 Since flat config requires us to explicitly provide the plugin names (instead of the mandatory convention from npm

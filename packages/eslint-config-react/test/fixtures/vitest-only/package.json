@@ -1,0 +1,10 @@
+{
+	"name": "vitest-only-app",
+	"private": true,
+	"dependencies": {
+		"react": "^19.0.0"
+	},
+	"devDependencies": {
+		"vitest": "^3.2.0"
+	}
+}

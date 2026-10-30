@@ -89,6 +89,41 @@ export default exported;
 "
 `;
 
+exports[`e2e fixtures typescript-alias: fixtures/src/alias.ts through eslint --fix: typescript-alias-diagnostics 1`] = `[]`;
+
+exports[`e2e fixtures typescript-alias: fixtures/src/alias.ts through eslint --fix: typescript-alias-content 1`] = `
+"import { answer } from '@fixture/alias-target';
+
+const doubled = answer * 2;
+const tripled = answer * 3;
+
+export { doubled, tripled };
+"
+`;
+
+exports[`e2e fixtures typescript-solution: fixtures/solution/src/solution.ts through eslint --fix: typescript-solution-diagnostics 1`] = `[]`;
+
+exports[`e2e fixtures typescript-solution: fixtures/solution/src/solution.ts through eslint --fix: typescript-solution-content 1`] = `
+"import { answer } from '@solution/answer';
+
+const doubled = answer * 2;
+const tripled = answer * 3;
+
+export { doubled, tripled };
+"
+`;
+
+exports[`e2e fixtures workspace: fixtures/workspace/packages/app/src/app.tsx through eslint --fix: workspace-diagnostics 1`] = `[]`;
+
+exports[`e2e fixtures workspace: fixtures/workspace/packages/app/src/app.tsx through eslint --fix: workspace-content 1`] = `
+"import { answer } from '@app/answer';
+
+export default function App(): string {
+	return String(answer);
+}
+"
+`;
+
 exports[`e2e fixtures javascript: fixtures/javascript.js through eslint --fix: javascript-diagnostics 1`] = `
 [
   {
@@ -132,7 +167,17 @@ exports[`e2e fixtures package-json: fixtures/package.json through eslint --fix: 
 exports[`e2e fixtures tsconfig-json: fixtures/tsconfig.json through eslint --fix: tsconfig-json-diagnostics 1`] = `[]`;
 
 exports[`e2e fixtures tsconfig-json: fixtures/tsconfig.json through eslint --fix: tsconfig-json-content 1`] = `
-"{ "extends": "@hexadrop/tsconfig", "compilerOptions": { "target": "ES2022", "strict": true }, "include": ["src"] }
+"{
+	"extends": "@hexadrop/tsconfig",
+	"compilerOptions": {
+		"target": "ES2022",
+		"paths": {
+			"@fixture/*": ["./src/*"]
+		},
+		"strict": true
+	},
+	"include": ["src"]
+}
 "
 `;
 
@@ -164,6 +209,53 @@ exports[`e2e fixtures tsx: fixtures/react.tsx through eslint --fix: tsx-diagnost
 exports[`e2e fixtures tsx: fixtures/react.tsx through eslint --fix: tsx-content 1`] = `
 "export default function Counter({ count }: { count: number }) {
 	return <button className='a b'>{count}</button>;
+}
+"
+`;
+
+exports[`e2e fixtures jsx-refresh-off: fixtures/react-refresh.jsx through eslint --fix: jsx-refresh-off-diagnostics 1`] = `
+[
+  {
+    "column": 16,
+    "line": 2,
+    "message": "Missing return type on function.",
+    "ruleId": "typescript/explicit-module-boundary-types",
+    "severity": 2,
+  },
+]
+`;
+
+exports[`e2e fixtures jsx-refresh-off: fixtures/react-refresh.jsx through eslint --fix: jsx-refresh-off-content 1`] = `
+"export const buttonVariants = { primary: 'bg-blue-500', secondary: 'bg-gray-500' };
+export default function Button() {
+	return <button className={buttonVariants.primary}>ok</button>;
+}
+"
+`;
+
+exports[`e2e fixtures jsx-refresh-on: fixtures/react-refresh.jsx through eslint --fix: jsx-refresh-on-diagnostics 1`] = `
+[
+  {
+    "column": 14,
+    "line": 1,
+    "message": "Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components.",
+    "ruleId": "react-refresh/only-export-components",
+    "severity": 1,
+  },
+  {
+    "column": 16,
+    "line": 2,
+    "message": "Missing return type on function.",
+    "ruleId": "typescript/explicit-module-boundary-types",
+    "severity": 2,
+  },
+]
+`;
+
+exports[`e2e fixtures jsx-refresh-on: fixtures/react-refresh.jsx through eslint --fix: jsx-refresh-on-content 1`] = `
+"export const buttonVariants = { primary: 'bg-blue-500', secondary: 'bg-gray-500' };
+export default function Button() {
+	return <button className={buttonVariants.primary}>ok</button>;
 }
 "
 `;

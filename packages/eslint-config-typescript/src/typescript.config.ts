@@ -1,5 +1,8 @@
+import { cwd } from 'node:process';
+
 import {
 	DTS_GLOBS,
+	expandTsconfigProjects,
 	GLOB_MARKDOWN_SOURCE,
 	interopDefault,
 	JAVASCRIPT_GLOBS,
@@ -16,11 +19,20 @@ import {
 	TYPESCRIPT_CONFIG_NAME_SETUP,
 	TYPESCRIPT_GLOBS,
 } from '@hexadrop/eslint-config-shared';
+import type { ParserOptions } from '@typescript-eslint/parser';
 
-import typescriptParser from './typescript.parser';
+import typescriptParser, { isTypeAware } from './typescript.parser';
 import type { TypedFlatConfigItem } from './typescript.typed-config';
 
 export interface TypescriptFactoryOptions {
+	/**
+	 * Extra parser options merged into the TypeScript parser config, after the
+	 * internal `project`/`tsconfigRootDir`. Use `projectService` to let
+	 * typescript-eslint resolve the project for every file (solution-style
+	 * tsconfigs and workspaces); `project` is then optional and omitted from the
+	 * parser options to avoid mixing both resolution modes.
+	 */
+	parserOptions?: Partial<ParserOptions>;
 	/**
 	 * If true, enables TS support without type-aware linting.
 	 * If a string or array, enables type-aware linting with those tsconfig paths.
@@ -34,8 +46,9 @@ export interface TypescriptFactoryOptions {
 }
 
 export default async function typescriptConfig(options: TypescriptFactoryOptions = {}): Promise<TypedFlatConfigItem[]> {
-	const { project, tsconfigRootDir } = options;
-	if (!project) {
+	const { parserOptions, project, tsconfigRootDir } = options;
+	const hasProjectService = Boolean(parserOptions?.projectService);
+	if (project === false || (!project && !hasProjectService)) {
 		return [];
 	}
 
@@ -47,7 +60,11 @@ export default async function typescriptConfig(options: TypescriptFactoryOptions
 	const typescriptPluginRename = PLUGIN_RENAME_TYPESCRIPT['@typescript-eslint'];
 
 	const config: TypedFlatConfigItem[] = [];
-	const isTypeAware = typeof project !== 'boolean';
+	const tsconfigPath =
+		project && project !== true && !hasProjectService
+			? expandTsconfigProjects(toArray(project), tsconfigRootDir ?? cwd())
+			: undefined;
+	const isTypeAwareLinting = isTypeAware(tsconfigPath, parserOptions);
 
 	config.push({
 		name: TYPESCRIPT_CONFIG_NAME_SETUP,
@@ -56,11 +73,13 @@ export default async function typescriptConfig(options: TypescriptFactoryOptions
 		},
 	});
 
-	if (project === true) {
+	if (project === true && !hasProjectService) {
 		config.push(
 			typescriptParser({
 				files: SOURCE_GLOBS,
 				parser,
+				...(parserOptions && { parserOptions }),
+				...(tsconfigRootDir && { tsconfigRootDir }),
 			})
 		);
 	} else {
@@ -73,7 +92,8 @@ export default async function typescriptConfig(options: TypescriptFactoryOptions
 				files: TYPESCRIPT_GLOBS,
 				ignores: GLOB_MARKDOWN_SOURCE,
 				parser,
-				tsconfigPath: toArray(project),
+				...(parserOptions && { parserOptions }),
+				...(tsconfigPath && !hasProjectService && { tsconfigPath }),
 				...(tsconfigRootDir && { tsconfigRootDir }),
 			})
 		);
@@ -100,7 +120,7 @@ export default async function typescriptConfig(options: TypescriptFactoryOptions
 		}
 	);
 
-	if (isTypeAware) {
+	if (isTypeAwareLinting) {
 		config.push({
 			files: TYPESCRIPT_GLOBS,
 			ignores: GLOB_MARKDOWN_SOURCE,

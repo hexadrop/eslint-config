@@ -1,9 +1,22 @@
+import path from 'node:path';
+
 import type { EndToEndCase as BaseEndToEndCase, RecursivePartial } from '@hexadrop/eslint-config-shared';
 
 import type { HexadropEslintOptions } from '../src/options';
 import type { TypedFlatConfigItem } from '../src/typed-config';
 
+const FIXTURES_DIR = path.join(import.meta.dir, 'fixtures');
+
 interface EndToEndCase extends BaseEndToEndCase {
+	/**
+	 * Working directory for this case, relative to the fixtures directory.
+	 */
+	cwd?: string;
+	/**
+	 * Config names the resolved config must include, used to prove that
+	 * auto-detection enabled the expected slices for this fixture.
+	 */
+	expectedConfigNames?: string[];
 	extraConfigs?: TypedFlatConfigItem[];
 	options?: RecursivePartial<HexadropEslintOptions>;
 }
@@ -41,6 +54,29 @@ export const END_TO_END_CASES: EndToEndCase[] = [
 		slug: 'typescript',
 	},
 	{
+		file: 'src/alias.ts',
+		options: {
+			...DEFAULTS,
+			typescript: { project: './tsconfig.json', tsconfigRootDir: FIXTURES_DIR },
+		},
+		slug: 'typescript-alias',
+	},
+	{
+		file: 'solution/src/solution.ts',
+		options: {
+			...DEFAULTS,
+			typescript: { project: './solution/tsconfig.json', tsconfigRootDir: FIXTURES_DIR },
+		},
+		slug: 'typescript-solution',
+	},
+	{
+		cwd: 'workspace',
+		expectedConfigNames: ['hexadrop/react/setup', 'hexadrop/typescript/setup'],
+		file: 'workspace/packages/app/src/app.tsx',
+		options: { astro: false },
+		slug: 'workspace',
+	},
+	{
 		file: 'javascript.js',
 		options: { astro: false, react: false, typescript: false },
 		slug: 'javascript',
@@ -66,11 +102,19 @@ export const END_TO_END_CASES: EndToEndCase[] = [
 		slug: 'markdown',
 	},
 	{
-		// `version: 'detect'` cannot resolve react from fixture dirs, so the version is pinned.
-		extraConfigs: [{ name: 'e2e/react-version', settings: { react: { version: '19' } } }],
 		file: 'react.tsx',
 		options: { astro: false, react: true, typescript: true },
 		slug: 'tsx',
+	},
+	{
+		file: 'react-refresh.jsx',
+		options: { astro: false, react: true, typescript: true },
+		slug: 'jsx-refresh-off',
+	},
+	{
+		file: 'react-refresh.jsx',
+		options: { astro: false, react: { refresh: true }, typescript: true },
+		slug: 'jsx-refresh-on',
 	},
 	{
 		file: 'astro.astro',

@@ -1,3 +1,8 @@
+import { mkdtempSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
+import process from 'node:process';
+
 import { GLOB_MARKDOWN_SOURCE } from '@hexadrop/eslint-config-shared';
 import { describe, expect, test } from 'bun:test';
 
@@ -8,6 +13,7 @@ import coreFactory, {
 	CORE_CONFIG_NAME_SETUP,
 	IGNORE_CONFIG_NAME_ADDITIONAL,
 	IGNORE_CONFIG_NAME_DEFAULT,
+	IGNORE_CONFIG_NAME_GITIGNORE,
 	IMPORTS_CONFIG_NAME_RULES_ASTRO,
 	IMPORTS_CONFIG_NAME_RULES_STATIC,
 	IMPORTS_CONFIG_NAME_RULES_STYLISTIC,
@@ -16,6 +22,7 @@ import coreFactory, {
 	IMPORTS_CONFIG_NAME_SETUP,
 	IMPORTS_CONFIG_NAME_SETUP_TYPESCRIPT,
 } from '../src';
+import { typeScriptResolverOptions } from '../src/imports.config';
 
 const ALL_OFF = {
 	astro: false,
@@ -74,6 +81,24 @@ describe('core factory', () => {
 		expect(configs.some(config => config.name?.startsWith('hexadrop/ignore'))).toBe(false);
 	});
 
+	test('keeps the default ignores when ignore is true and the cwd has no .gitignore', async () => {
+		const previousCwd = process.cwd();
+		const directory = mkdtempSync(path.join(tmpdir(), 'hexadrop-ignore-'));
+
+		try {
+			process.chdir(directory);
+
+			const configs = await coreFactory({ ...ALL_OFF, ignore: true });
+			const defaultIgnores = configs.find(config => config.name === IGNORE_CONFIG_NAME_DEFAULT);
+
+			expect(defaultIgnores?.ignores).toContain('**/node_modules');
+			expect(configs.some(config => config.name === IGNORE_CONFIG_NAME_GITIGNORE)).toBe(false);
+		} finally {
+			process.chdir(previousCwd);
+			rmSync(directory, { force: true, recursive: true });
+		}
+	});
+
 	test('adds the import setup and warnings when imports is enabled', async () => {
 		const configs = await coreFactory({ ...ALL_OFF, imports: true });
 		const setup = configs.find(config => config.name === IMPORTS_CONFIG_NAME_SETUP);
@@ -99,6 +124,59 @@ describe('core factory', () => {
 		expect(configs.some(config => config.name === IMPORTS_CONFIG_NAME_RULES_TYPESCRIPT)).toBe(true);
 		expect(configs.some(config => config.name === IMPORTS_CONFIG_NAME_RULES_ASTRO)).toBe(true);
 		expect(configs.some(config => config.name === IMPORTS_CONFIG_NAME_RULES_STYLISTIC)).toBe(true);
+	});
+
+	test('forwards the configured project paths to the typescript import resolver', () => {
+		const options = typeScriptResolverOptions({
+			project: ['./tsconfig.json'],
+			resolver: { bun: true },
+			tsconfigRootDir: '/repository',
+		});
+
+		expect(options).toEqual({
+			bun: true,
+			noWarnOnMultipleProjects: true,
+			project: ['/repository/tsconfig.json'],
+		});
+	});
+
+	test('keeps absolute project paths and resolves resolver-only projects', () => {
+		expect(typeScriptResolverOptions({ project: ['/abs/tsconfig.json'], tsconfigRootDir: '/ignored' })).toEqual({
+			noWarnOnMultipleProjects: true,
+			project: ['/abs/tsconfig.json'],
+		});
+		expect(
+			typeScriptResolverOptions({ resolver: { project: ['tsconfig.json'] }, tsconfigRootDir: '/repository' })
+		).toEqual({
+			project: ['/repository/tsconfig.json'],
+		});
+		expect(
+			typeScriptResolverOptions({
+				project: ['./app.json'],
+				resolver: { project: ['./ignored.json'] },
+				tsconfigRootDir: '/repository',
+			})
+		).toEqual({
+			noWarnOnMultipleProjects: true,
+			project: ['/repository/app.json'],
+		});
+	});
+
+	test('silences the multiple-projects warning only when it forwards the project', () => {
+		expect(
+			typeScriptResolverOptions({
+				project: ['./tsconfig.json'],
+				resolver: { noWarnOnMultipleProjects: false },
+			}).noWarnOnMultipleProjects
+		).toBe(false);
+		expect(typeScriptResolverOptions({ resolver: { project: ['tsconfig.json'] } }).noWarnOnMultipleProjects).toBe(
+			undefined
+		);
+	});
+
+	test('returns empty resolver options for a boolean typescript option', () => {
+		expect(typeScriptResolverOptions(true)).toEqual({});
+		expect(typeScriptResolverOptions(false)).toEqual({});
 	});
 
 	test('honours the module flags for dynamic require and webpack syntax', async () => {

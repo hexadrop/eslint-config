@@ -3,22 +3,14 @@
 	"changelog": "@changesets/cli/changelog",
 	"commit": false,
 	"linked": [],
-	"fixed": [
-		[
-			"@hexadrop/eslint-config",
-			"@hexadrop/eslint-config-core",
-			"@hexadrop/eslint-config-typescript",
-			"@hexadrop/eslint-config-json",
-			"@hexadrop/eslint-config-markdown",
-			"@hexadrop/eslint-config-react",
-			"@hexadrop/eslint-config-astro",
-			"@hexadrop/eslint-config-stylistic"
-		]
-	],
 	"access": "public",
 	"baseBranch": "main",
 	"updateInternalDependencies": "patch",
 	"ignore": [],
+	"privatePackages": {
+		"version": false,
+		"tag": false
+	},
 	"snapshot": {
 		"useCalculatedVersion": true,
 		"prereleaseTemplate": "{tag}-{datetime}"

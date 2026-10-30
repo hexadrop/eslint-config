@@ -1,5 +1,6 @@
 import type { RecursivePartial } from '@hexadrop/eslint-config-shared';
 import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore';
+import type { TypeScriptResolverOptions } from 'eslint-import-resolver-typescript';
 
 import type { TypedFlatConfigItem } from './core.typed-config';
 
@@ -8,6 +9,28 @@ interface CoreIgnoreOptions extends Omit<FlatGitignoreOptions, 'name'> {
 	 * Additional ignore patterns.
 	 */
 	globs?: string[];
+}
+
+interface CoreTypescriptOptions {
+	/**
+	 * tsconfig path or paths forwarded to the TypeScript import resolver.
+	 *
+	 * `true` enables TypeScript import resolution without an explicit project;
+	 * a path or list of paths enables type-aware alias resolution.
+	 */
+	project?: boolean | string | string[];
+
+	/**
+	 * Options forwarded to `eslint-import-resolver-typescript`.
+	 *
+	 * @see https://github.com/import-js/eslint-import-resolver-typescript
+	 */
+	resolver?: TypeScriptResolverOptions;
+
+	/**
+	 * Root directory the project paths are resolved from. Defaults to `cwd()`.
+	 */
+	tsconfigRootDir?: string;
 }
 
 interface CoreModuleOptions {
@@ -90,8 +113,11 @@ interface CoreOptions {
 
 	/**
 	 * Enable typescript-aware import rules.
+	 *
+	 * Pass the resolved TypeScript options (project, tsconfigRootDir and import
+	 * resolver options) to resolve path aliases in `import/no-unresolved`.
 	 */
-	typescript: boolean | object;
+	typescript: boolean | CoreTypescriptOptions;
 }
 
 type CoreFactoryOptions = RecursivePartial<CoreOptions> & TypedFlatConfigItem;
@@ -116,9 +142,9 @@ const defaultCoreOptions = (options: RecursivePartial<CoreOptions> = {}): CoreOp
 	},
 	node: options.node ?? true,
 	stylistic: Boolean(options.stylistic),
-	typescript: Boolean(options.typescript),
+	typescript: (options.typescript ?? false) as boolean | CoreTypescriptOptions,
 });
 
-export type { CoreFactoryOptions, CoreIgnoreOptions, CoreModuleOptions, CoreOptions };
+export type { CoreFactoryOptions, CoreIgnoreOptions, CoreModuleOptions, CoreOptions, CoreTypescriptOptions };
 
 export default defaultCoreOptions;

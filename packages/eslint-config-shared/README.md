@@ -10,6 +10,7 @@ Keeping the shared layer private is what lets the feature packages stay independ
 
 - `GLOB_*` constants — the file globs shared by several packages.
 - `PLUGIN_RENAME_*` maps and `pluginConfigRules`/`pluginConfigOverrideRules` helpers.
-- `interopDefault`, `toArray`, `extractTypedFlatConfigItem` and the `RecursivePartial` type.
+- `interopDefault`, `toArray`, `extractTypedFlatConfigItem`, `combine`, `renameRules` and the `RecursivePartial` type.
+- `expandTsconfigProjects` — expands a solution-style root tsconfig into the concrete projects it references.
 
 Changes here affect every package: run `bun run build` and `bun run test` from the repository root before opening a pull request.
