@@ -181,10 +181,10 @@ interface TypescriptOptions extends CoreTypescriptOptions {
 /**
  * Resolve the default TypeScript project(s) without consumer input.
  *
- * A root `tsconfig.json` wins (solution-style roots are expanded by the
- * TypeScript and import packages). When the root has no tsconfig, the tsconfigs
- * of the workspace packages are used, which covers monorepos whose root only
- * holds tooling configuration.
+ * A root `tsconfig.json` wins and keeps its bare `'tsconfig.json'` form
+ * (solution-style roots are expanded by the TypeScript and import packages).
+ * When the root has no tsconfig, the tsconfigs of the workspace packages are
+ * used, which covers monorepos whose root only holds tooling configuration.
  */
 function getDefaultTypescriptProject(): string | string[] | undefined {
 	const root = process.cwd();
@@ -196,7 +196,11 @@ function getDefaultTypescriptProject(): string | string[] | undefined {
 	const projects = getWorkspaceDirectories(root)
 		.map(directory => path.join(directory, 'tsconfig.json'))
 		.filter(file => existsSync(file))
-		.map(file => `./${path.relative(root, file).split(path.sep).join('/')}`);
+		.map(file => {
+			const relative = path.relative(root, file).split(path.sep).join('/');
+
+			return relative.startsWith('..') ? relative : `./${relative}`;
+		});
 
 	return projects.length > 0 ? projects : undefined;
 }

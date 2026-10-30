@@ -157,6 +157,29 @@ describe('workspace option detection', () => {
 		});
 	});
 
+	test('keeps parent-relative workspace tsconfigs outside the root', () => {
+		const root = createWorkspace();
+		const sibling = `${root}-sibling`;
+
+		mkdirSync(sibling, { recursive: true });
+		writeFileSync(
+			path.join(root, 'package.json'),
+			JSON.stringify({ workspaces: ['packages/*', `../${path.basename(sibling)}`] })
+		);
+		writeFileSync(path.join(sibling, 'package.json'), JSON.stringify({ name: 'sibling' }));
+		writeFileSync(path.join(sibling, 'tsconfig.json'), JSON.stringify({ include: ['src'] }));
+
+		try {
+			withWorkspace(root, () => {
+				expect(defaultOptions({}).typescript).toEqual({
+					project: ['./packages/app/tsconfig.json', `../${path.basename(sibling)}/tsconfig.json`],
+				});
+			});
+		} finally {
+			rmSync(sibling, { force: true, recursive: true });
+		}
+	});
+
 	test('keeps an explicit project when projectService is also set', () => {
 		const root = createWorkspace();
 
