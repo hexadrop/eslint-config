@@ -1,5 +1,12 @@
 # @hexadrop/eslint-config
 
+## 1.3.2
+
+### Patch Changes
+
+- Updated dependencies [8cb1172]
+  - @hexadrop/eslint-config-stylistic@1.1.4
+
 ## 1.3.1
 
 ### Patch Changes
