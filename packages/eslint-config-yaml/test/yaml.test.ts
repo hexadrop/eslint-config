@@ -67,7 +67,7 @@ describe('yaml config', () => {
 		expect(sanitised).toMatchSnapshot('yaml-full-config');
 	});
 
-	test('mixes an inline config item into the first argument', async () => {
+	test('appends an inline config item', async () => {
 		const configs = await yaml({ name: 'consumer/inline', rules: { 'yaml/no-empty-key': 'off' } });
 		const inline = configs.find(config => config.name === 'consumer/inline');
 

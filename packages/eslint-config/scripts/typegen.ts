@@ -5,7 +5,6 @@ import { config as markdown } from '@hexadrop/eslint-config-markdown';
 import { config as react } from '@hexadrop/eslint-config-react';
 import { config as stylistic } from '@hexadrop/eslint-config-stylistic';
 import { config as typescript } from '@hexadrop/eslint-config-typescript';
-import { config as yaml } from '@hexadrop/eslint-config-yaml';
 import { builtinRules } from 'eslint/use-at-your-own-risk';
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core';
 
@@ -30,7 +29,6 @@ const configs = await combine(
 	react(options.typescript === false ? { typescript: false as const } : {}),
 	astro(options.typescript === false ? { typescript: false as const } : {}),
 	json(),
-	yaml(),
 	markdown(),
 	imports(options),
 	stylistic({

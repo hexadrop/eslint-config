@@ -37,7 +37,7 @@ The factory takes no options: the slice is the whole feature, so importing it is
 export default yaml({ name: 'my/override', rules: { 'yaml/no-empty-key': 'off' } });
 ```
 
-To disable the slice, use the meta-package (`yaml: false`, the default there) or simply do not import this package.
+To disable the slice, simply do not import this package. The meta-package will compose it with `yaml: true` by default in `2.0.0`.
 
 ### Rules
 
@@ -46,14 +46,14 @@ The slice starts from the plugin's `standard` preset and overrides:
 | Rule            | Value                                                    | Why                                             |
 |-----------------|----------------------------------------------------------|-------------------------------------------------|
 | `yaml/indent`   | `['error', 2]`                                           | YAML always uses spaces.                        |
-| `yaml/quotes`   | `['error', { avoidEscape: false, prefer: 'single' }]`    | Single quotes by default.                       |
+| `yaml/quotes`   | `['error', { avoidEscape: false, prefer: 'single' }]`    | Single quotes; unnecessary quotes are removed.  |
 | `yaml/sort-keys`| `'off'`                                                  | Key order is meaningful in CI and GitHub Actions. |
 
-The slice registers the plugin's ESLint language (`language: 'yaml/yaml'`), so YAML files only receive `yaml/*` rules. The JavaScript-only rule sets in the meta-package are scoped with `GLOB_JS_LANGUAGE` and never reach YAML files.
+The slice registers the plugin's ESLint language (`language: 'yaml/yaml'`), so YAML files only receive `yaml/*` enabled rules. The preset's base block still turns off `no-irregular-whitespace`, `no-unused-vars` and `spaced-comment` on purpose. The JavaScript-only rule sets in the other packages are scoped with `GLOB_JS_LANGUAGE` and never reach YAML files.
 
 ### With the meta-package
 
-`@hexadrop/eslint-config` composes this slice as a regular dependency and controls it with its own `yaml` option. YAML linting is **opt-in** while the meta-package stays on the `1.x` line: pass `yaml: true` to enable it. It becomes the default in `2.0.0` ([#1129](https://github.com/hexadrop/eslint-config/issues/1129)).
+The meta-package does not compose this slice yet. Append it to your existing `hexadrop()` composer with `hexadrop().append(yaml())`. It joins `hexadrop()` with `yaml: true` by default in `2.0.0` ([#1129](https://github.com/hexadrop/eslint-config/issues/1129)).
 
 ### Optional peers
 

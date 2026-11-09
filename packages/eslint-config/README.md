@@ -39,7 +39,7 @@ bun add eslint @hexadrop/eslint-config --dev
 - Opinionated, but [very customizable](#customization)
 - Reasonable defaults, best practices, only one line of config
 - Designed to work with TypeScript, JSX, JSON, Markdown, etc. Out-of-box.
-- Supports ESLint v9.38+ or v10+
+- Supports ESLint v9.17+ or v10+
 - [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new), compose easily!
 
 ## Granular packages
@@ -119,10 +119,6 @@ export default hexadrop({
 
   // TypeScript are auto-detected, you can also explicitly enable them:
   typescript: true,
-
-  // YAML linting is opt-in for now; it becomes the default in 2.0.0.
-  // See https://github.com/hexadrop/eslint-config/issues/1129.
-  yaml: true,
 });
 ```
 

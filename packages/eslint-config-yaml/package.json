@@ -1,6 +1,6 @@
 {
 	"name": "@hexadrop/eslint-config-yaml",
-	"version": "1.0.0",
+	"version": "0.0.0",
 	"description": "YAML slice of the hexadrop ESLint config: yml plugin, YAML language and conventions for .yml and .yaml files.",
 	"keywords": [
 		"lint",

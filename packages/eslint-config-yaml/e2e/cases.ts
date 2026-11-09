@@ -34,6 +34,10 @@ export const END_TO_END_CASES: EndToEndCase[] = [
 		slug: 'workflow',
 	},
 	{
+		file: 'empty-mapping.yaml',
+		slug: 'empty-mapping',
+	},
+	{
 		extraConfigs: [{ name: 'consumer/rule-override', rules: { 'yaml/no-empty-mapping-value': 'off' } }],
 		file: 'rule-override.yaml',
 		slug: 'rule-override',

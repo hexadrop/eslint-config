@@ -33,38 +33,45 @@ function collectRules(configs: Linter.Config[]): Linter.RulesRecord {
 export default async function yamlConfig(): Promise<TypedFlatConfigItem[]> {
 	const pluginYaml = await interopDefault(import('eslint-plugin-yml'));
 
-	const yamlPluginRename = PLUGIN_RENAME.yml;
+	const yamlPluginName = PLUGIN_RENAME.yml;
+	const yamlFiles = [...GLOB_YAML, ...GLOB_MARKDOWN_YAML];
 
 	return [
 		{
 			name: YAML_CONFIG_NAME_SETUP,
 			plugins: {
-				[yamlPluginRename]: pluginYaml,
+				[yamlPluginName]: pluginYaml,
 			},
 		},
 		{
-			files: [...GLOB_YAML, ...GLOB_MARKDOWN_YAML],
+			files: yamlFiles,
 			/*
 			 * v3 ships an ESLint language plugin instead of a bare parser. The
 			 * language id is `yaml` inside the plugin namespace, so the renamed
 			 * `yaml` prefix resolves `yaml/yaml`.
 			 */
-			language: `${yamlPluginRename}/yaml`,
+			language: `${yamlPluginName}/yaml`,
 			name: YAML_CONFIG_NAME_SETUP_LANGUAGE,
 		},
 		{
-			files: [...GLOB_YAML, ...GLOB_MARKDOWN_YAML],
+			files: yamlFiles,
 			name: YAML_CONFIG_NAME_RULES,
 			rules: renameRules(
 				{
+					/*
+					 * The preset's base block also turns off three core rules that
+					 * would otherwise run on YAML (`no-irregular-whitespace`,
+					 * `no-unused-vars` and `spaced-comment`); they are kept on
+					 * purpose.
+					 */
 					...collectRules(pluginYaml.configs.standard),
-					[`${yamlPluginRename}/indent`]: ['error', 2],
-					[`${yamlPluginRename}/quotes`]: ['error', { avoidEscape: false, prefer: 'single' }],
+					[`${yamlPluginName}/indent`]: ['error', 2],
+					[`${yamlPluginName}/quotes`]: ['error', { avoidEscape: false, prefer: 'single' }],
 					/*
 					 * Key order is meaningful in some YAML (GitHub Actions, CI
 					 * pipelines), so it is never enforced.
 					 */
-					[`${yamlPluginRename}/sort-keys`]: 'off',
+					[`${yamlPluginName}/sort-keys`]: 'off',
 				},
 				PLUGIN_RENAME
 			),

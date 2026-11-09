@@ -28,10 +28,11 @@ Feature packages do **not** depend on core. They import the shared globs and uti
 3. `typescript`.
 4. `react` when enabled or detected.
 5. `json`.
-6. `yaml` when enabled.
-7. `markdown`.
-8. `imports` from `@hexadrop/eslint-config-core`.
-9. `stylistic` from `@hexadrop/eslint-config-stylistic`.
+6. `markdown`.
+7. `imports` from `@hexadrop/eslint-config-core`.
+8. `stylistic` from `@hexadrop/eslint-config-stylistic`.
+
+The YAML slice is published as a granular package but is not composed by the meta-package yet; it joins the pipeline with the `yaml: true` default in 2.0.0 ([#1129](https://github.com/hexadrop/eslint-config/issues/1129)).
 
 The base concerns are raw config functions imported from core. The framework concerns are loaded lazily with `optionalPlugin()` so their plugins are only evaluated when the section is enabled.
 

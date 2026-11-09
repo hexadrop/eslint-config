@@ -194,35 +194,6 @@ const a = 1;
 "
 `;
 
-exports[`e2e fixtures yaml: fixtures/file.yaml through eslint --fix: yaml-diagnostics 1`] = `[]`;
-
-exports[`e2e fixtures yaml: fixtures/file.yaml through eslint --fix: yaml-content 1`] = `
-"name: fixture
-enabled: true
-items:
-  - first
-  - second
-nested:
-  key: value
-"
-`;
-
-exports[`e2e fixtures markdown-yaml: fixtures/markdown-yaml.md through eslint --fix: markdown-yaml-diagnostics 1`] = `[]`;
-
-exports[`e2e fixtures markdown-yaml: fixtures/markdown-yaml.md through eslint --fix: markdown-yaml-content 1`] = `
-"# YAML fixture
-
-A fenced YAML block that the yaml slice lints through the markdown processor.
-
-\`\`\`yaml
-name: fixture
-items:
-  - first
-  - second
-\`\`\`
-"
-`;
-
 exports[`e2e fixtures tsx: fixtures/react.tsx through eslint --fix: tsx-diagnostics 1`] = `
 [
   {

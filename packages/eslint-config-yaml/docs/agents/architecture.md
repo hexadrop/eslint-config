@@ -35,13 +35,15 @@ The package must stay publishable standalone: it owns its dependencies (`eslint-
 
 ## Public API
 
-`yamlConfig()` accepts any number of extra flat config items to append and returns a `FlatConfigComposer`; consumers may use `.override()`, `.prepend()`, `.append()`, `.remove()`, and `.renamePlugins()`.
+`yamlConfig()` returns the raw array of flat config items. The default export, `yamlFactory()`, wraps it in a `FlatConfigComposer` that accepts any number of extra flat config items to append; consumers may use `.override()`, `.prepend()`, `.append()`, `.remove()`, and `.renamePlugins()`.
 
 ```js
 import yaml from '@hexadrop/eslint-config-yaml';
 
 export default yaml();
 ```
+
+The meta-package does not compose this slice yet; it is appended manually until `2.0.0`, when `hexadrop()` enables it by default ([#1129](https://github.com/hexadrop/eslint-config/issues/1129)).
 
 ## Generated types
 

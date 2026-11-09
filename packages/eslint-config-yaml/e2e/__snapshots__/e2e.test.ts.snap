@@ -77,3 +77,21 @@ exports[`e2e fixtures rule-override: fixtures/rule-override.yaml through eslint 
 empty:
 "
 `;
+
+exports[`e2e fixtures empty-mapping: fixtures/empty-mapping.yaml through eslint --fix: empty-mapping-diagnostics 1`] = `
+[
+  {
+    "column": 1,
+    "line": 2,
+    "message": "Empty mapping values are forbidden.",
+    "ruleId": "yaml/no-empty-mapping-value",
+    "severity": 2,
+  },
+]
+`;
+
+exports[`e2e fixtures empty-mapping: fixtures/empty-mapping.yaml through eslint --fix: empty-mapping-content 1`] = `
+"name: control
+empty:
+"
+`;
