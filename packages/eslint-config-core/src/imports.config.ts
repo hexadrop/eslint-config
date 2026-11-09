@@ -108,16 +108,18 @@ export default async function imports(options: CoreOptions): Promise<TypedFlatCo
 	];
 
 	if (typescript) {
-		const typeScriptExtensions = ['.ts', '.tsx'] as const;
+		const typeScriptExtensions = ['.ts', '.tsx', '.cts', '.mts'] as const;
+		const javaScriptExtensions = ['.js', '.jsx', '.cjs', '.mjs'] as const;
+		const moduleExtensions = [...typeScriptExtensions, ...javaScriptExtensions];
 		const resolverOptions = typeScriptResolverOptions(typescript);
 		configs.push({
 			files: TYPESCRIPT_GLOBS,
 			name: IMPORTS_CONFIG_NAME_SETUP_TYPESCRIPT,
 			settings: {
-				[`${importXPlugin}/extensions`]: typeScriptExtensions,
+				[`${importXPlugin}/extensions`]: moduleExtensions,
 				[`${importXPlugin}/external-module-folders`]: ['node_modules', 'node_modules/@types'],
 				[`${importXPlugin}/parsers`]: {
-					'@typescript-eslint/parser': [...typeScriptExtensions, '.cts', '.mts', '.cjs', '.js', '.mjs'],
+					'@typescript-eslint/parser': moduleExtensions,
 				},
 				[`${importXPlugin}/resolver-next`]: [
 					createNodeResolver(),
@@ -217,6 +219,19 @@ export default async function imports(options: CoreOptions): Promise<TypedFlatCo
 			name: IMPORTS_CONFIG_NAME_RULES_TYPESCRIPT,
 			rules: {
 				[`${importXPluginRename}/named`]: 'off',
+				/*
+				 * The TypeScript parser mapping widens the extensions import-x
+				 * considers valid, which makes `noUselessIndex` rewrite explicit
+				 * `./x/index.js` imports to `./x`. That is invalid under ESM, so
+				 * only collapse index imports when CommonJS is enabled.
+				 */
+				[`${importXPluginRename}/no-useless-path-segments`]: [
+					'error',
+					{
+						commonjs,
+						noUselessIndex: commonjs,
+					},
+				],
 			},
 		});
 	}
