@@ -120,7 +120,12 @@ describe('core factory', () => {
 			typescript: true,
 		});
 
-		expect(configs.some(config => config.name === IMPORTS_CONFIG_NAME_SETUP_TYPESCRIPT)).toBe(true);
+		const setupTypescript = configs.find(config => config.name === IMPORTS_CONFIG_NAME_SETUP_TYPESCRIPT);
+
+		expect(setupTypescript).toBeDefined();
+		expect(setupTypescript?.settings?.['import-x/parsers']).toMatchObject({
+			'@typescript-eslint/parser': ['.ts', '.tsx', '.cts', '.mts', '.cjs', '.js', '.mjs'],
+		});
 		expect(configs.some(config => config.name === IMPORTS_CONFIG_NAME_RULES_TYPESCRIPT)).toBe(true);
 		expect(configs.some(config => config.name === IMPORTS_CONFIG_NAME_RULES_ASTRO)).toBe(true);
 		expect(configs.some(config => config.name === IMPORTS_CONFIG_NAME_RULES_STYLISTIC)).toBe(true);

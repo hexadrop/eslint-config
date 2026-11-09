@@ -117,7 +117,7 @@ export default async function imports(options: CoreOptions): Promise<TypedFlatCo
 				[`${importXPlugin}/extensions`]: typeScriptExtensions,
 				[`${importXPlugin}/external-module-folders`]: ['node_modules', 'node_modules/@types'],
 				[`${importXPlugin}/parsers`]: {
-					'@typescript-eslint/parser': [...typeScriptExtensions, '.cts', '.mts'],
+					'@typescript-eslint/parser': [...typeScriptExtensions, '.cts', '.mts', '.cjs', '.js', '.mjs'],
 				},
 				[`${importXPlugin}/resolver-next`]: [
 					createNodeResolver(),
