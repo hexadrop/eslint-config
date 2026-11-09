@@ -1,0 +1,8 @@
+import { PLUGIN_PREFIX } from '../const';
+
+const YAML_CONFIG_NAME = `${PLUGIN_PREFIX}/yaml` as const;
+const YAML_CONFIG_NAME_SETUP = `${YAML_CONFIG_NAME}/setup` as const;
+const YAML_CONFIG_NAME_SETUP_LANGUAGE = `${YAML_CONFIG_NAME_SETUP}/language` as const;
+const YAML_CONFIG_NAME_RULES = `${YAML_CONFIG_NAME}/rules` as const;
+
+export { YAML_CONFIG_NAME_RULES, YAML_CONFIG_NAME_SETUP, YAML_CONFIG_NAME_SETUP_LANGUAGE };

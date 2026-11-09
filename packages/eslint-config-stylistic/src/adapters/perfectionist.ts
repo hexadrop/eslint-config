@@ -1,4 +1,8 @@
-import { interopDefault, STYLISTIC_CONFIG_NAME_RULES_PERFECTIONIST } from '@hexadrop/eslint-config-shared';
+import {
+	GLOB_JS_LANGUAGE,
+	interopDefault,
+	STYLISTIC_CONFIG_NAME_RULES_PERFECTIONIST,
+} from '@hexadrop/eslint-config-shared';
 
 import type { TypedFlatConfigItem } from '../stylistic.typed-config';
 
@@ -8,6 +12,7 @@ export default async function perfectionistAdapter(): Promise<TypedFlatConfigIte
 
 	return [
 		{
+			files: GLOB_JS_LANGUAGE,
 			name: STYLISTIC_CONFIG_NAME_RULES_PERFECTIONIST,
 			rules: {
 				...pluginPerfectionist.rules,

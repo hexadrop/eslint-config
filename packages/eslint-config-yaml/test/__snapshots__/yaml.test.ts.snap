@@ -1,0 +1,74 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`yaml config snapshot: full config structure: yaml-full-config 1`] = `
+[
+  {
+    "language": undefined,
+    "name": "hexadrop/yaml/setup",
+    "plugins": [
+      "yaml",
+    ],
+  },
+  {
+    "files": [
+      "**/*.yml",
+      "**/*.yaml",
+      "**/*.md/**/*.yml",
+      "**/*.md/**/*.yaml",
+    ],
+    "language": "yaml/yaml",
+    "name": "hexadrop/yaml/setup/language",
+    "plugins": undefined,
+  },
+  {
+    "files": [
+      "**/*.yml",
+      "**/*.yaml",
+      "**/*.md/**/*.yml",
+      "**/*.md/**/*.yaml",
+    ],
+    "language": undefined,
+    "name": "hexadrop/yaml/rules",
+    "plugins": undefined,
+    "rules": {
+      "no-irregular-whitespace": "off",
+      "no-unused-vars": "off",
+      "spaced-comment": "off",
+      "yaml/block-mapping": "error",
+      "yaml/block-mapping-colon-indicator-newline": "error",
+      "yaml/block-mapping-question-indicator-newline": "error",
+      "yaml/block-sequence": "error",
+      "yaml/block-sequence-hyphen-indicator-newline": "error",
+      "yaml/flow-mapping-curly-newline": "error",
+      "yaml/flow-mapping-curly-spacing": "error",
+      "yaml/flow-sequence-bracket-newline": "error",
+      "yaml/flow-sequence-bracket-spacing": "error",
+      "yaml/indent": [
+        "error",
+        2,
+      ],
+      "yaml/key-spacing": "error",
+      "yaml/no-empty-document": "error",
+      "yaml/no-empty-key": "error",
+      "yaml/no-empty-mapping-value": "error",
+      "yaml/no-empty-sequence-entry": "error",
+      "yaml/no-irregular-whitespace": "error",
+      "yaml/no-multiple-empty-lines": "error",
+      "yaml/no-tab-indent": "error",
+      "yaml/no-trailing-spaces": "error",
+      "yaml/no-trailing-zeros": "error",
+      "yaml/plain-scalar": "error",
+      "yaml/quotes": [
+        "error",
+        {
+          "avoidEscape": false,
+          "prefer": "single",
+        },
+      ],
+      "yaml/sort-keys": "off",
+      "yaml/spaced-comment": "error",
+      "yaml/vue-custom-block/no-parsing-error": "error",
+    },
+  },
+]
+`;

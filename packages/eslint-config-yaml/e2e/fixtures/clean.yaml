@@ -1,0 +1,7 @@
+name: clean
+enabled: true
+items:
+  - first
+  - second
+nested:
+  key: 'value: with colon'

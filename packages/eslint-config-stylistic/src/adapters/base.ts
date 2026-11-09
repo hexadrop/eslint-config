@@ -1,4 +1,5 @@
 import {
+	GLOB_JS_LANGUAGE,
 	GLOB_MARKDOWN_ASTRO,
 	GLOB_MARKDOWN_JSON,
 	GLOB_MARKDOWN_SOURCE,
@@ -47,6 +48,7 @@ export default async function baseAdapter(options: StylisticConfigOptions): Prom
 			},
 		},
 		{
+			files: GLOB_JS_LANGUAGE,
 			name: STYLISTIC_CONFIG_NAME_RULES,
 			rules: {
 				...renameRules(pluginStylisticRules, PLUGIN_RENAME),

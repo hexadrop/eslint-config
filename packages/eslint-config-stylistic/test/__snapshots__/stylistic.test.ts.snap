@@ -12,6 +12,20 @@ exports[`stylistic config snapshot: full config structure: stylistic-full-config
     ],
   },
   {
+    "files": [
+      "**/*.?([cm])[jt]s?(x)",
+      "*.astro",
+      "**/*.astro",
+      "**/*.md/**/*.?([cm])[jt]s?(x)",
+      "**/*.md/*.astro",
+      "**/*.md/**/*.astro",
+      "**/*.json",
+      "**/*.json5",
+      "**/*.jsonc",
+      "**/*.md/**/*.json",
+      "**/*.md/**/*.json5",
+      "**/*.md/**/*.jsonc",
+    ],
     "name": "hexadrop/stylistic/rules",
     "plugins": undefined,
     "rules": {
@@ -531,6 +545,20 @@ exports[`stylistic config snapshot: full config structure: stylistic-full-config
     },
   },
   {
+    "files": [
+      "**/*.?([cm])[jt]s?(x)",
+      "*.astro",
+      "**/*.astro",
+      "**/*.md/**/*.?([cm])[jt]s?(x)",
+      "**/*.md/*.astro",
+      "**/*.md/**/*.astro",
+      "**/*.json",
+      "**/*.json5",
+      "**/*.jsonc",
+      "**/*.md/**/*.json",
+      "**/*.md/**/*.json5",
+      "**/*.md/**/*.jsonc",
+    ],
     "name": "hexadrop/stylistic/rules/unicorn",
     "plugins": undefined,
     "rules": {
@@ -899,6 +927,20 @@ exports[`stylistic config snapshot: full config structure: stylistic-full-config
     },
   },
   {
+    "files": [
+      "**/*.?([cm])[jt]s?(x)",
+      "*.astro",
+      "**/*.astro",
+      "**/*.md/**/*.?([cm])[jt]s?(x)",
+      "**/*.md/*.astro",
+      "**/*.md/**/*.astro",
+      "**/*.json",
+      "**/*.json5",
+      "**/*.jsonc",
+      "**/*.md/**/*.json",
+      "**/*.md/**/*.json5",
+      "**/*.md/**/*.jsonc",
+    ],
     "name": "hexadrop/stylistic/rules/perfectionist",
     "plugins": undefined,
     "rules": {

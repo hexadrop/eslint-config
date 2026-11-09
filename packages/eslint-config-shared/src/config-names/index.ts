@@ -4,3 +4,4 @@ export * from './markdown.config-name';
 export * from './react.config-name';
 export * from './stylistic.config-name';
 export * from './typescript.config-name';
+export * from './yaml.config-name';
