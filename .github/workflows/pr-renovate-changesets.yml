@@ -1,4 +1,4 @@
-name: "Pull Request: Add changeset to renovate updates"
+name: 'Pull Request: Add changeset to renovate updates'
 
 on:
   pull_request_target:

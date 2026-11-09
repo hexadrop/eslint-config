@@ -70,14 +70,6 @@ jobs:
 "
 `;
 
-exports[`e2e fixtures rule-override: fixtures/rule-override.yaml through eslint --fix: rule-override-diagnostics 1`] = `[]`;
-
-exports[`e2e fixtures rule-override: fixtures/rule-override.yaml through eslint --fix: rule-override-content 1`] = `
-"name: override
-empty:
-"
-`;
-
 exports[`e2e fixtures empty-mapping: fixtures/empty-mapping.yaml through eslint --fix: empty-mapping-diagnostics 1`] = `
 [
   {
@@ -92,6 +84,14 @@ exports[`e2e fixtures empty-mapping: fixtures/empty-mapping.yaml through eslint 
 
 exports[`e2e fixtures empty-mapping: fixtures/empty-mapping.yaml through eslint --fix: empty-mapping-content 1`] = `
 "name: control
+empty:
+"
+`;
+
+exports[`e2e fixtures rule-override: fixtures/rule-override.yaml through eslint --fix: rule-override-diagnostics 1`] = `[]`;
+
+exports[`e2e fixtures rule-override: fixtures/rule-override.yaml through eslint --fix: rule-override-content 1`] = `
+"name: override
 empty:
 "
 `;

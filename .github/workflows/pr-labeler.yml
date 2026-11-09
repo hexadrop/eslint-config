@@ -1,4 +1,4 @@
-name: "Pull Request: Add labels"
+name: 'Pull Request: Add labels'
 
 on:
   - pull_request_target

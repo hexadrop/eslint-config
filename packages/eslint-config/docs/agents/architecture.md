@@ -25,9 +25,10 @@ The factory composes concerns in this order:
 4. `typescript` — configures the TypeScript parser and rules.
 5. `react` — configures React, hooks, and refresh rules.
 6. `json` — supports JSON and JSONC.
-7. `markdown` — lints Markdown code blocks.
-8. `imports` — from `@hexadrop/eslint-config-core`; validates, sorts, and removes unused imports.
-9. `stylistic` — composes `@hexadrop/eslint-config-stylistic` (stylistic, Unicorn, Perfectionist and Prettier-via-format rules).
+7. `yaml` — supports YAML and YAML fenced blocks in Markdown.
+8. `markdown` — lints Markdown code blocks.
+9. `imports` — from `@hexadrop/eslint-config-core`; validates, sorts, and removes unused imports.
+10. `stylistic` — composes `@hexadrop/eslint-config-stylistic` (stylistic, Unicorn, Perfectionist and Prettier-via-format rules).
 
 The core concerns are imported as raw config functions; the extracted framework concerns are loaded lazily through `optionalPlugin()`.
 
@@ -49,7 +50,7 @@ export default hexadrop(
 
 ## Feature resolution
 
-`defaultOptions()` in `src/options/hexadrop-eslint.options.ts` enables `ignore`, `imports`, `json`, `markdown`, `node`, and `stylistic` by default. It enables `react`, `astro`, and `typescript` when their packages are installed; a root `tsconfig.json` automatically enables TypeScript's type-aware configuration.
+`defaultOptions()` in `src/options/hexadrop-eslint.options.ts` enables `ignore`, `imports`, `json`, `markdown`, `node`, `stylistic` and `yaml` by default. It enables `react`, `astro`, and `typescript` when their packages are installed; a root `tsconfig.json` automatically enables TypeScript's type-aware configuration.
 
 Set `typescript: true` to enable TypeScript without type-aware rules. Pass one or more `tsconfig.json` paths to enable type-aware rules.
 

@@ -153,6 +153,13 @@ interface HexadropEslintOptions {
 	 *
 	 */
 	typescript: boolean | string | string[] | TypescriptOptions;
+
+	/**
+	 * Enable yaml support.
+	 *
+	 * @default true
+	 */
+	yaml: boolean;
 }
 
 /**
@@ -325,5 +332,6 @@ export default function defaultOptions(
 						...options.stylistic,
 					},
 		typescript,
+		yaml: options.yaml ?? true,
 	};
 }

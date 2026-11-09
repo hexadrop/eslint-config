@@ -1,4 +1,4 @@
-name: "Pull request: merge audit"
+name: 'Pull request: merge audit'
 
 on:
   pull_request:

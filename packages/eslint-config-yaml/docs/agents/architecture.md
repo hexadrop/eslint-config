@@ -43,7 +43,7 @@ import yaml from '@hexadrop/eslint-config-yaml';
 export default yaml();
 ```
 
-The meta-package does not compose this slice yet; it is appended manually until `2.0.0`, when `hexadrop()` enables it by default ([#1129](https://github.com/hexadrop/eslint-config/issues/1129)).
+The meta-package composes this slice and enables it by default (`yaml: true`); set `yaml: false` to disable it. It ships with the `2.0.0` release ([#1129](https://github.com/hexadrop/eslint-config/issues/1129)).
 
 ## Generated types
 

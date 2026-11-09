@@ -37,7 +37,7 @@ The factory takes no options: the slice is the whole feature, so importing it is
 export default yaml({ name: 'my/override', rules: { 'yaml/no-empty-key': 'off' } });
 ```
 
-To disable the slice, simply do not import this package. The meta-package will compose it with `yaml: true` by default in `2.0.0`.
+To disable the slice, use `yaml: false` in the meta-package or simply do not import this package.
 
 ### Rules
 
@@ -53,7 +53,7 @@ The slice registers the plugin's ESLint language (`language: 'yaml/yaml'`), so Y
 
 ### With the meta-package
 
-The meta-package does not compose this slice yet. Append it to your existing `hexadrop()` composer with `hexadrop().append(yaml())`. It joins `hexadrop()` with `yaml: true` by default in `2.0.0` ([#1129](https://github.com/hexadrop/eslint-config/issues/1129)).
+`@hexadrop/eslint-config` composes this slice and enables it by default (`yaml: true`). Set `yaml: false` to disable it. It ships with the `2.0.0` release, which also raises the meta-package's `eslint` peer floor to `^9.38.0` ([#1129](https://github.com/hexadrop/eslint-config/issues/1129)).
 
 ### Optional peers
 
