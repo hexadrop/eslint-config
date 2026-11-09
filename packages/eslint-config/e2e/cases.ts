@@ -102,6 +102,16 @@ export const END_TO_END_CASES: EndToEndCase[] = [
 		slug: 'markdown',
 	},
 	{
+		file: 'file.yaml',
+		options: { ...DEFAULTS, yaml: true },
+		slug: 'yaml',
+	},
+	{
+		file: 'markdown-yaml.md',
+		options: { ...DEFAULTS, yaml: true },
+		slug: 'markdown-yaml',
+	},
+	{
 		file: 'react.tsx',
 		options: { astro: false, react: true, typescript: true },
 		slug: 'tsx',

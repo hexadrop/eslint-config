@@ -24,6 +24,7 @@ export default hexadrop();
 | [`@hexadrop/eslint-config-core`](./packages/eslint-config-core/README.md) | Base ESLint rules, globals, ignores, `import-x` and `n`. | `bun add -D @hexadrop/eslint-config-core eslint` |
 | [`@hexadrop/eslint-config-typescript`](./packages/eslint-config-typescript/README.md) | `typescript-eslint` parser, plugin and type-aware rules. | `bun add -D @hexadrop/eslint-config-typescript` |
 | [`@hexadrop/eslint-config-json`](./packages/eslint-config-json/README.md) | JSON/JSONC rules and the `package.json`/`tsconfig.json` sort-keys slice. | `bun add -D @hexadrop/eslint-config-json` |
+| [`@hexadrop/eslint-config-yaml`](./packages/eslint-config-yaml/README.md) | YAML rules for `.yml`/`.yaml` files and Markdown fenced blocks. | `bun add -D @hexadrop/eslint-config-yaml` |
 | [`@hexadrop/eslint-config-markdown`](./packages/eslint-config-markdown/README.md) | Markdown processor and plain parser for code blocks. | `bun add -D @hexadrop/eslint-config-markdown` |
 | [`@hexadrop/eslint-config-react`](./packages/eslint-config-react/README.md) | React, hooks and refresh rules. | `bun add -D @hexadrop/eslint-config-react` |
 | [`@hexadrop/eslint-config-astro`](./packages/eslint-config-astro/README.md) | Astro plugin, parser and TS-in-astro support. | `bun add -D @hexadrop/eslint-config-astro` |

@@ -39,7 +39,7 @@ bun add eslint @hexadrop/eslint-config --dev
 - Opinionated, but [very customizable](#customization)
 - Reasonable defaults, best practices, only one line of config
 - Designed to work with TypeScript, JSX, JSON, Markdown, etc. Out-of-box.
-- Supports ESLint v9 or v8.50.0+
+- Supports ESLint v9.38+ or v10+
 - [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new), compose easily!
 
 ## Granular packages
@@ -51,6 +51,7 @@ The configuration is also published as one package per concern, so a project can
 | `@hexadrop/eslint-config-core`       | Base ESLint rules, globals, ignores, import-x and n.           |
 | `@hexadrop/eslint-config-typescript` | TypeScript parser, plugin and type-aware rules.                |
 | `@hexadrop/eslint-config-json`       | JSON/JSONC and the package.json/tsconfig.json sort-keys slice. |
+| `@hexadrop/eslint-config-yaml`       | YAML rules for .yml/.yaml files and Markdown fenced blocks.    |
 | `@hexadrop/eslint-config-markdown`   | Markdown processor and parser.                                 |
 | `@hexadrop/eslint-config-react`      | React, hooks and refresh rules.                                |
 | `@hexadrop/eslint-config-astro`      | Astro plugin, parser and TS-in-astro support.                  |
@@ -118,6 +119,10 @@ export default hexadrop({
 
   // TypeScript are auto-detected, you can also explicitly enable them:
   typescript: true,
+
+  // YAML linting is opt-in for now; it becomes the default in 2.0.0.
+  // See https://github.com/hexadrop/eslint-config/issues/1129.
+  yaml: true,
 });
 ```
 
@@ -215,6 +220,7 @@ package name), we renamed some plugins to make the overall scope more consistent
 | `typescript/*`    | `@typescript-eslint/*` | [@typescript-eslint/eslint-plugin] |
 | `import/*`        | `import-x/*`           | [eslint-plugin-import-x]           |
 | `json/*`          | `jsonc/*`              | [eslint-plugin-jsonc]              |
+| `yaml/*`          | `yml/*`                | [eslint-plugin-yml]                |
 | `node/*`          | `n/*`                  | [eslint-plugin-n]                  |
 | `import-sort/*`   | `simple-import-sort/*` | [eslint-plugin-simple-import-sort] |
 | `import-unused/*` | `unused-imports/*`     | [eslint-plugin-unused-imports]     |
@@ -376,6 +382,7 @@ Publishing this package we are committing ourselves to the following code qualit
   [@stylistic/eslint-plugin]: https://github.com/eslint-stylistic/eslint-stylistic
   [@typescript-eslint/eslint-plugin]: https://github.com/typescript-eslint/typescript-eslint
   [eslint-plugin-jsonc]: https://github.com/ota-meshi/eslint-plugin-jsonc
+  [eslint-plugin-yml]: https://github.com/ota-meshi/eslint-plugin-yml
   [eslint-plugin-import-x]: https://github.com/un-es/eslint-plugin-import-x
   [eslint-plugin-n]: https://github.com/eslint-community/eslint-plugin-n
   [eslint-plugin-simple-import-sort]: https://github.com/lydell/eslint-plugin-simple-import-sort

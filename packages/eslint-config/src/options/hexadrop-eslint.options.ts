@@ -153,6 +153,19 @@ interface HexadropEslintOptions {
 	 *
 	 */
 	typescript: boolean | string | string[] | TypescriptOptions;
+
+	/**
+	 * Enable yaml support.
+	 *
+	 * Opt-in for now: enabling it by default would start reporting errors on
+	 * existing YAML files in a minor release.
+	 *
+	 * TODO(2.0.0): default to `true` to match `json` and `markdown`.
+	 * https://github.com/hexadrop/eslint-config/issues/1129
+	 *
+	 * @default false
+	 */
+	yaml: boolean;
 }
 
 /**
@@ -325,5 +338,12 @@ export default function defaultOptions(
 						...options.stylistic,
 					},
 		typescript,
+		/*
+		 * TODO(2.0.0): flip the default to `true` so YAML matches `json`
+		 * and `markdown`. Kept opt-in so a minor update never starts reporting
+		 * on existing YAML files.
+		 * https://github.com/hexadrop/eslint-config/issues/1129
+		 */
+		yaml: options.yaml ?? false,
 	};
 }

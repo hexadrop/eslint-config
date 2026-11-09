@@ -105,6 +105,7 @@ export default function hexadrop(
 		),
 		...optionalPlugin(options.react, () => import('@hexadrop/eslint-config-react'), toReactFactoryOptions(options)),
 		...optionalPlugin(options.json, () => import('@hexadrop/eslint-config-json')),
+		...optionalPlugin(options.yaml, () => import('@hexadrop/eslint-config-yaml')),
 		...optionalPlugin(options.markdown, () => import('@hexadrop/eslint-config-markdown')),
 		imports(options),
 		...stylisticSection(options)
