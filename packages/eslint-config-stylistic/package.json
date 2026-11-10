@@ -75,6 +75,6 @@
 		"prettier-plugin-astro": "1.1.2"
 	},
 	"devDependencies": {
-		"tsdown": "0.23.4"
+		"tsdown": "0.23.5"
 	}
 }
