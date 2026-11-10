@@ -113,7 +113,6 @@ export default async function imports(options: CoreOptions): Promise<TypedFlatCo
 		const moduleExtensions = [...typeScriptExtensions, ...javaScriptExtensions];
 		const resolverOptions = typeScriptResolverOptions(typescript);
 		configs.push({
-			files: TYPESCRIPT_GLOBS,
 			name: IMPORTS_CONFIG_NAME_SETUP_TYPESCRIPT,
 			settings: {
 				[`${importXPlugin}/extensions`]: moduleExtensions,
