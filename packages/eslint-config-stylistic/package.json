@@ -1,6 +1,6 @@
 {
 	"name": "@hexadrop/eslint-config-stylistic",
-	"version": "1.1.3",
+	"version": "1.1.4",
 	"description": "Stylistic slice of the hexadrop ESLint config: @stylistic, unicorn, perfectionist, format/prettier rules and conditional sections for typescript, json and astro.",
 	"keywords": [
 		"lint",
@@ -72,7 +72,7 @@
 		"eslint-plugin-unicorn": "73.0.0",
 		"local-pkg": "1.2.1",
 		"prettier": "3.9.10",
-		"prettier-plugin-astro": "0.14.1"
+		"prettier-plugin-astro": "1.1.2"
 	},
 	"devDependencies": {
 		"tsdown": "0.23.4"
