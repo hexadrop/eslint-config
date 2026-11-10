@@ -1,5 +1,13 @@
 # @hexadrop/eslint-config
 
+## 1.3.3
+
+### Patch Changes
+
+- 4448ef7: Apply the `import-x` extensions, external module folders, parser and TypeScript resolver settings to every file, not only to TypeScript files. Astro and other non-TypeScript files now parse imported JavaScript and TypeScript modules with `@typescript-eslint/parser`, so consumers no longer need a manual `import-x/parsers` block.
+- Updated dependencies [4448ef7]
+  - @hexadrop/eslint-config-core@1.3.3
+
 ## 1.3.2
 
 ### Patch Changes
