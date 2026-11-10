@@ -1,0 +1,97 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`e2e fixtures clean: fixtures/clean.yaml through eslint --fix: clean-diagnostics 1`] = `[]`;
+
+exports[`e2e fixtures clean: fixtures/clean.yaml through eslint --fix: clean-content 1`] = `
+"name: clean
+enabled: true
+items:
+  - first
+  - second
+nested:
+  key: 'value: with colon'
+"
+`;
+
+exports[`e2e fixtures yaml: fixtures/file.yaml through eslint --fix: yaml-diagnostics 1`] = `[]`;
+
+exports[`e2e fixtures yaml: fixtures/file.yaml through eslint --fix: yaml-content 1`] = `
+"name: file
+enabled: true
+
+
+items:
+  - first
+  - second
+nested:
+  key: value
+"
+`;
+
+exports[`e2e fixtures yml: fixtures/file.yml through eslint --fix: yml-diagnostics 1`] = `[]`;
+
+exports[`e2e fixtures yml: fixtures/file.yml through eslint --fix: yml-content 1`] = `
+"name: file
+description: single
+items:
+  - first
+  - second
+"
+`;
+
+exports[`e2e fixtures invalid: fixtures/invalid.yaml through eslint --fix: invalid-diagnostics 1`] = `
+[
+  {
+    "column": 0,
+    "line": 2,
+    "message": "Parsing error: Flow sequence in block collection must be sufficiently indented and end with a ]",
+    "ruleId": undefined,
+    "severity": 2,
+  },
+]
+`;
+
+exports[`e2e fixtures invalid: fixtures/invalid.yaml through eslint --fix: invalid-content 1`] = `
+"name: [unclosed
+"
+`;
+
+exports[`e2e fixtures workflow: fixtures/workflow.yml through eslint --fix: workflow-diagnostics 1`] = `[]`;
+
+exports[`e2e fixtures workflow: fixtures/workflow.yml through eslint --fix: workflow-content 1`] = `
+"name: CI
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: bun test
+"
+`;
+
+exports[`e2e fixtures empty-mapping: fixtures/empty-mapping.yaml through eslint --fix: empty-mapping-diagnostics 1`] = `
+[
+  {
+    "column": 1,
+    "line": 2,
+    "message": "Empty mapping values are forbidden.",
+    "ruleId": "yaml/no-empty-mapping-value",
+    "severity": 2,
+  },
+]
+`;
+
+exports[`e2e fixtures empty-mapping: fixtures/empty-mapping.yaml through eslint --fix: empty-mapping-content 1`] = `
+"name: control
+empty:
+"
+`;
+
+exports[`e2e fixtures rule-override: fixtures/rule-override.yaml through eslint --fix: rule-override-diagnostics 1`] = `[]`;
+
+exports[`e2e fixtures rule-override: fixtures/rule-override.yaml through eslint --fix: rule-override-content 1`] = `
+"name: override
+empty:
+"
+`;

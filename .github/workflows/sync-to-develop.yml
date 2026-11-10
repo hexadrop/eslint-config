@@ -1,4 +1,4 @@
-name: "Sync to develop"
+name: Sync to develop
 
 on:
   pull_request:

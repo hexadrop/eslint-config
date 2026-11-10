@@ -1,4 +1,5 @@
 import {
+	GLOB_JS_LANGUAGE,
 	GLOB_MARKDOWN,
 	GLOB_MARKDOWN_ASTRO,
 	GLOB_MARKDOWN_JSON,
@@ -20,6 +21,7 @@ export default async function unicornAdapter(options: StylisticConfigOptions): P
 
 	const config: TypedFlatConfigItem[] = [
 		{
+			files: GLOB_JS_LANGUAGE,
 			name: STYLISTIC_CONFIG_NAME_RULES_UNICORN,
 			rules: {
 				...unicornRules,

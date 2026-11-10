@@ -1,4 +1,4 @@
-import { GLOB_MARKDOWN_SOURCE, interopDefault, PLUGIN_RENAME } from '@hexadrop/eslint-config-shared';
+import { GLOB_JS_LANGUAGE, GLOB_MARKDOWN_SOURCE, interopDefault, PLUGIN_RENAME } from '@hexadrop/eslint-config-shared';
 import globals from 'globals';
 
 import {
@@ -51,6 +51,7 @@ export default async function core(options: CoreOptions): Promise<TypedFlatConfi
 			},
 		},
 		{
+			files: GLOB_JS_LANGUAGE,
 			name: CORE_CONFIG_NAME_RULES,
 			rules: {
 				'accessor-pairs': ['error', { enforceForClassMembers: true, setWithoutGet: true }],
@@ -251,6 +252,7 @@ export default async function core(options: CoreOptions): Promise<TypedFlatConfi
 
 	if (node) {
 		configs.push({
+			files: GLOB_JS_LANGUAGE,
 			name: CORE_CONFIG_NAME_RULES_NODE,
 			rules: {
 				[`${nodePluginName}/handle-callback-err`]: ['error', '^(err|error)$'],

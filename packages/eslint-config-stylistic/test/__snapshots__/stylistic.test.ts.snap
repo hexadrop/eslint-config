@@ -12,6 +12,15 @@ exports[`stylistic config snapshot: full config structure: stylistic-full-config
     ],
   },
   {
+    "files": [
+      "**/*.?([cm])[jt]s?(x)",
+      "*.astro",
+      "**/*.astro",
+      "**/*.json",
+      "**/*.json5",
+      "**/*.jsonc",
+      "**/*.md",
+    ],
     "name": "hexadrop/stylistic/rules",
     "plugins": undefined,
     "rules": {
@@ -531,6 +540,15 @@ exports[`stylistic config snapshot: full config structure: stylistic-full-config
     },
   },
   {
+    "files": [
+      "**/*.?([cm])[jt]s?(x)",
+      "*.astro",
+      "**/*.astro",
+      "**/*.json",
+      "**/*.json5",
+      "**/*.jsonc",
+      "**/*.md",
+    ],
     "name": "hexadrop/stylistic/rules/unicorn",
     "plugins": undefined,
     "rules": {
@@ -899,6 +917,15 @@ exports[`stylistic config snapshot: full config structure: stylistic-full-config
     },
   },
   {
+    "files": [
+      "**/*.?([cm])[jt]s?(x)",
+      "*.astro",
+      "**/*.astro",
+      "**/*.json",
+      "**/*.json5",
+      "**/*.jsonc",
+      "**/*.md",
+    ],
     "name": "hexadrop/stylistic/rules/perfectionist",
     "plugins": undefined,
     "rules": {

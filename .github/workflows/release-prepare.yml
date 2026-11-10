@@ -1,8 +1,8 @@
-name: "Release: prepare"
+name: 'Release: prepare'
 
 on:
   push:
-    branches: [ develop ]
+    branches: [develop]
 
 jobs:
   release-prepare:

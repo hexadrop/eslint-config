@@ -111,3 +111,29 @@ describe('typescript option resolution', () => {
 		expect(names).toContain('hexadrop/typescript/rules/type-aware');
 	});
 });
+
+describe('yaml option resolution', () => {
+	test('defaults to enabled', () => {
+		expect(defaultOptions({}).yaml).toBe(true);
+	});
+
+	test('can be disabled explicitly', () => {
+		expect(defaultOptions({ yaml: false }).yaml).toBe(false);
+	});
+
+	test('includes the yaml slice by default', async () => {
+		const configs = await hexadrop({ astro: false, react: false, typescript: false });
+		const names = configs.map(config => config.name);
+
+		expect(names).toContain('hexadrop/yaml/setup');
+		expect(names).toContain('hexadrop/yaml/setup/language');
+		expect(names).toContain('hexadrop/yaml/rules');
+	});
+
+	test('skips the yaml slice when disabled', async () => {
+		const configs = await hexadrop({ astro: false, react: false, typescript: false, yaml: false });
+		const names = configs.map(config => config.name);
+
+		expect(names).not.toContain('hexadrop/yaml/setup');
+	});
+});

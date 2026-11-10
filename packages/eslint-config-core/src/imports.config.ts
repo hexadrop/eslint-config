@@ -6,6 +6,7 @@ import {
 	ESLINT_CONFIG_GLOBS,
 	expandTsconfigProjects,
 	GLOB_ASTRO,
+	GLOB_JS_LANGUAGE,
 	GLOB_MARKDOWN_ASTRO,
 	GLOB_MARKDOWN_JSON,
 	GLOB_MARKDOWN_SOURCE,
@@ -131,6 +132,7 @@ export default async function imports(options: CoreOptions): Promise<TypedFlatCo
 
 	configs.push(
 		{
+			files: GLOB_JS_LANGUAGE,
 			name: IMPORTS_CONFIG_NAME_RULES_WARNINGS,
 			rules: {
 				// Warnings rules https://github.com/un-ts/eslint-plugin-import-x?tab=readme-ov-file#helpful-warnings
@@ -156,6 +158,7 @@ export default async function imports(options: CoreOptions): Promise<TypedFlatCo
 			},
 		},
 		{
+			files: GLOB_JS_LANGUAGE,
 			name: IMPORTS_CONFIG_NAME_RULES_STATIC,
 			rules: {
 				// Static analysis rules https://github.com/un-ts/eslint-plugin-import-x?tab=readme-ov-file#static-analysis
@@ -248,6 +251,7 @@ export default async function imports(options: CoreOptions): Promise<TypedFlatCo
 
 	if (stylistic) {
 		configs.push({
+			files: GLOB_JS_LANGUAGE,
 			name: IMPORTS_CONFIG_NAME_RULES_STYLISTIC,
 			rules: {
 				[`${importXPluginRename}/consistent-type-specifier-style`]: ['error', 'prefer-top-level'],

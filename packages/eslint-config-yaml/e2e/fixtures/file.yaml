@@ -1,0 +1,9 @@
+name:   file
+enabled: true
+
+
+items:
+    - first
+    - second
+nested:
+    key: "value"   

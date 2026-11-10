@@ -10,6 +10,7 @@ The repository is a Bun workspaces monorepo. It publishes the zero-config meta-p
 | `@hexadrop/eslint-config-core` | Base ESLint rules, globals, ignores, `import-x` and `n`; core/ignore/imports config names and option types. | Its own plugins. |
 | `@hexadrop/eslint-config-typescript` | TypeScript parser, plugin and type-aware rules. | Its own plugins. |
 | `@hexadrop/eslint-config-json` | JSON/JSONC rules and the `package.json`/`tsconfig.json` sort-keys slice. | Its own plugins. |
+| `@hexadrop/eslint-config-yaml` | YAML rules for `.yml`/`.yaml` files and Markdown fenced blocks. | Its own plugins. |
 | `@hexadrop/eslint-config-markdown` | Markdown processor and plain parser. | Its own plugins. |
 | `@hexadrop/eslint-config-react` | React, hooks and refresh rules. | Optional peer: `-typescript`. |
 | `@hexadrop/eslint-config-astro` | Astro plugin, parser and TS-in-astro. | Optional peer: `-typescript`. |
@@ -27,11 +28,14 @@ Feature packages do **not** depend on core. They import the shared globs and uti
 3. `typescript`.
 4. `react` when enabled or detected.
 5. `json`.
-6. `markdown`.
-7. `imports` from `@hexadrop/eslint-config-core`.
-8. `stylistic` from `@hexadrop/eslint-config-stylistic`.
+6. `yaml`.
+7. `markdown`.
+8. `imports` from `@hexadrop/eslint-config-core`.
+9. `stylistic` from `@hexadrop/eslint-config-stylistic`.
 
 The base concerns are raw config functions imported from core. The framework concerns are loaded lazily with `optionalPlugin()` so their plugins are only evaluated when the section is enabled.
+
+Rule sets that only support ESLint's default `js` language (core, import-x, Unicorn, Perfectionist and `@stylistic`) are scoped with `GLOB_JS_LANGUAGE`, which covers JS/TS, Astro, JSON and Markdown code blocks. That keeps them out of languages such as YAML, where ESLint rejects JavaScript-only rules.
 
 Each package exposes a factory that returns a `FlatConfigComposer`, plus named exports for its raw config pieces, config names and globs where they are public. The meta-package keeps the existing `hexadrop()` API and reproduces the 1.0.x resolved config.
 
