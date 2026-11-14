@@ -1,5 +1,26 @@
 # @hexadrop/eslint-config
 
+## 1.3.3
+
+### Patch Changes
+
+- 4448ef7: Apply the `import-x` extensions, external module folders, parser and TypeScript resolver settings to every file, not only to TypeScript files. Astro and other non-TypeScript files now parse imported JavaScript and TypeScript modules with `@typescript-eslint/parser`, so consumers no longer need a manual `import-x/parsers` block.
+- Updated dependencies [4448ef7]
+  - @hexadrop/eslint-config-core@1.3.3
+
+## 1.3.2
+
+### Patch Changes
+
+- 236512e: Parse imported `.js`, `.jsx`, `.cjs` and `.mjs` files with `@typescript-eslint/parser` by default, alongside the existing TypeScript extensions. This removes the need for consumers to add `import-x/parsers` manually when they import JavaScript modules from a dependency. Import rules such as `import/named` and `import/default` can now report on JavaScript modules that were previously skipped.
+
+  The `import-x/extensions` setting now lists the same module extensions, so extensionless imports resolve consistently. `import/no-useless-path-segments` no longer collapses explicit `index.js` imports in ESM TypeScript files, because that rewrite produces an invalid specifier; the `noUselessIndex` option now follows the `commonjs` setting.
+
+- Updated dependencies [8cb1172]
+- Updated dependencies [236512e]
+  - @hexadrop/eslint-config-stylistic@1.1.4
+  - @hexadrop/eslint-config-core@1.3.2
+
 ## 1.3.1
 
 ### Patch Changes

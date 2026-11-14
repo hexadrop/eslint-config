@@ -126,6 +126,30 @@ describe('core factory', () => {
 		expect(configs.some(config => config.name === IMPORTS_CONFIG_NAME_RULES_STYLISTIC)).toBe(true);
 	});
 
+	test('parses JavaScript module extensions with the typescript parser', async () => {
+		const configs = await coreFactory({ ...ALL_OFF, imports: true, typescript: true });
+		const setup = configs.find(config => config.name === IMPORTS_CONFIG_NAME_SETUP_TYPESCRIPT);
+		const rules = configs.find(config => config.name === IMPORTS_CONFIG_NAME_RULES_TYPESCRIPT);
+
+		expect(setup?.settings?.['import-x/extensions']).toEqual([
+			'.ts',
+			'.tsx',
+			'.cts',
+			'.mts',
+			'.js',
+			'.jsx',
+			'.cjs',
+			'.mjs',
+		]);
+		expect(setup?.settings?.['import-x/parsers']).toEqual({
+			'@typescript-eslint/parser': ['.ts', '.tsx', '.cts', '.mts', '.js', '.jsx', '.cjs', '.mjs'],
+		});
+		expect(rules?.rules?.['import/no-useless-path-segments']).toEqual([
+			'error',
+			{ commonjs: false, noUselessIndex: false },
+		]);
+	});
+
 	test('forwards the configured project paths to the typescript import resolver', () => {
 		const options = typeScriptResolverOptions({
 			project: ['./tsconfig.json'],
