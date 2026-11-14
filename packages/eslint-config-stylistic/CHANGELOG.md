@@ -1,5 +1,11 @@
 # @hexadrop/eslint-config-stylistic
 
+## 1.1.4
+
+### Patch Changes
+
+- 8cb1172: fix(deps): update dependency prettier-plugin-astro to v1
+
 ## 1.1.3
 
 ### Patch Changes
