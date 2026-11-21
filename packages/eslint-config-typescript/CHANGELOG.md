@@ -1,5 +1,11 @@
 # @hexadrop/eslint-config-typescript
 
+## 1.3.1
+
+### Patch Changes
+
+- e747609: fix(deps): update typescript-eslint monorepo to v8.72.1
+
 ## 1.3.0
 
 ### Minor Changes

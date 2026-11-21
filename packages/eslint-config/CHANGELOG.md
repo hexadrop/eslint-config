@@ -1,5 +1,14 @@
 # @hexadrop/eslint-config
 
+## 1.3.4
+
+### Patch Changes
+
+- Updated dependencies [e747609]
+- Updated dependencies [5046572]
+  - @hexadrop/eslint-config-typescript@1.3.1
+  - @hexadrop/eslint-config-stylistic@1.1.5
+
 ## 1.3.3
 
 ### Patch Changes
