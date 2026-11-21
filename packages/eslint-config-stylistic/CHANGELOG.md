@@ -1,5 +1,13 @@
 # @hexadrop/eslint-config-stylistic
 
+## 1.1.5
+
+### Patch Changes
+
+- 5046572: fix(deps): update dependency eslint-plugin-perfectionist to v5.13.0
+- Updated dependencies [e747609]
+  - @hexadrop/eslint-config-typescript@1.3.1
+
 ## 1.1.4
 
 ### Patch Changes
